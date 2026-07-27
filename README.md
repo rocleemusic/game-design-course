@@ -6,7 +6,8 @@ Assignment staging area for [Festival of Souls](gdd/01-concept.md), a cozy rogue
 
 | Path | What it is |
 |---|---|
-| [`RocLee-GDD-v10.pdf`](RocLee-GDD-v10.pdf) | Printable pitch summary of the GDD (v10) |
+| [`RocLee-GDD-v10.pdf`](RocLee-GDD-v10.pdf) | Full GDD (v10), compiled to PDF from the 13 files in `gdd/` |
+| [`RocLee-GDD-v10-summary.pdf`](RocLee-GDD-v10-summary.pdf) | Printable pitch summary of the GDD (v10) — condensed for an external/collaborator read |
 | [`gdd/`](gdd/CONTEXT.md) | The full design-and-build spec, split into 13 linked files (concept, pillars, core loop, magic system, cast, levels, AI pipeline, scope/risks, etc.) |
 | [`assignment-03/`](assignment-03/README.md) | Dev-crew agent role prompts — runnable specs for the Narrative Director, Orchestrator, Narrative Architect, Content/Dialogue, Consistency Verifier, and QA/Playtest agents |
 | [`assignment-04/`](assignment-04/benchmark-plan.md) | Pipeline benchmark run — model-arm comparison plus full generation runs for two souls (Toby the Giver, Ilsa the Kinbound), with results and run logs |
