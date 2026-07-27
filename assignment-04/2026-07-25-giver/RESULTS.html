@@ -1,0 +1,694 @@
+<meta charset="utf-8">
+<title>Festival of Souls — Narrative Pipeline: Proof &amp; Cost</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root{
+  --cream:#F3EBD7; --cream-2:#ECE0C6; --cream-edge:#E4D5B4;
+  --gold:#E3B26A; --amber:#CE8F45;
+  --dusk:#6E8794; --dusk-deep:#435966;
+  --teal:#2E4E48; --sage:#90A67C; --forest:#4E6B4F; --forest-deep:#33492F;
+  --ink:#382C1E; --body:#251E15; --muted:#6E6149;
+  --rule:#C9B996; --col:44rem;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--cream); color:var(--body);
+  font-family:Spectral, Georgia, serif; font-size:14px; line-height:1.6;
+  position:relative;
+}
+/* aged-paper wash */
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+  background:
+    radial-gradient(60rem 40rem at 50% 0%, rgba(227,178,106,.20), transparent 70%),
+    radial-gradient(50rem 40rem at 0% 100%, rgba(110,135,148,.16), transparent 70%),
+    radial-gradient(40rem 30rem at 100% 0%, rgba(144,166,124,.14), transparent 70%);
+}
+body::after{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+  opacity:.5; mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='.35'/></svg>");
+}
+.sheet{position:relative; z-index:1; max-width:var(--col); margin:0 auto; padding:3rem 1.25rem 5rem}
+
+.eyebrow{
+  font-family:Fraunces, Georgia, serif; text-transform:uppercase;
+  letter-spacing:.30em; font-size:.62rem; color:var(--amber); font-weight:600;
+}
+h1{
+  font-family:Fraunces, Georgia, serif; font-weight:600; color:var(--ink);
+  font-size:2.1rem; line-height:1.15; margin:.4rem 0 .5rem; letter-spacing:-.01em;
+}
+.meta{
+  font-family:Fraunces, Georgia, serif; text-transform:uppercase;
+  letter-spacing:.22em; font-size:.6rem; color:var(--muted);
+}
+.logline{
+  border-left:3px solid var(--gold); padding:.45rem 0 .45rem 1rem;
+  font-family:Fraunces, Georgia, serif; font-style:italic; font-size:1.02rem;
+  color:var(--ink); margin:1.6rem 0 2.4rem; line-height:1.45;
+}
+
+.sec{margin:3rem 0 0}
+.sec-head{
+  display:flex; align-items:center; gap:.7rem;
+  border-bottom:1.5px solid var(--rule); padding-bottom:.5rem; margin-bottom:1.1rem;
+}
+.num{
+  flex:none; width:30px; height:30px; border-radius:50%;
+  background:var(--forest); color:var(--cream);
+  font-family:Fraunces, Georgia, serif; font-size:.82rem; font-weight:600;
+  display:flex; align-items:center; justify-content:center;
+}
+.sec-title{
+  font-family:Fraunces, Georgia, serif; font-weight:600; color:var(--ink);
+  font-size:1.18rem; line-height:1.2; margin:0;
+}
+.sec-head .eyebrow{display:block; margin-bottom:.12rem}
+
+.panel{
+  border-radius:9px; border:1px solid var(--cream-edge);
+  background:rgba(255,252,244,.55); padding:1rem 1.1rem; margin:1.1rem 0;
+}
+.panel h4{
+  font-family:Fraunces, Georgia, serif; font-size:.95rem; color:var(--ink);
+  margin:0 0 .45rem; font-weight:600;
+}
+.band-title{
+  font-family:Fraunces, Georgia, serif; text-transform:uppercase;
+  letter-spacing:.34em; font-size:.6rem; color:var(--amber); font-weight:600;
+  margin:0 0 .5rem;
+}
+
+.scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; margin:1.1rem 0}
+table{border-collapse:collapse; width:100%; font-size:.82rem; min-width:32rem}
+th{
+  font-family:Fraunces, Georgia, serif; text-align:left; font-weight:600;
+  color:var(--ink); font-size:.7rem; text-transform:uppercase; letter-spacing:.09em;
+  border-bottom:2px solid var(--forest); padding:.45rem .5rem;
+}
+td{border-bottom:1px solid var(--cream-edge); padding:.45rem .5rem; vertical-align:top}
+tbody tr:nth-child(even){background:rgba(236,224,198,.34)}
+td.num-cell{
+  font-family:'IBM Plex Mono', monospace; color:var(--amber);
+  font-variant-numeric:tabular-nums; white-space:nowrap;
+}
+td.win{font-weight:600; color:var(--forest-deep)}
+
+.chip{
+  display:inline-block; border-radius:999px; padding:.08rem .5rem;
+  font-family:Fraunces, Georgia, serif; font-size:.62rem; font-weight:600;
+  letter-spacing:.06em; text-transform:uppercase; color:#fff; white-space:nowrap;
+}
+.q{background:var(--dusk)} .w{background:var(--sage)}
+.g{background:var(--gold); color:var(--ink)}
+.s{background:linear-gradient(90deg,var(--gold),var(--dusk)); color:var(--ink)}
+
+pre.code{
+  background:linear-gradient(180deg,#2c3b38,#26332f); color:#e8dfc9;
+  border-radius:9px; padding:.9rem 1rem; overflow-x:auto;
+  font-family:'IBM Plex Mono', monospace; font-size:.72rem; line-height:1.55;
+}
+pre.code .k{color:var(--gold)}
+
+blockquote.line{
+  margin:.7rem 0; padding:.15rem 0 .15rem .95rem;
+  border-left:3px solid var(--gold);
+  font-family:Spectral, Georgia, serif; font-size:1.02rem; color:var(--ink);
+}
+blockquote.line .who{
+  display:block; font-family:Fraunces, Georgia, serif; font-size:.6rem;
+  text-transform:uppercase; letter-spacing:.2em; color:var(--muted); margin-top:.25rem;
+}
+.tag-action{
+  font-family:'IBM Plex Mono', monospace; font-size:.72rem;
+  color:var(--amber); font-weight:500;
+}
+
+ul{padding-left:1.1rem} li{margin:.3rem 0}
+strong{color:var(--ink)}
+.small{font-size:.78rem; color:var(--muted)}
+hr.rule{border:0; border-top:1.5px solid var(--rule); margin:2.4rem 0}
+
+@media (max-width:640px){
+  .sheet{padding:2rem 1rem 3.5rem}
+  h1{font-size:1.7rem}
+}
+</style>
+
+<div class="sheet">
+
+  <div class="eyebrow">Festival of Souls · Narrative Pipeline</div>
+  <h1>Does the crew work, and what does a soul cost?</h1>
+  <div class="meta">Proof run · 25 July 2026 · 27 agents across two phases</div>
+
+  <div class="logline">
+    The crew generated an approvable soul end-to-end without a single worker calling another —
+    and the run put a real number on what the next seven will cost.
+  </div>
+
+  <!-- 0 -->
+  <section class="sec">
+    <div class="sec-head">
+      <div class="num">0</div>
+      <div><span class="eyebrow">Orientation</span><h3 class="sec-title">The Pipeline</h3></div>
+    </div>
+
+    <p class="band-title">Content generation — stage order</p>
+    <div class="scroll">
+      <svg viewBox="0 0 1240 232" style="min-width:56rem;width:100%;height:auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Content generation stage order, seven stages feeding a shared substrate">
+        <defs>
+          <marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="3.2" orient="auto">
+            <path d="M0,0 L7,3.2 L0,6.4 z" fill="#4E6B4F"/>
+          </marker>
+          <marker id="ard" markerWidth="9" markerHeight="9" refX="7" refY="3.2" orient="auto">
+            <path d="M0,0 L7,3.2 L0,6.4 z" fill="#435966"/>
+          </marker>
+        </defs>
+        <g font-family="Fraunces, Georgia, serif" font-size="13" fill="#382C1E">
+          <!-- stage boxes -->
+          <g>
+            <rect x="20"   y="30" width="148" height="58" rx="9" fill="#90A67C22" stroke="#4E6B4F" stroke-width="2"/>
+            <text x="94"   y="54" text-anchor="middle" font-weight="600">1 · Arc</text>
+            <text x="94"   y="72" text-anchor="middle" font-size="11" fill="#6E6149">steering layer</text>
+          </g>
+          <g>
+            <rect x="192"  y="30" width="148" height="58" rx="9" fill="#E3B26A33" stroke="#CE8F45" stroke-width="2"/>
+            <text x="266"  y="54" text-anchor="middle" font-weight="600">2 · NPCs</text>
+            <text x="266"  y="72" text-anchor="middle" font-size="11" fill="#6E6149">cards · echoes</text>
+          </g>
+          <g>
+            <rect x="364"  y="30" width="148" height="58" rx="9" fill="rgba(255,252,244,.65)" stroke="#E4D5B4"/>
+            <text x="438"  y="54" text-anchor="middle" font-weight="600">3 · Spells</text>
+            <text x="438"  y="72" text-anchor="middle" font-size="11" fill="#6E6149">authored list</text>
+          </g>
+          <g>
+            <rect x="536"  y="30" width="148" height="58" rx="9" fill="rgba(255,252,244,.65)" stroke="#E4D5B4"/>
+            <text x="610"  y="54" text-anchor="middle" font-weight="600">4 · Components</text>
+            <text x="610"  y="72" text-anchor="middle" font-size="11" fill="#6E6149">→ items, derived</text>
+          </g>
+          <g>
+            <rect x="708"  y="30" width="148" height="58" rx="9" fill="rgba(255,252,244,.65)" stroke="#E4D5B4"/>
+            <text x="782"  y="54" text-anchor="middle" font-weight="600">5 · Item schema</text>
+            <text x="782"  y="72" text-anchor="middle" font-size="11" fill="#6E6149">material × category</text>
+          </g>
+          <g>
+            <rect x="880"  y="30" width="148" height="58" rx="9" fill="rgba(255,252,244,.65)" stroke="#E4D5B4"/>
+            <text x="954"  y="54" text-anchor="middle" font-weight="600">6 · Key items</text>
+            <text x="954"  y="72" text-anchor="middle" font-size="11" fill="#6E6149">soul-tied</text>
+          </g>
+          <g>
+            <rect x="1052" y="30" width="148" height="58" rx="9" fill="rgba(255,252,244,.65)" stroke="#E4D5B4"/>
+            <text x="1126" y="54" text-anchor="middle" font-weight="600">7 · Cross-pass</text>
+            <text x="1126" y="72" text-anchor="middle" font-size="11" fill="#6E6149">spells × items × NPCs</text>
+          </g>
+
+          <!-- chain arrows -->
+          <g stroke="#4E6B4F" stroke-width="2" marker-end="url(#ar)" fill="none">
+            <path d="M168,59 L186,59"/><path d="M340,59 L358,59"/><path d="M512,59 L530,59"/>
+            <path d="M684,59 L702,59"/><path d="M856,59 L874,59"/><path d="M1028,59 L1046,59"/>
+          </g>
+
+          <!-- substrate -->
+          <rect x="20" y="164" width="1180" height="52" rx="9" fill="#6E879422" stroke="#435966" stroke-width="1.5" stroke-dasharray="5 4"/>
+          <text x="610" y="188" text-anchor="middle" font-weight="600">Substrate — arc doc + generated cast</text>
+          <text x="610" y="205" text-anchor="middle" font-size="11" fill="#6E6149">every later class is run back through it</text>
+
+          <!-- feeds in -->
+          <g stroke="#435966" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#ard)" fill="none">
+            <path d="M94,88 L94,160"/><path d="M266,88 L266,160"/>
+          </g>
+          <!-- read by -->
+          <g stroke="#435966" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#ard)" fill="none">
+            <path d="M438,164 L438,92"/><path d="M954,164 L954,92"/><path d="M1126,164 L1126,92"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+
+    <p class="band-title" style="margin-top:2rem">The crew — call down, signal up</p>
+    <div class="scroll">
+      <svg viewBox="0 0 1000 600" style="min-width:46rem;width:100%;height:auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The dev crew: Roc to Narrative Director to human gate to arc doc to Orchestrator, which calls down to four isolated workers and surfaces a human gate">
+        <defs>
+          <marker id="a2" markerWidth="9" markerHeight="9" refX="7" refY="3.2" orient="auto">
+            <path d="M0,0 L7,3.2 L0,6.4 z" fill="#4E6B4F"/>
+          </marker>
+          <marker id="a3" markerWidth="9" markerHeight="9" refX="7" refY="3.2" orient="auto">
+            <path d="M0,0 L7,3.2 L0,6.4 z" fill="#CE8F45"/>
+          </marker>
+        </defs>
+        <g font-family="Fraunces, Georgia, serif" font-size="13" fill="#382C1E">
+          <!-- spine -->
+          <rect x="100" y="10"  width="200" height="46" rx="9" fill="#90A67C22" stroke="#4E6B4F" stroke-width="2"/>
+          <text x="200" y="32" text-anchor="middle" font-weight="600">Roc</text>
+          <text x="200" y="48" text-anchor="middle" font-size="11" fill="#6E6149">intent + direction</text>
+
+          <rect x="100" y="86" width="200" height="58" rx="9" fill="rgba(255,252,244,.65)" stroke="#E4D5B4"/>
+          <text x="200" y="108" text-anchor="middle" font-weight="600">Narrative Director</text>
+          <text x="200" y="126" text-anchor="middle" font-size="11" fill="#6E6149">surfaces · proposes · drafts</text>
+
+          <rect x="100" y="174" width="200" height="46" rx="9" fill="#E3B26A33" stroke="#CE8F45" stroke-width="2"/>
+          <text x="200" y="196" text-anchor="middle" font-weight="600">Human gate</text>
+          <text x="200" y="212" text-anchor="middle" font-size="11" fill="#6E6149">ratify the arc doc</text>
+
+          <rect x="100" y="250" width="200" height="46" rx="9" fill="#6E879422" stroke="#435966"/>
+          <text x="200" y="272" text-anchor="middle" font-weight="600">Arc doc</text>
+          <text x="200" y="288" text-anchor="middle" font-size="11" fill="#6E6149">steering layer</text>
+
+          <rect x="100" y="326" width="200" height="58" rx="9" fill="rgba(255,252,244,.65)" stroke="#E4D5B4"/>
+          <text x="200" y="348" text-anchor="middle" font-weight="600">Orchestrator</text>
+          <text x="200" y="366" text-anchor="middle" font-size="11" fill="#6E6149">sequences · generates nothing</text>
+
+          <rect x="100" y="454" width="200" height="46" rx="9" fill="#E3B26A33" stroke="#CE8F45" stroke-width="2"/>
+          <text x="200" y="476" text-anchor="middle" font-weight="600">Human gate</text>
+          <text x="200" y="492" text-anchor="middle" font-size="11" fill="#6E6149">Roc approves every line</text>
+
+          <rect x="100" y="530" width="200" height="46" rx="9" fill="#6E879422" stroke="#435966"/>
+          <text x="200" y="552" text-anchor="middle" font-weight="600">Approved content</text>
+          <text x="200" y="568" text-anchor="middle" font-size="11" fill="#6E6149">nothing ships unread</text>
+
+          <g stroke="#4E6B4F" stroke-width="2" marker-end="url(#a2)" fill="none">
+            <path d="M200,56 L200,82"/><path d="M200,144 L200,170"/>
+            <path d="M200,220 L200,246"/><path d="M200,296 L200,322"/>
+            <path d="M200,384 L200,450"/><path d="M200,500 L200,526"/>
+          </g>
+
+          <!-- crew -->
+          <rect x="380" y="238" width="600" height="196" rx="9" fill="rgba(255,252,244,.4)" stroke="#E4D5B4" stroke-dasharray="5 4"/>
+          <text x="680" y="262" text-anchor="middle" font-size="11" fill="#6E6149" font-weight="600">The crew — each isolated. No worker ever calls another.</text>
+
+          <rect x="400" y="278" width="270" height="62" rx="9" fill="rgba(255,252,244,.75)" stroke="#E4D5B4"/>
+          <text x="535" y="300" text-anchor="middle" font-weight="600">Narrative Architect</text>
+          <text x="535" y="318" text-anchor="middle" font-size="11" fill="#6E6149">cards · echoes · delta/canon</text>
+
+          <rect x="690" y="278" width="270" height="62" rx="9" fill="rgba(255,252,244,.75)" stroke="#E4D5B4"/>
+          <text x="825" y="300" text-anchor="middle" font-weight="600">Content / Dialogue</text>
+          <text x="825" y="318" text-anchor="middle" font-size="11" fill="#6E6149">lines in register</text>
+
+          <rect x="400" y="356" width="270" height="62" rx="9" fill="rgba(255,252,244,.75)" stroke="#E4D5B4"/>
+          <text x="535" y="378" text-anchor="middle" font-weight="600">Consistency Verifier</text>
+          <text x="535" y="396" text-anchor="middle" font-size="11" fill="#6E6149">flags only · never rewrites</text>
+
+          <rect x="690" y="356" width="270" height="62" rx="9" fill="rgba(255,252,244,.75)" stroke="#E4D5B4"/>
+          <text x="825" y="378" text-anchor="middle" font-weight="600">QA / Playtest</text>
+          <text x="825" y="396" text-anchor="middle" font-size="11" fill="#6E6149">traversal · soft-locks</text>
+
+          <!-- calls down / signals up -->
+          <g stroke="#4E6B4F" stroke-width="2" marker-end="url(#a2)" fill="none">
+            <path d="M300,326 L376,300"/>
+          </g>
+          <text x="338" y="300" text-anchor="middle" font-size="11" fill="#4E6B4F" font-weight="600">calls down</text>
+          <g stroke="#4E6B4F" stroke-width="2" marker-end="url(#a2)" fill="none">
+            <path d="M376,384 L300,362"/>
+          </g>
+          <text x="338" y="404" text-anchor="middle" font-size="11" fill="#4E6B4F" font-weight="600">signals up</text>
+
+          <!-- re-dispatch -->
+          <g stroke="#CE8F45" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#a3)" fill="none">
+            <path d="M120,384 C60,410 60,430 96,452"/>
+          </g>
+          <text x="20" y="424" font-size="10.5" fill="#CE8F45" font-weight="600">flags route up,</text>
+          <text x="20" y="438" font-size="10.5" fill="#CE8F45" font-weight="600">never sideways</text>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 1 -->
+  <section class="sec">
+    <div class="sec-head">
+      <div class="num">1</div>
+      <div><span class="eyebrow">The brief</span><h3 class="sec-title">Two questions, one run</h3></div>
+    </div>
+    <p>The GDD claims a dev crew of isolated AI agents can generate narrative content that holds
+    together. That claim had never been run — only described. This proof answers the two questions
+    that decide whether it survives contact with production.</p>
+    <div class="panel">
+      <h4>Does it work?</h4>
+      <p style="margin:.2rem 0 .8rem">Can six specialised agents produce a character a human would
+      actually ship, while obeying the architecture: call down, signal up, no worker-to-worker calls,
+      and a human gate that nothing bypasses?</p>
+      <h4>What does it cost?</h4>
+      <p style="margin:.2rem 0 0">The GDD budgets 2M tokens for the crew. Until this run that number
+      had nothing under it. Every figure here exists to put the budget on measured ground.</p>
+    </div>
+    <p class="small">Phase 1 benchmarked five model configurations against a blind human read.
+    Phase 2 ran the full pipeline live at the winning configuration.</p>
+  </section>
+
+  <!-- 2 -->
+  <section class="sec">
+    <div class="sec-head">
+      <div class="num">2</div>
+      <div><span class="eyebrow">Method</span><h3 class="sec-title">Why the read was blind</h3></div>
+    </div>
+    <p>The GDD sets the acceptance bar as a human judgement: <em>agent-generated lines pass the
+    side-by-side distinctness read.</em> A judgement like that is worthless if the judge knows which
+    model produced which output — "this one is the expensive model" contaminates the read before it
+    starts.</p>
+    <p>So the five outputs were stripped of model identity and <strong>re-randomized</strong>: the
+    benchmark plan itself named the models against labels <span class="tag-action">A1…B3</span>, so
+    those labels were replaced with opaque ones before anything reached a human. The ranking was
+    recorded first. The reveal, the flag counts, and the token figures were all withheld until after.</p>
+  </section>
+
+  <!-- 3 -->
+  <section class="sec">
+    <div class="sec-head">
+      <div class="num">3</div>
+      <div><span class="eyebrow">Phase 1</span><h3 class="sec-title">The benchmark, revealed</h3></div>
+    </div>
+    <p class="band-title">Content · the voice slot</p>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Arm</th><th>Model</th><th>Blind rank</th><th>Lines shippable</th><th>Flags</th><th>Output</th></tr></thead>
+      <tbody>
+        <tr><td>Lines-Q</td><td class="win">Fable 5</td><td><span class="chip g">1st</span></td><td class="win">6 of 6</td><td class="num-cell">1</td><td class="num-cell">5,480</td></tr>
+        <tr><td>Lines-R</td><td>Opus 5</td><td><span class="chip w">2nd</span></td><td>4 of 6</td><td class="num-cell">1</td><td class="num-cell">3,134</td></tr>
+        <tr><td>Lines-P</td><td>Sonnet 5</td><td><span class="chip q">3rd</span></td><td>1 of 6</td><td class="num-cell">1</td><td class="num-cell">4,214</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="panel">
+      <h4>The surprise: the prose-tuned model won the anti-ornamental voice</h4>
+      <p style="margin:.2rem 0 0">The register is deliberately flat — one clause, no amplification,
+      "cut before adding." The expectation was that a model tuned toward rich prose would fight it.
+      It didn't; it won outright. The likely reason is that holding a flat register is a
+      <em>prose</em> skill: knowing where the weight lands in a short clause. <strong>Restraint was
+      never the hard part. Cadence was.</strong></p>
+    </div>
+
+    <p class="band-title" style="margin-top:2rem">Architect · the structure slot</p>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Arm</th><th>Model</th><th>Human read</th><th>Flags</th><th>Output</th><th>Billed</th></tr></thead>
+      <tbody>
+        <tr><td>Card-K</td><td>Sonnet 5</td><td class="win">Preferred — concise</td><td class="num-cell">2 <span class="chip q">disqualifier</span></td><td class="num-cell">23,906</td><td class="num-cell">292,324</td></tr>
+        <tr><td>Card-M</td><td class="win">Opus 5</td><td>2nd — verbose</td><td class="num-cell">1</td><td class="num-cell">21,890</td><td class="num-cell">414,372</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>Here the human read and the automated check <strong>disagreed</strong>, and the check won. The
+    preferred card's three personality axes were not independent — two of them encoded the same fact,
+    so knowing one predicted the other. That is the exact failure that makes a generated cast read as
+    one character in different hats.</p>
+    <p>The two objections were different in kind. <strong>Verbosity is presentation</strong> — one
+    sentence in a prompt fixes it. <strong>Correlated axes are structural</strong> — the defect
+    propagates into every line written from that card and into every soul built the same way. Opus
+    took the slot with a word cap attached.</p>
+    <p class="small">Honest limit: on cost the two arms disagree depending on which measure you use,
+    and the difference traces to turn count on a single sample. The cost question is open; the
+    decision rests on the structural defect alone.</p>
+  </section>
+
+  <!-- 4 -->
+  <section class="sec">
+    <div class="sec-head">
+      <div class="num">4</div>
+      <div><span class="eyebrow">Phase 2</span><h3 class="sec-title">The architecture held</h3></div>
+    </div>
+    <p>Seventeen agent calls, four roles, three human gates. The architectural claims were checked
+    against the run rather than asserted.</p>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Claim</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td>Every input to a worker is prepared by the orchestrator</td><td class="win">Held — all 17 calls</td></tr>
+        <tr><td>Every output is typed and schema-conforming</td><td class="win">Held — all 17 calls</td></tr>
+        <tr><td>Workers never call each other</td><td class="win">Held — zero worker-to-worker edges</td></tr>
+        <tr><td>Flags route up, never sideways</td><td class="win">Held — all 9 flags re-dispatched by the orchestrator</td></tr>
+        <tr><td>The verifier flags only, never rewrites</td><td class="win">Held — no pass produced replacement text</td></tr>
+        <tr><td>The human gate is real</td><td class="win">Held — nothing self-approved, nothing written before approval</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <pre class="code"><span class="k">// one call-down / signal-up pair, verbatim shape</span>
+orchestrator → architect  { arc_doc, soul_seed, scene_context, schemas }
+architect    → orchestrator { persona_card, echo_templates, delta_rule, canon_flags }
+orchestrator → verifier   { batch, active_canon, arc_doc, invariants }
+verifier     → orchestrator { verification_report[], human_action_required, summary }
+<span class="k">// no edge from architect to verifier. there is no such edge in the system.</span></pre>
+    <p><strong>The architecture is not what strained. Revision governance is.</strong> The persona
+    card was approved in full, unchanged, on the first attempt. The cost came from everything after.</p>
+  </section>
+
+  <!-- 5 -->
+  <section class="sec">
+    <div class="sec-head">
+      <div class="num">5</div>
+      <div><span class="eyebrow">The output</span><h3 class="sec-title">Toby — the Giver</h3></div>
+    </div>
+    <p class="band-title">persona_card — essence fields <span style="letter-spacing:0;text-transform:none;font-weight:400;color:var(--muted)">(invariant across reshuffles)</span></p>
+    <div class="scroll">
+    <table>
+      <thead><tr><th style="width:11rem">Field</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td><code>npc_id</code></td><td>toby</td></tr>
+        <tr><td><code>name</code></td><td>Toby</td></tr>
+        <tr><td><code>essence_descriptor</code></td><td>Wants to be kept, and believes keeping must be earned. Manufactures need for himself: sees how everyone in a room connects, supplies what each is short of before asking, and converts anything given to him into a debt he pays back. Against a player who moves through lives taking nothing with him, Toby cannot hold what is offered.</td></tr>
+        <tr><td><code>suit_tag</code></td><td>giving</td></tr>
+        <tr><td><code>conviction</code></td><td>He will not accept care he has not paid for.</td></tr>
+        <tr><td><code>backstory_guideline</code></td><td>Large family, attention always short. Learned that being useful got him noticed, so usefulness became the price of a place.</td></tr>
+        <tr><td><code>notice_and_want</code></td><td>Notices who is short of what and who is not talking to whom — the whole web, live, without being told. Wants to be the piece the web cannot be missing. Reads an unrepaid gift as a standing debt, and a thank-you as a bill.</td></tr>
+        <tr><td><code>voice_register</code></td><td>World dialect: one clause, plain, deflect not name, 40-word ceiling absolute. His signature is tempo, never length — fastest to answer, first to offer, questions aimed outward. The animation is a learned trick and runs hottest when he owes. When attention turns back on him he goes flat and short. Verbose equals defect.</td></tr>
+        <tr><td><code>authored_exceptions</code></td><td>null</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p class="band-title" style="margin-top:1.8rem">trait_axes <span style="letter-spacing:0;text-transform:none;font-weight:400;color:var(--muted)">(orthogonal)</span></p>
+    <div class="scroll">
+    <table>
+      <thead><tr><th style="width:11rem">Axis</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td><code>deflection_target</code></td><td>The unfinished task in the room — turns any attention on himself into a job that still needs doing.</td></tr>
+        <tr><td><code>precision_profile</code></td><td>Exact about other people's quantities, timings and shortfalls; vague about his own (what he ate, slept, is owed).</td></tr>
+        <tr><td><code>warmth_channel</code></td><td>Anticipation — supplies the thing before it is asked for, and never names why.</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p class="band-title" style="margin-top:1.8rem">Role fields <span style="letter-spacing:0;text-transform:none;font-weight:400;color:var(--muted)">(re-dealt each life)</span></p>
+    <div class="scroll">
+    <table>
+      <thead><tr><th style="width:11rem">Field</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td><code>role_tag</code></td><td>Baker. Role-goal this life: the communal feast.</td></tr>
+        <tr><td><code>age_band</code></td><td>young (late teens – late 20s)</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p class="band-title" style="margin-top:1.8rem">echo_template — toby-unopened-jam</p>
+    <div class="scroll">
+    <table>
+      <thead><tr><th style="width:11rem">Field</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td><code>seed_scene</code></td><td>Toby's bakery kitchen, morning, festival week — planted between a wasp at the window and the price of a sack of flour.</td></tr>
+        <tr><td><code>seed_event</code></td><td>A neighbor leaves jam on the step as thanks. Toby shelves it unopened and slips two extra rolls into her next order.</td></tr>
+        <tr><td><code>payoff_scene</code></td><td>Festival night, the communal feast, once the tables are already served.</td></tr>
+        <tr><td><code>payoff_condition</code></td><td>Knowledge flag <code>toby_repays_every_gift</code> — set only when the player has given Toby something with nothing owed on it and then named the unopened shelf back to him.</td></tr>
+        <tr><td><code>payoff_voice</code> / <code>reveal_npc_id</code></td><td>toby</td></tr>
+        <tr><td><code>prerequisite_theme</code></td><td>Belonging as something earned versus something given.</td></tr>
+        <tr><td><code>The Idea</code></td><td>Show that Toby cannot let a gift stay a gift, so that later, when he keeps one, the change is visible without anyone saying it.</td></tr>
+        <tr><td><code>shape</code></td><td>deferred-gap</td></tr>
+        <tr><td><code>tier</code></td><td>mid</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p class="band-title" style="margin-top:1.8rem">content_lines — scene <code>bakery-feast-dough</code>, tone <code>matter_of_fact</code>, max_words 40</p>
+    <div class="scroll">
+    <table style="min-width:44rem">
+      <thead><tr><th>#</th><th>Speaker</th><th>Slot</th><th>Text</th><th>W</th><th>speaker_intent</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="num-cell">01</td><td>toby</td><td>dialogue</td>
+          <td>Dough went flat overnight. Forty loaves short if the whole square turns out. Pass me the starter.</td>
+          <td class="num-cell">17</td>
+          <td>Shortfall converted to arithmetic and a next step; distress rerouted into logistics before it can register.</td>
+        </tr>
+        <tr>
+          <td class="num-cell">02</td><td>toby</td><td>dialogue</td>
+          <td>Smith's out of salt; tuck a measure in with his loaves and call it bakery weight.</td>
+          <td class="num-cell">16</td>
+          <td>Supplies a shortfall nobody named and mislabels the gift as routine measure so no thanks can ever attach.</td>
+        </tr>
+        <tr>
+          <td class="num-cell">—</td><td>toby</td><td><span class="tag-action">action</span></td>
+          <td><span class="tag-action">[action]</span> A wasp at the window; flour up two coppers a sack. Toby shelves a neighbor's jam unopened, adds two rolls to her order, mentions neither. <em>echo_flag: true</em></td>
+          <td class="num-cell">25</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td class="num-cell">04</td><td>toby</td><td>dialogue</td>
+          <td colspan="3"><em>Deferred — the receive-beat requires a player choice node, which the schema cannot yet express.</em></td>
+        </tr>
+        <tr>
+          <td class="num-cell">05</td><td>toby</td><td>dialogue</td>
+          <td>You haven't eaten. Roll's on the board.</td>
+          <td class="num-cell">7</td>
+          <td>Reverses the direction of the gift; help offered to him comes back as him supplying the helper.</td>
+        </tr>
+        <tr>
+          <td class="num-cell">06</td><td>juno</td><td>dialogue</td>
+          <td>That boy has never once let me carry my own basket.</td>
+          <td class="num-cell">11</td>
+          <td>Mild observation of a pattern; no idea what it costs him.</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section class="sec">
+    <div class="sec-head">
+      <div class="num">6</div>
+      <div><span class="eyebrow">The number</span><h3 class="sec-title">What a soul costs</h3></div>
+    </div>
+    <p>Every call in Phase 2 was a single turn with no file reads, because the orchestrator handed
+    each worker its material directly instead of making it fetch. That one change cut billed volume
+    <strong>6.9×</strong> against Phase 1.</p>
+
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Unit</th><th>Tokens</th><th>Est. $</th><th>Scales with</th></tr></thead>
+      <tbody>
+        <tr><td>Architect — persona card + echoes</td><td class="num-cell">51,359</td><td class="num-cell">$0.87</td><td><strong>Souls</strong> — paid once each</td></tr>
+        <tr><td>Content — one soul, one scene</td><td class="num-cell">48,053</td><td class="num-cell">$0.85</td><td rowspan="2"><strong>Appearances</strong> — every time a soul is in a scene</td></tr>
+        <tr><td>Verifier — one batch</td><td class="num-cell">59,087</td><td class="num-cell">$0.45</td></tr>
+        <tr><td>QA — light traversal</td><td class="num-cell">50,813</td><td class="num-cell">—</td><td>Stage 6–7 only</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="panel">
+      <div class="band-title">The token budget binds long before the money does</div>
+      <p style="margin:.2rem 0 .7rem">Eight cards plus fifteen soul-appearances comes to roughly <strong>$26</strong> at
+      run cost — about <strong>$100</strong> if revisions run at the rate this project measured. The same work is a
+      hard ceiling in tokens and a bar tab in dollars.</p>
+      <p style="margin:0"><strong>So the budget is protecting capacity, not spend</strong> — which means model choices
+      should be made on quality, with cost as the tiebreak. Every decision in this report already follows that order;
+      the numbers are what justify it.</p>
+    </div>
+
+    <p class="band-title" style="margin-top:2rem">What the benchmark actually cost</p>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Arm</th><th>Model</th><th>Cost</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td>Architect</td><td>Opus 5</td><td class="num-cell">$1.34</td><td class="win">Chosen — axes independent</td></tr>
+        <tr><td>Architect</td><td>Sonnet 5</td><td class="num-cell">$0.68</td><td>Half the price, failed the structural check</td></tr>
+        <tr><td>Content</td><td class="win">Fable 5</td><td class="num-cell">$1.65</td><td class="win">Chosen — 6 of 6 lines</td></tr>
+        <tr><td>Content</td><td>Opus 5</td><td class="num-cell">$0.76</td><td>4 of 6</td></tr>
+        <tr><td>Content</td><td>Sonnet 5</td><td class="num-cell">$0.51</td><td>1 of 6</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>Both decisions cost money rather than saving it. Sonnet would have halved the Architect bill; it produced a card
+    whose personality axes were not independent, which is the defect that makes a whole cast read as one character.
+    Fable is <strong>3.2×</strong> the cheapest option for the lines, and returned six shippable lines where the
+    cheapest returned one.</p>
+
+    <div class="panel">
+      <div class="band-title">What the 2M crew budget actually buys</div>
+      <pre class="code">cards      8 souls  × 51,359  =   410,872
+remaining  2,000,000 − 410,872 = 1,589,128
+appearances 1,589,128 ÷ 107,140 =      <span class="k">~15</span></pre>
+      <p style="margin:.7rem 0 0">The slice runs five days × three time-blocks = <strong>15
+      scene-slots</strong>. So the budget affords roughly <strong>one soul-appearance per
+      time-block</strong> across the entire festival week — with zero revisions.</p>
+    </div>
+
+    <p class="band-title" style="margin-top:2rem">And revisions are the real cost</p>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Phase 2</th><th>Tokens</th><th>Share</th></tr></thead>
+      <tbody>
+        <tr><td>Generation — the pipeline running as designed</td><td class="num-cell">209,312</td><td class="num-cell">21%</td></tr>
+        <tr><td>Revisions — 13 further calls</td><td class="num-cell">799,782</td><td class="num-cell">79%</td></tr>
+        <tr><td><strong>Full run</strong></td><td class="num-cell">1,009,094</td><td class="num-cell">100%</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p><strong>Revisions cost 3.8× the generation they corrected.</strong> A 500K revision reserve
+    covers roughly two scenes out of fifteen at that rate. Capping revisions bounds the damage; it
+    does not prevent it.</p>
+    <div class="panel">
+      <h4>Why revisions happened, and the one lever that stops them</h4>
+      <p style="margin:.2rem 0 .6rem">Four separate times, the content agent was told to fix one
+      thing — and fixed it while silently spending a different constraint.</p>
+      <div class="scroll">
+      <table>
+        <thead><tr><th>Told to fix</th><th>Silently lost</th></tr></thead>
+        <tbody>
+          <tr><td>an invented fact</td><td>the soul's signature</td></tr>
+          <tr><td>flow</td><td>the echo's canon</td></tr>
+          <tr><td>warmth</td><td>the refusal</td></tr>
+          <tr><td>self-narration</td><td>the offer's target</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p style="margin:.7rem 0 0">The only pass that traded nothing away was the one where the
+      <strong>entire constraint set</strong> was restated alongside the defect. A revision brief that
+      names only the problem is an instruction to trade something else for it —
+      <strong>so briefing quality, not the revision cap, is what makes the roster affordable.</strong></p>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section class="sec">
+    <div class="sec-head">
+      <div class="num">7</div>
+      <div><span class="eyebrow">The yield</span><h3 class="sec-title">What the run changed</h3></div>
+    </div>
+    <p>Ten specification changes, none of them anticipated before the run. This is the part a
+    description of the pipeline could never have produced.</p>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>#</th><th>Change</th><th>Found by</th></tr></thead>
+      <tbody>
+        <tr><td class="num-cell">1</td><td><strong>Warmth is invariant.</strong> The animated/flat spread governs tempo only — a "correctly flat" line that reads cold is a defect</td><td>the human gate; two agents missed it</td></tr>
+        <tr><td class="num-cell">2</td><td><strong>Seed slot typing.</strong> An act a soul performs and never mentions cannot be carried by a spoken line</td><td>four failed passes</td></tr>
+        <tr><td class="num-cell">3</td><td><strong>Revision cap</strong> — two per item, any worker, and it does not reset at the human gate</td><td>the 79% figure</td></tr>
+        <tr><td class="num-cell">4</td><td><strong>Full-constraint briefing</strong> — restate everything, never only the defect</td><td>four silent trades</td></tr>
+        <tr><td class="num-cell">5</td><td><strong>Specify the invariant</strong> — when handing down an axis that varies, state what holds constant</td><td>the same defect, twice, one level apart</td></tr>
+        <tr><td class="num-cell">6</td><td><strong>Hard fact ceiling</strong> — two per scene; raising it surfaces to a human instead of being self-granted</td><td>the verifier, catching governance drift</td></tr>
+        <tr><td class="num-cell">7</td><td><strong>Choice nodes</strong> — the receive-beat is a player choice, and nothing in the schema can express a branch</td><td>the one unapproved line</td></tr>
+        <tr><td class="num-cell">8</td><td><strong>Brief for concreteness, not shape</strong> — a worked example handed down as a bar gets copied structurally</td><td>a flag on our own instruction</td></tr>
+        <tr><td class="num-cell">9</td><td><strong><span class="tag-action">[action]</span> typing</strong> — non-dialogue slots must be visibly non-dialogue, in schema and in review</td><td>a misread at the gate</td></tr>
+        <tr><td class="num-cell">10</td><td><strong>Age is a role field</strong> — re-dealt each life like the job; needed for who defers to whom</td><td>an unlicensed "that boy"</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <!-- 8 -->
+  <section class="sec">
+    <div class="sec-head">
+      <div class="num">8</div>
+      <div><span class="eyebrow">Limits</span><h3 class="sec-title">What this run does not prove</h3></div>
+    </div>
+    <ul>
+      <li><strong>One soul, one scene.</strong> Every model comparison is n=1. Arms that landed close
+      are inconclusive, not equal.</li>
+      <li><strong>One line is still unwritten.</strong> The receive-beat — the beat the Giver's whole
+      arc turns on — is deferred, because it turned out to need player choice and the schema cannot
+      express a branch. A gap in the specification, found by running it.</li>
+      <li><strong>The orchestrator's own cost is invisible.</strong> It is the main session's
+      reasoning and appears in no figure here. Every per-soul number is a floor, not a ceiling.</li>
+      <li><strong>The scene model is assumed.</strong> One content call, one soul, one time-block.
+      If scenes routinely carry several souls, the affordable count moves.</li>
+    </ul>
+  </section>
+
+  <hr class="rule">
+  <p class="meta" style="text-align:center">
+    Phase 1 benchmark · Phase 2 demo run · 25 July 2026<br>
+    Full working report: RESULTS.md · Call trail: run-log.md · Output: giver-persona-card.md
+  </p>
+
+</div>
