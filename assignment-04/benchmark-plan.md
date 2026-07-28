@@ -1,7 +1,6 @@
 # Benchmark Plan — model weight vs output quality (the Giver)
 
-The run plan for Task 1's pipeline proof. Two phases: a **benchmark** (which model tier does each slot actually need?) then a **clean demo run** at the winning config. Agents are specced in [`../narrative-pipeline/agents/`](../narrative-pipeline/agents/README.md); the procedure is [`../narrative-pipeline/pipeline.md`](../narrative-pipeline/pipeline.md); the steering layer is the ratified [`../narrative-pipeline/arc-festival-slice.md`](../narrative-pipeline/arc-festival-slice.md).
-
+The run plan for Task 1's pipeline proof. Two phases: a **benchmark** (which model tier does each slot actually need and how much does it cost?) then a **clean demo run** at the winning config. 
 ## Why this is the right test
 
 The GDD already sets this as the target-acceptance bar (v5 §9.1, Deep-soul arc):
@@ -174,3 +173,10 @@ pipeline-runs/
 1. The crew produces an approvable Giver end-to-end, honoring call-down/signal-up with the human gate at the output.
 2. The **Arc-Question shape** validates as a per-soul template (*express each soul's X→Y spine as a "stay X or become Y?" question*). If it holds, promote it into `steering-layer.md` / `content-stages.md` stage 2.
 3. A defensible model/effort config per slot, with token cost attached.
+
+## Screenshots of the run
+
+> This is an obsidian vault, if you have obsidian you can view the folder that way, or the pictures are in `assets/`
+
+![[Pasted image 20260728000508.png]]
+![[Pasted image 20260728000556.png]]

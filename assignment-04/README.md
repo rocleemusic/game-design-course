@@ -9,7 +9,7 @@ This pipeline generates the game's narrative and reactive content **from the gam
 ## TL;DR — the three questions the assignment asks
 
 - **What content did I generate?** Three things the game specifically needed: **soul persona cards**, **in-register scene dialogue**, and **spell-reaction beats** (what happens when you cast a spell at the world). All produced by the crew, all gated by me.
-- **Does it sound like my game?** Yes — and the test is distinctness: two souls (Toby, Ilsa) come out reading as two different people, not one archetype in two hats. Details under [Voice judgment](#does-it-sound-like-my-game-voice-judgment).
+- **Does it sound like my game?** Yes — content is human-gated. Details under [Voice judgment](#does-it-sound-like-my-game-voice-judgment).
 - **What did the critic catch?** It caught the writer **inventing a relationship between two souls that isn't in the game's canon** (`knowledge_travels`) and blocked it until it was rewritten. Shown in full under [What the critic caught](#what-the-critic-caught-consistency-checking).
 
 ---
@@ -42,10 +42,12 @@ flowchart LR
 
 **To run it:** paste [`2026-07-25-giver/phase-2-prompt.md`](2026-07-25-giver/phase-2-prompt.md) into a fresh Claude session. It's self-contained and reproduces the Giver run end to end.
 
-**It runs — proof:**
+**Benchmark Run:**
 
 ![The benchmark run: 10 agents, 563.8k tokens, completed with no errors](assets/Pasted%20image%2020260728000508.png)
 *The model-selection benchmark executing — 10 agents, completed, no errors.*
+
+**Ignite run**
 
 ![The ignite run: 13 agent invocations, each zero tool calls, to the human gate](assets/Pasted%20image%2020260728000556.png)
 *The `ignite × 7` run — 13 agent invocations, each **zero tool calls** (spec inlined, not fetched), stopping at the human gate.*
@@ -122,21 +124,6 @@ The **Consistency Verifier** caught a **lore break** — the writer invented a s
 The line now expresses Toby's essence (unasked-for giving, debt foreclosed) using only facts already in canon. Full trail: [`run-log.md`](2026-07-25-giver/run-log.md).
 
 > The critic also caught a **tone drift** that survived every structural check: a receiving line that was flat, short, and technically correct but read *"brusque and unwarm."* That one only surfaced at the human gate, which earned a new invariant — **warmth is invariant across the voice spread** (see below).
-
----
-
-## Does it sound like my game? (Voice judgment)
-
-**Yes — the evidence is distinctness.** The risk with generated casts is that everyone comes out as the same character wearing different jobs. Two souls run through the pipeline came out genuinely different:
-
-- **Toby's** engine is **tempo** — fast, outward, animated, his lines collapsing to seven words the moment attention turns back on him.
-- **Ilsa's** engine is **grammar** — uniform flat declaratives, her essence carried by an unfinished motion rather than a shortened line.
-
-He converts gifts into debts; she converts absences into arrangements. Their trait axes differ *in kind*, and the distinctness check against a third soul (Juno) passed on every line.
-
-**A concrete tweak I made to improve game-fit:** the **voice-register spread.** The first run passed Toby's voice as a **binary** — `"ANIMATED, not monotone"` — and every model missed the target. I re-cut it as a **spread**: *70% animated, with the asymmetry stated* (animated when attention points outward, flat and short when it turns back on him). Passing it as a spread instead of a switch landed on the first pass — visible in word count alone: outward lines 16–17 words, receiving lines 5–7.
-
-That fix exposed a deeper one. A line can satisfy the whole spread and still be cold, so a second rule was added to the retrieval bundle: **warmth is invariant across the spread — the spread governs tempo and uptake only, never warmth.** On the next soul, the cold-line defect simply never appeared.
 
 ---
 
