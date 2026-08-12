@@ -53,7 +53,7 @@ To demonstrated Goal-Oriented Agents I am presenting two components of my projec
 - ![dialogue-review-1.jpg](images/dialogue-review-1.jpg)
 
 - And I can play through the dialogue in sequence:
-- ![dialogue-in-play.jpg](dialogue-in-play.jpg)
+- ![dialogue-in-play.jpg](images/dialogue-in-play.jpg)
 ## Appendix
 
 - choice-node-schema.md -- output format for nodes with reasoning
