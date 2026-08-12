@@ -26,7 +26,7 @@ To demonstrated Goal-Oriented Agents I am presenting two components of my projec
 - /goal complete gp-34, 58, 59, and 60 to prove that ink integration is possible to unblock decision on whether to continue with unreal as the shipping target. goal is complete when current ink story is playable end-to-end in ureal.
 ## What the Agent Does
 
-- The task items the agent completed![paca-tasks-ink-integration.jpg]
+- The task items the agent completed ![paca-tasks-ink-integration.jpg](images/paca-tasks-ink-integration.jpg)
 ## Were you able to run this in your game?
 
 - Using this prompt was able to have it pull the ink integration github https://github.com/The-Chinese-Room/Inkpot, update it for Unreal 5.8, and have my ink script dialogue play in Unreal
