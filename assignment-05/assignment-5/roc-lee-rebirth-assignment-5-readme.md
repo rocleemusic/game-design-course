@@ -44,16 +44,16 @@ To demonstrated Goal-Oriented Agents I am presenting two components of my projec
 - The choice-designer is part of my narrative pipeline (see `pipeline-position`)
 - When session kicks off I orchestrate with a narrative architect on what story threads we should author.  
 - A package of the npc's personality as a .json, and a .md file the thread is passed to the choice-designer that then fills out each conversation slot with a branching dialogue tree. 
-- ![[toby-after-mermaid.jpg]]
+- ![toby-after-mermaid.jpg](images/toby-after-mermaid.jpg)
 ## Were you able to run this in your game?
 
 - Before using the choice-designer dialogue was one-dimensional and flat all the time. 
 - After the generated content was much more interesting and was something that was worth editing.
 - And here is the dialogue imported as ink script into my review tool:
-- ![[dialogue-review-1.jpg]]
+- ![dialogue-review-1.jpg](images/dialogue-review-1.jpg)
 
 - And I can play through the dialogue in sequence:
-- ![[dialogue-in-play.jpg]]
+- ![dialogue-in-play.jpg](dialogue-in-play.jpg)
 ## Appendix
 
 - choice-node-schema.md -- output format for nodes with reasoning
