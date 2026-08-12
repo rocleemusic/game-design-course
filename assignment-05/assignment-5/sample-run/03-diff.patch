@@ -1,0 +1,136 @@
+diff --git a/ProjectOS/game-project/lantern-projects/v01/threads/toby-the-shelf.md b/ProjectOS/game-project/lantern-projects/v01/threads/toby-the-shelf.md
+index 6e72c1d8..eac840c1 100644
+--- a/ProjectOS/game-project/lantern-projects/v01/threads/toby-the-shelf.md
++++ b/ProjectOS/game-project/lantern-projects/v01/threads/toby-the-shelf.md
+@@ -102,19 +102,127 @@ The content block says what is open, what is closed and what he reveals, per inc
+ 
+ ### C1 — `SC-T2-08`
+ 
+-*Awaiting Choice designer.*
++**Carries R1. Reads no prior facts — one incoming state (zero knowledge). Must work as first contact with Toby this week.**
++
++**Content block.**
++
++- **Incoming state: zero knowledge (the only state).** The shelf of unopened jars is staged as scene business behind the counter — present and visible whatever the player picks. Toby is mid-order; the counter work is the cover the reveal arrives under.
++- **Node 1 (`CH-T2-08-1`, ungated).** Three ways into first contact: ask about the jar shelf (marks it — sets `shelf_seen`, moves the thread), pitch in on the order at hand (his anticipation and deflection show in how he redirects the help — deed, no record), or talk about the order (plain first contact, no record). Neither is the correct read: asking turns attention on him, which his card says he deflects; helping and small talk respect the surface and cost the same beat.
++- **Node 2 (`CH-T2-08-2`, gated `knows(shelf_seen)`).** Opens only if the jars were asked about in node 1. The acknowledged shelf turns attention on him: he goes flat, reaches for an unfinished task (`deflection_target`). The player can note that none of the jars are opened (deep — records Recognition; his response beat is receiving-flat, warmth intact, and he supplies the player something mid-deflection) or let it drop (sit-with, no record). If the gate is false the node skips and the scene ends at node 1's gather.
++- **Closed path.** A player who never asks about the jars leaves without `shelf_seen`. The shelf stays in the world: the `ex-shelf` examinable (T2 hub, sticky, repeatable) reopens it by setting `shelf_seen` later. The shallow run still delivers first contact and the staging.
++
++```mermaid
++flowchart TD
++  N1["CH-T2-08-1<br>first contact — counter mid-order, jar shelf in view"]
++  N1 --> N1a("a · witness · 'asks about the shelf of jars'")
++  N1 --> N1b("b · ease · pitches in on the order at hand")
++  N1 --> N1c("c · witness · 'talks about the order'")
++  N1a --> R1a[/"flag: shelf_seen<br>move: toby-the-shelf"/]
++  R1a --> J1(("g"))
++  N1b --> J1
++  N1c --> J1
++  J1 --> G2{{"knows(shelf_seen)"}}
++  G2 --> N2["CH-T2-08-2<br>the shelf acknowledged — he goes flat, reaches for a task"]
++  N2 --> N2a("a · witness · 'notes that none of the jars are opened'")
++  N2 --> N2b("b · sit-with · lets it drop")
++  N2a --> R2a[/"bond: Recognition"/]
++  R2a --> J2(("g"))
++  N2b --> J2
++```
+ 
+ ### C2 — `SC-T2-09`
+ 
+-*Awaiting Choice designer.*
++**Carries R2. Reads one prior fact: `shelf_seen`. Two incoming states.**
++
++**Content block.**
++
++- **Scene business, both states.** A giver's order is being packed with two extra rolls, unbilled. The trade is staged and visible whoever walks in — R2's surface is delivered by the situation, not by a pick.
++- **Incoming state: `shelf_seen` (deep).** Node 2 opens. The trade reads as what it is — a gift converted into goods and sent back, unmentioned. The player can name the pattern to his face: the shelf, the jar, the rolls, one motion. Naming it sets `shelf_named`, records Recognition, and moves the thread; his response beat is flat and short, then a task found. Letting it pass records nothing and closes nothing — node 2 stays reachable on a later walk of this scene's state, but within this conversation the moment passes.
++- **Incoming state: fallback (finished C1, learned nothing).** Node 1 still delivers: the extra rolls are noticeable on their own, and asking about them sets `repaid_seen` and moves the thread — reached cold it is a baker giving away rolls, which is exactly what the Architect specifies, and it still counts as having seen someone repaid. Node 2 never opens; the connection to the shelf is not available to name. Shallower, not rerouted.
++- **Closed paths.** Missed `shelf_seen`: `ex-shelf` (T2, sticky, repeatable) reopens it — but C2 does not replay, so `shelf_named` cannot be set after this conversation completes; see the flag at the foot of this section. Missed `repaid_seen` (picked b in node 1): no examinable is wired to reopen it in the brief; C3 runs shallower per R5.
++- **Equal weight.** In node 1, asking about the rolls turns talk toward what he did (against his grain), helping pack respects the work. In node 2, naming the pattern is an intrusion his card deflects; letting it pass leaves him his cover. Neither is sanctioned; the records differ in kind, not rank.
++
++```mermaid
++flowchart TD
++  N1["CH-T2-09-1<br>an order packed with two unbilled rolls"]
++  N1 --> N1a("a · witness · 'asks about the extra rolls'")
++  N1 --> N1b("b · ease · helps pack the order")
++  N1a --> R1a[/"flag: repaid_seen<br>move: toby-the-shelf"/]
++  R1a --> J1(("g"))
++  N1b --> J1
++  J1 --> G2{{"knows(shelf_seen)"}}
++  G2 --> N2["CH-T2-09-2<br>the trade connects to the shelf"]
++  N2 --> N2a("a · witness · 'names the shelf and the trade to his face'")
++  N2 --> N2b("b · sit-with · lets it pass")
++  N2a --> R2a[/"flag: shelf_named<br>bond: Recognition<br>move: toby-the-shelf"/]
++  R2a --> J2(("g"))
++  N2b --> J2
++```
++
++> **Flagged to Roc (not fixed here):** if the player completes C2 without `shelf_seen`, node 2 never opens and `shelf_named` can never be set — no examinable reopens it and C2 does not replay — so C4's entry gate closes permanently for that player. That is a fall-off-the-thread-untold shape (R3's own rationale). Architect call, not this seat's.
+ 
+ ### C3 — `SC-T2-10`
+ 
+-*Awaiting Choice designer.*
++**Quiet beat. No reveal, no fact slots, no `thread_move`. Reads two prior facts: `shelf_seen`, `repaid_seen` — four incoming states. The only place the player can give Toby something with nothing owed on it.**
++
++**Content block.**
++
++- **All four states.** A lull — nothing needs doing, which his card says he cannot sit inside comfortably. Node 1 is open to everyone: set something of the player's own on the counter with nothing owed on it (deed — sets `gave_unowed`; his response beat is receiving-flat, and the thing is not repaid within the scene, which is the state C4 and the echo need), share the lull and give nothing (sit-with, no record), or idle talk (spoken, no record). The gift records no bond on purpose: giving is not sanctioned — his card makes a gift a load, and staying empty-handed respects his deflection. Equal weight, no accrual: giving twice accumulates nothing, and the flag is set-once knowledge, not a tally.
++- **Incoming state: `shelf_seen` and `repaid_seen` (deep).** Node 2 opens (gate is the conjunction — the two reads this conversation is entitled to). The player knows the whole pattern; sitting in the quiet with him is now a loaded act. The player can quietly mark that the quiet is deliberate — presence with no errand attached (spoken, records Recognition) — or just stay (sit-with, no record). No new information passes either way; this is reference, not delta.
++- **Incoming states: one flag only (either).** Structurally identical to the fallback — node 1 only. The single known fact shades the Lines pass inside node 1's existing slots; it opens no extra structure. Shallower, not rerouted.
++- **Incoming state: fallback (finished C2, learned nothing).** Node 1 alone, and it is content, not an apology: the lull, the visible discomfort of a man with no task, and the standing option to give. A zero-knowledge player can still set `gave_unowed` here.
++- **Closed path.** Node 2, when closed, is reopened by the same missed facts' pickups: `ex-shelf` for `shelf_seen`; `repaid_seen` has no wired examinable (noted under C2).
++
++```mermaid
++flowchart TD
++  N1["CH-T2-10-1<br>a lull — nothing needs doing"]
++  N1 --> N1a("a · ease · sets a gift on the counter, nothing owed")
++  N1 --> N1b("b · sit-with · shares the lull, gives nothing")
++  N1 --> N1c("c · witness · 'idle talk'")
++  N1a --> R1a[/"flag: gave_unowed"/]
++  R1a --> J1(("g"))
++  N1b --> J1
++  N1c --> J1
++  J1 --> G2{{"knows(shelf_seen)<br>knows(repaid_seen)"}}
++  G2 --> N2["CH-T2-10-2<br>the quiet, with the whole pattern known"]
++  N2 --> N2a("a · witness · 'marks that the company has no errand attached'")
++  N2 --> N2b("b · sit-with · stays, says nothing")
++  N2a --> R2a[/"bond: Recognition"/]
++  R2a --> J2(("g"))
++  N2b --> J2
++```
+ 
+ ### C4 — `SC-T2-11`
+ 
+-*Awaiting Choice designer.*
++**Carries R3. Entry additionally gated on `shelf_named` per the Architect's dependency order. Reads two facts: `shelf_named` (at entry) and `gave_unowed`.**
++
++**Content block.**
++
++- **Reachable states — two of four.** Because the Architect gates entry on `shelf_named`, the two `¬shelf_named` states never arrive: no content is authored for them, and this is deliberate, not an oversight. A player without `shelf_named` ends the thread at C3. (`shelf_named` has no pickup examinable, so that closure is permanent — flagged under C2 and in the return summary; entry-gating on knowledge also sits in tension with R3, which is the Architect's to resolve, not this seat's.)
++- **Scene business, both reachable states.** Another villager (walk-on — business, no card, no facts) mentions bread she never ordered. R3 is delivered by the situation itself; every pick below is what the player does with it, so the fallback state loses nothing of the reveal.
++- **Node 1 (`CH-T2-11-1`, ungated within the scene).** After the remark, with Toby: name it as a pattern — not a kindness to one person but what he does with everything he is given (spoken — moves the thread; his response beat is flat, then a task found), let the remark sit unanswered (sit-with, no record), or turn the talk to the villager's errand (ease — handing him the deflection he wants; no record). Equal weight: pressing the pattern turns attention on him at cost to his footing; the other two leave him his cover and spend the same beat. No option scolds another; records differ in kind only.
++- **Incoming state: `shelf_named` and `gave_unowed` (deep).** Node 2 opens. The one gift he has not repaid yet stands between them. The player can mark it — theirs is the one still on the shelf, unanswered (spoken — records Recognition) — or leave it unspent (sit-with, no record). Either way the conversation ends open: he has not repaid it, nothing closes, the held breath the brief specifies. The payoff is cross-soul seam-pass work (R7) and is not reached for here.
++- **Incoming state: fallback (`shelf_named`, finished C3 without giving).** Node 2 never opens. The conversation still delivers R3 in full — the pattern made public — and ends on the same open note at node 1's gather. Shallower, not rerouted.
++- **Closed path.** `gave_unowed` can only be set in C3, which does not replay; the deep ending of C4 closes with it. There is no wired examinable for it — the brief's table names none — noted in the return summary.
++
++```mermaid
++flowchart TD
++  N1["CH-T2-11-1<br>a villager's remark — bread she never ordered"]
++  N1 --> N1a("a · witness · 'names it as a pattern, not a kindness'")
++  N1 --> N1b("b · sit-with · lets the remark sit")
++  N1 --> N1c("c · ease · 'turns the talk to the villager's errand'")
++  N1a --> R1a[/"move: toby-the-shelf"/]
++  R1a --> J1(("g"))
++  N1b --> J1
++  N1c --> J1
++  J1 --> G2{{"knows(gave_unowed)"}}
++  G2 --> N2["CH-T2-11-2<br>the one gift he has not repaid yet"]
++  N2 --> N2a("a · witness · 'marks the one still unanswered'")
++  N2 --> N2b("b · sit-with · leaves it unspent")
++  N2a --> R2a[/"bond: Recognition"/]
++  R2a --> J2(("g"))
++  N2b --> J2
++```
+ 
+ ---
+ 
