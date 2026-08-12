@@ -31,14 +31,14 @@ To demonstrated Goal-Oriented Agents I am presenting two components of my projec
 
 - Using this prompt was able to have it pull the ink integration github https://github.com/The-Chinese-Room/Inkpot, update it for Unreal 5.8, and have my ink script dialogue play in Unreal
 - This allowed peace of mind in continuing to create dialogue using ink.
-- ![[ink-in-unreal.png]]
+- ![ink-in-unreal.png](images/ink-in-unreal.png)
 - video also in `images/ink in unreal demo.mp4`
 # Choice-Designer Agent
 ## What I built
 
 - `choice-designer.md`
 - I built a choice-designer agent to help design more varied branching dialogue shapes.
-- The problem: When I started generating dialogue initially it created the exact same dialogue shape every time without fail.  And each conversation was only 6 beats like this:  ![[toby-before-mermaid.jpg]]
+- The problem: When I started generating dialogue initially it created the exact same dialogue shape every time without fail.  And each conversation was only 6 beats like this:  ![toby-before-mermaid.jpg](images/toby-before-mermaid.jpg)
 ## What the Agent Does
 
 - The choice-designer is part of my narrative pipeline (see `pipeline-position`)
