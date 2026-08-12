@@ -7,6 +7,17 @@ To demonstrated Goal-Oriented Agents I am presenting two components of my projec
 - A one-time use /goal command as demonstrated in class, to prove that ink integration could work for my project.
 - A choice-designer agent that helps built out narrative branching dialogue graphs.
 
+# Whats in this repo
+
+| file                  | description                                                                                                      |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| choice-designer.md    | example of goal-oriented coding agent that takes a specified input and produces exactly one thing.               |
+| choice-node-schema.md | schema for the choice designer                                                                                   |
+| guardrails.md         | downstream rules for checking choice designer work                                                               |
+| pipeline-position.md  | mermaid graph of where the choice designer is executed                                                           |
+| /images               | example images                                                                                                   |
+| /sample-run           | before after example of a thread. before was the failed output that prompted the creation of the choice-designer |
+
 # /Goal prompt
 
 ## What I built
