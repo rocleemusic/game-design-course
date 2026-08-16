@@ -1,0 +1,16 @@
+{
+  "name": "ger-harness",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "GER pipeline (Assignment #6): generates one NPC dialogue slot, evaluates it against the deterministic ceilings and guardrails check 6, refines on a prose flag, and trips a circuit breaker rather than shipping a bad line.",
+  "bin": { "ger": "src/index.js" },
+  "scripts": {
+    "start": "node src/index.js",
+    "offline": "node src/index.js --offline",
+    "demo": "node src/index.js --offline --slot all"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.60.0"
+  }
+}

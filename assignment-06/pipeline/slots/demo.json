@@ -1,0 +1,31 @@
+[
+  {
+    "slot_id": "L-CH-T4-07-1-a-r2",
+    "npc_id": "ilsa",
+    "slot_type": "dialogue",
+    "tone": "warm",
+    "max_words": 40,
+    "scene_context": "Ilsa's forge, morning. The fire will not hold heat, so the centerpiece cannot be struck and the day has been re-ordered around file work. The player has just asked what is wrong with the fire.",
+    "beat": "Her warm beat. The asker ends up placed somewhere, and the spot comes with its reason for being a good one.",
+    "speaker_intent": "The care arrives as an assignment, stated as already decided."
+  },
+  {
+    "slot_id": "L-CH-T2-08-2-a-r1",
+    "npc_id": "toby",
+    "slot_type": "dialogue",
+    "tone": "quiet",
+    "max_words": 40,
+    "scene_context": "Toby's counter, mid-order. A shelf of unopened jars stands behind him. The player has just noted that none of the jars have been opened.",
+    "beat": "His warm beat, arriving mid-deflection. He goes flat and reaches for an unfinished task, and the player is supplied something anyway.",
+    "speaker_intent": "Warmth intact under the flatness. He does not acknowledge the observation."
+  },
+  {
+    "slot_id": "L-CH-T4-07-1-a-p",
+    "npc_id": "ilsa",
+    "slot_type": "player_line",
+    "tone": "matter_of_fact",
+    "max_words": 12,
+    "scene_context": "Ilsa's forge, morning. The fire is low and nothing can be struck.",
+    "beat": "The player asks, plainly, what is wrong with the fire."
+  }
+]
