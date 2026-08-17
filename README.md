@@ -12,7 +12,8 @@ Assignment staging area for [Festival of Souls](gdd/01-concept.md), a cozy rogue
 | [`assignment-03/`](assignment-03/README.md) | Dev-crew agent role prompts — runnable specs for the Narrative Director, Orchestrator, Narrative Architect, Content/Dialogue, Consistency Verifier, and QA/Playtest agents |
 | [`assignment-04/`](assignment-04/README.md) | Pipeline benchmark run — model-arm comparison plus full generation runs for two souls (Toby the Giver, Ilsa the Kinbound), with results and run logs |
 | [`assignment-05/`](assignment-05/assignment-5/roc-lee-rebirth-assignment-5-readme.md) | Goal-oriented coding agents — a one-shot `/goal` run that proved ink-in-Unreal integration, plus the Choice Designer agent that builds branching dialogue graphs |
-| [`assignment-06/`](roc-lee-rebirth-README.md) | GER pipeline — runnable Generator / Evaluator / Refiner / Circuit Breaker over one NPC dialogue slot, enforcing guardrails check 6 (voice register) with a 2-revision cap and a structural exit |
+| [`assignment-06/`](assignment-06/roc-lee-rebirth-README.md) | GER pipeline — runnable Generator / Evaluator / Refiner / Circuit Breaker over one NPC dialogue slot, enforcing guardrails check 6 (voice register) with a 2-revision cap and a structural exit |
+| [`assignment-07/`](assignment-07/roc-lee-rebirth-README.md) | Style Guide Agent — the game's five written constraint types ([`style-guide.md`](assignment-07/style-guide.md)), a three-layer evaluator scoring distance from those rules, and a recorded run catching a real lore contradiction that was sitting in the game repo |
 
 ## The game, briefly
 
