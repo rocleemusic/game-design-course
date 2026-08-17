@@ -3,7 +3,7 @@
 Generator · Evaluator · Refiner · Circuit Breaker, closing one loop over one slot of
 NPC dialogue for the capstone game.
 
-**The argument for the design is one level up, in [`../README.md`](../README.md).** This file is
+**The argument for the design is one level up, in [`../README.md`](roc-lee-rebirth-README.md).** This file is
 the operating manual.
 
 ```bash
