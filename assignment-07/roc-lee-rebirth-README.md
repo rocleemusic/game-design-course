@@ -153,8 +153,10 @@ Nothing about the before is broken code. It renders, the labels are there, the l
 > **SCORE: 4/10 · FIDELITY**
 > `[-6] component.wrong_family` — the move/action choices render as bare bracketed text (`[Look at trail signs]`, `[Go to Town Square]`) at hand-tuned offsets. §4 rules an on-screen choice is the shipped dialogue-pill family recolored to lantern gold — the same pill the VN dialogue choices already use. `TraversalRow.ts:117`.
 
-> **AFTER** · refined
-> ![After — §14 gold choice pills](evidence/component-after.png)
+**AFTER** · refined
+
+![After — §14 gold choice pills](evidence/component-after.png)
+
 > **SCORE: 10/10** — No rule in the style guide was broken. Matches §14.
 
 The dialogue choices in this game were already §14 pills. The move row beside them was still bare bracket text, so the same screen offered two different button vocabularies at once. That is what `component.wrong_family` catches — not a broken control, a control that doesn't belong to the family the game already speaks. The refiner rebuilt each choice as the dialogue pill, matching fill, border, radius and font token-for-token, and stripped the literal `[ ]` the pill makes redundant. It also carried a rule the reference exposed: a blocked choice now reads muted, never red, because a move you cannot take yet is a fact about the world, not an error you made. Now the whole interface — HUD nav, move choices, dialogue, control bar, menus — speaks one pill.
