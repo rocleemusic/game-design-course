@@ -146,8 +146,9 @@ Nothing about the before is broken code. It renders, the labels are there, the l
 
 ### Example 3 — Component. Bracket text where the game speaks in pills
 
-> **BEFORE** · the in-game move/action choices
-> ![Before — bare bracketed text choices](evidence/component-before.png)
+**BEFORE** · the in-game move/action choices
+
+![Before — bare bracketed text choices](evidence/component-before.png)
 
 > **SCORE: 4/10 · FIDELITY**
 > `[-6] component.wrong_family` — the move/action choices render as bare bracketed text (`[Look at trail signs]`, `[Go to Town Square]`) at hand-tuned offsets. §4 rules an on-screen choice is the shipped dialogue-pill family recolored to lantern gold — the same pill the VN dialogue choices already use. `TraversalRow.ts:117`.
