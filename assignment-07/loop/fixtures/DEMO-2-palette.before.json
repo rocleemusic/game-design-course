@@ -1,0 +1,8 @@
+[
+  {
+    "rule": "palette.off_brand_fill",
+    "file": "phaser/src/scenes/LocationSelectScene.ts",
+    "line": 152,
+    "evidence": "Day cards fill with COLOR.panel (#241c14, the dark HUD-chrome tone) as boxes on the light hand-painted book; §5.2 rules a day card is a light canvas/parchment page, not dark chrome"
+  }
+]

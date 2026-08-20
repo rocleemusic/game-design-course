@@ -1,0 +1,8 @@
+[
+  {
+    "rule": "component.wrong_family",
+    "file": "phaser/src/render/TraversalRow.ts",
+    "line": 117,
+    "evidence": "Move/action choices render as bare bracketed text ('[Look at trail signs]', '[Go to Town Square]') at hand-tuned offsets; §4 rules an on-screen choice uses the shipped dialogue-pill family recolored to lantern gold, the same pill the VN dialogue choices already use"
+  }
+]
