@@ -136,8 +136,10 @@ The screen that scored 1 and the screen that scored 10 are the same layout. What
 > **SCORE: 6/10 · FIDELITY**
 > `[-4] palette.off_brand_fill` — Day cards fill with `COLOR.panel` (`#241c14`, the dark HUD-chrome tone) as boxes on the light hand-painted book. §5.2 rules a day card is a light canvas/parchment page, not dark chrome. `LocationSelectScene.ts:152`.
 
-> **AFTER** · refined
-> ![After — light gold-framed parchment panels](evidence/palette-after.png)
+**AFTER** · refined
+
+![After — light gold-framed parchment panels](evidence/palette-after.png)
+
 > **SCORE: 10/10** — No rule in the style guide was broken. Matches §14.
 
 Nothing about the before is broken code. It renders, the labels are there, the layout is right. It fails because dark chrome punched holes in a light page — and the labels went dark-on-dark and stopped reading, which is the palette rule and the legibility rule arriving together. The refiner's fix was to swap the fill for the game's actual parchment-card treatment. No linter flags "this box is the wrong material for this surface." Only a screenshot judged against §5.2 does.
