@@ -183,6 +183,24 @@ The dialogue choices in this game were already §14 pills. The move row beside t
 
 `layout.mismatch` catches "right content, wrong object." Every fact in the flat panel is also in the book — but a panel is menu chrome and the book is a thing the character owns. In a game about a village you learn by living in it, the spellbook being an actual *book* you open — a page per spell, a live preview of its cue — is not decoration. It is the material language the style guide exists to protect.
 
+### Example 5 — Component, in a modal. The cast prompt's own buttons
+
+**BEFORE** · the old cast prompt
+
+![Before — flat bracket Cast/Use buttons and a bare lower-case spell list](evidence/before-cast.jpg)
+
+> **SCORE: 2/10 · FIDELITY**
+> `[-6] component.wrong_family` — the cast modal's `[ Cast ]` / `[ Use ]` actions and the "Which spell?" picker rows are flat bracket / background-fill text, not §14 pills. `HedgeCastPrompt.ts:84`.
+> `[-2] type.wrong_case` — the header and nav around it read lower-case (`day 1 · morning · moves 2 · satchel 1/6 · screen F1`, `[ notebook — N ]`); §14 casing is Title Case. `CollectScene.ts`.
+
+**AFTER** · refined
+
+![After — the cast modal on §14 pills, clean header, pill nav](evidence/cast-after.png)
+
+> **SCORE: 10/10** — No rule in the style guide was broken. Matches §14.
+
+The cast prompt is the loop at full scale: one screen carried the old long lower-case header, bracket nav, a bare-text spell grid, and two flat modal buttons — four off-brand controls at once. The refiner took them a finding at a time — header to `Day 1 · Morning · <screen>`, nav to a packed pill row, the move choices to pills, and finally the modal's own actions and spell grid to the §14 pill — until a screenshot of the whole thing broke no rule.
+
 ### Honest notes on these runs
 
 - **Every before here is a real saved screenshot.** All five before/after pairs are genuine renders — the befores captured before the migration, the afters from `playtest.mjs` this session. Nothing is reconstructed or mocked.
