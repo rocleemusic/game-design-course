@@ -1,0 +1,14 @@
+[
+  {
+    "rule": "component.wrong_family",
+    "file": "phaser/src/render/HedgeCastPrompt.ts",
+    "line": 84,
+    "evidence": "The cast modal's actions ('[ Cast ]', '[ Use ]') and the 'Which spell?' picker rows are flat bracket/background-fill text, not §14 pills; §4 rules a modal action and an on-screen choice both use the shipped pill family"
+  },
+  {
+    "rule": "type.wrong_case",
+    "file": "phaser/src/scenes/CollectScene.ts",
+    "line": 0,
+    "evidence": "The header and nav around the modal read lower-case ('day 1 · morning · moves 2 · satchel 1/6 · screen F1', '[ notebook — N ]'); §14 casing is Title Case"
+  }
+]

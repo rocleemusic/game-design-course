@@ -1,0 +1,14 @@
+[
+  {
+    "rule": "layout.mismatch",
+    "file": "phaser/src/scenes/NotebookScene.ts",
+    "line": 0,
+    "evidence": "The notebook is a flat dark panel pinned to the bottom of the screen. §14 §5 + the game's material language make the notebook a leather BOOK (the spellbook is a real object) — a two-page framed board, not a HUD strip"
+  },
+  {
+    "rule": "type.wrong_case",
+    "file": "phaser/src/scenes/NotebookScene.ts",
+    "line": 0,
+    "evidence": "The tabs read lower-case ('knowledge', 'spells', 'relationships', 'collection'); §14 casing puts tab labels in Title Case"
+  }
+]
