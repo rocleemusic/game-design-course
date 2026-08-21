@@ -2,9 +2,7 @@
 
 **A self-correcting Generator → Evaluator → Refiner loop that enforces the VISUAL style rules of my capstone game, screen by screen.**
 
-The game is a cozy roguelite point-and-click adventure set in a hand-painted village. The player arrives with no memory of the people there, works out who they are from how they behave, and loses those bonds at the end of each life. The souls stay. The player's knowledge of them does not.
-
-I have already used narrative generation for two assignments, and a later assignment is specifically about generating dialogue. So this one takes the same scored-loop method somewhere narrative never goes: **the interface**. A cozy game lives or dies on game-feel, and game-feel is the menus, the HUD, the framed spellbook, the calendar you open to see your week. This loop is the thing that keeps every one of those screens on-model — and it produces sharper before/after evidence than prose, because a violation is visible.
+The game is a cozy roguelite point-and-click adventure set in a hand-painted village. This is an application of the GER pattern and Styleguide to the game's UI.
 
 ## What's in this folder
 
@@ -25,7 +23,7 @@ The two contracts in `loop/` are copies of the **live** agent seats at `agents/u
 
 An automated loop that builds a game UI screen, renders it, scores the screenshot against my game's written visual rules, and rebuilds it from the reason it failed. No human touches the loop while it runs.
 
-The style guide is not new. It already existed as `gdd/14-visual-style-guide.md`, a design system derived from four approved mockups and the shipped `theme.ts`. What this assignment added is a **score derived from those rules** (`loop/score.mjs`), a **machine-readable findings format** the Evaluator emits, and a **set of real screens that broke specific rules** so the loop had something to catch.
+I added a new section to my GDD: `gdd/14-visual-style-guide.md`, a design system derived from four approved mockups and the shipped `theme.ts`. I also added a **score derived from those rules** (`loop/score.mjs`), a **machine-readable findings format** the Evaluator emits, and a **set of real screens that broke specific rules** so the loop had something to catch.
 
 The loop maps cleanly onto the brief's three roles:
 
@@ -49,8 +47,6 @@ Six constraint types. The brief asks for three. Full rules, with their §14 sour
 | **Button families** | HUD chrome uses the shipped dialogue-pill families recolored to gold, never per-screen bracket text | `component.wrong_family` |
 | **Panels & material** | Framed board / parchment card / diegetic object. The day card is a light framed page; the satchel is a pouch | `palette.off_brand_fill`, `layout.mismatch` |
 | **VFX & render fidelity** | Spell VFX stays in its pane; particles emit at their anchor. A whole class of defect is green under tests | `motion.render_bug`, `asset.missing` |
-
-These are game-specific on purpose. The gold is a **lantern in a hand-painted village**, not generic UI gold — and it is deliberately decoupled from the spell-VFX gold (`vfxGold`) so a menu repaint can never dim a spell effect. The spellbook is a real leather book, the calendar an open celestial book, the satchel a cloth pouch. A stranger reading `style-guide.md` can tell exactly which game it is.
 
 ---
 
