@@ -107,21 +107,27 @@ DEMO-2-palette      6/10 → 10/10   off-brand fill, refined
 DEMO-3-component    4/10 → 10/10   bracket text refined into the §14 pill family
 ```
 
-### Example 1 — Legibility, and the grader that learned to see it
+### Example 1 — The calendar, and the grader that learned to see it
 
 This is the one that proves the loop is self-correcting, because the Evaluator got it wrong first.
 
-The location-select redesign was handed to the Verifier, and the Verifier **passed it clean** — a 10. But the day-start subtitle was washing out over the busy calendar photo, and the shared backdrop was a printed paper calendar whose day numbers bled straight through the cards. The Verifier had graded *fidelity to the reference* and never asked whether the screen read.
+**BEFORE** · the old calendar
+
+![Before — dark cards on a printed paper calendar, its day numbers bleeding through](evidence/before-calendar.jpg)
+
+The day-start calendar was handed to the Verifier, and it **passed clean** — a 10. But look at it: dark boxes punched onto a printed paper calendar, the "THE WEEK" header washing out over the bright paper, and the backdrop's own printed numbers (28, 29, 30, 1…) bleeding straight through the cards. The Verifier had graded *fidelity to the reference* and never asked whether the screen read.
 
 > **SCORE: 1/10 · STRUCTURAL**
-> `[-3] legibility.contrast` — subtitle at ~3.1:1 over the bright paper, under the 4.5 AA floor.
-> `[-6] reference.defect` — the calendar backdrop's printed numbers bleed through the cards. Shared with `CalendarScene`; a human must supply a clean backdrop.
+> `[-3] legibility.contrast` — the "THE WEEK" subtitle at ~3.1:1 over the bright paper, under the 4.5 AA floor.
+> `[-6] reference.defect` — the printed calendar backdrop bleeds its day numbers through the cards. A human must supply a clean backdrop; no re-theme removes the print.
 
-So the **Evaluator's own contract was tightened** — a legibility check and a "reads well, not just matches the reference" rule were added to `ui-verifier.md`. Re-run on the same screen, the tightened grader **caught the exact defect it had just passed**, with a file and a line. The reference defect is structural, so it stopped the loop and went to a human — and the human (me) supplied a celestial-book backdrop with no printed numbers, and the subtitle got a night plaque behind it. After: 10/10.
+So the **Evaluator's own contract was tightened** — a legibility check and a "reads well, not just matches the reference" rule were added to `ui-verifier.md`. Re-run, the tightened grader **caught the exact defect it had just passed**, with a file and a line. The reference defect is structural, so it stopped the loop and went to a human — who swapped in a celestial-book backdrop with no printed numbers, dropped the time-of-day clutter, gave every day its own light gold-framed parchment page, and put a night plaque behind the header.
 
-![After — the clean celestial-book calendar, subtitle legible, no bleed](evidence/calendar-after.png)
+**AFTER** · the current calendar
 
-The screen that scored 1 and the screen that scored 10 are the same layout. What changed is a backdrop asset and a scrim — and a grader that now measures whether text can be read, not just whether it copies a reference.
+![After — the clean celestial-book calendar](evidence/calendar-after.png)
+
+The screen that scored 1 and the screen that scored 10 are the same week. What changed is a backdrop asset, a scrim, and a card treatment — and a grader that now measures whether text can be read, not just whether it copies a reference.
 
 ### Example 2 — Palette. A dark box where the page should be parchment
 
