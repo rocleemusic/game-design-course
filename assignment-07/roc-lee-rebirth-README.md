@@ -185,9 +185,9 @@ The dialogue choices in this game were already §14 pills. The move row beside t
 
 ### Honest notes on these runs
 
-- **Example 1's "before" is documented, not a saved screenshot.** The Verifier's first (wrong) pass and the tightened re-grade are recorded in the migration handoff and in `ui-verifier.md`'s own history section; the celestial-book backdrop that fixed it is the asset now shipped. I show the after, not a reconstructed before, rather than fake a screenshot.
-- **All three befores except Example 1 are saved screenshots from real renders.** Example 2 and Example 3 are genuine before/after pairs captured this session with `playtest.mjs`; only Example 1's washed-out state is documented rather than re-shot (see above).
-- **The same loop ran well beyond these three.** This session it also carried a font-consistency pass (33 raw font sites moved onto the §14 tokens, a mono screen-title corrected to the display serif), a Title-Case sweep of every menu label, and the Home Hub and NPC-talk modal onto §14 pills. The three examples here are the clearest scored ones; the method scaled to the whole interface.
+- **Every before here is a real saved screenshot.** All five before/after pairs are genuine renders — the befores captured before the migration, the afters from `playtest.mjs` this session. Nothing is reconstructed or mocked.
+- **The self-correction in Example 1 is on the record.** The Verifier's first (wrong) 10 and the tightened re-grade that caught the bleed are documented in the migration handoff and in `ui-verifier.md`'s own history section. The before image is the state it wrongly passed; the after is what shipped once the reference defect went to a human.
+- **The same loop ran well beyond these five.** This session it also carried a font-consistency pass (33 raw font sites moved onto the §14 tokens, a mono screen-title corrected to the display serif) and a Title-Case sweep of every menu label. The examples here are the clearest scored ones; the method scaled to the whole interface.
 - **`legibility.contrast` is estimated from the palette.** The 3.1:1 figure is read off the token pairing and the backdrop, not measured pixel-by-pixel. §14 lists the measured ratios for the on-brand pairings (e.g. `canvas/inkOnCanvas 10.9:1`); the washed-out case is a pairing that falls below 4.5.
 - **The scores are computed, never typed.** Every number above comes out of `loop/score.mjs` from the findings JSON in `loop/fixtures/`. Change a fixture, the score changes. No number in this document was chosen by hand.
 
