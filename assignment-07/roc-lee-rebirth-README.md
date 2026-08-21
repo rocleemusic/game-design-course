@@ -102,9 +102,11 @@ The Refiner is the Builder, handed the Evaluator's reason and told what to keep.
 Three screens, three violation classes, every score verbatim from `loop/score.mjs`. Replay any of them with `node loop/score.mjs --replay <name>`.
 
 ```
-DEMO-1-legibility   1/10 → 10/10   legibility + a structural reference defect
+DEMO-1-legibility   1/10 → 10/10   the old calendar: a washed header + a structural backdrop-bleed
 DEMO-2-palette      6/10 → 10/10   off-brand fill, refined
 DEMO-3-component    4/10 → 10/10   bracket text refined into the §14 pill family
+DEMO-4-notebook     2/10 → 10/10   a flat HUD panel refined into the leather-book spellbook
+DEMO-5-cast         2/10 → 10/10   the cast modal refined onto §14 pills
 ```
 
 ### Example 1 — The calendar, and the grader that learned to see it
