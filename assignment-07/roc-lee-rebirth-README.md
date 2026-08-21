@@ -99,7 +99,7 @@ The Refiner is the Builder, handed the Evaluator's reason and told what to keep.
 
 ## Before / After
 
-Three screens, three violation classes, every score verbatim from `loop/score.mjs`. Replay any of them with `node loop/score.mjs --replay <name>`.
+Five screens, six violation classes, every score verbatim from `loop/score.mjs`. Replay any of them with `node loop/score.mjs --replay <name>`. The brief asks for three; these are the clearest.
 
 ```
 DEMO-1-legibility   1/10 → 10/10   the old calendar: a washed header + a structural backdrop-bleed
