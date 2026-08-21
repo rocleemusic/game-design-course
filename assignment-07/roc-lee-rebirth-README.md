@@ -2,7 +2,7 @@
 
 **A self-correcting Generator → Evaluator → Refiner loop that enforces the VISUAL style rules of my capstone game, screen by screen.**
 
-The game is a cozy roguelite point-and-click adventure set in a hand-painted village. This is an application of the GER pattern and Styleguide to the game's UI.
+The game is a cozy roguelite point-and-click adventure set in a hand-painted village. This is an application of the GER pattern using a Styleguide to the game's UI.
 
 ## What's in this folder
 
@@ -111,19 +111,15 @@ DEMO-5-cast         2/10 → 10/10   the cast modal refined onto §14 pills
 
 ### Example 1 — The calendar, and the grader that learned to see it
 
-This is the one that proves the loop is self-correcting, because the Evaluator got it wrong first.
-
 **BEFORE** · the old calendar
 
 ![Before — dark cards on a printed paper calendar, its day numbers bleeding through](evidence/before-calendar.jpg)
-
-The day-start calendar was handed to the Verifier, and it **passed clean** — a 10. But look at it: dark boxes punched onto a printed paper calendar, the "THE WEEK" header washing out over the bright paper, and the backdrop's own printed numbers (28, 29, 30, 1…) bleeding straight through the cards. The Verifier had graded *fidelity to the reference* and never asked whether the screen read.
 
 > **SCORE: 1/10 · STRUCTURAL**
 > `[-3] legibility.contrast` — the "THE WEEK" subtitle at ~3.1:1 over the bright paper, under the 4.5 AA floor.
 > `[-6] reference.defect` — the printed calendar backdrop bleeds its day numbers through the cards. A human must supply a clean backdrop; no re-theme removes the print.
 
-So the **Evaluator's own contract was tightened** — a legibility check and a "reads well, not just matches the reference" rule were added to `ui-verifier.md`. Re-run, the tightened grader **caught the exact defect it had just passed**, with a file and a line. The reference defect is structural, so it stopped the loop and went to a human — who swapped in a celestial-book backdrop with no printed numbers, dropped the time-of-day clutter, gave every day its own light gold-framed parchment page, and put a night plaque behind the header.
+The reference defect was surfaced as structural, so it stopped the loop and went to human review — and using my art director agent generated a few assets: a celestial-book backdrop with no printed numbers, and frame for the day columns.
 
 **AFTER** · the current calendar
 
@@ -133,7 +129,7 @@ The screen that scored 1 and the screen that scored 10 are the same week. What c
 
 ### Example 2 — Palette. A dark box where the page should be parchment
 
-**BEFORE** · the day cards
+**BEFORE** · the day cards, before we tried just the overlay, and then with the agent's help swapped in the day cards.
 
 ![Before — dark panel boxes on the light book](evidence/palette-before.png)
 
@@ -145,8 +141,6 @@ The screen that scored 1 and the screen that scored 10 are the same week. What c
 ![After — light gold-framed parchment panels](evidence/palette-after.png)
 
 > **SCORE: 10/10** — No rule in the style guide was broken. Matches §14.
-
-Nothing about the before is broken code. It renders, the labels are there, the layout is right. It fails because dark chrome punched holes in a light page — and the labels went dark-on-dark and stopped reading, which is the palette rule and the legibility rule arriving together. The refiner's fix was to swap the fill for the game's actual parchment-card treatment. No linter flags "this box is the wrong material for this surface." Only a screenshot judged against §5.2 does.
 
 ### Example 3 — Component. Bracket text where the game speaks in pills
 
@@ -181,7 +175,7 @@ The dialogue choices in this game were already §14 pills. The move row beside t
 
 > **SCORE: 10/10** — No rule in the style guide was broken. Matches §14.
 
-`layout.mismatch` catches "right content, wrong object." Every fact in the flat panel is also in the book — but a panel is menu chrome and the book is a thing the character owns. In a game about a village you learn by living in it, the spellbook being an actual *book* you open — a page per spell, a live preview of its cue — is not decoration. It is the material language the style guide exists to protect.
+`layout.mismatch` catches "right content, wrong object." Every fact in the flat panel is also in the book — but a panel is menu chrome and the book is a thing the character owns.
 
 ### Example 5 — Component, in a modal. The cast prompt's own buttons
 
@@ -204,10 +198,13 @@ The cast prompt is the loop at full scale: one screen carried the old long lower
 ### Honest notes on these runs
 
 - **Every before here is a real saved screenshot.** All five before/after pairs are genuine renders — the befores captured before the migration, the afters from `playtest.mjs` this session. Nothing is reconstructed or mocked.
-- **The self-correction in Example 1 is on the record.** The Verifier's first (wrong) 10 and the tightened re-grade that caught the bleed are documented in the migration handoff and in `ui-verifier.md`'s own history section. The before image is the state it wrongly passed; the after is what shipped once the reference defect went to a human.
 - **The same loop ran well beyond these five.** This session it also carried a font-consistency pass (33 raw font sites moved onto the §14 tokens, a mono screen-title corrected to the display serif) and a Title-Case sweep of every menu label. The examples here are the clearest scored ones; the method scaled to the whole interface.
 - **`legibility.contrast` is estimated from the palette.** The 3.1:1 figure is read off the token pairing and the backdrop, not measured pixel-by-pixel. §14 lists the measured ratios for the on-brand pairings (e.g. `canvas/inkOnCanvas 10.9:1`); the washed-out case is a pairing that falls below 4.5.
 - **The scores are computed, never typed.** Every number above comes out of `loop/score.mjs` from the findings JSON in `loop/fixtures/`. Change a fixture, the score changes. No number in this document was chosen by hand.
+
+### Screenshots of the run in process
+![ui-casing-sweep.jpg](evidence/ui-casing-sweep.jpg)
+![ui-verifier-run.jpg](evidence/ui-verifier-run.jpg)
 
 ---
 
