@@ -163,6 +163,24 @@ Nothing about the before is broken code. It renders, the labels are there, the l
 
 The dialogue choices in this game were already §14 pills. The move row beside them was still bare bracket text, so the same screen offered two different button vocabularies at once. That is what `component.wrong_family` catches — not a broken control, a control that doesn't belong to the family the game already speaks. The refiner rebuilt each choice as the dialogue pill, matching fill, border, radius and font token-for-token, and stripped the literal `[ ]` the pill makes redundant. It also carried a rule the reference exposed: a blocked choice now reads muted, never red, because a move you cannot take yet is a fact about the world, not an error you made. Now the whole interface — HUD nav, move choices, dialogue, control bar, menus — speaks one pill.
 
+### Example 4 — Layout & material. A HUD strip where the spellbook should be a book
+
+**BEFORE** · the old notebook
+
+![Before — a flat dark panel pinned to the bottom, lower-case tabs](evidence/before-notebook.jpg)
+
+> **SCORE: 2/10 · FIDELITY**
+> `[-6] layout.mismatch` — the notebook is a flat dark panel stuck to the bottom of the screen. This game's material language makes the spellbook a real LEATHER BOOK, so §5 wants a two-page framed board, not a HUD strip. `NotebookScene.ts`.
+> `[-2] type.wrong_case` — the tabs read lower-case (`knowledge`, `spells`, `relationships`, `collection`); §14 casing is Title Case.
+
+**AFTER** · refined
+
+![After — the leather-book spellbook, two pages, a live VFX preview](evidence/notebook-after.png)
+
+> **SCORE: 10/10** — No rule in the style guide was broken. Matches §14.
+
+`layout.mismatch` catches "right content, wrong object." Every fact in the flat panel is also in the book — but a panel is menu chrome and the book is a thing the character owns. In a game about a village you learn by living in it, the spellbook being an actual *book* you open — a page per spell, a live preview of its cue — is not decoration. It is the material language the style guide exists to protect.
+
 ### Honest notes on these runs
 
 - **Example 1's "before" is documented, not a saved screenshot.** The Verifier's first (wrong) pass and the tightened re-grade are recorded in the migration handoff and in `ui-verifier.md`'s own history section; the celestial-book backdrop that fixed it is the asset now shipped. I show the after, not a reconstructed before, rather than fake a screenshot.
