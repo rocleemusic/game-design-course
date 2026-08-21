@@ -6,14 +6,15 @@ The game is a cozy roguelite point-and-click adventure set in a hand-painted vil
 
 ## What's in this folder
 
-| Path | What it is |
-|---|---|
-| `style-guide.md` | **The style guide.** Six constraint types, every rule pulled from the game's own design system (`gdd/14-visual-style-guide.md`) |
-| `loop/ui-builder.md` | The **Generator / Refiner** contract. One seat: it builds a screen, and on a fix pass it refines from the Evaluator's reason |
-| `loop/ui-verifier.md` | The **Evaluator** contract. Judges a rendered screenshot against the style guide and returns a SCORE + REASON |
-| `loop/score.mjs` | The deduction table. **Where SCORE comes from** — runnable, offline |
-| `loop/fixtures/` | The recorded runs. Each screen's real findings, before and after. Replays with no render |
-| `evidence/` | The before/after screenshots, from real `playtest.mjs` renders this session |
+| Path                  | What it is                                                                                                                      |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `style-guide.md`      | **The style guide.** Six constraint types, every rule pulled from the game's own design system (`gdd/14-visual-style-guide.md`) |
+| `loop/ui-builder.md`  | The **Generator / Refiner** contract. One seat: it builds a screen, and on a fix pass it refines from the Evaluator's reason    |
+| `loop/ui-verifier.md` | The **Evaluator** contract. Judges a rendered screenshot against the style guide and returns a SCORE + REASON                   |
+| `loop/score.mjs`      | The deduction table. **Where SCORE comes from** — runnable, offline                                                             |
+| `loop/fixtures/`      | The recorded runs. Each screen's real findings, before and after. Replays with no render                                        |
+| `evidence/`           | The before/after screenshots, from real `playtest.mjs` renders this session                                                     |
+| `design-system.html`  | The visual style-guide tokens and components                                                                                    |
 
 The two contracts in `loop/` are copies of the **live** agent seats at `agents/ui-builder.md` and `agents/ui-verifier.md`. This is not a throwaway pipeline. The seats that scored these screens are the seats that build my game's UI.
 

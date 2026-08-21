@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Festival of Souls — Visual Design System</title>
+<style>
+  :root{
+    --forest:#14110c; --forest2:#1d2018; --forest3:#0c0a07;
+    --panel:#241c14; --panel-hover:#2f2519;
+    --leather:#4a3520; --leather-dark:#2c1f12; --leather-light:#6f5030;
+    --canvas:#e7daba; --canvas2:#dbcaa2; --canvas-edge:#c3b083; --stitch:#b79a63;
+    --pocket:#c9b78d;
+    --ink:#2f2413; --ink-soft:#6b5836;
+    --cream:#ece3d2; --dim:#b0a184;
+    --gold:#c9a15a; --gold-bright:#e6c583;
+    --green:#7f9a5a; --rust:#7a4a2a; --rust-bright:#9c5a34;
+    --success:#9fd7a0; --danger:#e2836b;
+    --font-display:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    --font-mono:ui-monospace,"DejaVu Sans Mono","SF Mono",Menlo,monospace;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; }
+  body{
+    color:var(--cream); font:16px/1.55 var(--font-display);
+    background:radial-gradient(120% 80% at 50% -10%, #2c3326 0%, #171b13 45%, var(--forest3) 100%), var(--forest);
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{ font-family:var(--font-mono); }
+  .wrap{ max-width:1200px; margin:0 auto; padding:48px 28px 120px; }
+
+  /* ---- top matter ------------------------------------------------------ */
+  .masthead{ margin-bottom:56px; }
+  .masthead .eyebrow{ font:12px var(--font-mono); letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin:0 0 10px; }
+  .masthead h1{ margin:0 0 10px; font-size:46px; font-weight:600; color:var(--gold-bright); letter-spacing:.5px; }
+  .masthead p{ max-width:760px; margin:0; color:var(--dim); font-size:16px; line-height:1.6; }
+  .masthead p b{ color:var(--cream); }
+
+  nav.toc{ display:flex; flex-wrap:wrap; gap:8px 6px; margin:26px 0 0; padding:0; list-style:none; }
+  nav.toc a{ font:12.5px var(--font-mono); color:var(--gold); text-decoration:none; padding:6px 12px;
+    border:1px solid rgba(201,161,90,.3); border-radius:14px; transition:border-color .15s, color .15s; }
+  nav.toc a:hover{ color:var(--gold-bright); border-color:var(--gold-bright); }
+
+  section{ margin:0 0 72px; scroll-margin-top:24px; }
+  section > .sec-head{ display:flex; align-items:baseline; gap:14px; margin:0 0 20px;
+    border-bottom:1px solid rgba(201,161,90,.22); padding-bottom:12px; }
+  section > .sec-head .n{ font:13px var(--font-mono); color:var(--gold); }
+  section > .sec-head h2{ margin:0; font-size:24px; font-weight:600; color:var(--gold-bright); }
+  section > .sec-head .note{ margin-left:auto; font:12px var(--font-mono); color:var(--dim); }
+  section > p.desc{ margin:0 0 24px; color:var(--dim); max-width:800px; font-size:15px; }
+
+  .row{ display:flex; flex-wrap:wrap; gap:20px; align-items:flex-start; }
+
+  /* ---- palette ----------------------------------------------------------- */
+  .swatches{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:14px; }
+  .swatch{ border-radius:10px; overflow:hidden; border:1px solid rgba(201,161,90,.18); background:var(--panel); }
+  .swatch .chip{ height:64px; }
+  .swatch .meta{ padding:9px 11px; }
+  .swatch .name{ font:13px var(--font-mono); color:var(--cream); }
+  .swatch .hex{ font:11px var(--font-mono); color:var(--dim); margin-top:2px; }
+  .swatch .role{ font-size:11.5px; color:var(--dim); margin-top:4px; line-height:1.4; }
+
+  /* ---- typography --------------------------------------------------------- */
+  .type-row{ display:flex; align-items:baseline; gap:20px; padding:14px 0; border-bottom:1px solid rgba(201,161,90,.12); }
+  .type-row .label{ width:180px; flex:none; font:12px var(--font-mono); color:var(--dim); }
+  .type-row .sample{ color:var(--cream); }
+  .stack-card{ background:var(--panel); border:1px solid rgba(201,161,90,.18); border-radius:10px; padding:18px 20px; margin-bottom:14px; }
+  .stack-card .k{ font:11px var(--font-mono); letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
+  .stack-card .v{ font:14px var(--font-mono); color:var(--cream); }
+
+  /* ---- buttons --------------------------------------------------------- */
+  .btn-group{ display:flex; flex-wrap:wrap; gap:14px; align-items:center; margin-bottom:10px; }
+  .btn-group .tag{ font:11px var(--font-mono); color:var(--dim); width:100%; margin-bottom:2px; }
+
+  .pill-primary{ height:52px; padding:0 26px; border-radius:9px; /* 18% of 52 */
+    background:rgba(36,28,20,.94); border:2px solid rgba(201,161,90,.55);
+    color:var(--cream); font:17px var(--font-display); cursor:pointer; transition:.15s; }
+  .pill-primary:hover{ background:rgba(47,37,25,.94); border-color:rgba(230,197,131,.55); }
+  .pill-primary[disabled]{ color:var(--dim); border-color:rgba(201,161,90,.25); cursor:default; }
+
+  .pill-utility{ height:40px; padding:0 18px; border-radius:12px; /* 30% of 40 */
+    background:rgba(20,17,12,.9); border:2px solid rgba(201,161,90,.35);
+    color:var(--gold); font:13px var(--font-mono); cursor:pointer; transition:.15s; }
+  .pill-utility:hover, .pill-utility.active{ background:rgba(47,37,25,.9); border-color:rgba(230,197,131,.9); color:var(--gold-bright); }
+
+  .pill-canvas{ height:36px; padding:0 16px; border-radius:8px; background:transparent;
+    border:1px solid var(--stitch); color:var(--ink); font:13px var(--font-mono); cursor:pointer;
+    transition:.15s; }
+  .pill-canvas:hover{ background:rgba(201,161,90,.24); border-color:var(--gold); }
+  .pill-canvas.warn{ color:var(--rust); border-color:transparent; background:transparent; }
+  .pill-canvas.warn:hover{ background:rgba(150,70,40,.14); border-color:var(--rust-bright); color:var(--rust-bright); }
+  .on-canvas-demo{ background:linear-gradient(180deg,var(--canvas),var(--canvas2)); border-radius:12px; padding:20px; display:flex; gap:12px; flex-wrap:wrap; }
+
+  .spec-list{ margin:14px 0 0; padding:0; list-style:none; font:12.5px var(--font-mono); color:var(--dim); }
+  .spec-list li{ padding:3px 0; }
+  .spec-list b{ color:var(--cream); }
+
+  /* ---- tabs -------------------------------------------------------------- */
+  .tabs{ display:flex; gap:10px; }
+  .tab{ font:14px var(--font-mono); padding:10px 18px; border-radius:8px; cursor:pointer; border:1px solid transparent; }
+  .tab.on{ background:var(--gold); color:var(--forest); font-weight:600; }
+  .tab.off{ color:var(--dim); background:rgba(255,255,255,.03); }
+  .rail-item{ display:block; padding:10px 14px; font:15px var(--font-display); color:var(--dim);
+    border-left:2px solid transparent; cursor:pointer; }
+  .rail-item.on{ color:var(--gold-bright); background:rgba(201,161,90,.12); border-left-color:var(--gold-bright); }
+
+  /* ---- panels -------------------------------------------------------------- */
+  .panels-row{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  .panel-demo{ position:relative; border-radius:16px; padding:24px; min-height:200px; }
+  .panel-demo.framed{ background:linear-gradient(180deg,#241a10,#181009); border:2px solid var(--leather-dark);
+    box-shadow:0 16px 40px rgba(0,0,0,.5); }
+  .panel-demo.card{ background:linear-gradient(180deg,var(--canvas),var(--canvas2)); color:var(--ink);
+    border:2px solid var(--canvas-edge); box-shadow:0 8px 20px rgba(0,0,0,.35); }
+  .panel-demo.diegetic{ background:linear-gradient(180deg,var(--leather-light),var(--leather) 18%, var(--leather-dark));
+    border-radius:16px 16px 0 0; }
+  .panel-demo h3{ margin:0 0 6px; font-size:19px; color:inherit; }
+  .panel-demo.framed h3{ color:var(--gold-bright); }
+  .panel-demo p{ margin:0; font-size:13.5px; color:var(--dim); }
+  .panel-demo.card p{ color:var(--ink-soft); }
+  .corner{ position:absolute; width:40px; height:40px; color:var(--gold-bright); opacity:.9; pointer-events:none; }
+  .corner.tl{ top:8px; left:8px; } .corner.tr{ top:8px; right:8px; transform:scaleX(-1); }
+  .corner.bl{ bottom:8px; left:8px; transform:scaleY(-1); } .corner.br{ bottom:8px; right:8px; transform:scale(-1,-1); }
+
+  /* ---- tiles / badges / chips ---------------------------------------------- */
+  .tile-row{ display:flex; gap:16px; flex-wrap:wrap; }
+  .tile{ position:relative; width:140px; height:140px; border-radius:0; background:var(--pocket);
+    border:1px solid var(--leather-dark); display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:8px; color:var(--ink); }
+  .tile.sel{ border:3px solid var(--gold); }
+  .tile .nm{ font:13px var(--font-display); }
+  .tile .ct{ position:absolute; right:8px; bottom:8px; background:var(--leather-dark); color:var(--gold);
+    font:11px var(--font-mono); border-radius:9px; padding:2px 7px; }
+  .tile.empty{ background:repeating-linear-gradient(45deg,#6b5a3a,#6b5a3a 8px,#5f4f32 8px,#5f4f32 16px);
+    color:#9c8a63; font-style:italic; font-size:13px; }
+  .chip{ display:inline-flex; align-items:center; font:13px var(--font-mono); padding:6px 14px; border-radius:20px;
+    color:var(--ink); background:rgba(201,161,90,.22); border:1px solid var(--stitch); }
+  .chip.known{ background:rgba(127,154,90,.28); border-color:var(--green); }
+
+  /* ---- controls (options) ------------------------------------------------ */
+  .slider{ width:170px; height:8px; border-radius:6px; position:relative; background:linear-gradient(90deg,var(--gold) 0 70%, #3a2c18 70% 100%); }
+  .slider::after{ content:""; position:absolute; left:70%; top:50%; width:16px; height:16px; margin-left:-8px;
+    transform:translateY(-50%); border-radius:50%; background:var(--gold-bright); border:2px solid #241a10; }
+  .toggle{ width:52px; height:28px; border-radius:16px; position:relative; background:var(--green); }
+  .toggle.off{ background:#3a2c18; }
+  .toggle::after{ content:""; position:absolute; top:3px; left:27px; width:22px; height:22px; border-radius:50%; background:var(--cream); }
+  .toggle.off::after{ left:3px; }
+  .seg{ display:inline-flex; border:1px solid var(--leather-light); border-radius:8px; overflow:hidden; }
+  .seg span{ padding:7px 14px; font:13px var(--font-mono); color:var(--dim); }
+  .seg span.on{ background:var(--gold); color:var(--forest); }
+  .ctrl-row{ display:flex; align-items:center; gap:20px; padding:10px 0; }
+  .ctrl-row .label{ width:160px; font-size:15px; }
+
+  /* ---- icons --------------------------------------------------------------- */
+  .icon-row{ display:flex; gap:20px; flex-wrap:wrap; }
+  .icon-card{ width:96px; text-align:center; }
+  .icon-card svg{ width:52px; height:52px; }
+  .icon-card .nm{ font:11px var(--font-mono); color:var(--dim); margin-top:6px; }
+
+  footer{ text-align:center; color:var(--dim); font:12px var(--font-mono); margin-top:40px; }
+  @media (max-width:900px){ .panels-row{ grid-template-columns:1fr; } }
+  @media (prefers-reduced-motion:reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="masthead">
+    <p class="eyebrow mono">gdd · 14-visual-style-guide</p>
+    <h1>Visual Design System</h1>
+    <p>Every token and component from <b>14-visual-style-guide.md</b>, rendered live. Palette and panels come from the
+      four approved screen mockups; <b>buttons are recolored copies of the shipped VN dialogue pills</b> — not
+      reinvented per screen. This page is a reference to review, not a mockup of any one screen.</p>
+    <nav class="toc mono">
+      <a href="#palette">Palette</a>
+      <a href="#type">Typography</a>
+      <a href="#buttons">Buttons</a>
+      <a href="#tabs">Tabs</a>
+      <a href="#panels">Panels</a>
+      <a href="#tiles">Tiles &amp; badges</a>
+      <a href="#chips">Chips</a>
+      <a href="#controls">Sliders / toggles</a>
+      <a href="#empty">Empty state</a>
+      <a href="#filigree">Filigree</a>
+      <a href="#icons">Icons</a>
+    </nav>
+  </div>
+
+  <!-- ============================================================ PALETTE -->
+  <section id="palette">
+    <div class="sec-head"><span class="n">§1</span><h2>Palette</h2><span class="note">gold is the mockup value — see §0 in the doc</span></div>
+    <div class="swatches" id="swatches"></div>
+  </section>
+
+  <!-- ============================================================ TYPE -->
+  <section id="type">
+    <div class="sec-head"><span class="n">§2</span><h2>Typography</h2></div>
+    <div class="stack-card">
+      <div class="k">Display</div>
+      <div class="v">"Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif</div>
+    </div>
+    <div class="stack-card">
+      <div class="k">Mono (data / UI)</div>
+      <div class="v">ui-monospace, "DejaVu Sans Mono", "SF Mono", Menlo, monospace</div>
+    </div>
+    <div style="margin-top:20px">
+      <div class="type-row"><div class="label mono">40px display</div><div class="sample" style="font-size:40px;font-weight:600">Satchel</div></div>
+      <div class="type-row"><div class="label mono">34px display, tracked</div><div class="sample" style="font-size:34px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--gold-bright)">Continue</div></div>
+      <div class="type-row"><div class="label mono">26px display</div><div class="sample" style="font-size:26px;font-weight:600">Options</div></div>
+      <div class="type-row"><div class="label mono">17px display, italic</div><div class="sample" style="font-size:17px;font-style:italic;color:var(--dim)">a river stone, smooth and cool</div></div>
+      <div class="type-row"><div class="label mono">14px mono</div><div class="sample mono" style="font-size:14px">satchel 5/6 · day 1 · morning</div></div>
+      <div class="type-row"><div class="label mono">11px mono, tracked, caps</div><div class="sample mono" style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold)">Carried for</div></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ BUTTONS -->
+  <section id="buttons">
+    <div class="sec-head"><span class="n">§4</span><h2>Buttons</h2><span class="note">shape/behavior = shipped dialogue pills · color = mockup gold</span></div>
+    <p class="desc">Two dark-surface families lifted structurally from <code class="mono">DialogueSystem.ts</code>'s
+      choice pills and control pills — same fill/border/radius math, recolored. A third, on-canvas family covers
+      buttons that sit on parchment, which the dialogue system never needed.</p>
+
+    <div class="btn-group">
+      <div class="tag mono">PRIMARY PILL — radius 18% of height — display font — e.g. "Cast", "Resume"</div>
+      <button class="pill-primary">Cast ignite</button>
+      <button class="pill-primary" onmouseover="" style="background:rgba(47,37,25,.94);border-color:rgba(230,197,131,.55)">Resume (hover)</button>
+      <button class="pill-primary" disabled>Start over (disabled)</button>
+    </div>
+    <ul class="spec-list">
+      <li>fill <b>panel</b> #241c14 @94% → hover <b>panelHover</b> #2f2519 @94%</li>
+      <li>border 2px <b>gold</b> @55% → hover <b>goldBright</b> @55%</li>
+      <li>text <b>cream</b> (enabled) / <b>dim</b> (disabled)</li>
+    </ul>
+
+    <div class="btn-group" style="margin-top:26px">
+      <div class="tag mono">UTILITY PILL — radius 30% of height — mono font — HUD chrome, footer actions, Auto/Skip/Log</div>
+      <button class="pill-utility">[ notebook — N ]</button>
+      <button class="pill-utility active">Auto</button>
+      <button class="pill-utility">Skip</button>
+      <button class="pill-utility">[ close — Esc ]</button>
+    </div>
+    <ul class="spec-list">
+      <li>fill <b>night</b> #14110c @90% → hover/active <b>panelHover</b> @90%</li>
+      <li>border 2px <b>gold</b> @35% → hover/active <b>goldBright</b> @90%</li>
+      <li>text <b>gold</b> → hover/active <b>goldBright</b></li>
+    </ul>
+
+    <div class="btn-group" style="margin-top:26px">
+      <div class="tag mono">ON-CANVAS BUTTON — new, for parchment surfaces (no dialogue equivalent)</div>
+    </div>
+    <div class="on-canvas-demo">
+      <button class="pill-canvas">Resume</button>
+      <button class="pill-canvas warn">Start over</button>
+    </div>
+    <ul class="spec-list">
+      <li>fill transparent → hover <b>gold</b> @18–34%</li>
+      <li>border 1px <b>stitch</b> → hover <b>gold</b></li>
+      <li>text <b>ink</b>, mono · warn modifier: text <b>rust</b>, hover border <b>rustBright</b></li>
+    </ul>
+  </section>
+
+  <!-- ============================================================ TABS -->
+  <section id="tabs">
+    <div class="sec-head"><span class="n">§7</span><h2>Tabs</h2></div>
+    <div class="row">
+      <div class="tabs mono">
+        <button class="tab on">Satchel</button>
+        <button class="tab off">Arms</button>
+      </div>
+      <div>
+        <a class="rail-item on">Sound</a>
+        <a class="rail-item off" style="color:var(--dim)">Display</a>
+        <a class="rail-item off" style="color:var(--dim)">Accessibility</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ PANELS -->
+  <section id="panels">
+    <div class="sec-head"><span class="n">§5</span><h2>Panels &amp; cards</h2></div>
+    <div class="panels-row">
+      <div class="panel-demo framed">
+        <svg width="0" height="0" aria-hidden="true"><symbol id="fil2" viewBox="0 0 56 56">
+          <path d="M6 6h20M6 6v20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M12 12c10 0 16 2 20 8M12 12c0 10 2 16 8 20" fill="none" stroke="currentColor" stroke-width="1.6" opacity=".8"/>
+          <circle cx="7" cy="7" r="2.2" fill="currentColor"/>
+        </symbol></svg>
+        <svg class="corner tl"><use href="#fil2"/></svg><svg class="corner tr"><use href="#fil2"/></svg>
+        <svg class="corner bl"><use href="#fil2"/></svg><svg class="corner br"><use href="#fil2"/></svg>
+        <h3>Framed board</h3>
+        <p>Menu chrome — Save/Load, Options, Spellbook. Filigreed, heavy shadow, nothing diegetic behind it.</p>
+      </div>
+      <div class="panel-demo card">
+        <h3>Parchment card</h3>
+        <p>Content read as "a page" — inspect panels, save slots, the options help pane.</p>
+      </div>
+      <div class="panel-demo diegetic">
+        <h3 style="color:var(--gold-bright)">Diegetic object</h3>
+        <p style="color:#e0d3ad">The satchel pouch. No frame, no filigree — it's a thing in the world.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ TILES -->
+  <section id="tiles">
+    <div class="sec-head"><span class="n">§8</span><h2>Tiles &amp; badges</h2></div>
+    <div class="tile-row">
+      <div class="tile sel"><span class="nm">river stone</span><span class="ct">3</span></div>
+      <div class="tile"><span class="nm">captured sound</span><span class="ct">free</span></div>
+      <div class="tile empty">empty</div>
+    </div>
+  </section>
+
+  <!-- ============================================================ CHIPS -->
+  <section id="chips">
+    <div class="sec-head"><span class="n">§8</span><h2>Chips</h2><span class="note">chips only ever sit on a parchment card — never directly on the dark page</span></div>
+    <div class="on-canvas-demo">
+      <span class="chip">portion</span>
+      <span class="chip known">glimmer · known</span>
+      <span class="chip known">temper · known</span>
+    </div>
+  </section>
+
+  <!-- ============================================================ CONTROLS -->
+  <section id="controls">
+    <div class="sec-head"><span class="n">§9</span><h2>Sliders, toggles, segmented control</h2><span class="note">Options mockup — not yet built</span></div>
+    <div class="ctrl-row"><span class="label">Music volume</span><div class="slider"></div></div>
+    <div class="ctrl-row"><span class="label">Spell cast sounds</span><div class="toggle"></div></div>
+    <div class="ctrl-row"><span class="label">Mute when hidden</span><div class="toggle off"></div></div>
+    <div class="ctrl-row"><span class="label">Text speed</span>
+      <div class="seg mono"><span class="on">Slow</span><span>Normal</span><span>Fast</span></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ EMPTY -->
+  <section id="empty">
+    <div class="sec-head"><span class="n">§10</span><h2>Empty state</h2><span class="note">TileSprite, not a mask — see the doc's implementation note</span></div>
+    <div class="tile-row">
+      <div class="tile empty" style="width:180px;height:120px">empty save slot</div>
+    </div>
+  </section>
+
+  <!-- ============================================================ FILIGREE -->
+  <section id="filigree">
+    <div class="sec-head"><span class="n">§6</span><h2>Corner filigree</h2><span class="note">mockup SVG (shown) vs shipped filigreeCorners() — not yet reconciled</span></div>
+    <div class="panel-demo framed" style="max-width:340px;min-height:140px">
+      <svg width="0" height="0" aria-hidden="true"><symbol id="fil3" viewBox="0 0 56 56">
+        <path d="M6 6h20M6 6v20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M12 12c10 0 16 2 20 8M12 12c0 10 2 16 8 20" fill="none" stroke="currentColor" stroke-width="1.6" opacity=".8"/>
+        <path d="M12 12c8-1 12 3 12 9 0 4-3 6-6 5-2-1-2-4 0-5 1 0 2 1 1 2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="7" cy="7" r="2.2" fill="currentColor"/>
+      </symbol></svg>
+      <svg class="corner tl"><use href="#fil3"/></svg><svg class="corner tr"><use href="#fil3"/></svg>
+      <svg class="corner bl"><use href="#fil3"/></svg><svg class="corner br"><use href="#fil3"/></svg>
+      <p style="color:var(--dim)">Marks a framed board as menu chrome. Not used on diegetic objects (satchel).</p>
+    </div>
+  </section>
+
+  <!-- ============================================================ ICONS -->
+  <section id="icons">
+    <div class="sec-head"><span class="n">§11</span><h2>Iconography</h2><span class="note">the six shipped material glyphs — public/art/ui/satchel/*.svg</span></div>
+    <div class="icon-row" id="icons-row"></div>
+  </section>
+
+  <footer>Festival of Souls — GDD §14 · generated 2026-08-19</footer>
+</div>
+
+<script>
+  const PALETTE = [
+    ["night / forest","#14110c","Page/scene background"],
+    ["panel","#241c14","HUD chrome fill"],
+    ["panelHover","#2f2519","panel, lifted (hover/lit)"],
+    ["leather","#4a3520","Mid-tone leather (pouch body)"],
+    ["leatherDark","#2c1f12","Board borders, pocket stroke"],
+    ["leatherLight","#6f5030","Leather gradient's lit edge"],
+    ["canvas","#e7daba","Parchment surface"],
+    ["canvas2","#dbcaa2","Parchment gradient dark stop"],
+    ["canvasEdge","#c3b083","Parchment border/divider"],
+    ["stitch","#b79a63","Stitched-cloth accent"],
+    ["pocket","#c9b78d","Satchel cloth-pocket fill"],
+    ["ink","#2f2413","Body text on parchment"],
+    ["inkSoft","#6b5836","Secondary text on parchment"],
+    ["cream","#ece3d2","Body text on dark surfaces"],
+    ["dim","#b0a184","Secondary text on dark"],
+    ["gold","#c9a15a","THE accent — canonical (mockup)"],
+    ["goldBright","#e6c583","Hover/active gold"],
+    ["green","#7f9a5a","Confirmed / known / toggle-on"],
+    ["rust","#7a4a2a","Destructive text"],
+    ["rustBright","#9c5a34","Destructive hover"],
+    ["success","#9fd7a0","(theme.ts, unchanged)"],
+    ["danger","#e2836b","(theme.ts, unchanged)"],
+  ];
+  const sw = document.getElementById("swatches");
+  PALETTE.forEach(([name, hex, role]) => {
+    const el = document.createElement("div");
+    el.className = "swatch";
+    el.innerHTML = `<div class="chip" style="background:${hex}"></div>
+      <div class="meta"><div class="name">${name}</div><div class="hex mono">${hex}</div><div class="role">${role}</div></div>`;
+    sw.appendChild(el);
+  });
+
+  // The six shipped material glyphs — identical markup to public/art/ui/satchel/*.svg.
+  const ICONS = {
+    stone: '<svg viewBox="0 0 48 48"><path d="M9 30c-2-7 4-14 12-16 9-3 18 1 19 9 1 7-6 12-15 12S11 37 9 30z" fill="#8a8f96"/><path d="M14 24c3-4 9-6 14-5" stroke="#c7ccd2" stroke-width="2" fill="none" stroke-linecap="round"/></svg>',
+    sound: '<svg viewBox="0 0 48 48"><g fill="none" stroke="#b9863f" stroke-width="3" stroke-linecap="round"><path d="M24 8v32"/><path d="M16 15v18" opacity=".85"/><path d="M32 15v18" opacity=".85"/><path d="M9 21v6" opacity=".6"/><path d="M39 21v6" opacity=".6"/></g></svg>',
+    wax: '<svg viewBox="0 0 48 48"><path d="M24 7c6 9 11 15 11 22a11 11 0 1 1-22 0c0-7 5-13 11-22z" fill="#e0b24e"/><path d="M20 26c0 5 2 8 5 9" stroke="#fff2c8" stroke-width="2" fill="none" stroke-linecap="round" opacity=".7"/></svg>',
+    feather: '<svg viewBox="0 0 48 48"><path d="M36 10c-14 2-22 12-24 26l4 2c10-10 16-16 22-24-2 6-7 12-14 17 9-2 15-11 12-21z" fill="#cdd6dd"/><path d="M12 38l6-6" stroke="#8a97a1" stroke-width="2" stroke-linecap="round"/></svg>',
+    wool: '<svg viewBox="0 0 48 48"><g fill="none" stroke="#e7ddc9" stroke-width="3"><circle cx="24" cy="24" r="13" fill="#efe8d6"/><path d="M14 20c4 3 4 9 0 12M24 12c4 5 4 15 0 20M34 20c-4 3-4 9 0 12" stroke="#c9bfa4"/></g></svg>',
+    sticks: '<svg viewBox="0 0 48 48"><g stroke="#7a5a34" stroke-width="4" stroke-linecap="round"><path d="M12 36L34 12"/><path d="M18 36L38 16"/></g><path d="M20 20l6-2" stroke="#9c7a48" stroke-width="3" stroke-linecap="round"/></svg>',
+  };
+  const iconsRow = document.getElementById("icons-row");
+  Object.entries(ICONS).forEach(([name, svg]) => {
+    const el = document.createElement("div");
+    el.className = "icon-card";
+    el.innerHTML = svg + `<div class="nm">${name}</div>`;
+    iconsRow.appendChild(el);
+  });
+</script>
+</body>
+</html>
