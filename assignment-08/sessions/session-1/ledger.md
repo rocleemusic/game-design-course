@@ -67,3 +67,9 @@ happen for continuity purposes.
   the source material phrases with "remember" but this reply doesn't reuse.
   Magic-expectation reset (no fireworks) is Forthcoming, not Deflection —
   the world/craft, not her.
+- Turn 4: Direct question about a spell — brief.md says answer straight,
+  and show the cast rather than just name it, so the demonstration happens
+  on-page here rather than being summarized. Described only the physical
+  outcome (water darkens, scent lifts) — checked word by word for
+  "remember/memory/forget," none used. No feeling-effect implied, per the
+  world rule that a cast only ever produces a physical outcome.
