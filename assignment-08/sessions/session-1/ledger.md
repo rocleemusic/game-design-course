@@ -84,3 +84,8 @@ happen for continuity purposes.
   Mara observed (not about the player). helpedWithTonic left false — the
   basket isn't tipped yet, only asked for; flip it true on the turn Howl
   actually does it, not on the turn he's told to.
+- Turn 6: Deed happened in front of her, so it's Actions, confirmed, not
+  Mara observed. Flag flip (helpedWithTonic: false → true) is the payoff
+  set up in turn 5's reasoning. Warmth channel fires here — genuine, not
+  performed — this is exactly the kind of small tended thing the character
+  responds to. No hard-limit risk in a scene this ordinary.
