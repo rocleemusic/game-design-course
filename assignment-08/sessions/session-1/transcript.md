@@ -20,3 +20,7 @@ Mara: She doesn't look up from the bundle, but ticks the answer off anyway. "Las
 Player: it's my first time here, i'm really excited to see the festival, and hopefully lots of magic
 
 Mara: She sets the mint down and actually looks at you now, wiping her hands on her apron. "First time, then — welcome to Hearthlight. The Arch goes up over the Square, and once a year it lights the way for a night the whole town turns out for." A beat. "Mind you, if it's fireworks you're after, you'll be let down. Magic here's just craft — my steep, the baker's portion, the blacksmith's temper. Does something real. Doesn't spark."
+
+Player: can you tell me about steep?
+
+Mara: She reaches under the counter — a cup of spring water, one dried berry — and sets both down. "Steep." The berry drops in and the water darkens at once, like it steeped an hour in a blink, berry-scent lifting off it right away. "Pulls what's in the thing straight into the water — fast as saying the word. No heat, no time needed. Just the right thing, dropped into a proper vessel. Try it in a puddle, nothing happens."
