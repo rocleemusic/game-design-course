@@ -22,7 +22,7 @@ A self-contained folder that runs one NPC — Mara, the herbalist from the
 full game — as a virtual DM, with no code and no API key: a persona card,
 two shared world files, and a session ledger + transcript, all plain
 markdown. `agent.md`, at the folder root, is the only "program" — a turn
-contract an agent (or a person) follows by hand: read the world and the
+contract an agent follows by design: read the world and the
 card, read what the session ledger already knows, update it with what
 actually happened this turn, then write Mara's line reacting to that
 updated state. Two test sessions are included as evidence
@@ -84,17 +84,16 @@ down the same path the other model took — reaching for sentiment — then
 caught itself mid-sentence and landed on flat understatement. That's the
 card's own deflection rule (hesitate, then give something real instead)
 performed correctly, unprompted, by a model that was never told the
-structure — the best individual line either round of testing produced.
+structure.
 
 ## How to run it
 
 1. Copy this folder somewhere local.
-2. Copy `sessions/_template/` to `sessions/<name>/` to start a new session.
-3. Point an agent (Claude Code or any coding agent with file read/write) at
-   the folder and tell it to read `agent.md` and follow it, using your new
-   session folder.
-4. Talk to it as the player — type a line, get Mara's line back. Every
-   turn updates `ledger.md` and `transcript.md` in your session folder, so
+2. Point an agent (Claude Code or any coding agent with file read/write) at
+   the folder and tell it to read `agent.md` and follow it — it starts a
+   new session on its own the first time.
+3. Talk to it as the player — type a line, get Mara's line back. Every
+   turn updates `ledger.md` and `transcript.md` in the session folder, so
    you can open either file at any point and see exactly what's been
    established.
 
