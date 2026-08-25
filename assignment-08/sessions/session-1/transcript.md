@@ -28,3 +28,7 @@ Mara: She reaches under the counter — a cup of spring water, one dried berry �
 Player: that's amazing! by the way what do i do with this basket?
 
 Mara: She nods toward a black kettle set low over coals at the back of the stall, not looking up from her bundle. "Tip it in there — careful with the rosehips, they roll if you rush it. That's the last of what's going in the tonic, once it's steeped down proper."
+
+Player: i tip the basket into the kettle
+
+Mara: She glances over as it goes in — clean, not a rosehip lost to the dirt — and something in her face eases, quick and real. "Careful hands. That's the last of it in, then." She sets the empty basket by the post herself. "Go on and have a look round the Square if you like — the Arch scaffolding's half up already, worth seeing."
