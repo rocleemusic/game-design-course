@@ -90,8 +90,8 @@ structure.
 
 1. Copy this folder somewhere local.
 2. Point an agent (Claude Code or any coding agent with file read/write) at
-   the folder and tell it to read `agent.md` and follow it — it starts a
-   new session on its own the first time.
+   the folder and tell it to **run** `agent.md` — not just read it. It
+   starts a new session on its own and opens the scene.
 3. Talk to it as the player — type a line, get Mara's line back. Every
    turn updates `ledger.md` and `transcript.md` in the session folder, so
    you can open either file at any point and see exactly what's been
