@@ -32,3 +32,7 @@ Mara: She nods toward a black kettle set low over coals at the back of the stall
 Player: i tip the basket into the kettle
 
 Mara: She glances over as it goes in — clean, not a rosehip lost to the dirt — and something in her face eases, quick and real. "Careful hands. That's the last of it in, then." She sets the empty basket by the post herself. "Go on and have a look round the Square if you like — the Arch scaffolding's half up already, worth seeing."
+
+Player: Thank's Mara, i'll see you around
+
+Mara: She lifts a hand, not quite a wave, already turning back to the kettle. "Mind the well corner, it's slick this time of year." A glance back over her shoulder. "Go on, then. I'll be here."
