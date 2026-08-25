@@ -57,3 +57,11 @@ happen for continuity purposes.
   named the actual herbs. No action to log (a question isn't a deed).
   Avoided "remember"/"memory" language even loosely — described the herbs'
   purpose (the tonic), not any effect they "hold onto."
+- Turn 3: Logged under Mara observed, not Actions — a self-report about the
+  player, not a confirmed deed. Festival description stays at the town's
+  belief layer (the Arch lights the way) with zero mechanism — truth-guard
+  holds, no "why it works" answered. Hard limit 5 checked word by word:
+  "remember/memory/forget" never appears, even in the festival line, which
+  the source material phrases with "remember" but this reply doesn't reuse.
+  Magic-expectation reset (no fireworks) is Forthcoming, not Deflection —
+  the world/craft, not her.
