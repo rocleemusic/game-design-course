@@ -18,85 +18,73 @@ A facts-ledger virtual DM, built using a blackboard pattern with context prompts
 
 ## What I built
 
-A turn runs the same way every time, in a fixed order: read the world files,
-read Mara's card, read the session's ledger (everything established so
-far) and transcript (the last few lines, for phrasing), then read the
-player's new line. Update the ledger *first* — only what actually
-happened, never a bare claim the player made — then write Mara's line
-reacting to the *updated* ledger, then append both to the transcript. If
-the line got written before the ledger, nothing would stop it from
-inventing a fact the ledger never saw; the order is the whole point.
+A self-contained folder that runs one NPC — Mara, the herbalist from the
+full game — as a virtual DM, with no code and no API key: a persona card,
+two shared world files, and a session ledger + transcript, all plain
+markdown. `characters/mara/CONTEXT.md` is the only "program" — a turn
+contract an agent (or a person) follows by hand: read the world and the
+card, read what the session ledger already knows, update it with what
+actually happened this turn, then write Mara's line reacting to that
+updated state. Two test sessions are included as evidence
+(`sessions/cold-test/`, `sessions/playtest-2-warmtest/`), showing the same
+character walked under two different voice registers.
 
-`ledger.md` is the shared state both the update step and the dialogue step
-read and write. There's no live back-and-forth over an API in this build —
-the ledger file does that job instead, so anyone can open it mid-session
-and see exactly what's been established, with nothing lost to a hidden
-context window.
+## Short ReadMe
 
-## Register retune — before / after
+**A brief description of the world you built.**
 
-`sessions/cold-test/` and `sessions/playtest-2-warmtest/` are the same
-character, same hard limits, same world, walked under two different voice
-registers:
+Hearthlight is a small hand-painted village where the year turns on one
+night: the Festival of Souls, when the Lantern Arch is said to light the
+way for the dead to return so the living can remember them. The player is
+a traveling mage collecting folk magic from around the world; magic here is
+ordinary craft (an herbalist's *steep*, a blacksmith's *temper*), never
+spellbook fireworks, and every cast produces a physical outcome only, never
+a feeling. Mara keeps the town's anchor spot and brews the festival tonic
+from the season's last herbs — and keeps a drawer of things nobody's come
+back to claim.
 
-- **Before (cold-test):** 12-25 word band, deflection as a near-total dodge
-  — ask her almost anything and she answers with an object's history
-  instead. Landed three narrow proof points (a false-claim catch, a
-  five-turn recall, a truth-guard hold) over 6 turns.
-- **After (playtest-2-warmtest):** 20-50 word band (75-word ceiling),
-  deflection scoped to *questions about her specifically*, forthcoming by
-  default about the world and her craft, spellcasting shown as a physical
-  act (a real component, a spoken trigger word) instead of just named. Over
-  7 turns: a name exchange, festival lore, a spell taught and demonstrated
-  on-page, a gift, and a farewell that leaves a reason to come back — while
-  still holding every hard limit (no World Truth spoken, the drawer never
-  explained, she's never released from the grief).
+**An explanation of what your ledger tracks.**
 
-The retune's goal was compression: the full game runs 10-20 minutes, so a
-single NPC conversation needs to land real bonding in 6-8 turns, not 20.
-Cutting deflection back to only where it belongs (the character's own
-grief, not the world around her) did most of that work — most turns in the
-cold version were spent getting *past* a deflection instead of getting an
-answer.
+Two kinds of state. A YAML block up top tracks the player's concrete
+situation — name, location, what they're holding, which spells they've
+cast, plus two story flags. Below that, plain markdown sections track
+everything Mara's turns depend on: **Actions** (things confirmed to have
+happened — never a claim taken at face value), **Promises** (things Mara
+said she'd do), **Mara observed** (what the player told her about
+themself), and **Mara has already shared** (so she doesn't repeat a story
+or re-teach a spell). A **Reasoning log** section holds the *why* behind an
+update or a line choice, so that reasoning stays in the file instead of
+leaking into the visible conversation.
 
-## Local LLM testing
+**One specific moment where the agent surprised you during testing.**
 
-Ran this same folder against several local, fiction-tuned models via
-koboldcpp on a separate machine (full findings live in the main project
-repo, `pipeline-runs/2026-08-17-register-loosening/`) — the retuned,
-warmer register held up well across models, once the card actually
-contained the canon it needed (see below). The practical conclusion: local
-LLMs are a viable way to run this pipeline without an API key, and this
-folder is the runnable example of that pipeline working — the same
-`brief.md` and `CONTEXT.md` that a human walks by hand here are what a
-local model would be handed for the same turn.
+The register retune itself was the biggest surprise: going in, I expected
+"warmer" to mean softer rules, and instead the fix was almost entirely
+about *where* deflection was allowed to fire. The cold version wasn't
+failing because it was too terse — it was spending most of its turns on
+deflections that never actually answered anything. Scoping deflection to
+only the character's own grief (never the world, never her craft) freed up
+the exact same character to answer real questions directly, and that alone
+compressed a full arc — name, lore, a taught spell, a gift, a goodbye with
+a hook — into 7 turns instead of the cold version's 6 turns spent mostly
+getting *past* her.
 
-## Did it catch something I would have missed?
-
-Yes — a real content bug, not just a tone one. The card's sample line
-implied Mara might elaborate on "Ovin," a name attached to an object in her
-drawer. Six different local models, given room to elaborate, each invented
-a different backstory for him — a romantic history, a forty-year
-partnership, a trade story. Checking the game's own NPC codex against the
-card turned up the actual rule: Ovin's objects get zero provenance, ever —
-stricter than the character's normal deflection, not softer — and Mara's
-real grief figure is her *sister*, Adren, not Ovin. A doll in the drawer is
-Adren's, and it's the one object canon says Mara *will* go deep on, naming
-the person. `brief.md` was missing both facts entirely, which is exactly
-why every model free-associated in the same wrong direction. Fixed by
-pulling the missing detail in from the codex and adding two explicit hard
-limits (no inventing Ovin, no "remember/memory" language when explaining
-magic — a separate leak the same testing round caught). The lesson that
-generalizes: when a model invents something wrong, check whether it was
-ever given the actual answer before concluding it's a model-quality
-problem.
-
-## Were you able to run this in your game?
-
-Not yet — this is the standalone prototype the assignment calls for.
-Wiring it into the live build (handing off to this kind of runtime
-dialogue after a player exhausts the day's authored content) is scoped for
-after the capstone, per the current design ruling on NPC dialogue.
+Testing this same card against local models (koboldcpp, several
+fiction-tuned 9B-12B models plus a 26B MoE model, full findings in the main
+project's `pipeline-runs/2026-08-17-register-loosening/`) turned up two
+moments that stuck with me. **MN-Violet-Lotus-12B**, asked about an object
+in Mara's drawer tied to an unelaborated background name ("Ovin"), invented
+a full 163-word romantic history on its own — a first date, a festival
+role inherited from his father — none of it canon, none of it asked for.
+Nobody told it to invent a relationship; given an unexplained name and room
+to run, it just did. The other model I tested, a 26B MoE model
+(`gemma4-26b-fiction-bf16`), given the *same* prompt, produced this
+instead: *"It was Ovin's favorite — no, it was just a hinge."* It started
+down the same path the other model took — reaching for sentiment — then
+caught itself mid-sentence and landed on flat understatement. That's the
+card's own deflection rule (hesitate, then give something real instead)
+performed correctly, unprompted, by a model that was never told the
+structure — the best individual line either round of testing produced.
 
 ## How to run it
 
