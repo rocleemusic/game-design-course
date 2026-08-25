@@ -18,6 +18,8 @@ happened. Nothing below is ever deleted or rewritten, only added to.
 ## Actions
 
 - Turn 1: Player gave their name — Howl.
+- Turn 4: Mara demonstrated the steep spell on-page for Howl — a berry
+  dropped into a cup of spring water, trigger word spoken aloud.
 
 ## Promises
 
