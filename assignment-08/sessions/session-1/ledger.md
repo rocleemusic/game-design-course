@@ -41,4 +41,8 @@ into the chat response either. If a turn's reasoning isn't written here, it
 didn't happen for audit purposes, the same way an unlogged action didn't
 happen for continuity purposes.
 
-(none yet)
+- Turn 1: Name-giving is a direct, self-reported fact Mara heard herself say
+  it back to — logged as confirmed, not unverified. No hard-limit risk:
+  nothing about the drawer, Ovin, grief, or magic. Deflection doesn't fire —
+  a name isn't a question about her. Kept the welcome-task beat going from
+  the opening line rather than dropping it once she got the name.
