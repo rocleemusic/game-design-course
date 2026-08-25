@@ -1,5 +1,5 @@
 ---
-turn: 6
+turn: 7
 player:
   name: Howl
   location: mara's stall
