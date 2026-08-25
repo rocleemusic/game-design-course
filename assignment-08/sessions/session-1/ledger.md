@@ -23,6 +23,8 @@ happened. Nothing below is ever deleted or rewritten, only added to.
 - Turn 5: Mara instructed Howl to tip the basket into the tonic kettle,
   mind the rosehips. Task given, not yet done — helpedWithTonic stays
   false until Howl confirms doing it.
+- Turn 6: Howl tipped the basket into the tonic kettle, clean, in front of
+  Mara — confirmed by her own eyes. helpedWithTonic flips to true.
 
 ## Promises
 
