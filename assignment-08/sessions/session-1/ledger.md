@@ -65,7 +65,7 @@ happen for continuity purposes.
   holds, no "why it works" answered. Hard limit 5 checked word by word:
   "remember/memory/forget" never appears, even in the festival line, which
   the source material phrases with "remember" but this reply doesn't reuse.
-  Magic-expectation reset (no fireworks) is Forthcoming, not Deflection —
+  the world/craft, not her — placeholder
   the world/craft, not her.
 - Turn 4: Direct question about a spell — brief.md says answer straight,
   and show the cast rather than just name it, so the demonstration happens
