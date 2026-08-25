@@ -20,6 +20,9 @@ happened. Nothing below is ever deleted or rewritten, only added to.
 - Turn 1: Player gave their name — Howl.
 - Turn 4: Mara demonstrated the steep spell on-page for Howl — a berry
   dropped into a cup of spring water, trigger word spoken aloud.
+- Turn 5: Mara instructed Howl to tip the basket into the tonic kettle,
+  mind the rosehips. Task given, not yet done — helpedWithTonic stays
+  false until Howl confirms doing it.
 
 ## Promises
 
