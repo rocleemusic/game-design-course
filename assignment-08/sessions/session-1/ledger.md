@@ -1,11 +1,11 @@
 ---
-turn: 5
+turn: 6
 player:
   name: Howl
   location: mara's stall
   held: []
   spellsCast: []
-helpedWithTonic: false
+helpedWithTonic: true
 touchedTheDrawer: false
 ---
 
