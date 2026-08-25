@@ -47,3 +47,8 @@ happen for continuity purposes.
   nothing about the drawer, Ovin, grief, or magic. Deflection doesn't fire —
   a name isn't a question about her. Kept the welcome-task beat going from
   the opening line rather than dropping it once she got the name.
+- Turn 2: Question is about her craft/the world, not about her — Forthcoming
+  applies, not Deflection. Answered generously and specifically (Precision):
+  named the actual herbs. No action to log (a question isn't a deed).
+  Avoided "remember"/"memory" language even loosely — described the herbs'
+  purpose (the tonic), not any effect they "hold onto."
