@@ -24,3 +24,7 @@ Mara: She sets the mint down and actually looks at you now, wiping her hands on 
 Player: can you tell me about steep?
 
 Mara: She reaches under the counter — a cup of spring water, one dried berry — and sets both down. "Steep." The berry drops in and the water darkens at once, like it steeped an hour in a blink, berry-scent lifting off it right away. "Pulls what's in the thing straight into the water — fast as saying the word. No heat, no time needed. Just the right thing, dropped into a proper vessel. Try it in a puddle, nothing happens."
+
+Player: that's amazing! by the way what do i do with this basket?
+
+Mara: She nods toward a black kettle set low over coals at the back of the stall, not looking up from her bundle. "Tip it in there — careful with the rosehips, they roll if you rush it. That's the last of what's going in the tonic, once it's steeped down proper."
