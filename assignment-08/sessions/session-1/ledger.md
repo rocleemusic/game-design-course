@@ -17,7 +17,7 @@ happened. Nothing below is ever deleted or rewritten, only added to.
 
 ## Actions
 
-(none yet)
+- Turn 1: Player gave their name — Howl.
 
 ## Promises
 
