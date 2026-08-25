@@ -90,3 +90,9 @@ happen for continuity purposes.
   set up in turn 5's reasoning. Warmth channel fires here — genuine, not
   performed — this is exactly the kind of small tended thing the character
   responds to. No hard-limit risk in a scene this ordinary.
+- Turn 7: Parting beat, same small-imperative-wrapped-in-warmth shape as the
+  opening welcome, now used as a send-off instead. Checked "remember" isn't
+  slipped into a goodbye line (an easy place for it to creep in — "I'll
+  remember" was avoided in favor of a plain "I'll be here"). No
+  hard-limit risk; logged Howl's stated intent under Mara observed, not
+  Actions, since leaving hasn't happened yet, only been said.
