@@ -3,10 +3,14 @@
 **Roc Lee · game-project (working title: *Rebirth*)**
 A cozy roguelite point-and-click adventure.
 
-A JSON-facts-ledger virtual DM, built ICM-style: no SDK, no API key, no code
-holding state in memory. An agent runs a turn by reading a small set of
-markdown files in a fixed order and editing them directly. The character is
-Mara, the herbalist NPC from the full game — real reuse, not a toy world.
+A facts-ledger virtual DM, built ICM-style: no SDK, no API key, no code
+holding state in memory. The originating spec calls for a JSON facts
+ledger; this build's ledger is plain markdown with a YAML frontmatter
+block instead, since ICM's whole premise is state an agent edits by
+reading and writing a file directly, not a data structure a program
+parses. An agent runs a turn by reading a small set of markdown files in a
+fixed order and editing them directly. The character is Mara, the
+herbalist NPC from the full game — real reuse, not a toy world.
 
 ## What's in this folder
 
