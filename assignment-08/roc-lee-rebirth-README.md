@@ -91,8 +91,8 @@ structure — the best individual line either round of testing produced.
 1. Copy this folder somewhere local.
 2. Copy `sessions/_template/` to `sessions/<name>/` to start a new session.
 3. Point an agent (Claude Code or any coding agent with file read/write) at
-   the folder and tell it to read `characters/mara/CONTEXT.md` and follow
-   it, using your new session folder.
+   the folder and tell it to read `agent.md` and follow it, using your new
+   session folder.
 4. Talk to it as the player — type a line, get Mara's line back. Every
    turn updates `ledger.md` and `transcript.md` in your session folder, so
    you can open either file at any point and see exactly what's been
