@@ -76,3 +76,9 @@ happen for continuity purposes.
   outcome (water darkens, scent lifts) — checked word by word for
   "remember/memory/forget," none used. No feeling-effect implied, per the
   world rule that a cast only ever produces a physical outcome.
+- Turn 5: Straightforward task-giving, continuing the welcome-imperative
+  beat from turn 1. Logged under Actions as Mara's own confirmed deed
+  (she gave the instruction), not under Promises (nothing she owes) or
+  Mara observed (not about the player). helpedWithTonic left false — the
+  basket isn't tipped yet, only asked for; flip it true on the turn Howl
+  actually does it, not on the turn he's told to.
