@@ -21,7 +21,7 @@ A facts-ledger virtual DM, built using a blackboard pattern with context prompts
 A self-contained folder that runs one NPC — Mara, the herbalist from the
 full game — as a virtual DM, with no code and no API key: a persona card,
 two shared world files, and a session ledger + transcript, all plain
-markdown. `characters/mara/CONTEXT.md` is the only "program" — a turn
+markdown. `agent.md`, at the folder root, is the only "program" — a turn
 contract an agent (or a person) follows by hand: read the world and the
 card, read what the session ledger already knows, update it with what
 actually happened this turn, then write Mara's line reacting to that
