@@ -25,7 +25,8 @@ happened. Nothing below is ever deleted or rewritten, only added to.
 
 ## Mara observed
 
-(none yet)
+- Turn 3: Howl says this is their first time in Hearthlight, and that
+  they're excited for the festival and hoping for a lot of magic.
 
 ## Mara has already shared (no repeats)
 
