@@ -1,16 +1,9 @@
-# Assignment #8 — Virtual DM, ICM (folder-as-agent)
+# Assignment #8 — Virtual DM
 
 **Roc Lee · game-project (working title: *Rebirth*)**
 A cozy roguelite point-and-click adventure.
 
-A facts-ledger virtual DM, built ICM-style: no SDK, no API key, no code
-holding state in memory. The originating spec calls for a JSON facts
-ledger; this build's ledger is plain markdown with a YAML frontmatter
-block instead, since ICM's whole premise is state an agent edits by
-reading and writing a file directly, not a data structure a program
-parses. An agent runs a turn by reading a small set of markdown files in a
-fixed order and editing them directly. The character is Mara, the
-herbalist NPC from the full game — real reuse, not a toy world.
+A facts-ledger virtual DM, built using a blackboard pattern with context prompts: no SDK, no API key, no code holding state in memory. I had to build it this way because I don't have an API key subscription.  So instead of a JSON facts ledger an agent runs a turn by reading a small set of markdown files in a fixed order and editing them directly. The character is Mara, the herbalist NPC from the full game — real reuse, not a toy world.
 
 ## What's in this folder
 
@@ -23,42 +16,22 @@ herbalist NPC from the full game — real reuse, not a toy world.
 | `sessions/cold-test/` | A 6-turn walk under the **original** register — clipped, deflective, 12-25 word band |
 | `sessions/playtest-2-warmtest/` | A 7-turn walk under the **retuned** register — warmer, wordier, forthcoming — same character, same hard limits |
 
-## The ICM approach
+## What I built
 
-No TypeScript, no `messages.create` call, no `Ledger` object held in memory.
-State lives in `ledger.md`, a plain file. Running a turn means: read the
-player's line, read what the ledger already knows, decide what actually
-happened (not what the player merely claimed), write that to the ledger,
-*then* write Mara's spoken line reacting to the updated ledger — never the
-other way around. If the line gets written first, nothing stops it from
-inventing a fact the ledger never saw. The two-call shape (verify state,
-then react to it) is the same shape a coded pipeline enforces with an
-extractor call and a DM call; here one agent does both, in order, by
-following the contract in `CONTEXT.md`.
+A turn runs the same way every time, in a fixed order: read the world files,
+read Mara's card, read the session's ledger (everything established so
+far) and transcript (the last few lines, for phrasing), then read the
+player's new line. Update the ledger *first* — only what actually
+happened, never a bare claim the player made — then write Mara's line
+reacting to the *updated* ledger, then append both to the transcript. If
+the line got written before the ledger, nothing would stop it from
+inventing a fact the ledger never saw; the order is the whole point.
 
-## The blackboard pattern — why a ledger instead of an API call
-
-This prototype has no API key wired up, so there's no live back-and-forth
-between a "player" model and a "DM" model happening over the wire. Instead,
-`ledger.md` acts as a **blackboard**: a shared piece of state that every
-turn reads before it writes, and writes before the next turn reads. That's
-the same coordination problem a real two-call system solves by passing
-messages — here it's solved by both sides reading and writing the same
-file. It's slower and it's manual, but it's legible in a way a hidden
-context window isn't: anyone can open `ledger.md` mid-session and see
-exactly what's been established, with nothing lost to summarization.
-
-## Local LLM findings
-
-Ran this same persona card against several local, fiction-tuned models via
-koboldcpp on a separate machine (full findings live in the main project
-repo, `pipeline-runs/2026-08-17-register-loosening/`) — the retuned,
-warmer register held up well across models, once the card actually
-contained the canon it needed (see below). The practical conclusion: local
-LLMs are a viable way to run this pipeline without an API key, and **this
-ICM folder is the runnable example of that pipeline working** — the same
-`brief.md` and `CONTEXT.md` that a human walks by hand here are what a
-local model would be handed for the same turn.
+`ledger.md` is the shared state both the update step and the dialogue step
+read and write. There's no live back-and-forth over an API in this build —
+the ledger file does that job instead, so anyone can open it mid-session
+and see exactly what's been established, with nothing lost to a hidden
+context window.
 
 ## Register retune — before / after
 
@@ -86,39 +59,56 @@ grief, not the world around her) did most of that work — most turns in the
 cold version were spent getting *past* a deflection instead of getting an
 answer.
 
-## A canon-accuracy catch
+## Local LLM testing
 
-Testing surfaced a real content bug, not just a tone one. The card's sample
-line implied Mara might elaborate on "Ovin," a name attached to an object in
-her drawer. Six different local models, given room to elaborate, each
-invented a different backstory for him — a romantic history, a forty-year
-partnership, a trade story. Checking `narrative-pipeline/npc-codex.md`
-against the card turned up the actual rule: **Ovin's objects get zero
-provenance, ever** — stricter than the character's normal deflection, not
-softer — and Mara's real grief figure is her *sister*, Adren, not Ovin. A
-doll in the drawer is Adren's, and it's the one object the canon says Mara
-*will* go deep on, naming the person. `brief.md` was missing both facts
-entirely, which is exactly why every model free-associated in the same
-wrong direction. Fixed by pulling the missing detail in from the codex and
-adding two explicit hard limits (no inventing Ovin, no "remember/memory"
-language when explaining magic — the second one a separate leak the same
-testing round caught, tied to the world's truth-guard). The lesson that
+Ran this same folder against several local, fiction-tuned models via
+koboldcpp on a separate machine (full findings live in the main project
+repo, `pipeline-runs/2026-08-17-register-loosening/`) — the retuned,
+warmer register held up well across models, once the card actually
+contained the canon it needed (see below). The practical conclusion: local
+LLMs are a viable way to run this pipeline without an API key, and this
+folder is the runnable example of that pipeline working — the same
+`brief.md` and `CONTEXT.md` that a human walks by hand here are what a
+local model would be handed for the same turn.
+
+## Did it catch something I would have missed?
+
+Yes — a real content bug, not just a tone one. The card's sample line
+implied Mara might elaborate on "Ovin," a name attached to an object in her
+drawer. Six different local models, given room to elaborate, each invented
+a different backstory for him — a romantic history, a forty-year
+partnership, a trade story. Checking the game's own NPC codex against the
+card turned up the actual rule: Ovin's objects get zero provenance, ever —
+stricter than the character's normal deflection, not softer — and Mara's
+real grief figure is her *sister*, Adren, not Ovin. A doll in the drawer is
+Adren's, and it's the one object canon says Mara *will* go deep on, naming
+the person. `brief.md` was missing both facts entirely, which is exactly
+why every model free-associated in the same wrong direction. Fixed by
+pulling the missing detail in from the codex and adding two explicit hard
+limits (no inventing Ovin, no "remember/memory" language when explaining
+magic — a separate leak the same testing round caught). The lesson that
 generalizes: when a model invents something wrong, check whether it was
 ever given the actual answer before concluding it's a model-quality
 problem.
 
+## Were you able to run this in your game?
+
+Not yet — this is the standalone prototype the assignment calls for.
+Wiring it into the live build (handing off to this kind of runtime
+dialogue after a player exhausts the day's authored content) is scoped for
+after the capstone, per the current design ruling on NPC dialogue.
+
 ## How to run it
 
-1. Copy `sessions/_template/` to `sessions/<name>/` for a new session.
-2. Open `characters/mara/CONTEXT.md` and follow it in order: read
-   `brief.md`, the two `world/` files, then the session's `ledger.md` and
-   `transcript.md`.
-3. Given the player's line, update the ledger first — only what actually
-   happened, never a bare claim. Reasoning about *why* goes in the ledger's
-   own Reasoning log, not into the visible conversation.
-4. Write Mara's line reacting to the updated ledger, append both files to
-   `transcript.md`, and check the line against `brief.md`'s hard limits
-   before it's final.
+1. Copy this folder somewhere local.
+2. Copy `sessions/_template/` to `sessions/<name>/` to start a new session.
+3. Point an agent (Claude Code or any coding agent with file read/write) at
+   the folder and tell it to read `characters/mara/CONTEXT.md` and follow
+   it, using your new session folder.
+4. Talk to it as the player — type a line, get Mara's line back. Every
+   turn updates `ledger.md` and `transcript.md` in your session folder, so
+   you can open either file at any point and see exactly what's been
+   established.
 
 No install, no key, no server — the whole loop is reading and editing
 markdown files in order.
