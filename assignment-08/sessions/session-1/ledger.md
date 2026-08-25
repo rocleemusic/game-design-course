@@ -34,6 +34,7 @@ happened. Nothing below is ever deleted or rewritten, only added to.
 
 - Turn 3: Howl says this is their first time in Hearthlight, and that
   they're excited for the festival and hoping for a lot of magic.
+- Turn 7: Howl said goodbye for now, planning to see her around.
 
 ## Mara has already shared (no repeats)
 
