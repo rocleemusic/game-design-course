@@ -14,7 +14,7 @@ Assignment staging area for [Festival of Souls](gdd/01-concept.md), a cozy rogue
 | [`assignment-05/`](assignment-05/assignment-5/roc-lee-rebirth-assignment-5-readme.md) | Goal-oriented coding agents — a one-shot `/goal` run that proved ink-in-Unreal integration, plus the Choice Designer agent that builds branching dialogue graphs |
 | [`assignment-06/`](assignment-06/roc-lee-rebirth-README.md) | GER pipeline — runnable Generator / Evaluator / Refiner / Circuit Breaker over one NPC dialogue slot, enforcing guardrails check 6 (voice register) with a 2-revision cap and a structural exit |
 | [`assignment-07/`](assignment-07/roc-lee-rebirth-README.md) | Style Guide Agent — the game's five written constraint types ([`style-guide.md`](assignment-07/style-guide.md)), a three-layer evaluator scoring distance from those rules, and a recorded run catching a real lore contradiction that was sitting in the game repo |
-| [`assignment-08/`](assignment-08/roc-lee-rebirth-README.md) | Virtual DM, ICM (folder-as-agent) — a JSON-facts-ledger NPC (Mara) run entirely through markdown files instead of code, the ledger standing in as a blackboard in place of an API call, plus a before/after register retune and a real canon-accuracy catch from local-LLM testing |
+| [`assignment-08/`](assignment-08/roc-lee-rebirth-README.md) | Virtual DM — an NPC (Mara) run entirely through markdown files instead of code, a ledger standing in as a blackboard in place of an API call, plus a before/after register retune and a real canon-accuracy catch from local-LLM testing |
 
 ## The game, briefly
 
