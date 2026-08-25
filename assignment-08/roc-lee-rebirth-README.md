@@ -9,9 +9,9 @@ A facts-ledger virtual DM, built using a blackboard pattern with context prompts
 
 | Path | What it is |
 |---|---|
+| `agent.md` | **Start here.** The turn contract: what to read, in what order, and what to write back |
 | `characters/mara/brief.md` | Mara's persona card — essence, trait axes, voice register, magic, hard limits |
-| `characters/mara/CONTEXT.md` | The turn contract: what to read, in what order, and what to write back |
-| `world/hearthlight-brief.md`, `world/truth-guard.md` | The shared world and the one rule every character folder inherits |
+| `world/hearthlight-brief.md`, `world/truth-guard.md` | The shared world and the one rule agent.md inherits |
 | `sessions/_template/` | Blank ledger + transcript, copied per new session |
 | `sessions/cold-test/` | A 6-turn walk under the **original** register — clipped, deflective, 12-25 word band |
 | `sessions/playtest-2-warmtest/` | A 7-turn walk under the **retuned** register — warmer, wordier, forthcoming — same character, same hard limits |
