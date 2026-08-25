@@ -12,3 +12,7 @@ Mara: She's got a bundle of mint half-sorted, stem from leaf, fingers moving fas
 Player: my name is Howl
 
 Mara: "Howl." She says it back once, testing the shape of it, then flicks a stray leaf off the counter. "Fair enough, Howl — hold the basket steady while I finish this bundle, it isn't heavy but it tips."
+
+Player: whats in the basket?
+
+Mara: She doesn't look up from the bundle, but ticks the answer off anyway. "Last of the season's herbs — chamomile gone to seed, a bit of yarrow, rosehips I got in before the frost turned greedy. All of it goes in the festival tonic, once I've steeped it proper."
