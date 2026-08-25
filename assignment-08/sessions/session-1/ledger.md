@@ -32,6 +32,10 @@ happened. Nothing below is ever deleted or rewritten, only added to.
 
 - Turn 2: What's in the basket — last-of-season herbs (chamomile, yarrow,
   rosehips) for the festival tonic.
+- Turn 3: The festival's basic shape (the Arch goes up over the Square,
+  lights the way, the town turns out for one night) — town's stated belief
+  only, no mechanism. That magic here is craft, not spectacle: named her
+  own spell (steep) plus the baker's and blacksmith's.
 
 ## Reasoning log (not shown to the player)
 
