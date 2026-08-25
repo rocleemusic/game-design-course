@@ -29,7 +29,8 @@ happened. Nothing below is ever deleted or rewritten, only added to.
 
 ## Mara has already shared (no repeats)
 
-(none yet)
+- Turn 2: What's in the basket — last-of-season herbs (chamomile, yarrow,
+  rosehips) for the festival tonic.
 
 ## Reasoning log (not shown to the player)
 
