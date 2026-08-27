@@ -110,7 +110,7 @@ report lists them in `coverage.notReached` rather than passing them silently. Th
 ## Were you surprised?
 
 **The save/restore bug, because it's the entry flow, not the save code** (found
-8/24, again 8/26). A bug introduced by changing the screen flow. The game did not originally have save states or a return to main menu button at the end of the game. I added one, and that broke the game when it reloads the save state.
+8/24, again 8/26). A bug introduced by changing the screen flow. The game did not originally have save states or a return-to-main-menu button at the end of the game. I added one, and that broke the game when it reloads the save state.
 
 **The gate-tracking split, because the codebase already knows about it** (8/24,
 110 times; 8/26, 133 times). The agent surfaced a comment in
