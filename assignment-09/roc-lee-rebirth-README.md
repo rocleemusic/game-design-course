@@ -4,10 +4,7 @@
 A cozy roguelite point-and-click adventure.
 
 An agent that plays the capstone badly on purpose. 250 steps in a real headless
-Chromium, then a structured report of what broke. Every other test tool in the
-project plays the game *correctly*: a walker takes the week end to end, a sweep
-drives all 89 spell pairs, 33 scripts replay known-good flows, 743 unit tests
-cover the logic. None of them sends bad input. This agent does nothing else.
+Chromium, then a structured report of what broke.
 
 ## What's in this folder
 
@@ -42,11 +39,9 @@ for (const inv of INVARIANTS) {
 }
 ```
 
-**An invariant is one relationship that must hold.** A *gate* is a lock on a
-screen: a room the player can't enter until they've cleared it, by casting the
-right spell or earning a bond. This is the loudest finding in both runs: two
-separate parts of the code track which gates are cleared, and they are allowed to
-disagree about the same door.
+**An invariant is one relationship that must hold.** A gate is a lock on a screen: a room the player can't enter until they've cleared it, by casting the right spell or earning a bond. This is the loudest finding
+in both runs: two separate parts of the code track which gates are cleared, and
+they are allowed to disagree about the same door.
 
 ```js
 // INV-GATE-TWO-CLEARED-SETS-AGREE — two writers, one fact.
@@ -98,8 +93,7 @@ on 8/26.** None was fixed:
 | A bond-gated screen was walkable with its gate never cleared this life | `TraversalRow.ts` | 24 |
 
 **New on 8/26, a live regression:** item art fails to load. The console throws
-`Failed to process file: image "art:item:item_dirt"` **28 times**. It was not
-present 8/24.
+`Failed to process file: image "art:item:item_dirt"` **28 times**. The agent caught me working on item art and not having finished pictures for everything.
 
 **Loudest single finding:** the gate-tracking split above fired **133 times** in
 the 8/26 run (110 in 8/24). `CastPipeline.ts`'s own comment says the second
@@ -116,25 +110,17 @@ report lists them in `coverage.notReached` rather than passing them silently. Th
 ## Were you surprised?
 
 **The save/restore bug, because it's the entry flow, not the save code** (found
-8/24, again 8/26). The save layer is careful. Its own header says a defect must
-be reported, never coerced, and it correctly refused every corrupted save the run
-threw at it: truncated JSON, a bumped version, invented item and gate ids. The
-gap is upstream. Reopening the game routes back through the day's location picker,
-which starts a fresh day in ink *before* the save can restore over it. Each piece
-does its job. The sequence between them is what's missing.
+8/24, again 8/26). A bug introduced by changing the screen flow. The game did not originally have save states or a return to main menu button at the end of the game. I added one, and that broke the game when it reloads the save state.
 
 **The gate-tracking split, because the codebase already knows about it** (8/24,
-110 times; 8/26, 133 times). I didn't find a hidden bug. I found a comment in
-`CastPipeline.ts` admitting the exact gap the agent then walked straight through.
-That's the most useful kind of adversarial finding: not a mystery, but a
-confirmation that a known architectural debt is player-reachable right now.
+110 times; 8/26, 133 times). The agent surfaced a comment in
+`CastPipeline.ts` admitting the exact gap the agent then walked straight through in its QA pass.
+Not all gate conditions for screens are currently honored.
 
 **The item-art regression, because the agent caught it as a side effect** (8/26).
 I was re-running to refresh the numbers, not hunting art bugs. The adversary never
 targets asset loading. It just watches the console after every step, so a broken
-art path surfaced for free, 28 times. Worth stating plainly: on 8/26, none of the
-four blocking bugs from 8/24 had been fixed. An adversarial pass is only worth
-running if someone acts on it.
+art path surfaced for free.
 
 ## How to run it
 
