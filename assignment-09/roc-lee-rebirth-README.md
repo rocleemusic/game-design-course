@@ -42,9 +42,11 @@ for (const inv of INVARIANTS) {
 }
 ```
 
-**An invariant is one relationship that must hold.** This is the loudest finding
-in both runs: two separate parts of the code track which gates are cleared, and
-they are allowed to disagree about the same door.
+**An invariant is one relationship that must hold.** A *gate* is a lock on a
+screen: a room the player can't enter until they've cleared it, by casting the
+right spell or earning a bond. This is the loudest finding in both runs: two
+separate parts of the code track which gates are cleared, and they are allowed to
+disagree about the same door.
 
 ```js
 // INV-GATE-TWO-CLEARED-SETS-AGREE — two writers, one fact.
