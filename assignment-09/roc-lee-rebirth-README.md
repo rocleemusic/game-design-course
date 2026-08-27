@@ -114,7 +114,7 @@ report lists them in `coverage.notReached` rather than passing them silently. Th
 
 **The gate-tracking split, because the codebase already knows about it** (8/24,
 110 times; 8/26, 133 times). The agent surfaced a comment in
-`CastPipeline.ts` admitting the exact gap the agent then walked straight through in its QA pass.
+`CastPipeline.ts` admitting the exact gap it then walked straight through in its QA pass.
 Not all gate conditions for screens are currently honored.
 
 **The item-art regression, because the agent caught it as a side effect** (8/26).
