@@ -1,0 +1,33 @@
+{
+  "$comment": [
+    "Bugs already known and already owned, so the adversary reports them as `status: \"known\"`",
+    "instead of burying a real new finding under noise.",
+    "",
+    "EVERY ENTRY EXPIRES. `expires` is an ISO date; past it, the entry stops muting and the",
+    "finding is promoted back to `status: \"new\"` with a note saying the entry lapsed. That is",
+    "the whole point — without expiry this file quietly becomes a permanent mute button, and a",
+    "bug nobody fixed reads forever as a bug somebody is fixing.",
+    "",
+    "Schema, per entry:",
+    "  invariant  (required) an id from lib/invariants.mjs — checked, so a typo fails the run",
+    "  match      (optional) narrows to specific findings. `summaryIncludes` / `screen` / `system`",
+    "  why        (required) plain-language reason this is already known",
+    "  ref        (required) the plan or handoff that owns the fix",
+    "  expires    (required) ISO date. The phase boundary by which it should be fixed"
+  ],
+  "entries": [
+    {
+      "invariant": "INV-INV-DROP-REMOVES",
+      "why": "Inventory.drop() removes from `held` only. The item stays in the satchel and never lands in the world, so a drop can read as a duplication. Roc logged this in the 2026-08-23 review notes; it is Group 1, and the fix spans phaser/src/world/Inventory.ts and tools/lantern/src/lib/play.ts together.",
+      "ref": "plans/2026-08-23-roc-notes-triage-plan.md — Group 1, 'Drop doesn't remove item'",
+      "expires": "2026-08-26"
+    },
+    {
+      "invariant": "INV-CARRY-SLOTS-MATCH-COMPACTION",
+      "match": { "summaryIncludes": "disagree" },
+      "why": "Same root cause as the drop bug above: the satchel-drop/move track is mid-rework, so the pocket array and its compaction can disagree while Group 1 is in flight.",
+      "ref": "plans/_handoffs/2026-08-23-forage-reconcile-and-spread-handoff.md and Group 1 satchel cluster",
+      "expires": "2026-08-26"
+    }
+  ]
+}

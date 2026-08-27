@@ -1,0 +1,4663 @@
+{
+  "run": {
+    "tool": "phaser/tools/adversary",
+    "mode": "mode5",
+    "seed": 20260824,
+    "steps": 250,
+    "requestedSteps": 250,
+    "startedAt": "2026-08-24T04:46:18.955Z",
+    "durationMs": 701289,
+    "url": "http://localhost:5188/?mode=mode5",
+    "playRatio": 0.45,
+    "harnessError": null
+  },
+  "summary": {
+    "new": 33,
+    "known": 3,
+    "blocking": 6,
+    "material": 26,
+    "note": 1,
+    "playerReachable": 8
+  },
+  "coverage": {
+    "screensVisited": [
+      "F1",
+      "F2",
+      "F4",
+      "FS",
+      "HOME",
+      "T1",
+      "T2",
+      "T3",
+      "T4",
+      "T5",
+      "T6",
+      "T7",
+      "T8",
+      "TN"
+    ],
+    "probesFired": {
+      "clock": 25,
+      "gates": 11,
+      "inventory": 30,
+      "cast": 29,
+      "save": 21,
+      "soak": 19,
+      "explore": 115
+    },
+    "invariantsChecked": [
+      "INV-ADV-SURFACE",
+      "INV-CARRY-ARMS-WITHIN-CAPACITY",
+      "INV-CARRY-PICKED-SLOT-NOT-REOFFERED",
+      "INV-CARRY-SLOTS-MATCH-COMPACTION",
+      "INV-CARRY-WITHIN-CAPACITY",
+      "INV-CLOCK-BLOCK-IS-REAL",
+      "INV-CLOCK-DAY-MONOTONIC",
+      "INV-CLOCK-MOVES-NONNEG",
+      "INV-FLOW-INK-REPORTS-NO-ERRORS",
+      "INV-FLOW-NOT-SOFTLOCKED",
+      "INV-GATE-NO-PHANTOM-CLEAR",
+      "INV-GATE-RECLOSED-BEHIND-PLAYER",
+      "INV-GATE-REFUSED-NEVER-CLEARS",
+      "INV-GATE-STANDING-SOMEWHERE-LOCKED",
+      "INV-GATE-TWO-CLEARED-SETS-AGREE",
+      "INV-RENDER-DISPLAY-LIST-BOUNDED",
+      "INV-RENDER-TWEENS-BOUNDED"
+    ],
+    "notReached": [
+      "invariant:INV-ADV-CHECK-THREW",
+      "invariant:INV-ADV-LOST-PLAY-SCENE",
+      "invariant:INV-CAST-REQUIRES-COMPONENTS",
+      "invariant:INV-CLOCK-CHOICE-INDEX-SAFE",
+      "invariant:INV-CLOCK-NO-DOUBLE-SPEND",
+      "invariant:INV-GATE-LOCKED-PILL-INERT",
+      "invariant:INV-INV-NO-PICKUP-DUPLICATION",
+      "invariant:INV-PAGE-CONSOLE-ERROR",
+      "invariant:INV-PAGE-UNCAUGHT-EXCEPTION",
+      "invariant:INV-SAVE-DEFECT-NOT-COERCED",
+      "invariant:INV-SAVE-UNKNOWN-IDS-REJECTED",
+      "invariant:INV-SAVE-VERSION-REFUSED",
+      "invariant:INV-SOAK-MODAL-CYCLE-CLEAN"
+    ],
+    "knownIssueEntries": 2,
+    "lapsedKnownIssueEntries": []
+  },
+  "findings": [
+    {
+      "id": "ADV-0004",
+      "invariant": "INV-SAVE-ROUNDTRIP-STABLE",
+      "title": "save then load returns the same world, not a nearby one",
+      "error_type": "state_invariant_violation",
+      "severity": "blocking",
+      "status": "new",
+      "occurrences": 1,
+      "summary": "save, reload, load returned a different world: block evening -> morning · screen T6 -> F1 · satchel [\"herbs\",\"adv_item_572307\"] -> [] · cleared gates [\"G-T6-evening\"] -> []. \"Save and restore (close, reopen, resume)\" is item one of the amended Definition of Done.",
+      "reachability": "player",
+      "location": {
+        "screen": "F1",
+        "scene": "CollectScene",
+        "system": "save",
+        "file": "phaser/src/world/save/SaveCoordinator.ts",
+        "line": null
+      },
+      "game_context": {
+        "day": 1,
+        "timeBlock": "morning",
+        "movesLeft": 2,
+        "screen": "F1",
+        "drawnScreen": "F1",
+        "satchel": [],
+        "arms": [],
+        "held": [
+          "item_captured_sound"
+        ],
+        "spellbook": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ],
+        "clearedGates": [],
+        "refusedGates": [
+          "G-F4-still"
+        ],
+        "modalOpen": false,
+        "choices": [
+          "[Look at trail signs]",
+          "[Go to The Stream]",
+          "[Go to The Grove]",
+          "[Go to Town Square]",
+          "[Wait]",
+          "[End the day]"
+        ],
+        "drift": [
+          "block evening -> morning",
+          "screen T6 -> F1",
+          "satchel [\"herbs\",\"adv_item_572307\"] -> []",
+          "cleared gates [\"G-T6-evening\"] -> []"
+        ],
+        "before": {
+          "day": 1,
+          "screen": "T6",
+          "satchel": [
+            "herbs",
+            "adv_item_572307"
+          ]
+        }
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 11,
+        "lastStep": 11,
+        "probe": "save",
+        "recentActions": [
+          {
+            "step": 1,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to Market Row]\""
+          },
+          {
+            "step": 2,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to Town Square]\""
+          },
+          {
+            "step": 5,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to Market Row]\""
+          },
+          {
+            "step": 5,
+            "probe": "explore",
+            "action": "pickup(\"T2_1_afternoon_herbs\", \"herbs\")"
+          },
+          {
+            "step": 6,
+            "probe": "save",
+            "action": "plant a mode-swapped save at phaser-probe/save/v1/mode5 and load it"
+          },
+          {
+            "step": 7,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Town Square]\""
+          },
+          {
+            "step": 8,
+            "probe": "inventory",
+            "action": "pickup(\"adv_slot_432556\", <invented item>)"
+          },
+          {
+            "step": 9,
+            "probe": "gates",
+            "action": "model-veto: choose(5) past G-T6-evening"
+          },
+          {
+            "step": 11,
+            "probe": "save",
+            "action": "round trip: save -> full page reload -> load -> compare"
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      }
+    },
+    {
+      "id": "ADV-0005",
+      "invariant": "INV-INV-DROP-REMOVES",
+      "title": "a dropped item leaves the satchel and lands in the world exactly once",
+      "error_type": "resource_duplication",
+      "severity": "blocking",
+      "status": "known",
+      "occurrences": 1,
+      "summary": "drop(\"item_berry\") returned true but the item is still held (1 -> 1). It is ALSO in the world on T4 — one item now exists twice.",
+      "reachability": "player",
+      "location": {
+        "screen": "T4",
+        "scene": "CollectScene",
+        "system": "satchel",
+        "file": "phaser/src/world/Inventory.ts",
+        "line": null
+      },
+      "game_context": {
+        "day": 1,
+        "timeBlock": "evening",
+        "movesLeft": 1,
+        "screen": "T4",
+        "drawnScreen": "T4",
+        "satchel": [
+          "herbs",
+          "adv_item_1997",
+          "herbs",
+          "ash"
+        ],
+        "arms": [],
+        "held": [
+          "item_ash",
+          "item_berry",
+          "item_captured_sound"
+        ],
+        "spellbook": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ],
+        "clearedGates": [
+          "G-T6-evening"
+        ],
+        "refusedGates": [
+          "G-F4-still"
+        ],
+        "modalOpen": false,
+        "choices": [
+          "[Look at tools]",
+          "[Look at recipe board]",
+          "[Go to Market Row]",
+          "[Wait]",
+          "[End the day]"
+        ],
+        "item": "item_berry",
+        "heldBefore": 1,
+        "heldAfter": 1,
+        "inWorld": true,
+        "stillInSatchel": 0
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 25,
+        "lastStep": 25,
+        "probe": "inventory",
+        "recentActions": [
+          {
+            "step": 13,
+            "probe": "explore",
+            "action": "pickup(\"F1_1_afternoon_herbs\", \"herbs\")"
+          },
+          {
+            "step": 14,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to Town Square]\""
+          },
+          {
+            "step": 15,
+            "probe": "explore",
+            "action": "choose(4) \"[Go to The Commons / Well]\""
+          },
+          {
+            "step": 16,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Town Square]\""
+          },
+          {
+            "step": 17,
+            "probe": "clock",
+            "action": "choose(1) \"[Look at notice board]\" (to stale the index)"
+          },
+          {
+            "step": 20,
+            "probe": "inventory",
+            "action": "pickup(\"adv_slot_935213\", <invented item>)"
+          },
+          {
+            "step": 22,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to Market Row]\""
+          },
+          {
+            "step": 22,
+            "probe": "explore",
+            "action": "pickup(\"T2_1_evening_herbs\", \"herbs\")"
+          },
+          {
+            "step": 23,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to The Workshop]\""
+          },
+          {
+            "step": 23,
+            "probe": "explore",
+            "action": "pickup(\"T4_1_evening_ash\", \"ash\")"
+          },
+          {
+            "step": 24,
+            "probe": "cast",
+            "action": "cast \"echo\" on festival_bell with NO components offered"
+          },
+          {
+            "step": 25,
+            "probe": "inventory",
+            "action": "drop(\"item_berry\") on T4"
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      },
+      "knownIssue": {
+        "why": "Inventory.drop() removes from `held` only. The item stays in the satchel and never lands in the world, so a drop can read as a duplication. Roc logged this in the 2026-08-23 review notes; it is Group 1, and the fix spans phaser/src/world/Inventory.ts and tools/lantern/src/lib/play.ts together.",
+        "ref": "plans/2026-08-23-roc-notes-triage-plan.md — Group 1, 'Drop doesn't remove item'",
+        "expires": "2026-08-26"
+      }
+    },
+    {
+      "id": "ADV-0011",
+      "invariant": "INV-SOAK-NO-UNCAUGHT",
+      "title": "no input sequence produces an uncaught exception",
+      "error_type": "uncaught_exception",
+      "severity": "blocking",
+      "status": "new",
+      "occurrences": 1,
+      "summary": "after mashing [d h f f l n h c o f Delete s s d] the play scene is no longer running — live scenes are []. Four Escapes did not get back.",
+      "reachability": "player",
+      "location": {
+        "screen": null,
+        "scene": null,
+        "system": "flow",
+        "file": "phaser/src/scenes/CollectScene.ts",
+        "line": null
+      },
+      "game_context": {
+        "day": null,
+        "timeBlock": null,
+        "movesLeft": null,
+        "screen": null,
+        "drawnScreen": null,
+        "satchel": null,
+        "arms": null,
+        "held": null,
+        "spellbook": null,
+        "clearedGates": null,
+        "refusedGates": null,
+        "modalOpen": null,
+        "choices": [],
+        "keys": [
+          "d",
+          "h",
+          "f",
+          "f",
+          "l",
+          "n",
+          "h",
+          "c",
+          "o",
+          "f",
+          "Delete",
+          "s",
+          "s",
+          "d"
+        ],
+        "liveScenes": []
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 67,
+        "lastStep": 67,
+        "probe": "soak",
+        "recentActions": [
+          {
+            "step": 56,
+            "probe": "explore",
+            "action": "choose(1) \"[Go to The Commons / Well]\""
+          },
+          {
+            "step": 57,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Town Square]\""
+          },
+          {
+            "step": 58,
+            "probe": "explore",
+            "action": "choose(0) \"[Start the Next Day]\""
+          },
+          {
+            "step": 59,
+            "probe": "cast",
+            "action": "cast \"furrow\" on cobbled_square, which is not on HOME"
+          },
+          {
+            "step": 60,
+            "probe": "soak",
+            "action": "open/close \"satchel\" x20 via S"
+          },
+          {
+            "step": 60,
+            "probe": "soak",
+            "action": "\"satchel\" would not close after 5 cycles — stopping the soak"
+          },
+          {
+            "step": 61,
+            "probe": "cast",
+            "action": "cast \"breath\" on cat, which is not on HOME"
+          },
+          {
+            "step": 62,
+            "probe": "cast",
+            "action": "cast \"leap\" on cold_lantern, which is not on HOME"
+          },
+          {
+            "step": 64,
+            "probe": "clock",
+            "action": "choose(-1)"
+          },
+          {
+            "step": 65,
+            "probe": "explore",
+            "action": "choose(1) \"[Go to Market Row]\""
+          },
+          {
+            "step": 66,
+            "probe": "explore",
+            "action": "choose(4) \"[Go to The Workshop]\""
+          },
+          {
+            "step": 67,
+            "probe": "soak",
+            "action": "key mash: d h f f l n h c o f Delete s s d"
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      }
+    },
+    {
+      "id": "ADV-0015",
+      "invariant": "INV-INV-DROP-REMOVES",
+      "title": "a dropped item leaves the satchel and lands in the world exactly once",
+      "error_type": "resource_duplication",
+      "severity": "blocking",
+      "status": "known",
+      "occurrences": 1,
+      "summary": "drop(\"item_berry\") returned true but the item is still held (1 -> 1). It is ALSO in the world on T2 — one item now exists twice.",
+      "reachability": "player",
+      "location": {
+        "screen": "T2",
+        "scene": "CollectScene",
+        "system": "satchel",
+        "file": "phaser/src/world/Inventory.ts",
+        "line": null
+      },
+      "game_context": {
+        "day": 4,
+        "timeBlock": "afternoon",
+        "movesLeft": 1,
+        "screen": "T2",
+        "drawnScreen": "T2",
+        "satchel": [
+          "herbs",
+          "ash",
+          "wool",
+          "adv_item_900036",
+          "adv_item_869044"
+        ],
+        "arms": [],
+        "held": [
+          "item_berry",
+          "item_captured_sound",
+          "item_wool"
+        ],
+        "spellbook": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ],
+        "clearedGates": [],
+        "refusedGates": [
+          "G-F4-still"
+        ],
+        "modalOpen": false,
+        "choices": [
+          "[Talk to Mara (SC-T2-12)]",
+          "[Talk to Mara (SC-T2-22)]",
+          "[Look at stall goods]",
+          "[Look at ex shelf]",
+          "[Go to Town Square]",
+          "[Go to The Workshop]",
+          "[Wait]",
+          "[End the day]"
+        ],
+        "item": "item_berry",
+        "heldBefore": 1,
+        "heldAfter": 1,
+        "inWorld": true,
+        "stillInSatchel": 0
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 76,
+        "lastStep": 76,
+        "probe": "inventory",
+        "recentActions": [
+          {
+            "step": 66,
+            "probe": "explore",
+            "action": "choose(4) \"[Go to The Workshop]\""
+          },
+          {
+            "step": 67,
+            "probe": "soak",
+            "action": "key mash: d h f f l n h c o f Delete s s d"
+          },
+          {
+            "step": 70,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Market Row]\""
+          },
+          {
+            "step": 70,
+            "probe": "explore",
+            "action": "pickup(\"T2_4_afternoon_herbs\", \"herbs\")"
+          },
+          {
+            "step": 71,
+            "probe": "explore",
+            "action": "choose(5) \"[Go to The Workshop]\""
+          },
+          {
+            "step": 71,
+            "probe": "explore",
+            "action": "pickup(\"T4_4_afternoon_ash\", \"ash\")"
+          },
+          {
+            "step": 72,
+            "probe": "explore",
+            "action": "choose(5) \"[Go to Market Row]\""
+          },
+          {
+            "step": 72,
+            "probe": "explore",
+            "action": "pickup(\"T2_4_afternoon_wool\", \"wool\")"
+          },
+          {
+            "step": 73,
+            "probe": "cast",
+            "action": "cast \"dry\" (NOT in the spellbook) on rain_soaked_cat"
+          },
+          {
+            "step": 74,
+            "probe": "inventory",
+            "action": "pickup(\"T2_4_afternoon_lantern-oil\", \"adv_item_900036\") — real slot, item it never offered"
+          },
+          {
+            "step": 75,
+            "probe": "inventory",
+            "action": "pickup(\"adv_slot_511922\", <invented item>)"
+          },
+          {
+            "step": 76,
+            "probe": "inventory",
+            "action": "drop(\"item_berry\") on T2"
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      },
+      "knownIssue": {
+        "why": "Inventory.drop() removes from `held` only. The item stays in the satchel and never lands in the world, so a drop can read as a duplication. Roc logged this in the 2026-08-23 review notes; it is Group 1, and the fix spans phaser/src/world/Inventory.ts and tools/lantern/src/lib/play.ts together.",
+        "ref": "plans/2026-08-23-roc-notes-triage-plan.md — Group 1, 'Drop doesn't remove item'",
+        "expires": "2026-08-26"
+      }
+    },
+    {
+      "id": "ADV-0020",
+      "invariant": "INV-CLOCK-DAY-MONOTONIC",
+      "title": "the day never runs backwards inside one life",
+      "error_type": "state_invariant_violation",
+      "severity": "blocking",
+      "status": "new",
+      "occurrences": 2,
+      "summary": "day went 5 -> 1 with no restore in flight.",
+      "reachability": "player",
+      "location": {
+        "screen": "T1",
+        "scene": "CollectScene",
+        "system": "day-loop",
+        "file": null,
+        "line": null
+      },
+      "game_context": {
+        "day": 1,
+        "timeBlock": "morning",
+        "movesLeft": 2,
+        "screen": "T1",
+        "drawnScreen": "T1",
+        "satchel": [],
+        "arms": [],
+        "held": [
+          "item_captured_sound"
+        ],
+        "spellbook": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ],
+        "clearedGates": [],
+        "refusedGates": [
+          "G-F4-still"
+        ],
+        "modalOpen": false,
+        "choices": [
+          "[Look at arch]",
+          "[Look at notice board]",
+          "[Go to Forager's Clearing]",
+          "[Go to Market Row]",
+          "[Go to The Commons / Well]",
+          "[Go to The Tavern / Inn]",
+          "[Go to Festival Grounds]",
+          "[Wait]",
+          "[End the day]"
+        ]
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 120,
+        "lastStep": 229,
+        "probe": "explore",
+        "recentActions": [
+          {
+            "step": 103,
+            "probe": "clock",
+            "action": "choose(NaN)"
+          },
+          {
+            "step": 105,
+            "probe": "cast",
+            "action": "cast \"breath\" on fallen_leaves, which is not on T8"
+          },
+          {
+            "step": 106,
+            "probe": "explore",
+            "action": "choose(1) \"[Go to The Commons / Well]\""
+          },
+          {
+            "step": 107,
+            "probe": "inventory",
+            "action": "drop(\"item_wool\") on HOME"
+          },
+          {
+            "step": 108,
+            "probe": "explore",
+            "action": "choose(1) \"[Go to the Festival night]\""
+          },
+          {
+            "step": 110,
+            "probe": "soak",
+            "action": "open/close \"hub\" x20 via H"
+          },
+          {
+            "step": 111,
+            "probe": "explore",
+            "action": "choose(4) \"[Begin the festival vignette]\""
+          },
+          {
+            "step": 112,
+            "probe": "inventory",
+            "action": "drop(\"item_captured_sound\") on TN"
+          },
+          {
+            "step": 114,
+            "probe": "inventory",
+            "action": "pickup(\"adv_slot_215764\", <invented item>)"
+          },
+          {
+            "step": 116,
+            "probe": "explore",
+            "action": "choose(0) \"[Go to the results]\""
+          },
+          {
+            "step": 117,
+            "probe": "inventory",
+            "action": "pickup(\"adv_slot_444490\", <invented item>)"
+          },
+          {
+            "step": 119,
+            "probe": "explore",
+            "action": "story ended — restarting the loop from the entry scene"
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      }
+    },
+    {
+      "id": "ADV-0024",
+      "invariant": "INV-GATE-STANDING-SOMEWHERE-LOCKED",
+      "title": "the player never stands on a screen whose gates are still blocking",
+      "error_type": "gate_bypass",
+      "severity": "blocking",
+      "status": "new",
+      "occurrences": 1,
+      "summary": "standing on T5 with gate(s) G-T5-trust still blocking it, and none of them was ever cleared this session or bypassed by this agent. The mode declares gates enforced; something let the player through.",
+      "reachability": "player",
+      "location": {
+        "screen": "T5",
+        "scene": "CollectScene",
+        "system": "traversal",
+        "file": "phaser/src/render/TraversalRow.ts",
+        "line": null
+      },
+      "game_context": {
+        "day": 3,
+        "timeBlock": "afternoon",
+        "movesLeft": 1,
+        "screen": "T5",
+        "drawnScreen": "T5",
+        "satchel": [],
+        "arms": [],
+        "held": [
+          "item_captured_sound",
+          "item_spring_water"
+        ],
+        "spellbook": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ],
+        "clearedGates": [],
+        "refusedGates": [
+          "G-F4-still"
+        ],
+        "modalOpen": false,
+        "choices": [
+          "[Look at mementos]",
+          "[Go to The Commons / Well]",
+          "[Wait]",
+          "[End the day]"
+        ],
+        "required": [
+          "G-T5-trust"
+        ],
+        "cleared": [],
+        "everCleared": [
+          "G-T6-evening"
+        ]
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 150,
+        "lastStep": 150,
+        "probe": "explore",
+        "recentActions": [
+          {
+            "step": 135,
+            "probe": "explore",
+            "action": "choose(1) \"[Go to The Stream]\""
+          },
+          {
+            "step": 137,
+            "probe": "clock",
+            "action": "choose(1) \"[Start the Next Day]\" (to stale the index)"
+          },
+          {
+            "step": 137,
+            "probe": "clock",
+            "action": "stale choose(0) captured as \"[Look around your home]\""
+          },
+          {
+            "step": 138,
+            "probe": "clock",
+            "action": "choose(8) \"[End the day]\" (to stale the index)"
+          },
+          {
+            "step": 138,
+            "probe": "clock",
+            "action": "stale choose(1) captured as \"[Look at notice board]\""
+          },
+          {
+            "step": 140,
+            "probe": "explore",
+            "action": "choose(0) \"[Go to Town Square]\""
+          },
+          {
+            "step": 142,
+            "probe": "explore",
+            "action": "choose(4) \"[Go to The Commons / Well]\""
+          },
+          {
+            "step": 143,
+            "probe": "soak",
+            "action": "open/close \"notebook\" x20 via N"
+          },
+          {
+            "step": 145,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Town Square]\""
+          },
+          {
+            "step": 146,
+            "probe": "inventory",
+            "action": "drop(\"item_river_stone\") on T1"
+          },
+          {
+            "step": 147,
+            "probe": "explore",
+            "action": "choose(4) \"[Go to The Commons / Well]\""
+          },
+          {
+            "step": 149,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to A Neighbor's Home]\""
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      }
+    },
+    {
+      "id": "ADV-0025",
+      "invariant": "INV-SOAK-NO-UNCAUGHT",
+      "title": "no input sequence produces an uncaught exception",
+      "error_type": "uncaught_exception",
+      "severity": "blocking",
+      "status": "new",
+      "occurrences": 1,
+      "summary": "after mashing [m d h m s d h n Escape m Escape e f c] the play scene is no longer running — live scenes are [HubScene]. Four Escapes did not get back.",
+      "reachability": "player",
+      "location": {
+        "screen": null,
+        "scene": "HubScene",
+        "system": "flow",
+        "file": "phaser/src/scenes/CollectScene.ts",
+        "line": null
+      },
+      "game_context": {
+        "day": null,
+        "timeBlock": null,
+        "movesLeft": null,
+        "screen": null,
+        "drawnScreen": null,
+        "satchel": null,
+        "arms": null,
+        "held": null,
+        "spellbook": null,
+        "clearedGates": null,
+        "refusedGates": null,
+        "modalOpen": null,
+        "choices": [],
+        "keys": [
+          "m",
+          "d",
+          "h",
+          "m",
+          "s",
+          "d",
+          "h",
+          "n",
+          "Escape",
+          "m",
+          "Escape",
+          "e",
+          "f",
+          "c"
+        ],
+        "liveScenes": [
+          "HubScene"
+        ]
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 152,
+        "lastStep": 152,
+        "probe": "soak",
+        "recentActions": [
+          {
+            "step": 138,
+            "probe": "clock",
+            "action": "choose(8) \"[End the day]\" (to stale the index)"
+          },
+          {
+            "step": 138,
+            "probe": "clock",
+            "action": "stale choose(1) captured as \"[Look at notice board]\""
+          },
+          {
+            "step": 140,
+            "probe": "explore",
+            "action": "choose(0) \"[Go to Town Square]\""
+          },
+          {
+            "step": 142,
+            "probe": "explore",
+            "action": "choose(4) \"[Go to The Commons / Well]\""
+          },
+          {
+            "step": 143,
+            "probe": "soak",
+            "action": "open/close \"notebook\" x20 via N"
+          },
+          {
+            "step": 145,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Town Square]\""
+          },
+          {
+            "step": 146,
+            "probe": "inventory",
+            "action": "drop(\"item_river_stone\") on T1"
+          },
+          {
+            "step": 147,
+            "probe": "explore",
+            "action": "choose(4) \"[Go to The Commons / Well]\""
+          },
+          {
+            "step": 149,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to A Neighbor's Home]\""
+          },
+          {
+            "step": 150,
+            "probe": "explore",
+            "action": "choose(1) \"[Go to The Commons / Well]\""
+          },
+          {
+            "step": 151,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Town Square]\""
+          },
+          {
+            "step": 152,
+            "probe": "soak",
+            "action": "key mash: m d h m s d h n Escape m Escape e f c"
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      }
+    },
+    {
+      "id": "ADV-0026",
+      "invariant": "INV-CAST-CONSUMED-ONCE",
+      "title": "a component consumed by a cast cannot be spent a second time",
+      "error_type": "resource_duplication",
+      "severity": "blocking",
+      "status": "new",
+      "occurrences": 1,
+      "summary": "\"item_berry\" was consumed by the first cast of \"steep\" (held 1 -> 0) and the second cast landed anyway without spending anything (still 0). One component paid for two casts.",
+      "reachability": "model-only",
+      "location": {
+        "screen": "T2",
+        "scene": "CollectScene",
+        "system": "cast",
+        "file": "phaser/src/world/Inventory.ts",
+        "line": null
+      },
+      "game_context": {
+        "day": 3,
+        "timeBlock": "evening",
+        "movesLeft": 1,
+        "screen": "T2",
+        "drawnScreen": "T2",
+        "satchel": [
+          "herbs"
+        ],
+        "arms": [],
+        "held": [
+          "item_captured_sound"
+        ],
+        "spellbook": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ],
+        "clearedGates": [
+          "G-T6-evening"
+        ],
+        "refusedGates": [
+          "G-F4-still"
+        ],
+        "modalOpen": false,
+        "choices": [
+          "[Look at stall goods]",
+          "[Look at ex shelf]",
+          "[Go to Town Square]",
+          "[Go to The Workshop]",
+          "[Wait]",
+          "[End the day]"
+        ],
+        "spell": "steep",
+        "receiver": "juno",
+        "component": "item_berry",
+        "before": 1,
+        "afterFirst": 0,
+        "afterSecond": 0
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 156,
+        "lastStep": 156,
+        "probe": "cast",
+        "recentActions": [
+          {
+            "step": 142,
+            "probe": "explore",
+            "action": "choose(4) \"[Go to The Commons / Well]\""
+          },
+          {
+            "step": 143,
+            "probe": "soak",
+            "action": "open/close \"notebook\" x20 via N"
+          },
+          {
+            "step": 145,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Town Square]\""
+          },
+          {
+            "step": 146,
+            "probe": "inventory",
+            "action": "drop(\"item_river_stone\") on T1"
+          },
+          {
+            "step": 147,
+            "probe": "explore",
+            "action": "choose(4) \"[Go to The Commons / Well]\""
+          },
+          {
+            "step": 149,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to A Neighbor's Home]\""
+          },
+          {
+            "step": 150,
+            "probe": "explore",
+            "action": "choose(1) \"[Go to The Commons / Well]\""
+          },
+          {
+            "step": 151,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Town Square]\""
+          },
+          {
+            "step": 152,
+            "probe": "soak",
+            "action": "key mash: m d h m s d h n Escape m Escape e f c"
+          },
+          {
+            "step": 155,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to Market Row]\""
+          },
+          {
+            "step": 155,
+            "probe": "explore",
+            "action": "pickup(\"T2_3_evening_herbs\", \"herbs\")"
+          },
+          {
+            "step": 156,
+            "probe": "cast",
+            "action": "cast \"steep\" on juno twice, counting components"
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      }
+    },
+    {
+      "id": "ADV-0030",
+      "invariant": "INV-INV-DROP-REMOVES",
+      "title": "a dropped item leaves the satchel and lands in the world exactly once",
+      "error_type": "resource_duplication",
+      "severity": "blocking",
+      "status": "known",
+      "occurrences": 1,
+      "summary": "drop(\"item_sticks\") returned true but the item is still held (1 -> 1). It is ALSO in the world on T1 — one item now exists twice.",
+      "reachability": "player",
+      "location": {
+        "screen": "T1",
+        "scene": "CollectScene",
+        "system": "satchel",
+        "file": "phaser/src/world/Inventory.ts",
+        "line": null
+      },
+      "game_context": {
+        "day": 5,
+        "timeBlock": "evening",
+        "movesLeft": 3,
+        "screen": "T1",
+        "drawnScreen": "T1",
+        "satchel": [
+          "sticks",
+          "rare component"
+        ],
+        "arms": [],
+        "held": [
+          "item_sticks"
+        ],
+        "spellbook": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ],
+        "clearedGates": [
+          "G-T6-evening"
+        ],
+        "refusedGates": [
+          "G-F4-still"
+        ],
+        "modalOpen": false,
+        "choices": [
+          "[Look at arch]",
+          "[Look at notice board]",
+          "[Go to Forager's Clearing]",
+          "[Go to Market Row]",
+          "[Go to The Commons / Well]",
+          "[Go to The Tavern / Inn]",
+          "[Go to Festival Grounds]",
+          "[Wait]",
+          "[End the day]"
+        ],
+        "item": "item_sticks",
+        "heldBefore": 1,
+        "heldAfter": 1,
+        "inWorld": true,
+        "stillInSatchel": 0
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 192,
+        "lastStep": 192,
+        "probe": "inventory",
+        "recentActions": [
+          {
+            "step": 183,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Town Square]\""
+          },
+          {
+            "step": 184,
+            "probe": "explore",
+            "action": "choose(0) \"[Start the Next Day]\""
+          },
+          {
+            "step": 185,
+            "probe": "explore",
+            "action": "choose(4) \"[Go to Forager's Clearing]\""
+          },
+          {
+            "step": 185,
+            "probe": "explore",
+            "action": "pickup(\"F1_5_morning_sticks\", \"sticks\")"
+          },
+          {
+            "step": 186,
+            "probe": "explore",
+            "action": "choose(1) \"[Go to The Stream]\""
+          },
+          {
+            "step": 187,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to The Still Pool]\""
+          },
+          {
+            "step": 187,
+            "probe": "explore",
+            "action": "pickup(\"F4_5_afternoon_rare component\", \"rare component\")"
+          },
+          {
+            "step": 188,
+            "probe": "explore",
+            "action": "choose(1) \"[Go to The Stream]\""
+          },
+          {
+            "step": 189,
+            "probe": "explore",
+            "action": "choose(1) \"[Go to Forager's Clearing]\""
+          },
+          {
+            "step": 190,
+            "probe": "clock",
+            "action": "choose(NaN)"
+          },
+          {
+            "step": 191,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to Town Square]\""
+          },
+          {
+            "step": 192,
+            "probe": "inventory",
+            "action": "drop(\"item_sticks\") on T1"
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      },
+      "knownIssue": {
+        "why": "Inventory.drop() removes from `held` only. The item stays in the satchel and never lands in the world, so a drop can read as a duplication. Roc logged this in the 2026-08-23 review notes; it is Group 1, and the fix spans phaser/src/world/Inventory.ts and tools/lantern/src/lib/play.ts together.",
+        "ref": "plans/2026-08-23-roc-notes-triage-plan.md — Group 1, 'Drop doesn't remove item'",
+        "expires": "2026-08-26"
+      }
+    },
+    {
+      "id": "ADV-0001",
+      "invariant": "INV-INV-UNOFFERED-PICKUP-REFUSED",
+      "title": "an item the screen never offered cannot be picked up",
+      "error_type": "contract_violation",
+      "severity": "material",
+      "status": "new",
+      "occurrences": 3,
+      "summary": "pickup accepted slot \"adv_slot_432556\", which no screen in the graph offers. The satchel went 1 -> 2.",
+      "reachability": "model-only",
+      "location": {
+        "screen": "T1",
+        "scene": "CollectScene",
+        "system": "forage",
+        "file": "tools/lantern/src/lib/play.ts",
+        "line": null
+      },
+      "game_context": {
+        "day": 1,
+        "timeBlock": "afternoon",
+        "movesLeft": 1,
+        "screen": "T1",
+        "drawnScreen": "T1",
+        "satchel": [
+          "herbs",
+          "adv_item_572307"
+        ],
+        "arms": [],
+        "held": [
+          "item_berry",
+          "item_captured_sound"
+        ],
+        "spellbook": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ],
+        "clearedGates": [],
+        "refusedGates": [
+          "G-F4-still"
+        ],
+        "modalOpen": false,
+        "choices": [
+          "[Look at arch]",
+          "[Look at notice board]",
+          "[Go to Forager's Clearing]",
+          "[Go to Market Row]",
+          "[Go to The Commons / Well]",
+          "[Go to The Tavern / Inn]",
+          "[Go to Festival Grounds]",
+          "[Wait]",
+          "[End the day]"
+        ],
+        "slot": "adv_slot_432556",
+        "accepted": true
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 8,
+        "lastStep": 95,
+        "probe": "inventory",
+        "recentActions": [
+          {
+            "step": 1,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to Market Row]\""
+          },
+          {
+            "step": 2,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to Town Square]\""
+          },
+          {
+            "step": 5,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to Market Row]\""
+          },
+          {
+            "step": 5,
+            "probe": "explore",
+            "action": "pickup(\"T2_1_afternoon_herbs\", \"herbs\")"
+          },
+          {
+            "step": 6,
+            "probe": "save",
+            "action": "plant a mode-swapped save at phaser-probe/save/v1/mode5 and load it"
+          },
+          {
+            "step": 7,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Town Square]\""
+          },
+          {
+            "step": 8,
+            "probe": "inventory",
+            "action": "pickup(\"adv_slot_432556\", <invented item>)"
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      }
+    },
+    {
+      "id": "ADV-0002",
+      "invariant": "INV-GATE-MODEL-VETO",
+      "title": "the gate is enforced by the model, not only by the button",
+      "error_type": "gate_bypass",
+      "severity": "material",
+      "status": "new",
+      "occurrences": 1,
+      "summary": "the move onto T6 is blocked by gate(s) G-T6-evening, and going through the story layer instead of the pill walked straight past it. Enforcement lives in TraversalRow's decision about which pill is interactive — GateEngine is consulted, but never asked to veto. No shipping input path does this today; any second one would inherit the hole.",
+      "reachability": "model-only",
+      "location": {
+        "screen": "T1",
+        "scene": "CollectScene",
+        "system": "gates",
+        "file": "phaser/src/render/TraversalRow.ts",
+        "line": 147
+      },
+      "game_context": {
+        "day": 1,
+        "timeBlock": "evening",
+        "movesLeft": 3,
+        "screen": "T6",
+        "drawnScreen": "T6",
+        "satchel": [
+          "herbs",
+          "adv_item_572307"
+        ],
+        "arms": [],
+        "held": [
+          "item_berry",
+          "item_captured_sound"
+        ],
+        "spellbook": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ],
+        "clearedGates": [
+          "G-T6-evening"
+        ],
+        "refusedGates": [
+          "G-F4-still"
+        ],
+        "modalOpen": false,
+        "choices": [
+          "[Look at hearth]",
+          "[Look at ledger]",
+          "[Go to Town Square]",
+          "[Wait]",
+          "[End the day]"
+        ],
+        "target": "T6",
+        "blockingGates": [
+          "G-T6-evening"
+        ],
+        "choose": {
+          "ok": true
+        }
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 9,
+        "lastStep": 9,
+        "probe": "gates",
+        "recentActions": [
+          {
+            "step": 1,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to Market Row]\""
+          },
+          {
+            "step": 2,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to Town Square]\""
+          },
+          {
+            "step": 5,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to Market Row]\""
+          },
+          {
+            "step": 5,
+            "probe": "explore",
+            "action": "pickup(\"T2_1_afternoon_herbs\", \"herbs\")"
+          },
+          {
+            "step": 6,
+            "probe": "save",
+            "action": "plant a mode-swapped save at phaser-probe/save/v1/mode5 and load it"
+          },
+          {
+            "step": 7,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Town Square]\""
+          },
+          {
+            "step": 8,
+            "probe": "inventory",
+            "action": "pickup(\"adv_slot_432556\", <invented item>)"
+          },
+          {
+            "step": 9,
+            "probe": "gates",
+            "action": "model-veto: choose(5) past G-T6-evening"
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      }
+    },
+    {
+      "id": "ADV-0003",
+      "invariant": "INV-GATE-TWO-CLEARED-SETS-AGREE",
+      "title": "the graph's cleared set and the engine's cleared set hold the same fact",
+      "error_type": "model_ui_disagreement",
+      "severity": "material",
+      "status": "new",
+      "occurrences": 110,
+      "summary": "cleared-gate sets disagree — engine only: [G-T6-evening], graph only: []. Two writers hold one fact, so which door is open depends on who you ask.",
+      "reachability": "player",
+      "location": {
+        "screen": null,
+        "scene": "CollectScene",
+        "system": "gates",
+        "file": "phaser/src/world/Gates.ts",
+        "line": null
+      },
+      "game_context": {
+        "day": 1,
+        "timeBlock": "evening",
+        "movesLeft": 3,
+        "screen": "T6",
+        "drawnScreen": "T6",
+        "satchel": [
+          "herbs",
+          "adv_item_572307"
+        ],
+        "arms": [],
+        "held": [
+          "item_berry",
+          "item_captured_sound"
+        ],
+        "spellbook": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ],
+        "clearedGates": [
+          "G-T6-evening"
+        ],
+        "refusedGates": [
+          "G-F4-still"
+        ],
+        "modalOpen": false,
+        "choices": [
+          "[Look at hearth]",
+          "[Look at ledger]",
+          "[Go to Town Square]",
+          "[Wait]",
+          "[End the day]"
+        ],
+        "engineCleared": [
+          "G-T6-evening"
+        ],
+        "graphCleared": []
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 10,
+        "lastStep": 250,
+        "probe": "gates",
+        "recentActions": [
+          {
+            "step": 1,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to Market Row]\""
+          },
+          {
+            "step": 2,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to Town Square]\""
+          },
+          {
+            "step": 5,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to Market Row]\""
+          },
+          {
+            "step": 5,
+            "probe": "explore",
+            "action": "pickup(\"T2_1_afternoon_herbs\", \"herbs\")"
+          },
+          {
+            "step": 6,
+            "probe": "save",
+            "action": "plant a mode-swapped save at phaser-probe/save/v1/mode5 and load it"
+          },
+          {
+            "step": 7,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Town Square]\""
+          },
+          {
+            "step": 8,
+            "probe": "inventory",
+            "action": "pickup(\"adv_slot_432556\", <invented item>)"
+          },
+          {
+            "step": 9,
+            "probe": "gates",
+            "action": "model-veto: choose(5) past G-T6-evening"
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      }
+    },
+    {
+      "id": "ADV-0006",
+      "invariant": "INV-CAST-REQUIRES-KNOWN-SPELL",
+      "title": "a spell not in the spellbook cannot be cast",
+      "error_type": "contract_violation",
+      "severity": "material",
+      "status": "new",
+      "occurrences": 1,
+      "summary": "\"temper\" (temper) landed on hot_loaf while it was NOT in the spellbook. CastPipeline.run reads Knowledge to WRITE it (step 3) and never reads it as a precondition — the spellbook is a UI filter, not a rule.",
+      "reachability": "model-only",
+      "location": {
+        "screen": "HOME",
+        "scene": "CollectScene",
+        "system": "cast",
+        "file": "phaser/src/world/CastPipeline.ts",
+        "line": 200
+      },
+      "game_context": {
+        "day": 2,
+        "timeBlock": "evening",
+        "movesLeft": 0,
+        "screen": "HOME",
+        "drawnScreen": "HOME",
+        "satchel": [],
+        "arms": [],
+        "held": [
+          "item_berry",
+          "item_captured_sound"
+        ],
+        "spellbook": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ],
+        "clearedGates": [
+          "G-T6-evening"
+        ],
+        "refusedGates": [
+          "G-F4-still"
+        ],
+        "modalOpen": false,
+        "choices": [
+          "[Go to Town Square]",
+          "[Go to Market Row]",
+          "[Go to The Commons / Well]",
+          "[Go to The Workshop]",
+          "[Go to Forager's Clearing]",
+          "[Go to The Stream]",
+          "[Go to The Grove]"
+        ],
+        "spell": "temper",
+        "receiver": "hot_loaf",
+        "spellbookBefore": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ]
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 31,
+        "lastStep": 31,
+        "probe": "cast",
+        "recentActions": [
+          {
+            "step": 20,
+            "probe": "inventory",
+            "action": "pickup(\"adv_slot_935213\", <invented item>)"
+          },
+          {
+            "step": 22,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to Market Row]\""
+          },
+          {
+            "step": 22,
+            "probe": "explore",
+            "action": "pickup(\"T2_1_evening_herbs\", \"herbs\")"
+          },
+          {
+            "step": 23,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to The Workshop]\""
+          },
+          {
+            "step": 23,
+            "probe": "explore",
+            "action": "pickup(\"T4_1_evening_ash\", \"ash\")"
+          },
+          {
+            "step": 24,
+            "probe": "cast",
+            "action": "cast \"echo\" on festival_bell with NO components offered"
+          },
+          {
+            "step": 25,
+            "probe": "inventory",
+            "action": "drop(\"item_berry\") on T4"
+          },
+          {
+            "step": 26,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Market Row]\""
+          },
+          {
+            "step": 27,
+            "probe": "explore",
+            "action": "choose(0) \"[Look around your home]\""
+          },
+          {
+            "step": 28,
+            "probe": "inventory",
+            "action": "drop(\"item_ash\") on HOME"
+          },
+          {
+            "step": 29,
+            "probe": "explore",
+            "action": "choose(0) \"[Start the Next Day]\""
+          },
+          {
+            "step": 31,
+            "probe": "cast",
+            "action": "cast \"temper\" (NOT in the spellbook) on hot_loaf"
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      }
+    },
+    {
+      "id": "ADV-0007",
+      "invariant": "INV-INV-UNOFFERED-PICKUP-REFUSED",
+      "title": "an item the screen never offered cannot be picked up",
+      "error_type": "contract_violation",
+      "severity": "material",
+      "status": "new",
+      "occurrences": 2,
+      "summary": "pickup accepted slot \"adv_slot_956957\", which no screen in the graph offers. The satchel went 1 -> 2.",
+      "reachability": "model-only",
+      "location": {
+        "screen": "T3",
+        "scene": "CollectScene",
+        "system": "forage",
+        "file": "tools/lantern/src/lib/play.ts",
+        "line": null
+      },
+      "game_context": {
+        "day": 3,
+        "timeBlock": "afternoon",
+        "movesLeft": 2,
+        "screen": "T3",
+        "drawnScreen": "T3",
+        "satchel": [
+          "ash",
+          "adv_item_957773"
+        ],
+        "arms": [],
+        "held": [
+          "item_ash",
+          "item_berry",
+          "item_captured_sound"
+        ],
+        "spellbook": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ],
+        "clearedGates": [],
+        "refusedGates": [
+          "G-F4-still"
+        ],
+        "modalOpen": false,
+        "choices": [
+          "[Look at well]",
+          "[Look at doorsteps]",
+          "[Go to Town Square]",
+          "[Go to A Neighbor's Home]",
+          "[Go to The Old Shrine (Town)]",
+          "[Wait]",
+          "[End the day]"
+        ],
+        "slot": "adv_slot_956957",
+        "accepted": true
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 52,
+        "lastStep": 196,
+        "probe": "inventory",
+        "recentActions": [
+          {
+            "step": 37,
+            "probe": "explore",
+            "action": "choose(1) \"[Go to Forager's Clearing]\""
+          },
+          {
+            "step": 38,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to Town Square]\""
+          },
+          {
+            "step": 39,
+            "probe": "explore",
+            "action": "choose(6) \"[Go to Festival Grounds]\""
+          },
+          {
+            "step": 40,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Town Square]\""
+          },
+          {
+            "step": 43,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to Market Row]\""
+          },
+          {
+            "step": 44,
+            "probe": "explore",
+            "action": "choose(0) \"[Start the Next Day]\""
+          },
+          {
+            "step": 45,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to The Workshop]\""
+          },
+          {
+            "step": 45,
+            "probe": "explore",
+            "action": "pickup(\"T4_3_morning_ash\", \"ash\")"
+          },
+          {
+            "step": 47,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Market Row]\""
+          },
+          {
+            "step": 49,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to Town Square]\""
+          },
+          {
+            "step": 51,
+            "probe": "explore",
+            "action": "choose(4) \"[Go to The Commons / Well]\""
+          },
+          {
+            "step": 52,
+            "probe": "inventory",
+            "action": "pickup(\"adv_slot_956957\", <invented item>)"
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      }
+    },
+    {
+      "id": "ADV-0008",
+      "invariant": "INV-CAST-RECEIVER-MUST-BE-PRESENT",
+      "title": "a receiver absent from this screen cannot be cast on",
+      "error_type": "contract_violation",
+      "severity": "material",
+      "status": "new",
+      "occurrences": 1,
+      "summary": "\"furrow\" landed on receiver \"cobbled_square\" while standing on HOME. Nothing maps a receiver to a screen (GAPS.md G2), so the pipeline cannot check presence and does not try — the screen the cast names is carried through as data, not as a constraint.",
+      "reachability": "model-only",
+      "location": {
+        "screen": "HOME",
+        "scene": "CollectScene",
+        "system": "cast",
+        "file": "phaser/src/world/CastPipeline.ts",
+        "line": null
+      },
+      "game_context": {
+        "day": 4,
+        "timeBlock": "evening",
+        "movesLeft": 0,
+        "screen": "HOME",
+        "drawnScreen": "HOME",
+        "satchel": [],
+        "arms": [],
+        "held": [
+          "item_ash",
+          "item_berry",
+          "item_captured_sound"
+        ],
+        "spellbook": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ],
+        "clearedGates": [
+          "G-T6-evening"
+        ],
+        "refusedGates": [
+          "G-F4-still"
+        ],
+        "modalOpen": false,
+        "choices": [
+          "[Go to Town Square]",
+          "[Go to Market Row]",
+          "[Go to The Commons / Well]",
+          "[Go to The Workshop]",
+          "[Go to Forager's Clearing]",
+          "[Go to The Stream]",
+          "[Go to The Grove]"
+        ],
+        "spell": "furrow",
+        "receiver": "cobbled_square",
+        "standingOn": "HOME",
+        "clearedNow": []
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 59,
+        "lastStep": 59,
+        "probe": "cast",
+        "recentActions": [
+          {
+            "step": 47,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Market Row]\""
+          },
+          {
+            "step": 49,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to Town Square]\""
+          },
+          {
+            "step": 51,
+            "probe": "explore",
+            "action": "choose(4) \"[Go to The Commons / Well]\""
+          },
+          {
+            "step": 52,
+            "probe": "inventory",
+            "action": "pickup(\"adv_slot_956957\", <invented item>)"
+          },
+          {
+            "step": 53,
+            "probe": "clock",
+            "action": "choose(4) \"[Go to The Old Shrine (Town)]\" (to stale the index)"
+          },
+          {
+            "step": 53,
+            "probe": "clock",
+            "action": "stale choose(0) captured as \"[Look at well]\""
+          },
+          {
+            "step": 54,
+            "probe": "explore",
+            "action": "choose(1) \"[Go to The Commons / Well]\""
+          },
+          {
+            "step": 55,
+            "probe": "explore",
+            "action": "choose(4) \"[Go to The Old Shrine (Town)]\""
+          },
+          {
+            "step": 56,
+            "probe": "explore",
+            "action": "choose(1) \"[Go to The Commons / Well]\""
+          },
+          {
+            "step": 57,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Town Square]\""
+          },
+          {
+            "step": 58,
+            "probe": "explore",
+            "action": "choose(0) \"[Start the Next Day]\""
+          },
+          {
+            "step": 59,
+            "probe": "cast",
+            "action": "cast \"furrow\" on cobbled_square, which is not on HOME"
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      }
+    },
+    {
+      "id": "ADV-0009",
+      "invariant": "INV-CAST-RECEIVER-MUST-BE-PRESENT",
+      "title": "a receiver absent from this screen cannot be cast on",
+      "error_type": "contract_violation",
+      "severity": "material",
+      "status": "new",
+      "occurrences": 1,
+      "summary": "\"breath\" landed on receiver \"cat\" while standing on HOME. Nothing maps a receiver to a screen (GAPS.md G2), so the pipeline cannot check presence and does not try — the screen the cast names is carried through as data, not as a constraint.",
+      "reachability": "model-only",
+      "location": {
+        "screen": "HOME",
+        "scene": "CollectScene",
+        "system": "cast",
+        "file": "phaser/src/world/CastPipeline.ts",
+        "line": null
+      },
+      "game_context": {
+        "day": 4,
+        "timeBlock": "evening",
+        "movesLeft": 0,
+        "screen": "HOME",
+        "drawnScreen": "HOME",
+        "satchel": [],
+        "arms": [],
+        "held": [
+          "item_ash",
+          "item_berry",
+          "item_captured_sound"
+        ],
+        "spellbook": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ],
+        "clearedGates": [
+          "G-T6-evening"
+        ],
+        "refusedGates": [
+          "G-F4-still"
+        ],
+        "modalOpen": false,
+        "choices": [
+          "[Go to Town Square]",
+          "[Go to Market Row]",
+          "[Go to The Commons / Well]",
+          "[Go to The Workshop]",
+          "[Go to Forager's Clearing]",
+          "[Go to The Stream]",
+          "[Go to The Grove]"
+        ],
+        "spell": "breath",
+        "receiver": "cat",
+        "standingOn": "HOME",
+        "clearedNow": []
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 61,
+        "lastStep": 61,
+        "probe": "cast",
+        "recentActions": [
+          {
+            "step": 52,
+            "probe": "inventory",
+            "action": "pickup(\"adv_slot_956957\", <invented item>)"
+          },
+          {
+            "step": 53,
+            "probe": "clock",
+            "action": "choose(4) \"[Go to The Old Shrine (Town)]\" (to stale the index)"
+          },
+          {
+            "step": 53,
+            "probe": "clock",
+            "action": "stale choose(0) captured as \"[Look at well]\""
+          },
+          {
+            "step": 54,
+            "probe": "explore",
+            "action": "choose(1) \"[Go to The Commons / Well]\""
+          },
+          {
+            "step": 55,
+            "probe": "explore",
+            "action": "choose(4) \"[Go to The Old Shrine (Town)]\""
+          },
+          {
+            "step": 56,
+            "probe": "explore",
+            "action": "choose(1) \"[Go to The Commons / Well]\""
+          },
+          {
+            "step": 57,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Town Square]\""
+          },
+          {
+            "step": 58,
+            "probe": "explore",
+            "action": "choose(0) \"[Start the Next Day]\""
+          },
+          {
+            "step": 59,
+            "probe": "cast",
+            "action": "cast \"furrow\" on cobbled_square, which is not on HOME"
+          },
+          {
+            "step": 60,
+            "probe": "soak",
+            "action": "open/close \"satchel\" x20 via S"
+          },
+          {
+            "step": 60,
+            "probe": "soak",
+            "action": "\"satchel\" would not close after 5 cycles — stopping the soak"
+          },
+          {
+            "step": 61,
+            "probe": "cast",
+            "action": "cast \"breath\" on cat, which is not on HOME"
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      }
+    },
+    {
+      "id": "ADV-0010",
+      "invariant": "INV-CAST-RECEIVER-MUST-BE-PRESENT",
+      "title": "a receiver absent from this screen cannot be cast on",
+      "error_type": "contract_violation",
+      "severity": "material",
+      "status": "new",
+      "occurrences": 1,
+      "summary": "\"leap\" landed on receiver \"cold_lantern\" while standing on HOME. Nothing maps a receiver to a screen (GAPS.md G2), so the pipeline cannot check presence and does not try — the screen the cast names is carried through as data, not as a constraint.",
+      "reachability": "model-only",
+      "location": {
+        "screen": "HOME",
+        "scene": "CollectScene",
+        "system": "cast",
+        "file": "phaser/src/world/CastPipeline.ts",
+        "line": null
+      },
+      "game_context": {
+        "day": 4,
+        "timeBlock": "evening",
+        "movesLeft": 0,
+        "screen": "HOME",
+        "drawnScreen": "HOME",
+        "satchel": [],
+        "arms": [],
+        "held": [
+          "item_ash",
+          "item_berry",
+          "item_captured_sound"
+        ],
+        "spellbook": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ],
+        "clearedGates": [
+          "G-T6-evening"
+        ],
+        "refusedGates": [
+          "G-F4-still"
+        ],
+        "modalOpen": false,
+        "choices": [
+          "[Go to Town Square]",
+          "[Go to Market Row]",
+          "[Go to The Commons / Well]",
+          "[Go to The Workshop]",
+          "[Go to Forager's Clearing]",
+          "[Go to The Stream]",
+          "[Go to The Grove]"
+        ],
+        "spell": "leap",
+        "receiver": "cold_lantern",
+        "standingOn": "HOME",
+        "clearedNow": []
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 62,
+        "lastStep": 62,
+        "probe": "cast",
+        "recentActions": [
+          {
+            "step": 53,
+            "probe": "clock",
+            "action": "choose(4) \"[Go to The Old Shrine (Town)]\" (to stale the index)"
+          },
+          {
+            "step": 53,
+            "probe": "clock",
+            "action": "stale choose(0) captured as \"[Look at well]\""
+          },
+          {
+            "step": 54,
+            "probe": "explore",
+            "action": "choose(1) \"[Go to The Commons / Well]\""
+          },
+          {
+            "step": 55,
+            "probe": "explore",
+            "action": "choose(4) \"[Go to The Old Shrine (Town)]\""
+          },
+          {
+            "step": 56,
+            "probe": "explore",
+            "action": "choose(1) \"[Go to The Commons / Well]\""
+          },
+          {
+            "step": 57,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Town Square]\""
+          },
+          {
+            "step": 58,
+            "probe": "explore",
+            "action": "choose(0) \"[Start the Next Day]\""
+          },
+          {
+            "step": 59,
+            "probe": "cast",
+            "action": "cast \"furrow\" on cobbled_square, which is not on HOME"
+          },
+          {
+            "step": 60,
+            "probe": "soak",
+            "action": "open/close \"satchel\" x20 via S"
+          },
+          {
+            "step": 60,
+            "probe": "soak",
+            "action": "\"satchel\" would not close after 5 cycles — stopping the soak"
+          },
+          {
+            "step": 61,
+            "probe": "cast",
+            "action": "cast \"breath\" on cat, which is not on HOME"
+          },
+          {
+            "step": 62,
+            "probe": "cast",
+            "action": "cast \"leap\" on cold_lantern, which is not on HOME"
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      }
+    },
+    {
+      "id": "ADV-0012",
+      "invariant": "INV-CAST-REQUIRES-KNOWN-SPELL",
+      "title": "a spell not in the spellbook cannot be cast",
+      "error_type": "contract_violation",
+      "severity": "material",
+      "status": "new",
+      "occurrences": 1,
+      "summary": "\"dry\" (dry) landed on rain_soaked_cat while it was NOT in the spellbook. CastPipeline.run reads Knowledge to WRITE it (step 3) and never reads it as a precondition — the spellbook is a UI filter, not a rule.",
+      "reachability": "model-only",
+      "location": {
+        "screen": "T2",
+        "scene": "CollectScene",
+        "system": "cast",
+        "file": "phaser/src/world/CastPipeline.ts",
+        "line": 200
+      },
+      "game_context": {
+        "day": 4,
+        "timeBlock": "afternoon",
+        "movesLeft": 1,
+        "screen": "T2",
+        "drawnScreen": "T2",
+        "satchel": [
+          "herbs",
+          "ash",
+          "wool"
+        ],
+        "arms": [],
+        "held": [
+          "item_berry",
+          "item_captured_sound",
+          "item_wool"
+        ],
+        "spellbook": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ],
+        "clearedGates": [],
+        "refusedGates": [
+          "G-F4-still"
+        ],
+        "modalOpen": false,
+        "choices": [
+          "[Talk to Mara (SC-T2-12)]",
+          "[Talk to Mara (SC-T2-22)]",
+          "[Look at stall goods]",
+          "[Look at ex shelf]",
+          "[Go to Town Square]",
+          "[Go to The Workshop]",
+          "[Wait]",
+          "[End the day]"
+        ],
+        "spell": "dry",
+        "receiver": "rain_soaked_cat",
+        "spellbookBefore": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ]
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 73,
+        "lastStep": 73,
+        "probe": "cast",
+        "recentActions": [
+          {
+            "step": 62,
+            "probe": "cast",
+            "action": "cast \"leap\" on cold_lantern, which is not on HOME"
+          },
+          {
+            "step": 64,
+            "probe": "clock",
+            "action": "choose(-1)"
+          },
+          {
+            "step": 65,
+            "probe": "explore",
+            "action": "choose(1) \"[Go to Market Row]\""
+          },
+          {
+            "step": 66,
+            "probe": "explore",
+            "action": "choose(4) \"[Go to The Workshop]\""
+          },
+          {
+            "step": 67,
+            "probe": "soak",
+            "action": "key mash: d h f f l n h c o f Delete s s d"
+          },
+          {
+            "step": 70,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Market Row]\""
+          },
+          {
+            "step": 70,
+            "probe": "explore",
+            "action": "pickup(\"T2_4_afternoon_herbs\", \"herbs\")"
+          },
+          {
+            "step": 71,
+            "probe": "explore",
+            "action": "choose(5) \"[Go to The Workshop]\""
+          },
+          {
+            "step": 71,
+            "probe": "explore",
+            "action": "pickup(\"T4_4_afternoon_ash\", \"ash\")"
+          },
+          {
+            "step": 72,
+            "probe": "explore",
+            "action": "choose(5) \"[Go to Market Row]\""
+          },
+          {
+            "step": 72,
+            "probe": "explore",
+            "action": "pickup(\"T2_4_afternoon_wool\", \"wool\")"
+          },
+          {
+            "step": 73,
+            "probe": "cast",
+            "action": "cast \"dry\" (NOT in the spellbook) on rain_soaked_cat"
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      }
+    },
+    {
+      "id": "ADV-0013",
+      "invariant": "INV-INV-UNOFFERED-PICKUP-REFUSED",
+      "title": "an item the screen never offered cannot be picked up",
+      "error_type": "contract_violation",
+      "severity": "material",
+      "status": "new",
+      "occurrences": 1,
+      "summary": "slot \"T2_4_afternoon_lantern-oil\" accepted item \"adv_item_900036\", which it never offered. pickup() stores whatever string it is handed, so the offered set is the only thing standing between the player and an invented item.",
+      "reachability": "model-only",
+      "location": {
+        "screen": "T2",
+        "scene": "CollectScene",
+        "system": "forage",
+        "file": "tools/lantern/src/lib/play.ts",
+        "line": 506
+      },
+      "game_context": {
+        "day": 4,
+        "timeBlock": "afternoon",
+        "movesLeft": 1,
+        "screen": "T2",
+        "drawnScreen": "T2",
+        "satchel": [
+          "herbs",
+          "ash",
+          "wool",
+          "adv_item_900036"
+        ],
+        "arms": [],
+        "held": [
+          "item_berry",
+          "item_captured_sound",
+          "item_wool"
+        ],
+        "spellbook": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ],
+        "clearedGates": [],
+        "refusedGates": [
+          "G-F4-still"
+        ],
+        "modalOpen": false,
+        "choices": [
+          "[Talk to Mara (SC-T2-12)]",
+          "[Talk to Mara (SC-T2-22)]",
+          "[Look at stall goods]",
+          "[Look at ex shelf]",
+          "[Go to Town Square]",
+          "[Go to The Workshop]",
+          "[Wait]",
+          "[End the day]"
+        ],
+        "slot": "T2_4_afternoon_lantern-oil",
+        "item": "adv_item_900036"
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 74,
+        "lastStep": 74,
+        "probe": "inventory",
+        "recentActions": [
+          {
+            "step": 64,
+            "probe": "clock",
+            "action": "choose(-1)"
+          },
+          {
+            "step": 65,
+            "probe": "explore",
+            "action": "choose(1) \"[Go to Market Row]\""
+          },
+          {
+            "step": 66,
+            "probe": "explore",
+            "action": "choose(4) \"[Go to The Workshop]\""
+          },
+          {
+            "step": 67,
+            "probe": "soak",
+            "action": "key mash: d h f f l n h c o f Delete s s d"
+          },
+          {
+            "step": 70,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Market Row]\""
+          },
+          {
+            "step": 70,
+            "probe": "explore",
+            "action": "pickup(\"T2_4_afternoon_herbs\", \"herbs\")"
+          },
+          {
+            "step": 71,
+            "probe": "explore",
+            "action": "choose(5) \"[Go to The Workshop]\""
+          },
+          {
+            "step": 71,
+            "probe": "explore",
+            "action": "pickup(\"T4_4_afternoon_ash\", \"ash\")"
+          },
+          {
+            "step": 72,
+            "probe": "explore",
+            "action": "choose(5) \"[Go to Market Row]\""
+          },
+          {
+            "step": 72,
+            "probe": "explore",
+            "action": "pickup(\"T2_4_afternoon_wool\", \"wool\")"
+          },
+          {
+            "step": 73,
+            "probe": "cast",
+            "action": "cast \"dry\" (NOT in the spellbook) on rain_soaked_cat"
+          },
+          {
+            "step": 74,
+            "probe": "inventory",
+            "action": "pickup(\"T2_4_afternoon_lantern-oil\", \"adv_item_900036\") — real slot, item it never offered"
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      }
+    },
+    {
+      "id": "ADV-0014",
+      "invariant": "INV-INV-UNOFFERED-PICKUP-REFUSED",
+      "title": "an item the screen never offered cannot be picked up",
+      "error_type": "contract_violation",
+      "severity": "material",
+      "status": "new",
+      "occurrences": 1,
+      "summary": "pickup accepted slot \"adv_slot_511922\", which no screen in the graph offers. The satchel went 4 -> 5.",
+      "reachability": "model-only",
+      "location": {
+        "screen": "T2",
+        "scene": "CollectScene",
+        "system": "forage",
+        "file": "tools/lantern/src/lib/play.ts",
+        "line": null
+      },
+      "game_context": {
+        "day": 4,
+        "timeBlock": "afternoon",
+        "movesLeft": 1,
+        "screen": "T2",
+        "drawnScreen": "T2",
+        "satchel": [
+          "herbs",
+          "ash",
+          "wool",
+          "adv_item_900036",
+          "adv_item_869044"
+        ],
+        "arms": [],
+        "held": [
+          "item_berry",
+          "item_captured_sound",
+          "item_wool"
+        ],
+        "spellbook": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ],
+        "clearedGates": [],
+        "refusedGates": [
+          "G-F4-still"
+        ],
+        "modalOpen": false,
+        "choices": [
+          "[Talk to Mara (SC-T2-12)]",
+          "[Talk to Mara (SC-T2-22)]",
+          "[Look at stall goods]",
+          "[Look at ex shelf]",
+          "[Go to Town Square]",
+          "[Go to The Workshop]",
+          "[Wait]",
+          "[End the day]"
+        ],
+        "slot": "adv_slot_511922",
+        "accepted": true
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 75,
+        "lastStep": 75,
+        "probe": "inventory",
+        "recentActions": [
+          {
+            "step": 65,
+            "probe": "explore",
+            "action": "choose(1) \"[Go to Market Row]\""
+          },
+          {
+            "step": 66,
+            "probe": "explore",
+            "action": "choose(4) \"[Go to The Workshop]\""
+          },
+          {
+            "step": 67,
+            "probe": "soak",
+            "action": "key mash: d h f f l n h c o f Delete s s d"
+          },
+          {
+            "step": 70,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Market Row]\""
+          },
+          {
+            "step": 70,
+            "probe": "explore",
+            "action": "pickup(\"T2_4_afternoon_herbs\", \"herbs\")"
+          },
+          {
+            "step": 71,
+            "probe": "explore",
+            "action": "choose(5) \"[Go to The Workshop]\""
+          },
+          {
+            "step": 71,
+            "probe": "explore",
+            "action": "pickup(\"T4_4_afternoon_ash\", \"ash\")"
+          },
+          {
+            "step": 72,
+            "probe": "explore",
+            "action": "choose(5) \"[Go to Market Row]\""
+          },
+          {
+            "step": 72,
+            "probe": "explore",
+            "action": "pickup(\"T2_4_afternoon_wool\", \"wool\")"
+          },
+          {
+            "step": 73,
+            "probe": "cast",
+            "action": "cast \"dry\" (NOT in the spellbook) on rain_soaked_cat"
+          },
+          {
+            "step": 74,
+            "probe": "inventory",
+            "action": "pickup(\"T2_4_afternoon_lantern-oil\", \"adv_item_900036\") — real slot, item it never offered"
+          },
+          {
+            "step": 75,
+            "probe": "inventory",
+            "action": "pickup(\"adv_slot_511922\", <invented item>)"
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      }
+    },
+    {
+      "id": "ADV-0016",
+      "invariant": "INV-INV-UNOFFERED-PICKUP-REFUSED",
+      "title": "an item the screen never offered cannot be picked up",
+      "error_type": "contract_violation",
+      "severity": "material",
+      "status": "new",
+      "occurrences": 3,
+      "summary": "pickup accepted slot \"adv_slot_318702\", which no screen in the graph offers. The satchel went 0 -> 1.",
+      "reachability": "model-only",
+      "location": {
+        "screen": "HOME",
+        "scene": "CollectScene",
+        "system": "forage",
+        "file": "tools/lantern/src/lib/play.ts",
+        "line": null
+      },
+      "game_context": {
+        "day": 5,
+        "timeBlock": "evening",
+        "movesLeft": 0,
+        "screen": "HOME",
+        "drawnScreen": "HOME",
+        "satchel": [
+          "adv_item_715593"
+        ],
+        "arms": [],
+        "held": [
+          "item_ash",
+          "item_berry",
+          "item_captured_sound",
+          "item_wool"
+        ],
+        "spellbook": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ],
+        "clearedGates": [
+          "G-T6-evening"
+        ],
+        "refusedGates": [
+          "G-F4-still"
+        ],
+        "modalOpen": false,
+        "choices": [
+          "[Go to Town Square]",
+          "[Go to Market Row]",
+          "[Go to The Commons / Well]",
+          "[Go to The Workshop]",
+          "[Go to Forager's Clearing]",
+          "[Go to The Stream]",
+          "[Go to The Grove]"
+        ],
+        "slot": "adv_slot_318702",
+        "accepted": true
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 86,
+        "lastStep": 248,
+        "probe": "inventory",
+        "recentActions": [
+          {
+            "step": 74,
+            "probe": "inventory",
+            "action": "pickup(\"T2_4_afternoon_lantern-oil\", \"adv_item_900036\") — real slot, item it never offered"
+          },
+          {
+            "step": 75,
+            "probe": "inventory",
+            "action": "pickup(\"adv_slot_511922\", <invented item>)"
+          },
+          {
+            "step": 76,
+            "probe": "inventory",
+            "action": "drop(\"item_berry\") on T2"
+          },
+          {
+            "step": 77,
+            "probe": "explore",
+            "action": "choose(5) \"[Go to The Workshop]\""
+          },
+          {
+            "step": 77,
+            "probe": "explore",
+            "action": "pickup(\"T4_4_evening_ash\", \"ash\")"
+          },
+          {
+            "step": 79,
+            "probe": "explore",
+            "action": "choose(5) \"[Go to Market Row]\""
+          },
+          {
+            "step": 79,
+            "probe": "explore",
+            "action": "pickup(\"T2_4_evening_herbs\", \"herbs\")"
+          },
+          {
+            "step": 81,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to The Workshop]\""
+          },
+          {
+            "step": 82,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Market Row]\""
+          },
+          {
+            "step": 84,
+            "probe": "soak",
+            "action": "open/close \"hub\" x20 via H"
+          },
+          {
+            "step": 85,
+            "probe": "explore",
+            "action": "choose(0) \"[Start the Next Day]\""
+          },
+          {
+            "step": 86,
+            "probe": "inventory",
+            "action": "pickup(\"adv_slot_318702\", <invented item>)"
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      }
+    },
+    {
+      "id": "ADV-0017",
+      "invariant": "INV-CAST-RECEIVER-MUST-BE-PRESENT",
+      "title": "a receiver absent from this screen cannot be cast on",
+      "error_type": "contract_violation",
+      "severity": "material",
+      "status": "new",
+      "occurrences": 1,
+      "summary": "\"breath\" landed on receiver \"fallen_leaves\" while standing on T8. Nothing maps a receiver to a screen (GAPS.md G2), so the pipeline cannot check presence and does not try — the screen the cast names is carried through as data, not as a constraint.",
+      "reachability": "model-only",
+      "location": {
+        "screen": "T8",
+        "scene": "CollectScene",
+        "system": "cast",
+        "file": "phaser/src/world/CastPipeline.ts",
+        "line": null
+      },
+      "game_context": {
+        "day": 5,
+        "timeBlock": "evening",
+        "movesLeft": 1,
+        "screen": "T8",
+        "drawnScreen": "T8",
+        "satchel": [
+          "adv_item_715593",
+          "adv_item_999470"
+        ],
+        "arms": [],
+        "held": [
+          "item_captured_sound",
+          "item_wool"
+        ],
+        "spellbook": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ],
+        "clearedGates": [
+          "G-T6-evening"
+        ],
+        "refusedGates": [
+          "G-F4-still"
+        ],
+        "modalOpen": false,
+        "choices": [
+          "[Look at shrine carvings]",
+          "[Go to The Commons / Well]",
+          "[Wait]",
+          "[End the day]"
+        ],
+        "spell": "breath",
+        "receiver": "fallen_leaves",
+        "standingOn": "T8",
+        "clearedNow": []
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 105,
+        "lastStep": 105,
+        "probe": "cast",
+        "recentActions": [
+          {
+            "step": 93,
+            "probe": "soak",
+            "action": "open/close \"calendar\" x20 via L"
+          },
+          {
+            "step": 94,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to Town Square]\""
+          },
+          {
+            "step": 95,
+            "probe": "inventory",
+            "action": "pickup(\"adv_slot_449350\", <invented item>)"
+          },
+          {
+            "step": 96,
+            "probe": "explore",
+            "action": "choose(5) \"[Go to The Tavern / Inn]\""
+          },
+          {
+            "step": 97,
+            "probe": "inventory",
+            "action": "drop(\"item_berry\") on T6"
+          },
+          {
+            "step": 98,
+            "probe": "inventory",
+            "action": "drop(\"item_ash\") on T6"
+          },
+          {
+            "step": 99,
+            "probe": "clock",
+            "action": "choose(3) \"[Wait]\" (to stale the index)"
+          },
+          {
+            "step": 100,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Town Square]\""
+          },
+          {
+            "step": 101,
+            "probe": "explore",
+            "action": "choose(4) \"[Go to The Commons / Well]\""
+          },
+          {
+            "step": 102,
+            "probe": "explore",
+            "action": "choose(4) \"[Go to The Old Shrine (Town)]\""
+          },
+          {
+            "step": 103,
+            "probe": "clock",
+            "action": "choose(NaN)"
+          },
+          {
+            "step": 105,
+            "probe": "cast",
+            "action": "cast \"breath\" on fallen_leaves, which is not on T8"
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      }
+    },
+    {
+      "id": "ADV-0018",
+      "invariant": "INV-INV-UNOFFERED-PICKUP-REFUSED",
+      "title": "an item the screen never offered cannot be picked up",
+      "error_type": "contract_violation",
+      "severity": "material",
+      "status": "new",
+      "occurrences": 1,
+      "summary": "pickup accepted slot \"adv_slot_215764\", which no screen in the graph offers. The satchel went 0 -> 1.",
+      "reachability": "model-only",
+      "location": {
+        "screen": "TN",
+        "scene": "CollectScene",
+        "system": "forage",
+        "file": "tools/lantern/src/lib/play.ts",
+        "line": null
+      },
+      "game_context": {
+        "day": 5,
+        "timeBlock": "night",
+        "movesLeft": 0,
+        "screen": "TN",
+        "drawnScreen": "TN",
+        "satchel": [
+          "adv_item_150731"
+        ],
+        "arms": [],
+        "held": [],
+        "spellbook": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ],
+        "clearedGates": [],
+        "refusedGates": [
+          "G-F4-still"
+        ],
+        "modalOpen": false,
+        "choices": [
+          "[Go to the results]"
+        ],
+        "slot": "adv_slot_215764",
+        "accepted": true
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 114,
+        "lastStep": 114,
+        "probe": "inventory",
+        "recentActions": [
+          {
+            "step": 100,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Town Square]\""
+          },
+          {
+            "step": 101,
+            "probe": "explore",
+            "action": "choose(4) \"[Go to The Commons / Well]\""
+          },
+          {
+            "step": 102,
+            "probe": "explore",
+            "action": "choose(4) \"[Go to The Old Shrine (Town)]\""
+          },
+          {
+            "step": 103,
+            "probe": "clock",
+            "action": "choose(NaN)"
+          },
+          {
+            "step": 105,
+            "probe": "cast",
+            "action": "cast \"breath\" on fallen_leaves, which is not on T8"
+          },
+          {
+            "step": 106,
+            "probe": "explore",
+            "action": "choose(1) \"[Go to The Commons / Well]\""
+          },
+          {
+            "step": 107,
+            "probe": "inventory",
+            "action": "drop(\"item_wool\") on HOME"
+          },
+          {
+            "step": 108,
+            "probe": "explore",
+            "action": "choose(1) \"[Go to the Festival night]\""
+          },
+          {
+            "step": 110,
+            "probe": "soak",
+            "action": "open/close \"hub\" x20 via H"
+          },
+          {
+            "step": 111,
+            "probe": "explore",
+            "action": "choose(4) \"[Begin the festival vignette]\""
+          },
+          {
+            "step": 112,
+            "probe": "inventory",
+            "action": "drop(\"item_captured_sound\") on TN"
+          },
+          {
+            "step": 114,
+            "probe": "inventory",
+            "action": "pickup(\"adv_slot_215764\", <invented item>)"
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      }
+    },
+    {
+      "id": "ADV-0019",
+      "invariant": "INV-INV-UNOFFERED-PICKUP-REFUSED",
+      "title": "an item the screen never offered cannot be picked up",
+      "error_type": "contract_violation",
+      "severity": "material",
+      "status": "new",
+      "occurrences": 2,
+      "summary": "pickup accepted slot \"adv_slot_444490\", which no screen in the graph offers. The satchel went 1 -> 2.",
+      "reachability": "model-only",
+      "location": {
+        "screen": "FS",
+        "scene": "CollectScene",
+        "system": "forage",
+        "file": "tools/lantern/src/lib/play.ts",
+        "line": null
+      },
+      "game_context": {
+        "day": 5,
+        "timeBlock": "night",
+        "movesLeft": 0,
+        "screen": "FS",
+        "drawnScreen": "FS",
+        "satchel": [
+          "adv_item_150731",
+          "adv_item_249919"
+        ],
+        "arms": [],
+        "held": [],
+        "spellbook": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ],
+        "clearedGates": [],
+        "refusedGates": [
+          "G-F4-still"
+        ],
+        "modalOpen": false,
+        "choices": [],
+        "slot": "adv_slot_444490",
+        "accepted": true
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 117,
+        "lastStep": 220,
+        "probe": "inventory",
+        "recentActions": [
+          {
+            "step": 102,
+            "probe": "explore",
+            "action": "choose(4) \"[Go to The Old Shrine (Town)]\""
+          },
+          {
+            "step": 103,
+            "probe": "clock",
+            "action": "choose(NaN)"
+          },
+          {
+            "step": 105,
+            "probe": "cast",
+            "action": "cast \"breath\" on fallen_leaves, which is not on T8"
+          },
+          {
+            "step": 106,
+            "probe": "explore",
+            "action": "choose(1) \"[Go to The Commons / Well]\""
+          },
+          {
+            "step": 107,
+            "probe": "inventory",
+            "action": "drop(\"item_wool\") on HOME"
+          },
+          {
+            "step": 108,
+            "probe": "explore",
+            "action": "choose(1) \"[Go to the Festival night]\""
+          },
+          {
+            "step": 110,
+            "probe": "soak",
+            "action": "open/close \"hub\" x20 via H"
+          },
+          {
+            "step": 111,
+            "probe": "explore",
+            "action": "choose(4) \"[Begin the festival vignette]\""
+          },
+          {
+            "step": 112,
+            "probe": "inventory",
+            "action": "drop(\"item_captured_sound\") on TN"
+          },
+          {
+            "step": 114,
+            "probe": "inventory",
+            "action": "pickup(\"adv_slot_215764\", <invented item>)"
+          },
+          {
+            "step": 116,
+            "probe": "explore",
+            "action": "choose(0) \"[Go to the results]\""
+          },
+          {
+            "step": 117,
+            "probe": "inventory",
+            "action": "pickup(\"adv_slot_444490\", <invented item>)"
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      }
+    },
+    {
+      "id": "ADV-0021",
+      "invariant": "INV-CAST-RECEIVER-MUST-BE-PRESENT",
+      "title": "a receiver absent from this screen cannot be cast on",
+      "error_type": "contract_violation",
+      "severity": "material",
+      "status": "new",
+      "occurrences": 1,
+      "summary": "\"scratch\" landed on receiver \"scabbed_graze\" while standing on T7. Nothing maps a receiver to a screen (GAPS.md G2), so the pipeline cannot check presence and does not try — the screen the cast names is carried through as data, not as a constraint.",
+      "reachability": "model-only",
+      "location": {
+        "screen": "T7",
+        "scene": "CollectScene",
+        "system": "cast",
+        "file": "phaser/src/world/CastPipeline.ts",
+        "line": null
+      },
+      "game_context": {
+        "day": 1,
+        "timeBlock": "morning",
+        "movesLeft": 1,
+        "screen": "T7",
+        "drawnScreen": "T7",
+        "satchel": [],
+        "arms": [],
+        "held": [
+          "item_captured_sound"
+        ],
+        "spellbook": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ],
+        "clearedGates": [],
+        "refusedGates": [
+          "G-F4-still"
+        ],
+        "modalOpen": false,
+        "choices": [
+          "[Look at stage]",
+          "[Look at lanterns]",
+          "[Go to Town Square]",
+          "[Wait]",
+          "[End the day]"
+        ],
+        "spell": "scratch",
+        "receiver": "scabbed_graze",
+        "standingOn": "T7",
+        "clearedNow": []
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 123,
+        "lastStep": 123,
+        "probe": "cast",
+        "recentActions": [
+          {
+            "step": 107,
+            "probe": "inventory",
+            "action": "drop(\"item_wool\") on HOME"
+          },
+          {
+            "step": 108,
+            "probe": "explore",
+            "action": "choose(1) \"[Go to the Festival night]\""
+          },
+          {
+            "step": 110,
+            "probe": "soak",
+            "action": "open/close \"hub\" x20 via H"
+          },
+          {
+            "step": 111,
+            "probe": "explore",
+            "action": "choose(4) \"[Begin the festival vignette]\""
+          },
+          {
+            "step": 112,
+            "probe": "inventory",
+            "action": "drop(\"item_captured_sound\") on TN"
+          },
+          {
+            "step": 114,
+            "probe": "inventory",
+            "action": "pickup(\"adv_slot_215764\", <invented item>)"
+          },
+          {
+            "step": 116,
+            "probe": "explore",
+            "action": "choose(0) \"[Go to the results]\""
+          },
+          {
+            "step": 117,
+            "probe": "inventory",
+            "action": "pickup(\"adv_slot_444490\", <invented item>)"
+          },
+          {
+            "step": 119,
+            "probe": "explore",
+            "action": "story ended — restarting the loop from the entry scene"
+          },
+          {
+            "step": 120,
+            "probe": "explore",
+            "action": "choose(6) \"[Go to Festival Grounds]\""
+          },
+          {
+            "step": 121,
+            "probe": "soak",
+            "action": "open/close \"options\" x20 via O"
+          },
+          {
+            "step": 123,
+            "probe": "cast",
+            "action": "cast \"scratch\" on scabbed_graze, which is not on T7"
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      }
+    },
+    {
+      "id": "ADV-0022",
+      "invariant": "INV-CAST-REQUIRES-KNOWN-SPELL",
+      "title": "a spell not in the spellbook cannot be cast",
+      "error_type": "contract_violation",
+      "severity": "material",
+      "status": "new",
+      "occurrences": 1,
+      "summary": "\"leap\" (leap) landed on dog while it was NOT in the spellbook. CastPipeline.run reads Knowledge to WRITE it (step 3) and never reads it as a precondition — the spellbook is a UI filter, not a rule.",
+      "reachability": "model-only",
+      "location": {
+        "screen": "F1",
+        "scene": "CollectScene",
+        "system": "cast",
+        "file": "phaser/src/world/CastPipeline.ts",
+        "line": 200
+      },
+      "game_context": {
+        "day": 1,
+        "timeBlock": "evening",
+        "movesLeft": 3,
+        "screen": "F1",
+        "drawnScreen": "F1",
+        "satchel": [],
+        "arms": [],
+        "held": [
+          "item_captured_sound"
+        ],
+        "spellbook": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ],
+        "clearedGates": [
+          "G-T6-evening"
+        ],
+        "refusedGates": [
+          "G-F4-still"
+        ],
+        "modalOpen": false,
+        "choices": [
+          "[Look at trail signs]",
+          "[Go to The Stream]",
+          "[Go to The Grove]",
+          "[Go to Town Square]",
+          "[Wait]",
+          "[End the day]"
+        ],
+        "spell": "leap",
+        "receiver": "dog",
+        "spellbookBefore": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ]
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 129,
+        "lastStep": 129,
+        "probe": "cast",
+        "recentActions": [
+          {
+            "step": 116,
+            "probe": "explore",
+            "action": "choose(0) \"[Go to the results]\""
+          },
+          {
+            "step": 117,
+            "probe": "inventory",
+            "action": "pickup(\"adv_slot_444490\", <invented item>)"
+          },
+          {
+            "step": 119,
+            "probe": "explore",
+            "action": "story ended — restarting the loop from the entry scene"
+          },
+          {
+            "step": 120,
+            "probe": "explore",
+            "action": "choose(6) \"[Go to Festival Grounds]\""
+          },
+          {
+            "step": 121,
+            "probe": "soak",
+            "action": "open/close \"options\" x20 via O"
+          },
+          {
+            "step": 123,
+            "probe": "cast",
+            "action": "cast \"scratch\" on scabbed_graze, which is not on T7"
+          },
+          {
+            "step": 124,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Town Square]\""
+          },
+          {
+            "step": 125,
+            "probe": "explore",
+            "action": "choose(6) \"[Go to Festival Grounds]\""
+          },
+          {
+            "step": 126,
+            "probe": "clock",
+            "action": "choose(5)"
+          },
+          {
+            "step": 127,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Town Square]\""
+          },
+          {
+            "step": 128,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Forager's Clearing]\""
+          },
+          {
+            "step": 129,
+            "probe": "cast",
+            "action": "cast \"leap\" (NOT in the spellbook) on dog"
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      }
+    },
+    {
+      "id": "ADV-0023",
+      "invariant": "INV-CAST-REQUIRES-KNOWN-SPELL",
+      "title": "a spell not in the spellbook cannot be cast",
+      "error_type": "contract_violation",
+      "severity": "material",
+      "status": "new",
+      "occurrences": 1,
+      "summary": "\"seal\" (seal) landed on jam_jar while it was NOT in the spellbook. CastPipeline.run reads Knowledge to WRITE it (step 3) and never reads it as a precondition — the spellbook is a UI filter, not a rule.",
+      "reachability": "model-only",
+      "location": {
+        "screen": "F2",
+        "scene": "CollectScene",
+        "system": "cast",
+        "file": "phaser/src/world/CastPipeline.ts",
+        "line": 200
+      },
+      "game_context": {
+        "day": 1,
+        "timeBlock": "evening",
+        "movesLeft": 2,
+        "screen": "F2",
+        "drawnScreen": "F2",
+        "satchel": [
+          "river stones"
+        ],
+        "arms": [],
+        "held": [
+          "item_captured_sound",
+          "item_river_stone"
+        ],
+        "spellbook": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ],
+        "clearedGates": [
+          "G-T6-evening"
+        ],
+        "refusedGates": [
+          "G-F4-still"
+        ],
+        "modalOpen": false,
+        "choices": [
+          "[Look at ford]",
+          "[Go to Forager's Clearing]",
+          "[Go to The Still Pool]",
+          "[Wait]",
+          "[End the day]"
+        ],
+        "spell": "seal",
+        "receiver": "jam_jar",
+        "spellbookBefore": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ]
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 132,
+        "lastStep": 132,
+        "probe": "cast",
+        "recentActions": [
+          {
+            "step": 120,
+            "probe": "explore",
+            "action": "choose(6) \"[Go to Festival Grounds]\""
+          },
+          {
+            "step": 121,
+            "probe": "soak",
+            "action": "open/close \"options\" x20 via O"
+          },
+          {
+            "step": 123,
+            "probe": "cast",
+            "action": "cast \"scratch\" on scabbed_graze, which is not on T7"
+          },
+          {
+            "step": 124,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Town Square]\""
+          },
+          {
+            "step": 125,
+            "probe": "explore",
+            "action": "choose(6) \"[Go to Festival Grounds]\""
+          },
+          {
+            "step": 126,
+            "probe": "clock",
+            "action": "choose(5)"
+          },
+          {
+            "step": 127,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Town Square]\""
+          },
+          {
+            "step": 128,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Forager's Clearing]\""
+          },
+          {
+            "step": 129,
+            "probe": "cast",
+            "action": "cast \"leap\" (NOT in the spellbook) on dog"
+          },
+          {
+            "step": 130,
+            "probe": "explore",
+            "action": "choose(1) \"[Go to The Stream]\""
+          },
+          {
+            "step": 130,
+            "probe": "explore",
+            "action": "pickup(\"F2_1_evening_river stones\", \"river stones\")"
+          },
+          {
+            "step": 132,
+            "probe": "cast",
+            "action": "cast \"seal\" (NOT in the spellbook) on jam_jar"
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      }
+    },
+    {
+      "id": "ADV-0027",
+      "invariant": "INV-CAST-REQUIRES-KNOWN-SPELL",
+      "title": "a spell not in the spellbook cannot be cast",
+      "error_type": "contract_violation",
+      "severity": "material",
+      "status": "new",
+      "occurrences": 1,
+      "summary": "\"waft\" (waft) landed on cat while it was NOT in the spellbook. CastPipeline.run reads Knowledge to WRITE it (step 3) and never reads it as a precondition — the spellbook is a UI filter, not a rule.",
+      "reachability": "model-only",
+      "location": {
+        "screen": "HOME",
+        "scene": "CollectScene",
+        "system": "cast",
+        "file": "phaser/src/world/CastPipeline.ts",
+        "line": 200
+      },
+      "game_context": {
+        "day": 4,
+        "timeBlock": "evening",
+        "movesLeft": 0,
+        "screen": "HOME",
+        "drawnScreen": "HOME",
+        "satchel": [],
+        "arms": [],
+        "held": [],
+        "spellbook": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ],
+        "clearedGates": [
+          "G-T6-evening"
+        ],
+        "refusedGates": [
+          "G-F4-still"
+        ],
+        "modalOpen": false,
+        "choices": [
+          "[Look around your home]",
+          "[Start the Next Day]"
+        ],
+        "spell": "waft",
+        "receiver": "cat",
+        "spellbookBefore": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ]
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 161,
+        "lastStep": 161,
+        "probe": "cast",
+        "recentActions": [
+          {
+            "step": 147,
+            "probe": "explore",
+            "action": "choose(4) \"[Go to The Commons / Well]\""
+          },
+          {
+            "step": 149,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to A Neighbor's Home]\""
+          },
+          {
+            "step": 150,
+            "probe": "explore",
+            "action": "choose(1) \"[Go to The Commons / Well]\""
+          },
+          {
+            "step": 151,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Town Square]\""
+          },
+          {
+            "step": 152,
+            "probe": "soak",
+            "action": "key mash: m d h m s d h n Escape m Escape e f c"
+          },
+          {
+            "step": 155,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to Market Row]\""
+          },
+          {
+            "step": 155,
+            "probe": "explore",
+            "action": "pickup(\"T2_3_evening_herbs\", \"herbs\")"
+          },
+          {
+            "step": 156,
+            "probe": "cast",
+            "action": "cast \"steep\" on juno twice, counting components"
+          },
+          {
+            "step": 157,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Town Square]\""
+          },
+          {
+            "step": 158,
+            "probe": "inventory",
+            "action": "drop(\"item_captured_sound\") on HOME"
+          },
+          {
+            "step": 159,
+            "probe": "soak",
+            "action": "key mash: m c m o m c e e c f Delete f n c"
+          },
+          {
+            "step": 161,
+            "probe": "cast",
+            "action": "cast \"waft\" (NOT in the spellbook) on cat"
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      }
+    },
+    {
+      "id": "ADV-0028",
+      "invariant": "INV-CAST-REQUIRES-KNOWN-SPELL",
+      "title": "a spell not in the spellbook cannot be cast",
+      "error_type": "contract_violation",
+      "severity": "material",
+      "status": "new",
+      "occurrences": 1,
+      "summary": "\"scratch\" (scratch) landed on scabbed_graze while it was NOT in the spellbook. CastPipeline.run reads Knowledge to WRITE it (step 3) and never reads it as a precondition — the spellbook is a UI filter, not a rule.",
+      "reachability": "model-only",
+      "location": {
+        "screen": "HOME",
+        "scene": "CollectScene",
+        "system": "cast",
+        "file": "phaser/src/world/CastPipeline.ts",
+        "line": 200
+      },
+      "game_context": {
+        "day": 4,
+        "timeBlock": "evening",
+        "movesLeft": 0,
+        "screen": "HOME",
+        "drawnScreen": "HOME",
+        "satchel": [
+          "adv_item_272577"
+        ],
+        "arms": [],
+        "held": [],
+        "spellbook": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ],
+        "clearedGates": [
+          "G-T6-evening"
+        ],
+        "refusedGates": [
+          "G-F4-still"
+        ],
+        "modalOpen": false,
+        "choices": [
+          "[Look around your home]",
+          "[Start the Next Day]"
+        ],
+        "spell": "scratch",
+        "receiver": "scabbed_graze",
+        "spellbookBefore": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ]
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 164,
+        "lastStep": 164,
+        "probe": "cast",
+        "recentActions": [
+          {
+            "step": 151,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Town Square]\""
+          },
+          {
+            "step": 152,
+            "probe": "soak",
+            "action": "key mash: m d h m s d h n Escape m Escape e f c"
+          },
+          {
+            "step": 155,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to Market Row]\""
+          },
+          {
+            "step": 155,
+            "probe": "explore",
+            "action": "pickup(\"T2_3_evening_herbs\", \"herbs\")"
+          },
+          {
+            "step": 156,
+            "probe": "cast",
+            "action": "cast \"steep\" on juno twice, counting components"
+          },
+          {
+            "step": 157,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Town Square]\""
+          },
+          {
+            "step": 158,
+            "probe": "inventory",
+            "action": "drop(\"item_captured_sound\") on HOME"
+          },
+          {
+            "step": 159,
+            "probe": "soak",
+            "action": "key mash: m c m o m c e e c f Delete f n c"
+          },
+          {
+            "step": 161,
+            "probe": "cast",
+            "action": "cast \"waft\" (NOT in the spellbook) on cat"
+          },
+          {
+            "step": 162,
+            "probe": "inventory",
+            "action": "pickup(\"adv_slot_363200\", <invented item>)"
+          },
+          {
+            "step": 163,
+            "probe": "cast",
+            "action": "cast \"steep\" on dry_herb_bundle with NO components offered"
+          },
+          {
+            "step": 164,
+            "probe": "cast",
+            "action": "cast \"scratch\" (NOT in the spellbook) on scabbed_graze"
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      }
+    },
+    {
+      "id": "ADV-0029",
+      "invariant": "INV-INV-UNOFFERED-PICKUP-REFUSED",
+      "title": "an item the screen never offered cannot be picked up",
+      "error_type": "contract_violation",
+      "severity": "material",
+      "status": "new",
+      "occurrences": 1,
+      "summary": "pickup accepted slot \"adv_slot_683971\", which no screen in the graph offers. The satchel went 1 -> 2.",
+      "reachability": "model-only",
+      "location": {
+        "screen": "T7",
+        "scene": "CollectScene",
+        "system": "forage",
+        "file": "tools/lantern/src/lib/play.ts",
+        "line": null
+      },
+      "game_context": {
+        "day": 4,
+        "timeBlock": "morning",
+        "movesLeft": 1,
+        "screen": "T7",
+        "drawnScreen": "T7",
+        "satchel": [
+          "adv_item_272577",
+          "adv_item_342336"
+        ],
+        "arms": [],
+        "held": [],
+        "spellbook": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ],
+        "clearedGates": [],
+        "refusedGates": [
+          "G-F4-still"
+        ],
+        "modalOpen": false,
+        "choices": [
+          "[Look at stage]",
+          "[Look at lanterns]",
+          "[Go to Town Square]",
+          "[Wait]",
+          "[End the day]"
+        ],
+        "slot": "adv_slot_683971",
+        "accepted": true
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 175,
+        "lastStep": 175,
+        "probe": "inventory",
+        "recentActions": [
+          {
+            "step": 161,
+            "probe": "cast",
+            "action": "cast \"waft\" (NOT in the spellbook) on cat"
+          },
+          {
+            "step": 162,
+            "probe": "inventory",
+            "action": "pickup(\"adv_slot_363200\", <invented item>)"
+          },
+          {
+            "step": 163,
+            "probe": "cast",
+            "action": "cast \"steep\" on dry_herb_bundle with NO components offered"
+          },
+          {
+            "step": 164,
+            "probe": "cast",
+            "action": "cast \"scratch\" (NOT in the spellbook) on scabbed_graze"
+          },
+          {
+            "step": 165,
+            "probe": "cast",
+            "action": "cast \"ignite\" on river_stone with NO components offered"
+          },
+          {
+            "step": 166,
+            "probe": "soak",
+            "action": "open/close \"options\" x20 via O"
+          },
+          {
+            "step": 167,
+            "probe": "soak",
+            "action": "open/close \"calendar\" x20 via L"
+          },
+          {
+            "step": 171,
+            "probe": "explore",
+            "action": "choose(0) \"[Look around your home]\""
+          },
+          {
+            "step": 172,
+            "probe": "explore",
+            "action": "choose(0) \"[Start the Next Day]\""
+          },
+          {
+            "step": 173,
+            "probe": "explore",
+            "action": "choose(0) \"[Go to Town Square]\""
+          },
+          {
+            "step": 174,
+            "probe": "explore",
+            "action": "choose(6) \"[Go to Festival Grounds]\""
+          },
+          {
+            "step": 175,
+            "probe": "inventory",
+            "action": "pickup(\"adv_slot_683971\", <invented item>)"
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      }
+    },
+    {
+      "id": "ADV-0031",
+      "invariant": "INV-CAST-RECEIVER-MUST-BE-PRESENT",
+      "title": "a receiver absent from this screen cannot be cast on",
+      "error_type": "contract_violation",
+      "severity": "material",
+      "status": "new",
+      "occurrences": 1,
+      "summary": "\"temper\" landed on receiver \"heated_stone\" while standing on T7. Nothing maps a receiver to a screen (GAPS.md G2), so the pipeline cannot check presence and does not try — the screen the cast names is carried through as data, not as a constraint.",
+      "reachability": "model-only",
+      "location": {
+        "screen": "T7",
+        "scene": "CollectScene",
+        "system": "cast",
+        "file": "phaser/src/world/CastPipeline.ts",
+        "line": null
+      },
+      "game_context": {
+        "day": 5,
+        "timeBlock": "night",
+        "movesLeft": 3,
+        "screen": "T7",
+        "drawnScreen": "T7",
+        "satchel": [],
+        "arms": [],
+        "held": [],
+        "spellbook": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ],
+        "clearedGates": [],
+        "refusedGates": [
+          "G-F4-still"
+        ],
+        "modalOpen": false,
+        "choices": [
+          "[stay until the lanterns are up]",
+          "\"Good night, Ilsa.\""
+        ],
+        "spell": "temper",
+        "receiver": "heated_stone",
+        "standingOn": "T7",
+        "clearedNow": []
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 211,
+        "lastStep": 211,
+        "probe": "cast",
+        "recentActions": [
+          {
+            "step": 199,
+            "probe": "explore",
+            "action": "choose(1) \"[Go to the Festival night]\""
+          },
+          {
+            "step": 200,
+            "probe": "explore",
+            "action": "choose(2) \"[Look at stage]\""
+          },
+          {
+            "step": 201,
+            "probe": "inventory",
+            "action": "drop(\"item_sticks\") on T7"
+          },
+          {
+            "step": 202,
+            "probe": "explore",
+            "action": "choose(0) \"[Talk to Toby]\""
+          },
+          {
+            "step": 203,
+            "probe": "explore",
+            "action": "choose(1) \"\"It's lit. You can stop.\"\""
+          },
+          {
+            "step": 204,
+            "probe": "cast",
+            "action": "cast \"temper\" on heated_stone with NO components offered"
+          },
+          {
+            "step": 205,
+            "probe": "explore",
+            "action": "choose(1) \"[let him hand the thanks along]\""
+          },
+          {
+            "step": 207,
+            "probe": "explore",
+            "action": "choose(1) \"\"Save me a sweet roll.\"\""
+          },
+          {
+            "step": 208,
+            "probe": "explore",
+            "action": "choose(0) \"[Talk to Ilsa]\""
+          },
+          {
+            "step": 210,
+            "probe": "clock",
+            "action": "choose(1) \"\"Saving that?\"\" (to stale the index)"
+          },
+          {
+            "step": 210,
+            "probe": "clock",
+            "action": "stale choose(0) captured as \"[take the space beside her]\""
+          },
+          {
+            "step": 211,
+            "probe": "cast",
+            "action": "cast \"temper\" on heated_stone, which is not on T7"
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      }
+    },
+    {
+      "id": "ADV-0032",
+      "invariant": "INV-GATE-TWO-CLEARED-SETS-AGREE",
+      "title": "the graph's cleared set and the engine's cleared set hold the same fact",
+      "error_type": "model_ui_disagreement",
+      "severity": "material",
+      "status": "new",
+      "occurrences": 11,
+      "summary": "cleared-gate sets disagree — engine only: [G-T5-trust], graph only: []. Two writers hold one fact, so which door is open depends on who you ask.",
+      "reachability": "player",
+      "location": {
+        "screen": null,
+        "scene": "CollectScene",
+        "system": "gates",
+        "file": "phaser/src/world/Gates.ts",
+        "line": null
+      },
+      "game_context": {
+        "day": 5,
+        "timeBlock": "night",
+        "movesLeft": 3,
+        "screen": "TN",
+        "drawnScreen": "TN",
+        "satchel": [],
+        "arms": [],
+        "held": [],
+        "spellbook": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ],
+        "clearedGates": [
+          "G-T5-trust"
+        ],
+        "refusedGates": [
+          "G-F4-still"
+        ],
+        "modalOpen": false,
+        "choices": [
+          "[Go to the results]"
+        ],
+        "engineCleared": [
+          "G-T5-trust"
+        ],
+        "graphCleared": []
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 218,
+        "lastStep": 228,
+        "probe": "explore",
+        "recentActions": [
+          {
+            "step": 203,
+            "probe": "explore",
+            "action": "choose(1) \"\"It's lit. You can stop.\"\""
+          },
+          {
+            "step": 204,
+            "probe": "cast",
+            "action": "cast \"temper\" on heated_stone with NO components offered"
+          },
+          {
+            "step": 205,
+            "probe": "explore",
+            "action": "choose(1) \"[let him hand the thanks along]\""
+          },
+          {
+            "step": 207,
+            "probe": "explore",
+            "action": "choose(1) \"\"Save me a sweet roll.\"\""
+          },
+          {
+            "step": 208,
+            "probe": "explore",
+            "action": "choose(0) \"[Talk to Ilsa]\""
+          },
+          {
+            "step": 210,
+            "probe": "clock",
+            "action": "choose(1) \"\"Saving that?\"\" (to stale the index)"
+          },
+          {
+            "step": 210,
+            "probe": "clock",
+            "action": "stale choose(0) captured as \"[take the space beside her]\""
+          },
+          {
+            "step": 211,
+            "probe": "cast",
+            "action": "cast \"temper\" on heated_stone, which is not on T7"
+          },
+          {
+            "step": 214,
+            "probe": "cast",
+            "action": "cast \"fetch\" on latched_shutter with NO components offered"
+          },
+          {
+            "step": 215,
+            "probe": "soak",
+            "action": "key mash: Delete n s h h o m c Delete n h d m f"
+          },
+          {
+            "step": 216,
+            "probe": "soak",
+            "action": "open/close \"satchel\" x20 via S"
+          },
+          {
+            "step": 217,
+            "probe": "explore",
+            "action": "choose(1) \"\"Good night, Ilsa.\"\""
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      }
+    },
+    {
+      "id": "ADV-0033",
+      "invariant": "INV-CAST-REQUIRES-KNOWN-SPELL",
+      "title": "a spell not in the spellbook cannot be cast",
+      "error_type": "contract_violation",
+      "severity": "material",
+      "status": "new",
+      "occurrences": 1,
+      "summary": "\"preserve\" (preserve) landed on cut_flowers while it was NOT in the spellbook. CastPipeline.run reads Knowledge to WRITE it (step 3) and never reads it as a precondition — the spellbook is a UI filter, not a rule.",
+      "reachability": "model-only",
+      "location": {
+        "screen": "TN",
+        "scene": "CollectScene",
+        "system": "cast",
+        "file": "phaser/src/world/CastPipeline.ts",
+        "line": 200
+      },
+      "game_context": {
+        "day": 5,
+        "timeBlock": "night",
+        "movesLeft": 3,
+        "screen": "TN",
+        "drawnScreen": "TN",
+        "satchel": [],
+        "arms": [],
+        "held": [],
+        "spellbook": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ],
+        "clearedGates": [
+          "G-T5-trust"
+        ],
+        "refusedGates": [
+          "G-F4-still"
+        ],
+        "modalOpen": false,
+        "choices": [
+          "[Go to the results]"
+        ],
+        "spell": "preserve",
+        "receiver": "cut_flowers",
+        "spellbookBefore": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ]
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 218,
+        "lastStep": 218,
+        "probe": "cast",
+        "recentActions": [
+          {
+            "step": 204,
+            "probe": "cast",
+            "action": "cast \"temper\" on heated_stone with NO components offered"
+          },
+          {
+            "step": 205,
+            "probe": "explore",
+            "action": "choose(1) \"[let him hand the thanks along]\""
+          },
+          {
+            "step": 207,
+            "probe": "explore",
+            "action": "choose(1) \"\"Save me a sweet roll.\"\""
+          },
+          {
+            "step": 208,
+            "probe": "explore",
+            "action": "choose(0) \"[Talk to Ilsa]\""
+          },
+          {
+            "step": 210,
+            "probe": "clock",
+            "action": "choose(1) \"\"Saving that?\"\" (to stale the index)"
+          },
+          {
+            "step": 210,
+            "probe": "clock",
+            "action": "stale choose(0) captured as \"[take the space beside her]\""
+          },
+          {
+            "step": 211,
+            "probe": "cast",
+            "action": "cast \"temper\" on heated_stone, which is not on T7"
+          },
+          {
+            "step": 214,
+            "probe": "cast",
+            "action": "cast \"fetch\" on latched_shutter with NO components offered"
+          },
+          {
+            "step": 215,
+            "probe": "soak",
+            "action": "key mash: Delete n s h h o m c Delete n h d m f"
+          },
+          {
+            "step": 216,
+            "probe": "soak",
+            "action": "open/close \"satchel\" x20 via S"
+          },
+          {
+            "step": 217,
+            "probe": "explore",
+            "action": "choose(1) \"\"Good night, Ilsa.\"\""
+          },
+          {
+            "step": 218,
+            "probe": "cast",
+            "action": "cast \"preserve\" (NOT in the spellbook) on cut_flowers"
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      }
+    },
+    {
+      "id": "ADV-0035",
+      "invariant": "INV-CAST-RECEIVER-MUST-BE-PRESENT",
+      "title": "a receiver absent from this screen cannot be cast on",
+      "error_type": "contract_violation",
+      "severity": "material",
+      "status": "new",
+      "occurrences": 1,
+      "summary": "\"waft\" landed on receiver \"river_stone\" while standing on T1. Nothing maps a receiver to a screen (GAPS.md G2), so the pipeline cannot check presence and does not try — the screen the cast names is carried through as data, not as a constraint.",
+      "reachability": "model-only",
+      "location": {
+        "screen": "T1",
+        "scene": "CollectScene",
+        "system": "cast",
+        "file": "phaser/src/world/CastPipeline.ts",
+        "line": null
+      },
+      "game_context": {
+        "day": 1,
+        "timeBlock": "evening",
+        "movesLeft": 2,
+        "screen": "T1",
+        "drawnScreen": "T1",
+        "satchel": [],
+        "arms": [],
+        "held": [
+          "item_captured_sound"
+        ],
+        "spellbook": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ],
+        "clearedGates": [
+          "G-T6-evening"
+        ],
+        "refusedGates": [
+          "G-F4-still"
+        ],
+        "modalOpen": false,
+        "choices": [
+          "[Look at arch]",
+          "[Look at notice board]",
+          "[Go to Forager's Clearing]",
+          "[Go to Market Row]",
+          "[Go to The Commons / Well]",
+          "[Go to The Tavern / Inn]",
+          "[Go to Festival Grounds]",
+          "[Wait]",
+          "[End the day]"
+        ],
+        "spell": "waft",
+        "receiver": "river_stone",
+        "standingOn": "T1",
+        "clearedNow": []
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 242,
+        "lastStep": 242,
+        "probe": "cast",
+        "recentActions": [
+          {
+            "step": 228,
+            "probe": "explore",
+            "action": "story ended — restarting the loop from the entry scene"
+          },
+          {
+            "step": 230,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Forager's Clearing]\""
+          },
+          {
+            "step": 232,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to Town Square]\""
+          },
+          {
+            "step": 234,
+            "probe": "soak",
+            "action": "key mash: d s n f e s d l e f Delete m e e"
+          },
+          {
+            "step": 235,
+            "probe": "clock",
+            "action": "choose(-1)"
+          },
+          {
+            "step": 236,
+            "probe": "soak",
+            "action": "open/close \"calendar\" x20 via L"
+          },
+          {
+            "step": 237,
+            "probe": "explore",
+            "action": "choose(4) \"[Go to The Commons / Well]\""
+          },
+          {
+            "step": 238,
+            "probe": "soak",
+            "action": "open/close \"options\" x20 via O"
+          },
+          {
+            "step": 239,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to A Neighbor's Home]\""
+          },
+          {
+            "step": 240,
+            "probe": "explore",
+            "action": "choose(1) \"[Go to The Commons / Well]\""
+          },
+          {
+            "step": 241,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Town Square]\""
+          },
+          {
+            "step": 242,
+            "probe": "cast",
+            "action": "cast \"waft\" on river_stone, which is not on T1"
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      }
+    },
+    {
+      "id": "ADV-0036",
+      "invariant": "INV-CAST-RECEIVER-MUST-BE-PRESENT",
+      "title": "a receiver absent from this screen cannot be cast on",
+      "error_type": "contract_violation",
+      "severity": "material",
+      "status": "new",
+      "occurrences": 1,
+      "summary": "\"scratch\" landed on receiver \"mara\" while standing on HOME. Nothing maps a receiver to a screen (GAPS.md G2), so the pipeline cannot check presence and does not try — the screen the cast names is carried through as data, not as a constraint.",
+      "reachability": "model-only",
+      "location": {
+        "screen": "HOME",
+        "scene": "CollectScene",
+        "system": "cast",
+        "file": "phaser/src/world/CastPipeline.ts",
+        "line": null
+      },
+      "game_context": {
+        "day": 2,
+        "timeBlock": "evening",
+        "movesLeft": 0,
+        "screen": "HOME",
+        "drawnScreen": "HOME",
+        "satchel": [
+          "adv_item_327743"
+        ],
+        "arms": [],
+        "held": [],
+        "spellbook": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ],
+        "clearedGates": [
+          "G-T6-evening"
+        ],
+        "refusedGates": [
+          "G-F4-still"
+        ],
+        "modalOpen": false,
+        "choices": [
+          "[Look around your home]",
+          "[Start the Next Day]"
+        ],
+        "spell": "scratch",
+        "receiver": "mara",
+        "standingOn": "HOME",
+        "clearedNow": []
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 250,
+        "lastStep": 250,
+        "probe": "cast",
+        "recentActions": [
+          {
+            "step": 238,
+            "probe": "soak",
+            "action": "open/close \"options\" x20 via O"
+          },
+          {
+            "step": 239,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to A Neighbor's Home]\""
+          },
+          {
+            "step": 240,
+            "probe": "explore",
+            "action": "choose(1) \"[Go to The Commons / Well]\""
+          },
+          {
+            "step": 241,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Town Square]\""
+          },
+          {
+            "step": 242,
+            "probe": "cast",
+            "action": "cast \"waft\" on river_stone, which is not on T1"
+          },
+          {
+            "step": 243,
+            "probe": "soak",
+            "action": "open/close \"notebook\" x20 via N"
+          },
+          {
+            "step": 244,
+            "probe": "clock",
+            "action": "choose(9)"
+          },
+          {
+            "step": 245,
+            "probe": "clock",
+            "action": "choose(7) \"[Wait]\" (to stale the index)"
+          },
+          {
+            "step": 246,
+            "probe": "explore",
+            "action": "choose(5) \"[Go to The Tavern / Inn]\""
+          },
+          {
+            "step": 247,
+            "probe": "inventory",
+            "action": "drop(\"item_captured_sound\") on HOME"
+          },
+          {
+            "step": 248,
+            "probe": "inventory",
+            "action": "pickup(\"adv_slot_958104\", <invented item>)"
+          },
+          {
+            "step": 250,
+            "probe": "cast",
+            "action": "cast \"scratch\" on mara, which is not on HOME"
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      }
+    },
+    {
+      "id": "ADV-0034",
+      "invariant": "INV-GATE-RECLOSED-BEHIND-PLAYER",
+      "title": "a gate that shuts while the player is past it leaves them somewhere they could not now enter",
+      "error_type": "state_invariant_violation",
+      "severity": "note",
+      "status": "new",
+      "occurrences": 1,
+      "summary": "T5 is gated by G-T5-trust, which opened earlier this session and has since shut with the player still on the screen (day 1, afternoon). Nothing walks them out or warns them, and the way back in is now closed.",
+      "reachability": "player",
+      "location": {
+        "screen": "T5",
+        "scene": "CollectScene",
+        "system": "gates",
+        "file": "phaser/src/world/gates/GateEngine.ts",
+        "line": null
+      },
+      "game_context": {
+        "day": 1,
+        "timeBlock": "afternoon",
+        "movesLeft": 1,
+        "screen": "T5",
+        "drawnScreen": "T5",
+        "satchel": [],
+        "arms": [],
+        "held": [
+          "item_captured_sound"
+        ],
+        "spellbook": [
+          "echo",
+          "fetch",
+          "glimmer"
+        ],
+        "clearedGates": [],
+        "refusedGates": [
+          "G-F4-still"
+        ],
+        "modalOpen": false,
+        "choices": [
+          "[Look at mementos]",
+          "[Go to The Commons / Well]",
+          "[Wait]",
+          "[End the day]"
+        ],
+        "gates": [
+          "G-T5-trust"
+        ]
+      },
+      "repro": {
+        "seed": 20260824,
+        "mode": "mode5",
+        "step": 240,
+        "lastStep": 240,
+        "probe": "explore",
+        "recentActions": [
+          {
+            "step": 224,
+            "probe": "explore",
+            "action": "story ended — restarting the loop from the entry scene"
+          },
+          {
+            "step": 225,
+            "probe": "explore",
+            "action": "story ended — restarting the loop from the entry scene"
+          },
+          {
+            "step": 226,
+            "probe": "explore",
+            "action": "story ended — restarting the loop from the entry scene"
+          },
+          {
+            "step": 228,
+            "probe": "explore",
+            "action": "story ended — restarting the loop from the entry scene"
+          },
+          {
+            "step": 230,
+            "probe": "explore",
+            "action": "choose(2) \"[Go to Forager's Clearing]\""
+          },
+          {
+            "step": 232,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to Town Square]\""
+          },
+          {
+            "step": 234,
+            "probe": "soak",
+            "action": "key mash: d s n f e s d l e f Delete m e e"
+          },
+          {
+            "step": 235,
+            "probe": "clock",
+            "action": "choose(-1)"
+          },
+          {
+            "step": 236,
+            "probe": "soak",
+            "action": "open/close \"calendar\" x20 via L"
+          },
+          {
+            "step": 237,
+            "probe": "explore",
+            "action": "choose(4) \"[Go to The Commons / Well]\""
+          },
+          {
+            "step": 238,
+            "probe": "soak",
+            "action": "open/close \"options\" x20 via O"
+          },
+          {
+            "step": 239,
+            "probe": "explore",
+            "action": "choose(3) \"[Go to A Neighbor's Home]\""
+          }
+        ],
+        "command": "npm run adversary -- --seed 20260824 --mode mode5 --steps 250"
+      },
+      "evidence": {
+        "screenshot": null,
+        "consoleErrors": []
+      }
+    }
+  ]
+}
