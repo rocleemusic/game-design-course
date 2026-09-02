@@ -27,7 +27,7 @@ A stranger opening the link needs no setup — it boots straight into the mode p
 **Pipeline Repository Link:** https://github.com/rocleemusic/game-design-course (this folder — `assignment-10/`)
 **Pipeline Run Video Link:** *[TODO — record a short screen capture of a content-generation pass or the resolver build step, then paste the link here]*
 
-**What's actually in this folder vs. the private working repo.** The agent seat contracts (`agents/`, `narrative-pipeline/agents/`), the measured cost/benchmark reports (`evidence/`), and the small referenced commands/scripts (`commands/`, `tools/`) are copied in here, so grading doesn't depend on private-repo access. The runnable engine code they describe — the resolver, the bundler, the deploy script, the Phaser source itself — stays in the private working repo (`RL_MAP/ProjectOS/game-project/`) for size and build reasons; the linked video demonstrates it running. Paths below with no `evidence/`, `agents/`, `narrative-pipeline/`, `commands/`, or `tools/` prefix refer to that private repo.
+**This folder is self-contained.** Everything the tables below name — every agent contract, the resolver and Lantern review-tool source, the bundling/deploy scripts, the in-engine editor code, the benchmark and cost-analysis reports — is copied in here, not just linked to a private repo. Three things are named but genuinely can't be copied because they aren't files in any repo: **ComfyUI** and the **Blender MCP connector** (real software running on separate machines/processes, described in Stage 9, demonstrated in the linked video) and the live **itch.io page** (Deliverable 1). Two things are named but deliberately excluded as reproducible build output, not source: `node_modules/` for the two TypeScript tools (regenerate with `npm install` from the included `package.json`), and the screen-capture image set + the 73MB self-contained HTML page `phaser-tools/screen-flow/` builds from them (regenerate by running `capture.mjs` then `build-flow.mjs` against a live build — the scripts themselves are included).
 
 ### Target Game Engine
 
@@ -46,61 +46,61 @@ Every step after the human content gate is a script, not a person. Nobody hand-e
 **Legend:** 🤖 AI agent seat · ⚙️ deterministic script, no LLM · 👁️ human review surface (no AI)
 
 **1. Steering**
-| Seat | Path | What it does |
+| Seat | Path (in this folder) | What it does |
 |---|---|---|
 | 🤖 Narrative Director | `narrative-pipeline/agents/narrative-director.md` | Reads the story corpus, proposes the arc doc that steers every soul's writing |
 | Orchestrator | `narrative-pipeline/agents/orchestrator.md` | Sequences the stages below, routes flags, never writes content itself |
 
 **2. Content generation** — each agent is called one slot at a time, reports back, never calls another agent directly
-| Seat | Path | What it does |
+| Seat | Path (in this folder) | What it does |
 |---|---|---|
 | 🤖 Narrative Architect | `narrative-pipeline/agents/narrative-architect.md` | Persona cards, trait axes, seed→payoff design per soul — and the scene structure every line-writer below builds from |
 | 🤖 Content / Dialogue (spec path) | `narrative-pipeline/agents/content-dialogue.md` | The original design: every player-facing line written by a Claude agent, as one step in the multi-agent crew |
-| 🤖 Content / Dialogue (live path) | private repo: `pipeline-runs/2026-08-17-register-loosening/`, `pipeline-runs/2026-08-25-thread-driven-scenes/`, `assignments/assignment-8-icm/_kobold-tests/` — benchmark evidence copied to `evidence/local-model-findings-2026-08-24.md` and `evidence/thread-driven-scenes-RESULTS.md` | **What actually writes lines today.** A self-hosted open-weight model on my own GPU, fed a structured-context prompt — the full scene state (persona card, canon constraints, the approved structure) packed into one prompt so the model has exactly what it needs to write the scene correctly in a single pass, instead of a multi-turn conversation it has to remember its own way through. A real benchmark settled this split: Claude authors structure, local models write the lines. See Deliverable 3 for the model-selection story |
+| 🤖 Content / Dialogue (live path) | `pipeline-runs/2026-08-17-register-loosening/` (the model benchmark), `pipeline-runs/2026-08-25-thread-driven-scenes/` (the 469-slot production run) | **What actually writes lines today.** A self-hosted open-weight model on my own GPU, fed a structured-context prompt — the full scene state (persona card, canon constraints, the approved structure) packed into one prompt so the model has exactly what it needs to write the scene correctly in a single pass, instead of a multi-turn conversation it has to remember its own way through. This benchmark settled the split: Claude authors structure, local models write the lines. See Deliverable 3 for the model-selection story |
 | 🤖 Spell Schema / Item Schema | `narrative-pipeline/agents/spell-schema.md`, `item-schema.md` | Spell and item records |
 | 🤖 Consistency Verifier | `narrative-pipeline/agents/consistency-verifier.md` | Flags a batch against locked rules and voice — review only |
 | 🤖 QA / Playtest (pipeline) | `narrative-pipeline/agents/qa-playtest.md` | Traversal/logic flags on new content before it reaches the graph |
 
 Both line-writing paths feed the same downstream chain — the same structure format, the same human read, the same `content-check.mjs` gate before anything compiles. Nothing here ships unread — Roc approves every line before it becomes canon content.
 
-**3. Compilation — deterministic, this is where content becomes game data** *(private repo — engine code, not copied here)*
-| Tool | Path | What it does |
+**3. Compilation — deterministic, this is where content becomes game data**
+| Tool | Path (in this folder) | What it does |
 |---|---|---|
-| ⚙️ Resolver | `tools/resolver/` | Turns approved content JSON into `graph.json`, the `ink/` tree, and the day schedule. `--emit-story` compiles the ink into `story.json` — this is the exact file Phaser reads |
+| ⚙️ Resolver | `tools/resolver/` (source + data + tests; `node_modules/` excluded, regenerate with `npm install`) | Turns approved content JSON into `graph.json`, the `ink/` tree, and the day schedule. `--emit-story` compiles the ink into `story.json` — this is the exact file Phaser reads |
 | ⚙️ `content-check.mjs` + lint scripts | `tools/*.mjs` | Blocks the build if any id, index, or slot cap is wrong |
 
-**4. Human review surfaces — no AI, but part of how content and layout get authored** *(private repo)*
-| Tool | Path | Does it write back into the game? |
+**4. Human review surfaces — no AI, but part of how content and layout get authored**
+| Tool | Path (in this folder) | Does it write back into the game? |
 |---|---|---|
-| 👁️ Lantern | `tools/lantern/` | **Yes, indirectly.** Reviewer edits round-trip through `edits.json`, and the resolver's `applyEdits` folds them back into the source before the next compile |
-| 👁️ Content Approval Editor | `phaser/tools/content-editor/` | **No.** Approve/reject + notes only, written to a `review.json` sidecar. It gates content, it doesn't touch it |
-| 👁️ In-engine hotspot editor (`EditModeSystem`, press `E` in-game) | `phaser/src/render/EditModeSystem.ts` | **No live write.** Draws region rects on the real backdrop, then exports the merged result to the clipboard in the exact `regions.json` shape. A person pastes it into the real file and rebuilds — same "author here, build to see it" shape as everything else, just for layout instead of dialogue |
-| 👁️ Screen-Flow | `phaser/tools/screen-flow/` | **No.** Captures every screen, builds a static review page with feedback boxes. Pure review artifact |
+| 👁️ Lantern | `tools/lantern/` (source + tests; `node_modules/` excluded) | **Yes, indirectly.** Reviewer edits round-trip through `edits.json`, and the resolver's `applyEdits` folds them back into the source before the next compile |
+| 👁️ Content Approval Editor | `phaser-tools/content-editor/` | **No.** Approve/reject + notes only, written to a `review.json` sidecar. It gates content, it doesn't touch it |
+| 👁️ In-engine hotspot editor (`EditModeSystem`, press `E` in-game) | `phaser-src/render/EditModeSystem.ts` | **No live write.** Draws region rects on the real backdrop, then exports the merged result to the clipboard in the exact `regions.json` shape. A person pastes it into the real file and rebuilds — same "author here, build to see it" shape as everything else, just for layout instead of dialogue |
+| 👁️ Screen-Flow | `phaser-tools/screen-flow/` (scripts + mockups; the generated screenshot set and the assembled review page are excluded as reproducible output — see the note above Target Game Engine) | **No.** Captures every screen, builds a static review page with feedback boxes. Pure review artifact |
 
-**5. Bundling and deploy** *(private repo)*
-| Tool | Path | What it does |
+**5. Bundling and deploy**
+| Tool | Path (in this folder) | What it does |
 |---|---|---|
-| ⚙️ `bundle-content.mjs` | `phaser/tools/bundle-content.mjs` | Filters to approved-only content, copies it into `phaser/public/` where the browser fetches it |
-| ⚙️ `deploy-itch.mjs` | `phaser/tools/deploy-itch.mjs` | Rebuilds and pushes to itch.io via `butler` |
+| ⚙️ `bundle-content.mjs` | `phaser-tools/bundle-content.mjs` | Filters to approved-only content, copies it into `phaser/public/` where the browser fetches it |
+| ⚙️ `deploy-itch.mjs` | `phaser-tools/deploy-itch.mjs` | Rebuilds and pushes to itch.io via `butler` |
 
 **6. Verification, after the build runs**
 | Seat | Path | What it does |
 |---|---|---|
-| 🤖 QA Adversary | `agents/qa-adversary.md` (copied here; the runnable tool is `phaser/tools/adversary/` in the private repo — see [`../assignment-09/`](../assignment-09/) for its full run of record) | Drives the real game through 250+ steps of deliberately bad input in headless Chromium, files structured findings |
-| 🤖 UI Verifier / UI Builder | `agents/ui-builder.md`, `agents/ui-verifier.md` (copied here; full before/after evidence in [`../assignment-07/`](../assignment-07/)) | Verifier scores a real screenshot against the visual style guide; Builder fixes exactly what it named |
-| ⚙️ `playtest.mjs`, `walk.mjs`, `gate-audit.mjs`, `presence-audit.mjs` | `phaser/tools/` (private repo) | Scripted health checks — full-week walk, gate logic, NPC presence, orphaned content |
+| 🤖 QA Adversary | `agents/qa-adversary.md` (contract, in this folder); the runnable tool and its full run of record are in the sibling [`../assignment-09/`](../assignment-09/) folder in this same repo | Drives the real game through 250+ steps of deliberately bad input in headless Chromium, files structured findings |
+| 🤖 UI Verifier / UI Builder | `agents/ui-builder.md`, `agents/ui-verifier.md` (contracts, in this folder); full before/after evidence in the sibling [`../assignment-07/`](../assignment-07/) folder | Verifier scores a real screenshot against the visual style guide; Builder fixes exactly what it named |
+| ⚙️ `playtest.mjs`, `walk.mjs`, `gate-audit.mjs`, `presence-audit.mjs` | `phaser-tools/` | Scripted health checks — full-week walk, gate logic, NPC presence, orphaned content |
 
 **7. Process, not code — the rituals that keep the above honest**
-| What | Path | What it does |
+| What | Path (in this folder) | What it does |
 |---|---|---|
 | `/gdd-sync` | `commands/gdd-sync.md` | Reconciles a session's rulings back into the GDD, flags superseded doc sections. Proposes, never writes without approval |
 | Systems Documentarian | `agents/systems-documentarian.md` | Regenerates `phaser/ARCHITECTURE.md` — the seam diagram and module table — from what's actually on disk, at build-phase boundaries |
-| `/pm` | private repo: `.claude/skills/pm/SKILL.md` | Reads the task board, reports what's late, blocked, or unreviewed — the first move of any session |
-| Session handoffs | private repo: `plans/_handoffs/*.md` | A narrative "what happened, what's next" note, deliberately left to go stale — durable rulings get promoted into the GDD or `CONTEXT.md`, not left here |
+| `/pm` | `skills/pm/SKILL.md` | Reads the task board, reports what's late, blocked, or unreviewed — the first move of any session |
+| Session handoffs | `plans/_handoffs/` (one representative example included) | A narrative "what happened, what's next" note, deliberately left to go stale — durable rulings get promoted into the GDD or `CONTEXT.md`, not left here |
 
 **8. Audio pipeline — a separate loop, for sound, that writes straight into the engine**
 
-| Seat | Path | What it does |
+| Seat | Path (in this folder) | What it does |
 |---|---|---|
 | 🤖 Audio Implementer (propose) | `agents/audio-implementer/CONTEXT.md`, Stage 1 | Scans `phaser/src/` for a real, already-coded interaction with no sound behind it — a click, a screen transition, a spell cast — and writes one entry to `asset-list.json` with `status: "proposed"`. Never invents an interaction; every proposal names a file and line |
 | 👁️ Human (make + stage) | `agents/audio-implementer/staging/` | Roc makes or sources the sound and drops the file in `staging/`, named to match the proposed slot's id — the one hand-made step in the loop |
@@ -110,15 +110,15 @@ Both line-writing paths feed the same downstream chain — the same structure fo
 
 **9. Art pipeline — 3D reference + local diffusion, for backdrops, portraits, and item icons**
 
-Unlike the narrative and audio loops, this one has no persistent agent seat file — it runs as tool calls inside a session, plus real image-generation software on separate local machines, not through Claude at any generation step.
+Unlike the narrative and audio loops, this one has no persistent agent seat file — it runs as tool calls inside a session, plus real image-generation software on separate local machines, not through Claude at any generation step. **Blender and ComfyUI themselves cannot be copied into this folder** — they're running software on other machines, not repository files — so this stage is documented and demonstrated in the video rather than included as source.
 
 | Tool | Path / where it runs | What it does |
 |---|---|---|
-| Blender MCP (reference pull) | in-session, via the `blender` MCP connector | Searches Sketchfab/PolyHaven for a real-world 3D model matching an item, renders it clean on a transparent background — the source image the restyle pass repaints |
-| ComfyUI (restyle pass) | external — a local SDXL install on its own machine (moved from an AMD/ZLUDA box to an RTX 4070 box mid-project), not Claude | img2img: checkpoint + a Ghibli-style LoRA + the game's locked palette prompt preamble repaints the reference render to match `gdd/09-art-direction.md`, denoise tuned to hold the source shape while changing the surface |
-| `run_ghibli_batch.py`, `upscale.py`, `color_match.py` | `ComfyUI-Zluda/_tools/` (art-pipeline machine, not this repo) | Batch orchestration, tiled upscaling, and palette pull-back toward the game's locked colors — plain scripts, no LLM |
-| FaceDetailer (character faces) | ComfyUI custom node | Automated crop → upscale → redraw → feathered-paste at the face specifically, since a full-body render doesn't give a diffusion model enough resolution to draw a face correctly on its own |
-| Background removal | `commands/remove-background.md`, `tools/remove-background.py` (both copied here) | Cuts a generated backdrop out to a transparent PNG so it drops into the game clean — flood-fill for hard-edged art (portraits, item icons), a two-render matte technique for soft-edged art (glows, VFX) |
+| Blender MCP (reference pull) | in-session, via the `blender` MCP connector — external | Searches Sketchfab/PolyHaven for a real-world 3D model matching an item, renders it clean on a transparent background — the source image the restyle pass repaints |
+| ComfyUI (restyle pass) | external — a local SDXL install on its own machine (moved from an AMD/ZLUDA box to an RTX 4070 box mid-project), not Claude | img2img: checkpoint + a Ghibli-style LoRA + the game's locked palette prompt preamble repaints the reference render to match `gdd/09-art-direction.md` (included in this folder), denoise tuned to hold the source shape while changing the surface |
+| `run_ghibli_batch.py`, `upscale.py`, `color_match.py` | live on the art-pipeline machine, not in this repo | Batch orchestration, tiled upscaling, and palette pull-back toward the game's locked colors — plain scripts, no LLM |
+| FaceDetailer (character faces) | ComfyUI custom node — external | Automated crop → upscale → redraw → feathered-paste at the face specifically, since a full-body render doesn't give a diffusion model enough resolution to draw a face correctly on its own |
+| Background removal | `commands/remove-background.md`, `tools/remove-background.py` (both included) | Cuts a generated backdrop out to a transparent PNG so it drops into the game clean — flood-fill for hard-edged art (portraits, item icons), a two-render matte technique for soft-edged art (glows, VFX) |
 
 **Nothing here ships automatically.** Every stage lands in a `_staging/` folder (`phaser/public/art/items/_staging/`, `.../key-items/_staging/`, or a machine-local output folder for backdrops and characters) and waits for Roc's review before anything moves to `phaser/public/art/` — the same staged-until-approved discipline the narrative and audio pipelines use, just with no scripted promotion step yet: moving a file from staging to shipped is still done by hand.
 
@@ -147,7 +147,7 @@ The only place a human types content directly into a game file is the pre-compil
 
 ### Cost analysis
 
-**Total actual run cost — from a real, controlled benchmark, not an estimate.** [`evidence/giver-benchmark-RESULTS.md`](evidence/giver-benchmark-RESULTS.md) is a genuine measured pipeline run: ten Claude agents (a 5-arm model benchmark plus five verification passes), computed per-call from the real transcripts at published rates. **Phase 1 cost $8.37 exactly** (2,411,567 billed tokens) to produce one soul's persona card, one echo, and six candidate lines. A follow-up demo run at the winning model config (**Phase 2**) cost 1,009,094 billed tokens to produce one full scene end to end — and the report projects that out to the whole game: **the full one-week festival slice (all 8 souls' cards plus 15 scene-appearances) costs about $26 at zero revisions, and about $100 at the 3.8× revision rate this project actually measured.**
+**Total actual run cost — from a real, controlled benchmark, not an estimate.** [`pipeline-runs/2026-07-25-giver/RESULTS.md`](pipeline-runs/2026-07-25-giver/RESULTS.md) is a genuine measured pipeline run: ten Claude agents (a 5-arm model benchmark plus five verification passes), computed per-call from the real transcripts at published rates. **Phase 1 cost $8.37 exactly** (2,411,567 billed tokens) to produce one soul's persona card, one echo, and six candidate lines. A follow-up demo run at the winning model config (**Phase 2**) cost 1,009,094 billed tokens to produce one full scene end to end — and the report projects that out to the whole game: **the full one-week festival slice (all 8 souls' cards plus 15 scene-appearances) costs about $26 at zero revisions, and about $100 at the 3.8× revision rate this project actually measured.**
 
 That's the clean number for the Claude-run half of the pipeline (structure-authoring and verification). It doesn't cover the line-writing itself, which — per Deliverable 2 — now runs on a free local model, so I also pulled a second, cruder number: every Claude Code session that touched this repo across six weeks (2026-07-19 to 2026-08-30, 129 sessions, everything — build fixes, planning, this document, not just clean generation runs), priced at published API rates, comes to **≈$9,990**. That figure is not comparable to the $26–$100 above — it's total project activity, not one content run — but it's the honest answer to "what would six weeks of this cost metered," which the sustainability question below needs.
 
@@ -167,7 +167,7 @@ That's the clean number for the Claude-run half of the pipeline (structure-autho
 
 **A second, real cost change, already covered in Deliverable 2: moving line-writing itself off Claude and onto a free local model — now with a measured electricity cost, not an assumption.**
 
-I measured this directly rather than assuming "free." On the machine that runs generation (RTX 4070 Super, 220W rated), I sampled live GPU power draw with `nvidia-smi` during five clean generation calls on Muse-12B, the model actually used for two of the three deep souls: **173.7W average, 189.0W peak.** For total runtime, I summed every logged `Total:X.Xs` line across every server log I could find (`_kobold-tests/logs/*.log` plus the three `pipeline-runs/*/koboldcpp-server.log` copies) — 287 calls, 1,790 seconds, **≈0.497 hours.** That's a documented floor, not the true total — the production logs are fragments from around server restarts, confirmed against one run's own summary file showing 95 successful calls against only 3 logged completion lines — but it's real measurement, not a guess, and it's the best figure available without a fuller log.
+I measured this directly rather than assuming "free," documented in full in [`plans/_handoffs/2026-08-30-local-cost-analysis-handoff.md`](plans/_handoffs/2026-08-30-local-cost-analysis-handoff.md). On the machine that runs generation (RTX 4070 Super, 220W rated), I sampled live GPU power draw with `nvidia-smi` during five clean generation calls on Muse-12B, the model actually used for two of the three deep souls: **173.7W average, 189.0W peak.** For total runtime, I summed every logged `Total:X.Xs` line across every server log I could find — 287 calls, 1,790 seconds, **≈0.497 hours.** That's a documented floor, not the true total — the production logs are fragments from around server restarts, confirmed against one run's own summary file showing 95 successful calls against only 3 logged completion lines — but it's real measurement, not a guess, and it's the best figure available without a fuller log.
 
 At my actual electricity rate (21–24¢/kWh), the measured floor comes to **≈$0.02**; even inflating the hours 20× to cover what the truncated logs missed, it stays under **$0.45**. Either way it's small enough not to move the number below.
 
@@ -182,15 +182,14 @@ Electricity is close to a rounding error against the Claude cost it replaces —
 
 ---
 
-## Appendix — where the real evidence lives
+## Appendix — where the real evidence lives, all in this folder
 
-Everything below with a relative path (`agents/`, `narrative-pipeline/`, `evidence/`, `commands/`, `tools/`) is copied into this submission folder. Paths starting with `../` point to sibling assignment folders in this same course repo. Anything else refers to the private working repo (`RL_MAP/ProjectOS/game-project/`), demonstrated in the linked video rather than duplicated here.
-
-- Agent contracts: [`agents/`](agents/), [`narrative-pipeline/agents/`](narrative-pipeline/agents/)
-- The measured cost benchmark (Phase 1 $8.37, Phase 2 demo run, the caching fix, the Giver-vs-Kinbound revision comparison): [`evidence/giver-benchmark-RESULTS.md`](evidence/giver-benchmark-RESULTS.md)
-- Benchmark and model-tiering rationale: [`evidence/benchmark-plan.md`](evidence/benchmark-plan.md)
-- Local-model line-writing benchmarks: [`evidence/local-model-findings-2026-08-24.md`](evidence/local-model-findings-2026-08-24.md), [`evidence/thread-driven-scenes-RESULTS.md`](evidence/thread-driven-scenes-RESULTS.md)
-- The measured local-generation electricity numbers (GPU draw, runtime-log method, caveats): [`evidence/local-cost-analysis-handoff.md`](evidence/local-cost-analysis-handoff.md)
-- Deterministic pipeline code (resolver, bundler, deploy script) — private repo: `tools/resolver/`, `phaser/tools/bundle-content.mjs`, `phaser/tools/deploy-itch.mjs`
+- Agent contracts (full crew): [`agents/`](agents/), [`narrative-pipeline/agents/`](narrative-pipeline/agents/)
+- Engine-integration source (resolver, Lantern, content-editor, bundler, deploy script, the in-engine hotspot editor): [`tools/`](tools/), [`phaser-tools/`](phaser-tools/), [`phaser-src/`](phaser-src/)
+- The measured cost benchmark (Phase 1 $8.37, Phase 2 demo run, the caching fix, the Giver-vs-Kinbound revision comparison), full folder including raw arm outputs and the call-by-call run log: [`pipeline-runs/2026-07-25-giver/`](pipeline-runs/2026-07-25-giver/)
+- Benchmark and model-tiering rationale: [`pipeline-runs/benchmark-plan.md`](pipeline-runs/benchmark-plan.md)
+- Local-model line-writing benchmarks, full folders: [`pipeline-runs/2026-08-17-register-loosening/`](pipeline-runs/2026-08-17-register-loosening/), [`pipeline-runs/2026-08-25-thread-driven-scenes/`](pipeline-runs/2026-08-25-thread-driven-scenes/)
+- The measured local-generation electricity numbers and a representative session handoff: [`plans/_handoffs/`](plans/_handoffs/)
+- The `/pm` skill and `/gdd-sync` command: [`skills/pm/SKILL.md`](skills/pm/SKILL.md), [`commands/gdd-sync.md`](commands/gdd-sync.md)
 - Adversarial QA run of record (gate-tracking split, 133 hits): [`../assignment-09/report/2026-08-26-seed20260826/`](../assignment-09/report/2026-08-26-seed20260826/)
 - Visual style-guide loop: [`../assignment-07/`](../assignment-07/)
