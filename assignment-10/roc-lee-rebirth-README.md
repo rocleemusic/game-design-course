@@ -70,6 +70,7 @@ Every step after the human content gate is a script, not a person. Nobody hand-e
 Both line-writing paths feed the same downstream chain — the same structure format, the same human read, the same `content-check.mjs` gate before anything compiles. Nothing here ships unread — Roc approves every line before it becomes canon content.
 
 **3. Compilation — deterministic, this is where content becomes game data**
+
 | Tool | Path (in this folder) | What it does |
 |---|---|---|
 | ⚙️ Resolver | `tools/resolver/` (source + data + tests; `node_modules/` excluded, regenerate with `npm install`) | Turns approved content JSON into `graph.json`, the `ink/` tree, and the day schedule. `--emit-story` compiles the ink into `story.json` — this is the exact file Phaser reads |
