@@ -86,6 +86,7 @@ Both line-writing paths feed the same downstream chain — the same structure fo
 | 👁️ Screen-Flow | `phaser-tools/screen-flow/` (scripts + mockups; the generated screenshot set and the assembled review page are excluded as reproducible output — see the note above Target Game Engine) | **No.** Captures every screen, builds a static review page with feedback boxes. Pure review artifact |
 
 **5. Bundling and deploy**
+
 | Tool | Path (in this folder) | What it does |
 |---|---|---|
 | ⚙️ `bundle-content.mjs` | `phaser-tools/bundle-content.mjs` | Filters to approved-only content, copies it into `phaser/public/` where the browser fetches it |
