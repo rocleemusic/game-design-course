@@ -101,7 +101,7 @@ Both line-writing paths feed the same downstream chain: the same structure forma
 | Seat | Path | What it does |
 |---|---|---|
 | 🤖 QA Adversary | `agents/qa-adversary.md` (contract, in this folder); the runnable tool and its full run of record are in the sibling [`../assignment-09/`](../assignment-09/) folder in this same repo | Drives the real game through 250+ steps of deliberately bad input in headless Chromium, files structured findings |
-| 🤖 UI Verifier / UI Builder | `agents/ui-builder.md`, `agents/ui-verifier.md` (contracts, in this folder); full before/after evidence in the sibling [`../assignment-07/`](../assignment-07/) folder | Verifier scores a real screenshot against the visual style guide; Builder fixes exactly what it named |
+| 🤖 UI Verifier / UI Builder | `agents/ui-builder.md`, `agents/ui-verifier.md` (contracts, in this folder); full before/after evidence in the sibling [`../assignment-07/`](../assignment-07/) folder | Verifier scores a real screenshot against the visual style guide. Builder fixes exactly what it named |
 | ⚙️ `playtest.mjs`, `walk.mjs`, `gate-audit.mjs`, `presence-audit.mjs` | `phaser-tools/` | Scripted health checks — full-week walk, gate logic, NPC presence, orphaned content |
 
 **7. Process, not code: the rituals that keep the above honest**
