@@ -93,6 +93,7 @@ Both line-writing paths feed the same downstream chain — the same structure fo
 | ⚙️ `deploy-itch.mjs` | `phaser-tools/deploy-itch.mjs` | Rebuilds and pushes to itch.io via `butler` |
 
 **6. Verification, after the build runs**
+
 | Seat | Path | What it does |
 |---|---|---|
 | 🤖 QA Adversary | `agents/qa-adversary.md` (contract, in this folder); the runnable tool and its full run of record are in the sibling [`../assignment-09/`](../assignment-09/) folder in this same repo | Drives the real game through 250+ steps of deliberately bad input in headless Chromium, files structured findings |
