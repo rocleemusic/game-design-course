@@ -10,22 +10,16 @@
 
 **Playable Game Link:** https://rocdoessound.itch.io/the-festival-of-souls
 
-**⚠️ Status: needs a fresh deploy before this counts as current.** The live page is real and running (Mode 5, the shipped mode), but it doesn't yet reflect the last round of edits made this week. Before submitting, run:
-
-```bash
-cd phaser
-npm run build:itch      # tsc --noEmit + vite build, content bundled fresh
-npm run deploy:itch     # butler push to the itch.io channel
-```
-
-A stranger opening the link needs no setup. It boots straight into the mode picker, then the game.
-
 ---
 
 ## Deliverable 2: Pipeline Source Code & Engine Integration
 
 **Pipeline Repository Link:** https://github.com/rocleemusic/game-design-course (this folder — `assignment-10/`)
-**Pipeline Run Video Link:** *[TODO — record a short screen capture of a content-generation pass or the resolver build step, then paste the link here]*
+**Pipeline Run Video Link:** 
+- UI verifier and builder:
+https://drive.google.com/file/d/1dKeSes5QjaIiqUUCB9dnp5VsVIO6Jcfv/view?usp=drive_link
+- Bugfixes this week:
+https://drive.google.com/file/d/1x1TL6vuYFgJwOxbInnLQ5tDkKr6WNfjR/view?usp=sharing
 
 **This folder is self-contained.** Every agent contract, the resolver and Lantern review-tool source, the bundling/deploy scripts, the in-engine editor code, and the benchmark and cost-analysis reports are copied in here.
 
