@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Ilsa works the bellows alone, the forge fire smoldering instead of burning. She sees the player arrive and states, \"You're on the bellows,\" her tone flat and certain, as if the task were already theirs.",
+    "wc": 35,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player brings a bundle of sticks to feed the fire. Ilsa takes them without pausing, works them in. The fire catches properly. \"There, that's it,\" she says, settling into a rhythm with the bellows.",
+    "wc": 35,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player casts *ignite* on the banked coals, and the fire catches properly. Ilsa feels the heat change through the bellows handle, and adjusts her rhythm to match, wordless.",
+    "wc": 29,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player speaks, \"Rough morning for it.\" Ilsa, working the bellows, responds without pause, \"It'll come round.\" Her voice is flat, certain, and she gives no further elaboration. The fire continues to smolder, its state unchanged but tended.",
+    "wc": 38,
+    "ok": true,
+    "err": null
+  }
+}

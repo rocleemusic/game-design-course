@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Ilsa's forge is cold and dark, the coals banked from the night before. She sets a bundle of sticks neatly at the forge mouth, her daily ritual, not for the player's sake. She takes a step back, pauses, then reaches for the bellows. \"It's time,\" she says, a simple statement, not a question or request. She begins to work the bellows, coaxing the first flames from the dry tinder. \"First light, first fire,\" she murmurs, more to herself than to the player. \"Old way.\" The flames catch and grow, casting warm shadows on the walls of the forge. Ilsa watches the fire build, her expression unchanging. The player waits",
+    "wc": 109,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player asks, \"How do you get it going?\" Ilsa responds, \"You clear back first. Always.\" She lays the sticks into the forge mouth, settles them, steps back a half-pace before doing anything else \u2014 a practiced clearance, the physical clue. She speaks the world dialect: one thought per turn, plain, confirming facts and never feelings, with the world's 75-word dialogue ceiling (loosened 2026-08-23) as a cap rather than a target \u2014 her ordinary line sits in the world's 5\u20137 word band, and that placement does not move just because the ceiling did. What marks her is grammar. Her arrangements arrive already decided and are stated",
+    "wc": 106,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player tries the same clearing motion on a second stick, off to the side. It catches, small and steady. Ilsa watches, her eyes following the player's hands, and when the stick starts to smolder, she gives a brief nod of approval. \"There it is,\" she says, her voice low and matter-of-fact. \"Now you've got it.\" She moves to the bellows, her focus returning to the growing fire, leaving the player to observe their own accomplishment.",
+    "wc": 76,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player picks up a river stone lying nearby instead and holds it near the coals. Ilsa glances at the stone, then looks away. \"That won't catch.\" She returns to the bellows, her hands busy. No further explanation follows. The forge fire begins to take hold, but the stone remains unlit. Ilsa doesn't comment on the failed attempt. The lesson is clear without words: only the right materials will respond to the spell.",
+    "wc": 73,
+    "ok": true,
+    "err": null
+  }
+}

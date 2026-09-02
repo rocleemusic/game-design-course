@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The postman pauses along the fence line, the mailbag heavy on one shoulder. He presses his shoulder blade against a post and grimaces, unable to reach the spot.",
+    "wc": 28,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player gestures toward the man's shoulder. \"Can't reach it?\"\n\nThe postman grimaces as he shifts his weight. \"Right between the shoulder blades. I can never quite reach that spot properly.\"",
+    "wc": 31,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player hands over a scrap of wool for him to work with. The postman settles the fabric against the itch and his shoulders drop and roll once.",
+    "wc": 28,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player presses the wool against the post. No relief comes.",
+    "wc": 11,
+    "ok": true,
+    "err": null
+  }
+}

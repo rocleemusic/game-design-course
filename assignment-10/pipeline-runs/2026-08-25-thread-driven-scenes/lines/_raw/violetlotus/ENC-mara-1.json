@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Mara is already sorting what little she has, running on longer than the village median as her card allows \u2014 she explains what each half-basket still needs while her hands keep moving. \"The frost'll be in by week's end,\" she says, \"so we're down to what the ground gives up.\" She holds up a small bunch of berries, dark and tight to the stem. \"These'll keep, though. Good for the tonic.\" Her voice is warm, exact, and present as she works. \"It's all in how you store them.\" She sets the berries down with care and turns to the player. \"We could use more of these, if you've a mind to gather. The clearing's not far",
+    "wc": 116,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": null,
+    "wc": 0,
+    "ok": false,
+    "err": "leakage: out-of-scene character invented: 'Toby' is not in this scene's notes"
+  },
+  "option_b": {
+    "text": "Mara watches the color change, sets the vessel aside to work. \"It's a start. The rest we'll have to gather ourselves \u2014 the village is tight, but it keeps.\" She turns to the player. \"Good, another set of hands \u2014 hold this a second, mind the third step, and tell me your name while you're at it.\"",
+    "wc": 57,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "Mara pauses in her sorting, glances up as the player approaches. \"Tight, but it keeps.\" She resumes her work, fingers precise and sure. \"The berries are a help, but we're running short of what keeps. A good tonic, and we might see the week through.\" Her eyes flick to a corner of the stall, where a basket waits, empty and ready. \"You know your way around a still, I take it?\" Her hands never stop moving, even as she turns to face the player, a question in her eyes and on her lips. \"We could use the help, if you've a mind to lend a hand.\" She gestures to the herbs laid out on the counter, a silent invitation",
+    "wc": 119,
+    "ok": true,
+    "err": null
+  }
+}

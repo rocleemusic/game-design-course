@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "types": ["vite/client", "node"]
+  },
+  "include": [
+    "src",
+    "vite.config.ts",
+    "../../src/render/vfx",
+    "../../src/ui/theme.ts",
+    "../../src/world/events/GameEvents.ts"
+  ]
+}

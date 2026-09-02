@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "A massive lump of feast dough rests on Toby's counter, too large for the shop's standard scales. Toby picks up a smooth river stone and presses it against the dough without a word.",
+    "wc": 33,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player watches the stone settle against the dough. \"How do you get it even?\"\n\nToby adjusts his grip without looking up. \"Stone does that part.\"",
+    "wc": 26,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player hands Toby a second river stone. The dough parts clean into matched measures.",
+    "wc": 15,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player picks up a single berry from a nearby bowl and sets it where the stone would go instead. Toby glances at the berry, then back at the dough.",
+    "wc": 30,
+    "ok": true,
+    "err": null
+  }
+}

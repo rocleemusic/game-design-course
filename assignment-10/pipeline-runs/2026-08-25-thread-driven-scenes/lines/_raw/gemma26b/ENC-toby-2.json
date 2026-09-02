@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Toby angles a borrowed crock toward the light, checks it by smell without comment, and sets it back down. He glances at the tally slate where a second row of marks has been added, then looks to the player. \"It'll hold some of it.\"",
+    "wc": 44,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "Toby tucks a small packet into the cloth with the starter. \"Bakery weight.\"",
+    "wc": 13,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "Toby watches the dough settle into even lumps and resets his count. \"Portions are easier to track.\"",
+    "wc": 17,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "\"That'll hold?\"\n\nToby looks at the tally marks and the crock. \"Some of it.\"",
+    "wc": 14,
+    "ok": true,
+    "err": null
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Mara rests her hand near the kettle, watching the water. \"The cast draws the berries' color fast, but it'll take a while if you just leave it to the fire. It's better to keep it moving.\"",
+    "wc": 36,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player asks, \"Does it work on plain water?\" Mara's hand hovers near the kettle. \"Not on its own. Needs something in it first.\"",
+    "wc": 24,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player offers a fresh skin of spring water and a handful of berries for a second kettle. The water takes on a deep hue in moments, and Mara gives a small, approving nod. \"That's the way. The color takes fast when the cast draws it, and it's better than waiting on the fire alone.\"",
+    "wc": 55,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player dips a cup straight into the well water to see. Mara watches the cup, noting how the liquid takes on a faint, unwanted discoloration from the floating leaf-litter. \"It catches what is there, but it doesn't draw anything new. It's just the well being the well.\"",
+    "wc": 48,
+    "ok": true,
+    "err": null
+  }
+}

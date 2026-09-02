@@ -1,0 +1,47 @@
+{
+  "provisional": true,
+  "generated": "tuning-home 2026-07-30",
+  "note": "The ONE home for tunable global game settings (Roc's rule, 2026-07-30: all global game settings tune in one place). The resolver reads this file. Map structure stays in screen-specs.json; per-screen slot counts are map data, not tuning.",
+  "arch_promote": {
+    "threads_moved_min": 3,
+    "of_threads": 5,
+    "role_goals_advanced_min": 2,
+    "_note": "A2 formula, approved 2026-07-30. Bond is not an input (ruled)."
+  },
+  "bond": {
+    "category_weights": { "Trust": 2, "Intimacy": 2, "Recognition": 3 },
+    "trait_coefficients": { "_default": 1.0, "toby": 1.0, "ilsa": 0.7 },
+    "band_thresholds": { "mid_min": 6, "high_min": 18 },
+    "demo_multiplier": 1.0,
+    "_note": "SLICE VALUES, ruled by Roc 2026-07-30; retune for the full game. ONE hidden count per soul (guardrails check 2) — these weight a single delta and are never stored as per-category sub-scores. RE-SIZED 2026-07-31 after the W1 content pass: a fully attentive life now yields ~24 (Toby) / ~29 (Ilsa), so the thresholds moved to keep the RULING true rather than the numbers. mid_min 12 = about half an attentive life; high_min 36 needs a second life. 36 rather than 32 for MARGIN: the walker measures Ilsa's best real week at 31.5, and at 32 she sat half a point short, so any bond added in the prose pass would silently flip her to high in one life and break the ruling. RE-SIZED AGAIN 2026-08-07 after the toby-the-shelf C1-C4 port (SC-T2-08..SC-T2-11, GP-120) roughly tripled Toby's authored content: the authored per-life ceiling (test/tuning.test.ts's maxBondPerLife) rose from ~24 to 71, which cleared the old high_min=36 in a single life and broke the ruling from the other direction — Roc, 2026-08-07 verbatim: 'c4 mid variant should be possible if you lean heavily on toby, high not possible in single life.' Same ruling as 2026-07-30, restored not reinterpreted. Measured before retuning: theoretical one-life ceiling (tuning.test.ts maxBondPerLife) is 71 for Toby, 31.5 for Ilsa (mara/nell/juno/linnet/pip/bex have no authored bond scenes, pre-existing gap, out of scope); the real walked achievable max (walk.test.ts searchReachable, move/day-economy constrained) is 65 for Toby (exact, scenesUsed SC-F1-02/T2-04/T2-07/T2-08/T2-09/T2-10/T2-11/T6-01/T7-toby) and 28.7 for Ilsa (exact). mid_min stays at 12 — unchanged, still clears for both souls, and raising it would push Ilsa (28.7 real, 31.5 theoretical ceiling) toward falling out of mid, which nothing measured requires. high_min moved 36 -> 82: must clear the higher of the two Toby ceilings (71 theoretical) with the same proportional MARGIN as the 2026-07-31 resize (36/31.5 ~= 1.14x the measured bar) — 71 * 1.14 ~= 81, rounded up to 82 so a later prose pass in the C1-C4 line still cannot silently flip Toby to high in one life; a second life (142 theoretical, 130 real) clears it with room to spare. test/walk.test.ts measures the achievable maximum and test/tuning.test.ts the authored one, so both halves are guarded. test/tuning.test.ts derives these from the real content and fails if the ruling stops holding, so re-author content freely and let the test tell you when to re-size. demo_multiplier scales the DELTA, not the thresholds — set 2.0 to reach high inside one life for demonstration, so the real bar stays readable here. Recognition weighted highest because pipeline.md step 9 calls being-seen the thematic core. RESPECT RETIRED 2026-08-10 (Roc): folded into Trust and Recognition after nine authored threads recorded zero Respect deltas; craft shown is a promise kept in another form, and a soul's values honoured is that soul noticed. Weights of the surviving three are unchanged. ilsa < 1.0 because the Kinbound is guarded and 'a guarded soul's bond moves slower' is the spec's own example; unchanged this pass — Ilsa's ceiling barely moved (31.5 -> 28.7 theoretical/real split, well inside noise from the new content competing for day-economy) so nothing measured shows the coefficient broken. RULING RETIRED 2026-08-17 (Roc): 'one attentive life earns MID, HIGH needs a second life' (2026-07-30, restored 2026-08-07) is replaced by 'one attentive life MAY reach HIGH'. Reshuffle left the Definition of Done the same day, so the second-life payoff is not demonstrated at the capstone, and under the old ruling every high-band beat was unreachable in the single playthrough a demo gets. RE-SIZED 2026-08-17: mid_min 12 -> 6, high_min 82 -> 18. SIZED AGAINST THE WALKED CEILING, NOT THE THEORETICAL ONE — this is the correction that matters. maxBondPerLife (tuning.test.ts) now reads toby 174 / mara 128 / ilsa 114.1, and those numbers are unreachable BY CONSTRUCTION: they sum the best option at every beat across all 34 authored scenes, and a life holds 5 days x 3 moves = 15 move slots. The real walked figures, each replayed through walkWeek from that soul's own bond-optimal week, are toby 35 / mara 20 / ilsa 56.7. Note the walked ceiling FELL since 2026-08-07 (toby 65 -> 35) even as the authored total rose 71 -> 174: content growth adds scenes that compete for the same 15 slots, and only 12 of 34 scenes are enterable in one week. TWO FINDINGS THAT MOVED THE DECISION: (1) MARA is the binding soul at 20, not Ilsa. Ilsa walks 56.7 — the HIGHEST of the three — despite trait_coefficient 0.7, because her scenes cluster on T4 and the planner can chain them inside one week. GP-21's premise (Ilsa's 0.7 makes her the floor) is aimed at the wrong soul; it holds theoretically and inverts in play. (2) high_min 18 sits under Mara's 20 with about 10% margin, the tightest in the candidate set — 24 or above strands Mara in MID and breaks the new ruling from the same direction the old one broke. mid_min 6 is a third of high_min, keeping three bands inside the achievable range. WHAT IT COSTS, measured not guessed: CH-T7-toby-3 and its two options (Toby's day-5 farewell at T7, the MID arm) become unreachable — he now ends the week HIGH, so the HIGH arm renders instead. CH-T7-toby-2 (the LOW arm) was already dead before this change. So SC-T7-toby's three-way band fork now only ever renders its HIGH branch. That is the narrowing gdd/12-technical-overview.md's Reciprocity row has to record. PROVISIONAL, and Roc accepted it as such: the walked figures are LOWER bounds (the week planner is a heuristic) and walk.ts's own upperBound accounting is currently under-counting (mara achieved 20 vs upperBound 12; ilsa 56.7 vs 24.5), which is a separate open bug. If the reachability wall opens — 22 of 34 scenes are currently unenterable in a 15-move week, a day-economy/content-scope question, NOT a search-budget one — these numbers move again. demo_multiplier is now REDUNDANT at 1.0: its stated purpose ('reach high inside one life for demonstration') is the real bar under the new ruling. Flagged for cleanup, deliberately not deleted here."
+  },
+  "day_loop": {
+    "moves_per_day": 3,
+    "days_per_life": 5,
+    "_note": "Was hard-coded in the emitted day loop's day_start knot. Moved here under the single-home rule; the walk tests vary it."
+  },
+  "availability_weights": {
+    "role_anchor": 5,
+    "home_evening": 4,
+    "base": 1,
+    "_note": "NPC day-start draw weights (S3 weighted pools). role-workplace.json holds WHERE each role anchors; these hold HOW STRONGLY."
+  },
+  "floor": {
+    "prefer_unlocked_screens": true,
+    "prefer_scene_screens": true,
+    "_note": "RULED (Roc, 2026-07-30, B1): guaranteed souls land on screens the player can enter today. Locked screens may hold slots once specced; the draw falls back to unlocked ones."
+  },
+  "live_leads": { "min": 2, "max": 3 },
+  "aliveness_bands": {
+    "quiet_max_days": null,
+    "waking_max_days": null,
+    "_note": "Band thresholds await playtest (ruled: bands are quiet/waking/alive)."
+  },
+  "npc_slot_defaults": {
+    "per_block_multiplier": 1.0,
+    "_note": "Global busyness scale (C4). Per-screen counts stay in screen-specs.json. RULED (Roc, 2026-07-30): uniform-across-blocks stays the default; a screen may author per-block counts as an override where its draft implies them."
+  },
+  "word_ceilings": {
+    "_note": "NOT tunable here — ceilings are register/guardrails contract (40 dialogue / 60 action-object / 12 player_line). Listed so nobody looks for them in this file."
+  }
+}

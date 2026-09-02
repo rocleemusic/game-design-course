@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The farmer sets sticks and a handful of dirt against the soft ground and draws a line. \"The festival week's planting is squeezed between every other job.\"",
+    "wc": 27,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player asks, \"Does the ground matter?\" The farmer pauses to glance down at the dark soil. \"Has to be turned first. Packed ground just scuffs.\"",
+    "wc": 26,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player turns a second patch of soil with a hoe, then offers it for the same treatment. A clean furrow opens.",
+    "wc": 22,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player tries the cast on the nearby cobbled square, but the stone does not part.",
+    "wc": 16,
+    "ok": true,
+    "err": null
+  }
+}

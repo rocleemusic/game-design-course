@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The player stands at the edge of the Festival Grounds, watching the priest approach a row of lanterns, their wicks freshly dressed. A single flame burns steadily in the rite-fire nearby. The priest dips a taper into the flames, then sends the fire dancing through the air to the nearest lantern. It catches, and the lantern begins to glow. \"One flame, one send,\" the priest murmurs, moving on to the next lantern. \"A test of the festival's strength before the crowds arrive.\"",
+    "wc": 82,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The priest pauses and turns to the player. \"Does the flame run out?\" \"Depends how far it's asked to go. One flame, one send.\"",
+    "wc": 24,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player dips a second taper and sends the flame to the next lantern. The wick catches and burns steadily. \"I see,\" the player says, impressed. \"It's a direct line.\" The priest nods, pleased. \"The leap doesn't ask for much. Just a straight path.\" The lanterns now stretch down the Arch in a steady glow, each one alight and unwavering. The player looks along the line, understanding the simple power of the spell. \"One flame, one send,\" the player murmurs, more to themselves than to the priest. The priest simply smiles, leaving the player to contemplate the magic in front of them. The flame has been sent, and the lanterns burn bright. The",
+    "wc": 113,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player sends a flame toward the rain barrel at the edge of the grounds instead, out of curiosity. It lands on the water and goes out, the flame spent for nothing. \"Curiosity's a fine thing, but a wasted flame is a sorry thing to see.\" The priest shakes their head, moving to light the next lantern along the row. \"It's a lesson best learned early, before the night gets long.\" The rain barrel glimmers in the fading light of the unspent flame.",
+    "wc": 83,
+    "ok": true,
+    "err": null
+  }
+}

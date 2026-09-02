@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The forge yard has settled into a familiar rhythm over the past few days. The centerpiece frame stands complete, though the socket for the special ore remains empty. Ilsa has arranged her tools in a careful circle around the gap. She places a river stone on the anvil.",
+    "wc": 48,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player hands over a river stone from the forest. Ilsa turns the stone once in the light before setting to work on it.",
+    "wc": 24,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player casts temper on the heated stone as it cools. The stone sets true on the first pass. Ilsa checks the edge with her thumb.",
+    "wc": 26,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player asks, \"Waiting on something?\"\n\nIlsa continues her work without looking up. \"It'll turn up.\"",
+    "wc": 16,
+    "ok": true,
+    "err": null
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The priest kneels beside the censer, unhurriedly working grass and sap into it. He cups his hands around the rising smoke, and it steadies, climbing straight and undisturbed by the wind. \"Once it's called straight, the wind won't fight it,\" he murmurs, his voice calm and steady like the smoke.",
+    "wc": 50,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The priest looks up, a small smile touching his lips. \"It's a simple truth, but a profound one,\" he says, his voice soft yet clear. \"Once something is called straight, the wind respects that. It can't change its path.\" He turns his gaze back to the censer, the steady column of smoke rising into the sky. \"Just as some things in life, once they're set, they won't be moved by the winds of change.\" The player nods thoughtfully, the priest's words resonating with their own experiences.",
+    "wc": 86,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player sweeps the dusty floor near the censer, offering it as a second thing to lift. The dust rises in a thin sheet and drifts out the doorway.\n\nThe priest watches, a small smile tugging at the corners of his mouth. \"Well done,\" he says, \"You've a knack for this.\" His eyes follow the dust as it disappears into the sunlight. \"The Festival will be pleased.\" He turns back to the censer, hands still cupped around its steady stream of smoke. \"Now, let's see what else you can raise.\" His gaze shifts to the player, expectant.",
+    "wc": 97,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": null,
+    "wc": 0,
+    "ok": false,
+    "err": "leakage: structural marker leaked into output: 'Records '"
+  }
+}

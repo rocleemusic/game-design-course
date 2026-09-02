@@ -1,0 +1,12 @@
+{
+  "provisional": true,
+  "generated": "layout-pass 2026-07-29",
+  "note": "PROVISIONAL — pending human review. The seam is an edge annotation, not a screen; the draft's Forest Path holds no screen_id (screen-spec-schema.md, connects_to row). Bidirectional and never a lock (draft, cross-location seam section).",
+  "seams": [
+    {
+      "from": "T1",
+      "to": "F1",
+      "name": "forest_path"
+    }
+  ]
+}

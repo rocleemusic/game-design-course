@@ -1,0 +1,14 @@
+{
+  "beat_a": {
+    "text": "The mage stands at the edge of the village square, her eyes scanning the colorful banners and the bustling crowd. \"The Festival of Souls and Hearthlight,\" she murmurs, a spark of excitement in her voice. \"I've heard whispers of its magic, and now I can feel it. This is a place of power.\" She takes a step forward, ready to immerse herself in the celebration and, perhaps, uncover the secrets that draw the souls back home each year.",
+    "wc": 78,
+    "ok": true,
+    "err": null
+  },
+  "beat_b": {
+    "text": "INT-1-b:\nThe player steps into the village square, a cozy space framed by timber-framed cottages and a bubbling fountain at its center. The square is bustling with villagers going about their morning chores, children playing, and the scent of fresh bread wafting from a nearby bakery.\n\nA cheerful village elder approaches the player with a warm smile. \"Welcome, traveler! I don't believe I've seen you around these parts before. I'm Ilsa, the village baker. Might I ask your name?\"\n\nThe player looks around, taking in the quaint scene. A gentle breeze carries the sound of laughter and the clucking of chickens. The sun is just beginning to rise,",
+    "wc": 108,
+    "ok": true,
+    "err": null
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Mara sets a jar back on the shelf, checks the seal against the light \u2014 \"This one won't keep past the week without help.\" She says it plainly, no elaboration. The frost is nearer. The jars line the shelf, roughly half filled, waiting. A chill has crept into the room, though the hearth still glows. She straightens, eyes scanning the jars, calculating. The air grows heavy with the weight of time passing.",
+    "wc": 72,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "Mara hands over a measure of salt. \"Here \u2014 this will keep the seal tight a while longer,\" she says, her voice warm and steady as she works the salt into the jar's lid, checking its hold with a practiced eye. She sets the jar back on the shelf, far from the others still at risk, her movements precise and sure. \"Thank you,\" the player says, watching her work. Mara nods, a small smile touching her lips. \"Good to have another set of hands around here,\" she says, her words carrying the weight of shared purpose. \"Let's get these jars sorted before the frost comes.\" She turns back to the task, her past-tense slip unremarked upon, as the two work",
+    "wc": 120,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player casts *preserve* on the freshly cut herbs. Mara notes the batch stops wilting mid-cast without looking up. \"That's a good cast,\" she says, \"not many can do it so clean.\" She takes a jar, works a measure of salt into the seal, and checks it against the light \u2014 the fix holds this time. \"There,\" she says, setting the jar back and moving it to the far end of the shelf. \"That one won't spoil before the frost now.\" She turns to the player, her eyes warm with gratitude. \"Thank you for that, and for the herbs too. They were just starting to go.\" She reaches out a hand to shake, her touch firm and her",
+    "wc": 118,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "Mara points out two jars, says nothing further. \"Which ones are close?\" the player asks. Mara points out two jars, says nothing further. The player understands the silence. The sorting act is all the answer needed.",
+    "wc": 36,
+    "ok": true,
+    "err": null
+  }
+}

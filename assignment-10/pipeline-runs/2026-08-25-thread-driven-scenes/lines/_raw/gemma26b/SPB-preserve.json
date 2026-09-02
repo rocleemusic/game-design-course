@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Mara pinches salt between her thumb and forefinger and sprinkles it over the freshly cut flowers, working it into the stems without ceremony. \"Needs to be held fast before the day turns them,\" she says.",
+    "wc": 35,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "the player asks, \"Does it work on anything dried?\"\n\nMara shakes her head, her fingers still busy with the salt. \"No. Has to still be fresh.\"",
+    "wc": 26,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "the player offers a basket of berries picked this morning. Mara nods, her fingers working the salt over the fruit with a steady rhythm. \"This works just as well, so long as it's still ripe and has not started to go soft.\"",
+    "wc": 42,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player sets a pinch of salt on the bundle of dried herbs, testing the edges of the practice.\n\n\"Does it work on things that are already done?\" Mara asks, her hands moving with a steady, rhythmic grace.",
+    "wc": 38,
+    "ok": true,
+    "err": null
+  }
+}

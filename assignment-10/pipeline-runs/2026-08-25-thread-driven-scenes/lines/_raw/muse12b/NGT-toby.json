@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The evening stillness hangs thick in the room, the lanterns' warm glow spilling across the cleared tables. Toby moves with the methodical ease of a man who knows his purpose. His hands stack the last tray onto the towering pile with a soft clink of wood against wood.\n\nHe pauses only briefly as he straightens, surveying the remaining work. The unopened jars catch his eye for a moment, lined up neat as soldiers on the shelf beyond the kitchen doorway. Then his gaze slides past them, focusing back on the trays. He picks up another, fingers moving deftly, setting it into place with the same care he gives everything he does.\n\nThe air smells of spent wax and damp stone, mingling with",
+    "wc": 122,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player sets the tray down. \"That's a lot of thank-yous stacking up.\"\n\nToby's hands stop on the next tray for exactly one beat. His fingers press lightly against the wood before resuming their work, faster now than before, as if the movement itself might shake off the observation. He doesn't look up. He doesn't stop. Just: \"Yeah.\"\n\nThe word is small, but not unkind. It is the acknowledgment of a man who does not need to be told what he already knows\u2014that the jars represent a ledger, not charity. He will not say it aloud, but he knows what they mean. His hands move quickly, stacking one tray atop another with a practiced ease, but now there",
+    "wc": 118,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player sets the folded cloth on the table by Toby's elbow, the fabric smooth and still warm from the last use. Toby's hands don't stop, don't acknowledge. They just work\u2014stacking trays with that same unbroken rhythm, moving the cloth from the table to the tray he's holding with no extra motion, as if the cloth had always belonged there. He tucks it under the stack, and the next tray comes down atop it.\n\nNeither of them speak. The lantern light catches on the cloth's creases, the edges shifting as Toby lifts the full stack and carries it toward the kitchen door. He doesn't look back, but his step is just a little slower. A tiny concession. A debt acknowledged",
+    "wc": 120,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player settles onto the bench, leaning against the table's solid edge. The wood is warm where the evening's meal was laid out, a quiet comfort that contrasts with the cool air near the open door.\n\n\"Come sit a minute,\" the player says, speaking gently but with purpose.\n\nToby hesitates only briefly before shaking his head. He keeps moving, but his hands slow just a fraction as he arranges the last tray.\n\n\"In a bit,\" he says, the words coming out almost automatic, like something he's said before to many people over many years. He doesn't look up from the trays, but he doesn't speed up again either, his movements methodical rather than rushed now that he's been asked.",
+    "wc": 119,
+    "ok": true,
+    "err": null
+  }
+}

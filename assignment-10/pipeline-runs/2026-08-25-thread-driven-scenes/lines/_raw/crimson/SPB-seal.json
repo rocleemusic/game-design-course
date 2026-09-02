@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The postman's calloused hands work deftly, pressing a lump of warm beeswax along the folds of a letter. \"A letter that opens in the rain,\" he says, eyes focused on his task, \"is a letter lost.\"",
+    "wc": 36,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "\"Does every letter need it?\" the player asks, curious about the beeswax. The postman smiles warmly, explaining, \"Just the ones going out today. Rain's coming.\"",
+    "wc": 25,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player hands over a second folded letter to the postman. He takes it, a little surprised but pleased, and works the warm beeswax along its creases. \"Ah, you're a quick learner,\" he says, pressing the folds flat. \"Just like that, it's sealed. Ready for the journey ahead.\" He hands the letter back, now protected from the rain.",
+    "wc": 58,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player picks up an already-sealed letter and tries to reseal it, out of curiosity. The postman watches, amused. \"No, no. That one's already gone through. A letter that opens again is a letter lost twice.\"",
+    "wc": 36,
+    "ok": true,
+    "err": null
+  }
+}

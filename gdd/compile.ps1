@@ -17,10 +17,12 @@ $gddDir = $PSScriptRoot
 $resourcesDir = Join-Path $gddDir "..\resources"
 
 $parts = @(
+  @{ File = 0;  Title = "Part 0: The World" }
   @{ File = 1;  Title = "Part I: Concept & Pillars" }
   @{ File = 3;  Title = "Part II: Game Mechanics" }
   @{ File = 9;  Title = "Part III: Art, Audio & AI Architecture" }
   @{ File = 12; Title = "Part IV: Technical Strategy & Scope" }
+  @{ File = 14; Title = "Part V: Visual Style Guide" }
 )
 
 $boilerplate = "See [``CONTEXT.md``](CONTEXT.md) for how this fits with the rest of the GDD. "

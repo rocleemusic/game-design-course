@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Toby measures a scoop, frowns, scrapes it back. He says, without looking up, \"Dough went flat overnight. Square's forty loaves short if the whole town turns out \u2014 arithmetic delivered fast, one thought per turn, the shortfall converted to a number before it can register as anything else.\"",
+    "wc": 48,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player brings a skin of spring water over to the starter bowl. Toby glances at it, says nothing, works it into the starter without breaking stride. The starter takes faster with it.",
+    "wc": 33,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "Toby glances at the floating scale, recalculates out loud: \"Twenty pounds short. The whole town's coming.\"",
+    "wc": 16,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player steps into Toby's workshop, the morning light slanting in through the high windows. Toby doesn't pause in his work, his hands deftly measuring out flour. \"Dough went flat overnight,\" he says, not looking up. \"Square's short forty loaves if the whole town turns out. Arithmetic's easy.\" He scrapes the measure back, starts again.\n\nThe player hesitates, then speaks up. \"Need a hand?\" Toby's hands falter for a heartbeat. \"Not yet,\" he says, resuming his work. The starter bowl gets a quick reset, the proofing cloth draped over it with a small, efficient movement. Toby reaches for the next task without looking up, the scene closing",
+    "wc": 107,
+    "ok": true,
+    "err": null
+  }
+}

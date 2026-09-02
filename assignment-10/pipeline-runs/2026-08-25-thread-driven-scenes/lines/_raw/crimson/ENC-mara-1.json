@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Mara sorts the few remaining items in her baskets, her hands moving with practiced efficiency. \"The frost will be here by week's end,\" she murmurs, setting aside a wilted sprig. \"We'll need to make sure the cellar's well-stocked.\"",
+    "wc": 38,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player hands over a basket of berries gathered from the clearing. Mara checks them, nods, adds them to the working pile. \"Good, another set of hands. Hold this a second, mind the third step, and tell me your name while you're at it.\"",
+    "wc": 44,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player casts *steep* over a vessel of water with what herbs are on hand. Mara watches the color change, sets the vessel aside to work. \"That's the way, right?\" the player asks. Mara nods, \"Exactly so. Good hands you have. We'll make a proper tonic yet.\"",
+    "wc": 47,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "Mara looks up from her work, meeting the player's eyes as they speak. \"How's it looking?\" she says, \"Tight, but it keeps.\" Her hands never stop moving, sorting and arranging the contents of her stall with practiced efficiency. She gestures to the mostly empty baskets. \"The frost's coming \u2014 we'll need every bit of this to make it through the week.\"",
+    "wc": 61,
+    "ok": true,
+    "err": null
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Mara stands at the counter of her herb stall, her hands moving swiftly as she measures out the last of the winter's herbs into a stone mortar. The air is thick with the scent of dried leaves and earth. \"Tonight or not at all,\" she mutters, her voice flat and determined as she begins to grind the herbs into a fine powder. The frost is predicted overnight, and the last of the tonics need to be made before the first light of dawn. She works without hurrying, her hands steady and sure, knowing that the herbs' potency depends on the precise rhythm of her movements. The lanterns used to hang right there \u2014 mind your step, they'll be up again by evening, same as every year.",
+    "wc": 126,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player brings a skin of spring water to the counter. Mara pours it into the last vessel without pausing her work. \"Tonight or not at all,\" she says flatly. The water turns the herbs a deep shade of green as she sets the finished jar among the others. \"That's the last of them,\" she says, wiping her hands on her apron. \"The frost will hold till dawn, then we'll see what we've saved.\" Her voice carries a quiet satisfaction, the job well done before the season's first freeze. The row of jars gleams under the lantern light, a silent testament to her careful work. She turns to the player, her eyes meeting theirs for a moment before she begins to clean",
+    "wc": 122,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "Mara casts *steep* on the last of the uncast herbs. The color turns fast; she sets the finished vessel with the rest. \"That's the last of them. Good \u2014 I'll be able to get the cellar doors closed before dark.\" She wipes her hands on her apron, looking over the shelf of jars. \"This is the most I've ever had ready this early. Thanks for your help.\" She opens the cellar door, the cool air rushing up to meet her. \"After you.\"",
+    "wc": 82,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player: \"Need another set of hands?\"\n\nMara: \"Not tonight.\" She keeps working alone, her hands never slowing as she finishes the last of the jars. \"Tonight or not at all,\" she says again, this time with a faint sigh. The words are the only hint of the pressure she's under.",
+    "wc": 51,
+    "ok": true,
+    "err": null
+  }
+}

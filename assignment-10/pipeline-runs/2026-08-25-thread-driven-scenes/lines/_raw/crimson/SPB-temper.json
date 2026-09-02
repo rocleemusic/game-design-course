@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Ilsa swings the billet to the anvil, its glowing surface sending a flicker of heat into the air. \"It needs to glow, not just be warm,\" she says flatly, her gaze fixed on the metal.",
+    "wc": 35,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "Ilsa turns the billet once more in the coals, checking the color, then swings it to the anvil. \"Glowing, not just warm,\" she says flatly. \"That's the only way it matters.\"",
+    "wc": 31,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player hands Ilsa a second river stone, warm from near the fire. Ilsa takes it and starts to work it the same way, her movements confident and precise. \"This one's ready,\" she says, not looking up. The stone hardens evenly under her touch, the temper taking hold. \"There,\" she finishes, setting it down beside the first. \"Both done.\"",
+    "wc": 59,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player picks up a stick lying nearby and holds it toward the quench trough. The stick hisses briefly but emerges unchanged. Ilsa watches without comment, then turns back to the anvil, setting the properly tempered piece beside it.",
+    "wc": 39,
+    "ok": true,
+    "err": null
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The jars sit in a neat row, most of them already sealed, while a few sprigs of herbs remain uncast upon the counter. Mara works with a quick, steady hand, never hurrying her movements even as the frost begins to gather. \"Tonight or not at all,\" she says, her voice flat against the quiet of the room.",
+    "wc": 57,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player sets a skin of spring water on the counter. Mara pours the liquid into the final vessel without breaking her rhythm. \"Good, another set of hands\u2014hold this a second, mind the third step, and tell me your name while you're at it.\"",
+    "wc": 44,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player casts a steep on the last of the herbs. Mara sets the finished vessel with the rest. \"Tonight or not at all.\"",
+    "wc": 24,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player asks, \"Need another set of hands?\" Mara doesn't stop her work. \"Not tonight.\"",
+    "wc": 15,
+    "ok": true,
+    "err": null
+  }
+}

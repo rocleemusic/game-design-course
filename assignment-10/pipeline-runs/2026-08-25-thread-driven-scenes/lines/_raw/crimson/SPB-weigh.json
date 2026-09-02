@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Toby sets a river stone against the nearest sack. It rises a hand's breadth and hangs \u2014 heavy, low. \"Hangs low. That's full,\" he says, fast and exact.",
+    "wc": 28,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "Toby sets the stone against a third sack. It hangs high, lighter than the others.\n\n\"Is that one short?\" the player asks.\n\nToby glances at the sack, fast and exact. \"Hangs high. That's light.",
+    "wc": 34,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player sets the stone against a second sack the same way \u2014 it hangs level with the first, matched. Toby glances up, notes it with a nod. \"Right. You've got a feel for it.\"",
+    "wc": 35,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player sets the stone against the brick oven. It rests flat and immovable, bearing no weight. Toby glances over, sees the oven and the stone. \"Oven's built in, won't bear up.\"",
+    "wc": 32,
+    "ok": true,
+    "err": null
+  }
+}

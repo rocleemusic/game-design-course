@@ -1,0 +1,2375 @@
+{
+  "archived_on": "2026-08-11",
+  "card": "GP-133",
+  "ruling": "Roc 2026-08-11 — archive whole placeholder scenes, not a row-level strip",
+  "note": "Restore by splicing these objects back into scene-graph.json's scenes array.",
+  "held_back_pending_ruling": {
+    "SC-T6-01": "GP-39 (Assignment #6) demonstrates this scene's unreachability; archiving deletes the finding it reports",
+    "SC-T7-toby": "only scenes on T7 — archiving both removes the RULED 2026-08-01 auto-vignette transition",
+    "SC-T7-ilsa": "only scenes on T7 — archiving both removes the RULED 2026-08-01 auto-vignette transition"
+  },
+  "scenes": [
+    {
+      "scene_id": "SC-T2-07",
+      "soul": "toby",
+      "screen_id": "T2",
+      "lines": [
+        {
+          "content_id": "L-SC-T2-07-01",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder set-up: the shelf of unopened jars behind him; he is already reaching to repay the last one.",
+          "choice_id": "CH-T2-07-1"
+        },
+        {
+          "content_id": "L-CH-T2-07-1-a-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "Placeholder player line: notice the jars.",
+          "choice_id": "CH-T2-07-1",
+          "option_id": "CH-T2-07-1-a"
+        },
+        {
+          "content_id": "L-CH-T2-07-1-a-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder response: he names what each jar still owes.",
+          "choice_id": "CH-T2-07-1",
+          "option_id": "CH-T2-07-1-a"
+        },
+        {
+          "content_id": "L-CH-T2-07-1-b-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder response: he is already reaching to square the gift.",
+          "choice_id": "CH-T2-07-1",
+          "option_id": "CH-T2-07-1-b"
+        },
+        {
+          "content_id": "L-CH-T2-07-1-c-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "Placeholder player line: busy morning?",
+          "choice_id": "CH-T2-07-1",
+          "option_id": "CH-T2-07-1-c"
+        },
+        {
+          "content_id": "L-CH-T2-07-1-c-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder response: he reroutes to the ovens.",
+          "choice_id": "CH-T2-07-1",
+          "option_id": "CH-T2-07-1-c"
+        },
+        {
+          "content_id": "L-SC-T2-07-02",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder set-up: he slides two rolls toward you, unasked.",
+          "choice_id": "CH-T2-07-2"
+        },
+        {
+          "content_id": "L-CH-T2-07-2-a-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "Placeholder player line: it was a gift, no charge.",
+          "choice_id": "CH-T2-07-2",
+          "option_id": "CH-T2-07-2-a"
+        },
+        {
+          "content_id": "L-CH-T2-07-2-a-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder response: he goes flat and short, receiving.",
+          "choice_id": "CH-T2-07-2",
+          "option_id": "CH-T2-07-2-a"
+        },
+        {
+          "content_id": "L-CH-T2-07-2-b-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "Placeholder player line: what do I owe you?",
+          "choice_id": "CH-T2-07-2",
+          "option_id": "CH-T2-07-2-b"
+        },
+        {
+          "content_id": "L-CH-T2-07-2-b-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder response: relief; he quotes a price.",
+          "choice_id": "CH-T2-07-2",
+          "option_id": "CH-T2-07-2-b"
+        },
+        {
+          "content_id": "L-CH-T2-07-3-a-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "Placeholder player line: you do not have to square it.",
+          "choice_id": "CH-T2-07-3",
+          "option_id": "CH-T2-07-3-a"
+        },
+        {
+          "content_id": "L-CH-T2-07-3-a-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder response: he has no answer ready for that.",
+          "choice_id": "CH-T2-07-3",
+          "option_id": "CH-T2-07-3-a"
+        },
+        {
+          "content_id": "L-CH-T2-07-3-b-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder response: the ledger closes; he is easier.",
+          "choice_id": "CH-T2-07-3",
+          "option_id": "CH-T2-07-3-b"
+        },
+        {
+          "content_id": "L-SC-T2-07-03",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder set-up: your flask is full again; you never filled it.",
+          "choice_id": "CH-T2-07-4"
+        },
+        {
+          "content_id": "L-CH-T2-07-4-a-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "Placeholder player line: you filled my flask.",
+          "choice_id": "CH-T2-07-4",
+          "option_id": "CH-T2-07-4-a"
+        },
+        {
+          "content_id": "L-CH-T2-07-4-a-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder response: routine, he says; bakery habit.",
+          "choice_id": "CH-T2-07-4",
+          "option_id": "CH-T2-07-4-a"
+        },
+        {
+          "content_id": "L-CH-T2-07-4-b-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder response: he has already moved on.",
+          "choice_id": "CH-T2-07-4",
+          "option_id": "CH-T2-07-4-b"
+        },
+        {
+          "content_id": "L-CH-T2-07-5-a-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "Placeholder player line: you keep every one of these.",
+          "choice_id": "CH-T2-07-5",
+          "option_id": "CH-T2-07-5-a"
+        },
+        {
+          "content_id": "L-CH-T2-07-5-a-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder response: a pause; the reach does not finish.",
+          "choice_id": "CH-T2-07-5",
+          "option_id": "CH-T2-07-5-a"
+        },
+        {
+          "content_id": "L-CH-T2-07-5-b-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder response: he lets the shelf be.",
+          "choice_id": "CH-T2-07-5",
+          "option_id": "CH-T2-07-5-b"
+        },
+        {
+          "content_id": "L-SC-T2-07-04",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder set-up: the square is filling; the feast still short.",
+          "choice_id": "CH-T2-07-6"
+        },
+        {
+          "content_id": "L-CH-T2-07-6-a-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "Placeholder player line: save me nothing.",
+          "choice_id": "CH-T2-07-6",
+          "option_id": "CH-T2-07-6-a"
+        },
+        {
+          "content_id": "L-CH-T2-07-6-a-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder response: he almost smiles.",
+          "choice_id": "CH-T2-07-6",
+          "option_id": "CH-T2-07-6-a"
+        },
+        {
+          "content_id": "L-CH-T2-07-6-b-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder response: he is back at the trays.",
+          "choice_id": "CH-T2-07-6",
+          "option_id": "CH-T2-07-6-b"
+        }
+      ],
+      "choice_nodes": [
+        {
+          "choice_id": "CH-T2-07-1",
+          "scene_id": "SC-T2-07",
+          "availability_conditions": [],
+          "equal_weight_note": "Noticing the jars, setting down a gift, and small talk each cost the same beat and respect a different thing; none is the correct read of him.",
+          "no_accrual_note": "No counter keys off any option; nothing accrues from a repeated pick.",
+          "options": [
+            {
+              "option_id": "CH-T2-07-1-a",
+              "verb_family": "Converse",
+              "player_verb": "witness",
+              "player_line": "L-CH-T2-07-1-a-p",
+              "response_slots": [
+                "L-CH-T2-07-1-a-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "knowledge_flag",
+                  "arg": "shelf_seen"
+                }
+              ],
+              "rejoin": "gather"
+            },
+            {
+              "option_id": "CH-T2-07-1-b",
+              "verb_family": "Converse",
+              "player_verb": "ease",
+              "surface_action": "set your own gift on the counter",
+              "response_slots": [
+                "L-CH-T2-07-1-b-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "knowledge_flag",
+                  "arg": "gave_gift"
+                }
+              ],
+              "rejoin": "gather"
+            },
+            {
+              "option_id": "CH-T2-07-1-c",
+              "verb_family": "Converse",
+              "player_verb": "witness",
+              "player_line": "L-CH-T2-07-1-c-p",
+              "response_slots": [
+                "L-CH-T2-07-1-c-r1"
+              ],
+              "state_actions": [],
+              "rejoin": "gather"
+            }
+          ]
+        },
+        {
+          "choice_id": "CH-T2-07-2",
+          "scene_id": "SC-T2-07",
+          "availability_conditions": [],
+          "equal_weight_note": "Refusing the repayment and paying it both spend the beat; one foregoes his ledger, the other honors it, and neither is sanctioned.",
+          "no_accrual_note": "No counter keys off either option; nothing accrues from repetition.",
+          "options": [
+            {
+              "option_id": "CH-T2-07-2-a",
+              "verb_family": "Converse",
+              "player_verb": "ease",
+              "player_line": "L-CH-T2-07-2-a-p",
+              "response_slots": [
+                "L-CH-T2-07-2-a-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "thread_move",
+                  "arg": "giver-receive"
+                }
+              ],
+              "rejoin": "gather"
+            },
+            {
+              "option_id": "CH-T2-07-2-b",
+              "verb_family": "Converse",
+              "player_verb": "witness",
+              "player_line": "L-CH-T2-07-2-b-p",
+              "response_slots": [
+                "L-CH-T2-07-2-b-r1"
+              ],
+              "state_actions": [],
+              "rejoin": "gather"
+            }
+          ]
+        },
+        {
+          "choice_id": "CH-T2-07-3",
+          "scene_id": "SC-T2-07",
+          "availability_conditions": [
+            "knows(gave_gift)"
+          ],
+          "equal_weight_note": "This beat opens only if you already gave him something; pressing it and letting him repay both cost the beat and respect a different thing.",
+          "no_accrual_note": "No counter keys off either option; the gate is the earlier gift, not a tally.",
+          "options": [
+            {
+              "option_id": "CH-T2-07-3-a",
+              "verb_family": "Converse",
+              "player_verb": "ease",
+              "player_line": "L-CH-T2-07-3-a-p",
+              "response_slots": [
+                "L-CH-T2-07-3-a-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "bond_event",
+                  "arg": "Intimacy"
+                },
+                {
+                  "type": "thread_move",
+                  "arg": "giver-receive"
+                }
+              ],
+              "rejoin": "gather"
+            },
+            {
+              "option_id": "CH-T2-07-3-b",
+              "verb_family": "Converse",
+              "player_verb": "witness",
+              "surface_action": "let him repay you",
+              "response_slots": [
+                "L-CH-T2-07-3-b-r1"
+              ],
+              "state_actions": [],
+              "rejoin": "gather"
+            }
+          ]
+        },
+        {
+          "choice_id": "CH-T2-07-4",
+          "scene_id": "SC-T2-07",
+          "availability_conditions": [],
+          "equal_weight_note": "Naming the filled flask and saying nothing both spend the beat; one marks the anticipatory habit, the other lets it pass unremarked.",
+          "no_accrual_note": "No counter keys off either option; nothing accrues from repetition.",
+          "options": [
+            {
+              "option_id": "CH-T2-07-4-a",
+              "verb_family": "Converse",
+              "player_verb": "witness",
+              "player_line": "L-CH-T2-07-4-a-p",
+              "response_slots": [
+                "L-CH-T2-07-4-a-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "knowledge_flag",
+                  "arg": "shelf_seen"
+                }
+              ],
+              "rejoin": "gather"
+            },
+            {
+              "option_id": "CH-T2-07-4-b",
+              "verb_family": "Converse",
+              "player_verb": "sit-with",
+              "surface_action": "say nothing",
+              "response_slots": [
+                "L-CH-T2-07-4-b-r1"
+              ],
+              "state_actions": [],
+              "rejoin": "gather"
+            }
+          ]
+        },
+        {
+          "choice_id": "CH-T2-07-5",
+          "scene_id": "SC-T2-07",
+          "availability_conditions": [
+            "knows(shelf_seen)"
+          ],
+          "equal_weight_note": "This beat opens only once you have clocked the shelf or the flask; naming it and letting it go both cost the beat and respect a different thing.",
+          "no_accrual_note": "No counter keys off either option; the gate is having seen, not a count.",
+          "options": [
+            {
+              "option_id": "CH-T2-07-5-a",
+              "verb_family": "Converse",
+              "player_verb": "witness",
+              "player_line": "L-CH-T2-07-5-a-p",
+              "response_slots": [
+                "L-CH-T2-07-5-a-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "thread_move",
+                  "arg": "giver-receive"
+                },
+                {
+                  "type": "knowledge_flag",
+                  "arg": "shelf_named"
+                },
+                {
+                  "type": "bond_event",
+                  "arg": "Recognition"
+                }
+              ],
+              "rejoin": "gather"
+            },
+            {
+              "option_id": "CH-T2-07-5-b",
+              "verb_family": "Converse",
+              "player_verb": "sit-with",
+              "surface_action": "let it go",
+              "response_slots": [
+                "L-CH-T2-07-5-b-r1"
+              ],
+              "state_actions": [],
+              "rejoin": "gather"
+            }
+          ]
+        },
+        {
+          "choice_id": "CH-T2-07-6",
+          "scene_id": "SC-T2-07",
+          "availability_conditions": [],
+          "equal_weight_note": "Refusing a share of the feast and heading out both close the scene; one presses the thread once more, the other leaves it where it stands.",
+          "no_accrual_note": "No counter keys off either option; nothing accrues from repetition.",
+          "options": [
+            {
+              "option_id": "CH-T2-07-6-a",
+              "verb_family": "Converse",
+              "player_verb": "ease",
+              "player_line": "L-CH-T2-07-6-a-p",
+              "response_slots": [
+                "L-CH-T2-07-6-a-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "thread_move",
+                  "arg": "giver-receive"
+                }
+              ],
+              "rejoin": "gather"
+            },
+            {
+              "option_id": "CH-T2-07-6-b",
+              "verb_family": "Converse",
+              "player_verb": "witness",
+              "surface_action": "head out",
+              "response_slots": [
+                "L-CH-T2-07-6-b-r1"
+              ],
+              "state_actions": [],
+              "rejoin": "gather"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scene_id": "SC-T4-01",
+      "soul": "ilsa",
+      "screen_id": "T4",
+      "note": "Ilsa, the forge. The six ratified forge lines (persona card, approved 2026-07-25) are kept verbatim as each beat's set-up; the player_lines and responses around them are placeholder for the prose pass. Player's part is witness / ease / sit-with — never fix the family. knows(saw_apron) gate on beat 5 is set by noticing the apron in beat 2. W1 (2026-07-31): state_actions only — five bond_events added so a deep arc can move its own band. No ratified prose altered. Before this the scene scored nothing and Ilsa's band could never leave low. W1 (2026-07-31): state_actions only — five bond_events added so a deep arc can move its own band. No ratified prose altered. Before this the scene scored nothing and Ilsa's band could never leave low.",
+      "lines": [
+        {
+          "content_id": "L-SC-T4-01-01",
+          "slot_type": "action",
+          "speaker_id": "ilsa",
+          "text": "Ilsa waves a wasp off the slack tub, lays a second apron and tongs at the bench's empty end, and works around them while the centerpiece stock heats.",
+          "choice_id": "CH-T4-01-1"
+        },
+        {
+          "content_id": "L-CH-T4-01-1-a-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "Where do you want me?",
+          "choice_id": "CH-T4-01-1",
+          "option_id": "CH-T4-01-1-a"
+        },
+        {
+          "content_id": "L-CH-T4-01-1-a-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: she clears a spot at the bellows. There.",
+          "choice_id": "CH-T4-01-1",
+          "option_id": "CH-T4-01-1-a"
+        },
+        {
+          "content_id": "L-CH-T4-01-1-b-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: she makes room without a word.",
+          "choice_id": "CH-T4-01-1",
+          "option_id": "CH-T4-01-1-b"
+        },
+        {
+          "content_id": "L-SC-T4-01-02",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "You're on the bellows. Price of coal went up a coin this week. We waste none of it.",
+          "choice_id": "CH-T4-01-2"
+        },
+        {
+          "content_id": "L-CH-T4-01-2-a-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "Whose is the second apron?",
+          "choice_id": "CH-T4-01-2",
+          "option_id": "CH-T4-01-2-a"
+        },
+        {
+          "content_id": "L-CH-T4-01-2-a-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: she answers with placement, not a name.",
+          "choice_id": "CH-T4-01-2",
+          "option_id": "CH-T4-01-2-a"
+        },
+        {
+          "content_id": "L-CH-T4-01-2-b-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: the bellows find a rhythm.",
+          "choice_id": "CH-T4-01-2",
+          "option_id": "CH-T4-01-2-b"
+        },
+        {
+          "content_id": "L-CH-T4-01-2-c-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "Coal's dear this year.",
+          "choice_id": "CH-T4-01-2",
+          "option_id": "CH-T4-01-2-c"
+        },
+        {
+          "content_id": "L-CH-T4-01-2-c-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: up a coin, she says; we waste none.",
+          "choice_id": "CH-T4-01-2",
+          "option_id": "CH-T4-01-2-c"
+        },
+        {
+          "content_id": "L-SC-T4-01-03",
+          "slot_type": "dialogue",
+          "speaker_id": "festival_runner",
+          "text": "Arch raising's short a pair of hands. Bram sent word. Not coming.",
+          "choice_id": "CH-T4-01-3"
+        },
+        {
+          "content_id": "L-CH-T4-01-3-a-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "Who's Bram?",
+          "choice_id": "CH-T4-01-3",
+          "option_id": "CH-T4-01-3-a"
+        },
+        {
+          "content_id": "L-CH-T4-01-3-a-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: she does not answer; she reaches for the sheet.",
+          "choice_id": "CH-T4-01-3",
+          "option_id": "CH-T4-01-3-a"
+        },
+        {
+          "content_id": "L-CH-T4-01-3-b-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: the stock glows; she counts hands.",
+          "choice_id": "CH-T4-01-3",
+          "option_id": "CH-T4-01-3-b"
+        },
+        {
+          "content_id": "L-SC-T4-01-04",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Put us down for it, then. That's hands enough, the two of us.",
+          "choice_id": "CH-T4-01-4"
+        },
+        {
+          "content_id": "L-CH-T4-01-4-a-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "The two of us, then.",
+          "choice_id": "CH-T4-01-4",
+          "option_id": "CH-T4-01-4-a"
+        },
+        {
+          "content_id": "L-CH-T4-01-4-a-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: settled, as if it were already true.",
+          "choice_id": "CH-T4-01-4",
+          "option_id": "CH-T4-01-4-a"
+        },
+        {
+          "content_id": "L-CH-T4-01-4-b-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: she sets you to the tongs.",
+          "choice_id": "CH-T4-01-4",
+          "option_id": "CH-T4-01-4-b"
+        },
+        {
+          "content_id": "L-SC-T4-01-05",
+          "slot_type": "action",
+          "speaker_id": "ilsa",
+          "text": "Ilsa reaches toward the empty end of the bench, stops partway, and turns the stock in the fire.",
+          "choice_id": "CH-T4-01-5"
+        },
+        {
+          "content_id": "L-CH-T4-01-5-a-r1",
+          "slot_type": "action",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: the reach does not finish; she turns the stock.",
+          "choice_id": "CH-T4-01-5",
+          "option_id": "CH-T4-01-5-a"
+        },
+        {
+          "content_id": "L-CH-T4-01-5-b-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "The apron can wait.",
+          "choice_id": "CH-T4-01-5",
+          "option_id": "CH-T4-01-5-b"
+        },
+        {
+          "content_id": "L-CH-T4-01-5-b-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: a pause; then the fire again.",
+          "choice_id": "CH-T4-01-5",
+          "option_id": "CH-T4-01-5-b"
+        },
+        {
+          "content_id": "L-SC-T4-01-06",
+          "slot_type": "object",
+          "speaker_id": "ilsa",
+          "text": "The second apron lies at the empty end of the bench, tongs beside it. The wasp is back at the rim of the slack tub.",
+          "choice_id": "CH-T4-01-6"
+        },
+        {
+          "content_id": "L-CH-T4-01-6-a-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "Same time tomorrow.",
+          "choice_id": "CH-T4-01-6",
+          "option_id": "CH-T4-01-6-a"
+        },
+        {
+          "content_id": "L-CH-T4-01-6-a-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: she is already banking the coals.",
+          "choice_id": "CH-T4-01-6",
+          "option_id": "CH-T4-01-6-a"
+        },
+        {
+          "content_id": "L-CH-T4-01-6-b-r1",
+          "slot_type": "object",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: the forge ticks as it cools.",
+          "choice_id": "CH-T4-01-6",
+          "option_id": "CH-T4-01-6-b"
+        }
+      ],
+      "choice_nodes": [
+        {
+          "choice_id": "CH-T4-01-1",
+          "scene_id": "SC-T4-01",
+          "availability_conditions": [],
+          "equal_weight_note": "Asking where to stand and taking up the bellows both cost the beat; one waits to be placed, the other steps in unasked, and neither is the right read of her.",
+          "no_accrual_note": "No counter keys off either option; nothing accrues from repetition.",
+          "options": [
+            {
+              "option_id": "CH-T4-01-1-a",
+              "verb_family": "Converse",
+              "player_verb": "witness",
+              "player_line": "L-CH-T4-01-1-a-p",
+              "response_slots": [
+                "L-CH-T4-01-1-a-r1"
+              ],
+              "state_actions": [],
+              "rejoin": "gather"
+            },
+            {
+              "option_id": "CH-T4-01-1-b",
+              "verb_family": "Converse",
+              "player_verb": "ease",
+              "surface_action": "take up the bellows",
+              "response_slots": [
+                "L-CH-T4-01-1-b-r1"
+              ],
+              "state_actions": [],
+              "rejoin": "gather"
+            }
+          ]
+        },
+        {
+          "choice_id": "CH-T4-01-2",
+          "scene_id": "SC-T4-01",
+          "availability_conditions": [],
+          "equal_weight_note": "Asking after the apron, working in silence, and remarking on the coal each spend the beat and touch a different thing; none is sanctioned.",
+          "no_accrual_note": "No counter keys off any option; nothing accrues from a repeated pick.",
+          "options": [
+            {
+              "option_id": "CH-T4-01-2-a",
+              "verb_family": "Converse",
+              "player_verb": "witness",
+              "player_line": "L-CH-T4-01-2-a-p",
+              "response_slots": [
+                "L-CH-T4-01-2-a-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "knowledge_flag",
+                  "arg": "saw_apron"
+                },
+                {
+                  "type": "bond_event",
+                  "arg": "Trust"
+                }
+              ],
+              "rejoin": "gather"
+            },
+            {
+              "option_id": "CH-T4-01-2-b",
+              "verb_family": "Converse",
+              "player_verb": "sit-with",
+              "surface_action": "work the bellows and say nothing",
+              "response_slots": [
+                "L-CH-T4-01-2-b-r1"
+              ],
+              "state_actions": [],
+              "rejoin": "gather"
+            },
+            {
+              "option_id": "CH-T4-01-2-c",
+              "verb_family": "Converse",
+              "player_verb": "ease",
+              "player_line": "L-CH-T4-01-2-c-p",
+              "response_slots": [
+                "L-CH-T4-01-2-c-r1"
+              ],
+              "state_actions": [],
+              "rejoin": "gather"
+            }
+          ]
+        },
+        {
+          "choice_id": "CH-T4-01-3",
+          "scene_id": "SC-T4-01",
+          "availability_conditions": [],
+          "equal_weight_note": "Asking who Bram is and simply working on both cost the beat; one seeks the name she will not give, the other lets the absence stand unremarked.",
+          "no_accrual_note": "No counter keys off either option; nothing accrues from repetition.",
+          "options": [
+            {
+              "option_id": "CH-T4-01-3-a",
+              "verb_family": "Converse",
+              "player_verb": "witness",
+              "player_line": "L-CH-T4-01-3-a-p",
+              "response_slots": [
+                "L-CH-T4-01-3-a-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "bond_event",
+                  "arg": "Trust"
+                }
+              ],
+              "rejoin": "gather"
+            },
+            {
+              "option_id": "CH-T4-01-3-b",
+              "verb_family": "Converse",
+              "player_verb": "sit-with",
+              "surface_action": "keep working",
+              "response_slots": [
+                "L-CH-T4-01-3-b-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "thread_move",
+                  "arg": "kinbound-absence"
+                }
+              ],
+              "rejoin": "gather"
+            }
+          ]
+        },
+        {
+          "choice_id": "CH-T4-01-4",
+          "scene_id": "SC-T4-01",
+          "availability_conditions": [],
+          "equal_weight_note": "Echoing her arrangement and quietly taking the tongs both cost the beat; one says the thing back, the other lets the doing be the answer.",
+          "no_accrual_note": "No counter keys off either option; nothing accrues from repetition.",
+          "options": [
+            {
+              "option_id": "CH-T4-01-4-a",
+              "verb_family": "Converse",
+              "player_verb": "ease",
+              "player_line": "L-CH-T4-01-4-a-p",
+              "response_slots": [
+                "L-CH-T4-01-4-a-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "thread_move",
+                  "arg": "kinbound-absence"
+                },
+                {
+                  "type": "bond_event",
+                  "arg": "Intimacy"
+                }
+              ],
+              "rejoin": "gather"
+            },
+            {
+              "option_id": "CH-T4-01-4-b",
+              "verb_family": "Converse",
+              "player_verb": "witness",
+              "surface_action": "nod and take the tongs",
+              "response_slots": [
+                "L-CH-T4-01-4-b-r1"
+              ],
+              "state_actions": [],
+              "rejoin": "gather"
+            }
+          ]
+        },
+        {
+          "choice_id": "CH-T4-01-5",
+          "scene_id": "SC-T4-01",
+          "availability_conditions": [
+            "knows(saw_apron)"
+          ],
+          "equal_weight_note": "This beat opens only if you noticed the second apron; letting the silence sit and telling her the apron can wait both cost the beat and respect the pause differently.",
+          "no_accrual_note": "No counter keys off either option; the gate is having noticed, not a count.",
+          "options": [
+            {
+              "option_id": "CH-T4-01-5-a",
+              "verb_family": "Converse",
+              "player_verb": "sit-with",
+              "surface_action": "let the silence sit",
+              "response_slots": [
+                "L-CH-T4-01-5-a-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "thread_move",
+                  "arg": "kinbound-absence"
+                }
+              ],
+              "rejoin": "gather"
+            },
+            {
+              "option_id": "CH-T4-01-5-b",
+              "verb_family": "Converse",
+              "player_verb": "witness",
+              "player_line": "L-CH-T4-01-5-b-p",
+              "response_slots": [
+                "L-CH-T4-01-5-b-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "thread_move",
+                  "arg": "kinbound-absence"
+                },
+                {
+                  "type": "bond_event",
+                  "arg": "Intimacy"
+                }
+              ],
+              "rejoin": "gather"
+            }
+          ]
+        },
+        {
+          "choice_id": "CH-T4-01-6",
+          "scene_id": "SC-T4-01",
+          "availability_conditions": [],
+          "equal_weight_note": "Naming tomorrow and heading out both close the scene; one assumes the next day together, the other simply leaves the forge to cool.",
+          "no_accrual_note": "No counter keys off either option; nothing accrues from repetition.",
+          "options": [
+            {
+              "option_id": "CH-T4-01-6-a",
+              "verb_family": "Converse",
+              "player_verb": "ease",
+              "player_line": "L-CH-T4-01-6-a-p",
+              "response_slots": [
+                "L-CH-T4-01-6-a-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "bond_event",
+                  "arg": "Recognition"
+                }
+              ],
+              "rejoin": "gather"
+            },
+            {
+              "option_id": "CH-T4-01-6-b",
+              "verb_family": "Converse",
+              "player_verb": "witness",
+              "surface_action": "head out",
+              "response_slots": [
+                "L-CH-T4-01-6-b-r1"
+              ],
+              "state_actions": [],
+              "rejoin": "gather"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scene_id": "SC-F1-02",
+      "soul": "toby",
+      "screen_id": "F1",
+      "note": "Toby sourcing feast ingredients in the forest (Baker mishap: a key ingredient ran short). Placeholder throughout. His arc pressure: the feast can't be finished alone, so he must let you contribute — and he keeps converting the help into a debt he'll repay. knows(offered_help) gate on beat 3 is set by offering in beat 1.",
+      "lines": [
+        {
+          "content_id": "L-SC-F1-02-01",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder set-up: Toby counts the basket short at the forest edge.",
+          "choice_id": "CH-F1-02-1"
+        },
+        {
+          "content_id": "L-CH-F1-02-1-a-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "I'll gather the rest.",
+          "choice_id": "CH-F1-02-1",
+          "option_id": "CH-F1-02-1-a"
+        },
+        {
+          "content_id": "L-CH-F1-02-1-a-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder response: he tallies your help before you've started.",
+          "choice_id": "CH-F1-02-1",
+          "option_id": "CH-F1-02-1-a"
+        },
+        {
+          "content_id": "L-CH-F1-02-1-b-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "What's still short?",
+          "choice_id": "CH-F1-02-1",
+          "option_id": "CH-F1-02-1-b"
+        },
+        {
+          "content_id": "L-CH-F1-02-1-b-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder response: he rattles off the list without looking up.",
+          "choice_id": "CH-F1-02-1",
+          "option_id": "CH-F1-02-1-b"
+        },
+        {
+          "content_id": "L-CH-F1-02-1-c-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder response: he's already crediting the basket to your account.",
+          "choice_id": "CH-F1-02-1",
+          "option_id": "CH-F1-02-1-c"
+        },
+        {
+          "content_id": "L-SC-F1-02-02",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder set-up: he books it as bakery weight, already owing you back.",
+          "choice_id": "CH-F1-02-2"
+        },
+        {
+          "content_id": "L-CH-F1-02-2-a-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "It's not a trade.",
+          "choice_id": "CH-F1-02-2",
+          "option_id": "CH-F1-02-2-a"
+        },
+        {
+          "content_id": "L-CH-F1-02-2-a-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder response: he goes flat, hands still moving.",
+          "choice_id": "CH-F1-02-2",
+          "option_id": "CH-F1-02-2-a"
+        },
+        {
+          "content_id": "L-CH-F1-02-2-b-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "How much do you need?",
+          "choice_id": "CH-F1-02-2",
+          "option_id": "CH-F1-02-2-b"
+        },
+        {
+          "content_id": "L-CH-F1-02-2-b-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder response: relief; he gives you a number and a route.",
+          "choice_id": "CH-F1-02-2",
+          "option_id": "CH-F1-02-2-b"
+        },
+        {
+          "content_id": "L-CH-F1-02-3-a-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "Take the help, Toby.",
+          "choice_id": "CH-F1-02-3",
+          "option_id": "CH-F1-02-3-a"
+        },
+        {
+          "content_id": "L-CH-F1-02-3-a-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder response: he has no counter ready.",
+          "choice_id": "CH-F1-02-3",
+          "option_id": "CH-F1-02-3-a"
+        },
+        {
+          "content_id": "L-CH-F1-02-3-b-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder response: you pick beside him; he lets it be, for a moment.",
+          "choice_id": "CH-F1-02-3",
+          "option_id": "CH-F1-02-3-b"
+        },
+        {
+          "content_id": "L-SC-F1-02-03",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder set-up: he names what each patch of the wood still owes the feast.",
+          "choice_id": "CH-F1-02-4"
+        },
+        {
+          "content_id": "L-CH-F1-02-4-a-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "You know every patch.",
+          "choice_id": "CH-F1-02-4",
+          "option_id": "CH-F1-02-4-a"
+        },
+        {
+          "content_id": "L-CH-F1-02-4-a-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder response: he deflects to the next thing that's short.",
+          "choice_id": "CH-F1-02-4",
+          "option_id": "CH-F1-02-4-a"
+        },
+        {
+          "content_id": "L-CH-F1-02-4-b-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder response: he sets the pace through the trees.",
+          "choice_id": "CH-F1-02-4",
+          "option_id": "CH-F1-02-4-b"
+        },
+        {
+          "content_id": "L-SC-F1-02-04",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder set-up: you come back with more than he asked for.",
+          "choice_id": "CH-F1-02-5"
+        },
+        {
+          "content_id": "L-CH-F1-02-5-a-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "Extra, for the turnout.",
+          "choice_id": "CH-F1-02-5",
+          "option_id": "CH-F1-02-5-a"
+        },
+        {
+          "content_id": "L-CH-F1-02-5-a-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder response: he starts pricing what he owes for it.",
+          "choice_id": "CH-F1-02-5",
+          "option_id": "CH-F1-02-5-a"
+        },
+        {
+          "content_id": "L-CH-F1-02-5-b-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder response: he takes it in without a word, this time.",
+          "choice_id": "CH-F1-02-5",
+          "option_id": "CH-F1-02-5-b"
+        },
+        {
+          "content_id": "L-SC-F1-02-05",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder set-up: the basket's full; festival night holds.",
+          "choice_id": "CH-F1-02-6"
+        },
+        {
+          "content_id": "L-CH-F1-02-6-a-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "Save yourself some.",
+          "choice_id": "CH-F1-02-6",
+          "option_id": "CH-F1-02-6-a"
+        },
+        {
+          "content_id": "L-CH-F1-02-6-a-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder response: he'll see; there's the square to feed first.",
+          "choice_id": "CH-F1-02-6",
+          "option_id": "CH-F1-02-6-a"
+        },
+        {
+          "content_id": "L-CH-F1-02-6-b-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder response: he's already turning back to the ovens.",
+          "choice_id": "CH-F1-02-6",
+          "option_id": "CH-F1-02-6-b"
+        }
+      ],
+      "choice_nodes": [
+        {
+          "choice_id": "CH-F1-02-1",
+          "scene_id": "SC-F1-02",
+          "availability_conditions": [],
+          "equal_weight_note": "Offering to gather, asking what's short, and simply shouldering the basket each spend the beat and meet his shortfall differently; none is the right read of him.",
+          "no_accrual_note": "No counter keys off any option; nothing accrues from a repeated pick.",
+          "options": [
+            {
+              "option_id": "CH-F1-02-1-a",
+              "verb_family": "Collect",
+              "player_verb": "ease",
+              "player_line": "L-CH-F1-02-1-a-p",
+              "response_slots": [
+                "L-CH-F1-02-1-a-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "knowledge_flag",
+                  "arg": "offered_help"
+                }
+              ],
+              "rejoin": "gather"
+            },
+            {
+              "option_id": "CH-F1-02-1-b",
+              "verb_family": "Converse",
+              "player_verb": "witness",
+              "player_line": "L-CH-F1-02-1-b-p",
+              "response_slots": [
+                "L-CH-F1-02-1-b-r1"
+              ],
+              "state_actions": [],
+              "rejoin": "gather"
+            },
+            {
+              "option_id": "CH-F1-02-1-c",
+              "verb_family": "Collect",
+              "player_verb": "sit-with",
+              "surface_action": "shoulder the empty basket",
+              "response_slots": [
+                "L-CH-F1-02-1-c-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "knowledge_flag",
+                  "arg": "offered_help"
+                }
+              ],
+              "rejoin": "gather"
+            }
+          ]
+        },
+        {
+          "choice_id": "CH-F1-02-2",
+          "scene_id": "SC-F1-02",
+          "availability_conditions": [],
+          "equal_weight_note": "Refusing the ledger and asking his number both cost the beat; one foregoes his repayment, the other plays it straight, and neither is sanctioned.",
+          "no_accrual_note": "No counter keys off either option; nothing accrues from repetition.",
+          "options": [
+            {
+              "option_id": "CH-F1-02-2-a",
+              "verb_family": "Converse",
+              "player_verb": "ease",
+              "player_line": "L-CH-F1-02-2-a-p",
+              "response_slots": [
+                "L-CH-F1-02-2-a-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "thread_move",
+                  "arg": "giver-receive"
+                }
+              ],
+              "rejoin": "gather"
+            },
+            {
+              "option_id": "CH-F1-02-2-b",
+              "verb_family": "Converse",
+              "player_verb": "witness",
+              "player_line": "L-CH-F1-02-2-b-p",
+              "response_slots": [
+                "L-CH-F1-02-2-b-r1"
+              ],
+              "state_actions": [],
+              "rejoin": "gather"
+            }
+          ]
+        },
+        {
+          "choice_id": "CH-F1-02-3",
+          "scene_id": "SC-F1-02",
+          "availability_conditions": [
+            "knows(offered_help)"
+          ],
+          "equal_weight_note": "This beat opens only if you offered to help; pressing him to take it and picking quietly beside him both cost the beat and respect his refusal differently.",
+          "no_accrual_note": "No counter keys off either option; the gate is the earlier offer, not a tally.",
+          "options": [
+            {
+              "option_id": "CH-F1-02-3-a",
+              "verb_family": "Converse",
+              "player_verb": "ease",
+              "player_line": "L-CH-F1-02-3-a-p",
+              "response_slots": [
+                "L-CH-F1-02-3-a-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "bond_event",
+                  "arg": "Intimacy"
+                },
+                {
+                  "type": "thread_move",
+                  "arg": "giver-receive"
+                }
+              ],
+              "rejoin": "gather"
+            },
+            {
+              "option_id": "CH-F1-02-3-b",
+              "verb_family": "Collect",
+              "player_verb": "witness",
+              "surface_action": "pick in silence beside him",
+              "response_slots": [
+                "L-CH-F1-02-3-b-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "thread_move",
+                  "arg": "giver-receive"
+                }
+              ],
+              "rejoin": "gather"
+            }
+          ]
+        },
+        {
+          "choice_id": "CH-F1-02-4",
+          "scene_id": "SC-F1-02",
+          "availability_conditions": [],
+          "equal_weight_note": "Remarking on how well he knows the wood and simply following his lead both cost the beat; one turns attention on him, the other keeps it on the work.",
+          "no_accrual_note": "No counter keys off either option; nothing accrues from repetition.",
+          "options": [
+            {
+              "option_id": "CH-F1-02-4-a",
+              "verb_family": "Converse",
+              "player_verb": "witness",
+              "player_line": "L-CH-F1-02-4-a-p",
+              "response_slots": [
+                "L-CH-F1-02-4-a-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "bond_event",
+                  "arg": "Trust"
+                }
+              ],
+              "rejoin": "gather"
+            },
+            {
+              "option_id": "CH-F1-02-4-b",
+              "verb_family": "Collect",
+              "player_verb": "sit-with",
+              "surface_action": "follow his read of the wood",
+              "response_slots": [
+                "L-CH-F1-02-4-b-r1"
+              ],
+              "state_actions": [],
+              "rejoin": "gather"
+            }
+          ]
+        },
+        {
+          "choice_id": "CH-F1-02-5",
+          "scene_id": "SC-F1-02",
+          "availability_conditions": [],
+          "equal_weight_note": "Naming the extra you brought and setting it down without a word both cost the beat; one gives him a reason, the other gives him nothing to repay.",
+          "no_accrual_note": "No counter keys off either option; nothing accrues from repetition.",
+          "options": [
+            {
+              "option_id": "CH-F1-02-5-a",
+              "verb_family": "Converse",
+              "player_verb": "ease",
+              "player_line": "L-CH-F1-02-5-a-p",
+              "response_slots": [
+                "L-CH-F1-02-5-a-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "thread_move",
+                  "arg": "giver-receive"
+                }
+              ],
+              "rejoin": "gather"
+            },
+            {
+              "option_id": "CH-F1-02-5-b",
+              "verb_family": "Collect",
+              "player_verb": "witness",
+              "surface_action": "set it down without a word",
+              "response_slots": [
+                "L-CH-F1-02-5-b-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "thread_move",
+                  "arg": "giver-receive"
+                }
+              ],
+              "rejoin": "gather"
+            }
+          ]
+        },
+        {
+          "choice_id": "CH-F1-02-6",
+          "scene_id": "SC-F1-02",
+          "availability_conditions": [],
+          "equal_weight_note": "Telling him to keep some back and heading out both close the scene; one presses the thread once more, the other leaves him to the feast.",
+          "no_accrual_note": "No counter keys off either option; nothing accrues from repetition.",
+          "options": [
+            {
+              "option_id": "CH-F1-02-6-a",
+              "verb_family": "Converse",
+              "player_verb": "ease",
+              "player_line": "L-CH-F1-02-6-a-p",
+              "response_slots": [
+                "L-CH-F1-02-6-a-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "thread_move",
+                  "arg": "giver-receive"
+                }
+              ],
+              "rejoin": "gather"
+            },
+            {
+              "option_id": "CH-F1-02-6-b",
+              "verb_family": "Collect",
+              "player_verb": "witness",
+              "surface_action": "head back to the ovens",
+              "response_slots": [
+                "L-CH-F1-02-6-b-r1"
+              ],
+              "state_actions": [],
+              "rejoin": "gather"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scene_id": "SC-T1-01",
+      "soul": "ilsa",
+      "screen_id": "T1",
+      "note": "PROPOSAL, placeholder prose. Short establishing shape (3 beats, 2 options, no gates), authored 2026-07-30 to vary scene shape per the calibration standing rule. Ilsa assumes you into the festival prep. Real prose goes through the crew, gated by Roc. W1 (2026-07-31): three bond_events added (state_actions only, prose untouched). W1 (2026-07-31): three bond_events added (state_actions only, prose untouched).",
+      "lines": [
+        {
+          "content_id": "L-SC-T1-01-01",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder set-up: Ilsa is already handing you one end of a banner, as though it was arranged.",
+          "choice_id": "CH-T1-01-1"
+        },
+        {
+          "content_id": "L-CH-T1-01-1-a-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "Placeholder player line: ask who decided this.",
+          "choice_id": "CH-T1-01-1",
+          "option_id": "CH-T1-01-1-a"
+        },
+        {
+          "content_id": "L-CH-T1-01-1-a-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: she does not look up from the knot.",
+          "choice_id": "CH-T1-01-1",
+          "option_id": "CH-T1-01-1-a"
+        },
+        {
+          "content_id": "L-CH-T1-01-1-b-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: the banner goes taut between you.",
+          "choice_id": "CH-T1-01-1",
+          "option_id": "CH-T1-01-1-b"
+        },
+        {
+          "content_id": "L-SC-T1-01-02",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder set-up: she names two people who are coming, and does not name a third.",
+          "choice_id": "CH-T1-01-2"
+        },
+        {
+          "content_id": "L-CH-T1-01-2-a-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "Placeholder player line: repeat the count back.",
+          "choice_id": "CH-T1-01-2",
+          "option_id": "CH-T1-01-2-a"
+        },
+        {
+          "content_id": "L-CH-T1-01-2-a-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: she corrects the count without adding the name.",
+          "choice_id": "CH-T1-01-2",
+          "option_id": "CH-T1-01-2-a"
+        },
+        {
+          "content_id": "L-CH-T1-01-2-b-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "Placeholder player line: let the gap stand.",
+          "choice_id": "CH-T1-01-2",
+          "option_id": "CH-T1-01-2-b"
+        },
+        {
+          "content_id": "L-CH-T1-01-2-b-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: she moves to the next knot.",
+          "choice_id": "CH-T1-01-2",
+          "option_id": "CH-T1-01-2-b"
+        },
+        {
+          "content_id": "L-SC-T1-01-03",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder set-up: the banner is up; she steps back to judge it.",
+          "choice_id": "CH-T1-01-3"
+        },
+        {
+          "content_id": "L-CH-T1-01-3-a-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "Placeholder player line: say it hangs straight.",
+          "choice_id": "CH-T1-01-3",
+          "option_id": "CH-T1-01-3-a"
+        },
+        {
+          "content_id": "L-CH-T1-01-3-a-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: she says it will do.",
+          "choice_id": "CH-T1-01-3",
+          "option_id": "CH-T1-01-3-a"
+        },
+        {
+          "content_id": "L-CH-T1-01-3-b-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: she notices the cord and says nothing about it.",
+          "choice_id": "CH-T1-01-3",
+          "option_id": "CH-T1-01-3-b"
+        }
+      ],
+      "choice_nodes": [
+        {
+          "choice_id": "CH-T1-01-1",
+          "scene_id": "SC-T1-01",
+          "availability_conditions": [
+            "npc_present(ilsa)"
+          ],
+          "equal_weight_note": "Both options cost the same: one spends the block, the other leaves the surface request standing.",
+          "no_accrual_note": "No counter keys off repeated selection of any option here.",
+          "options": [
+            {
+              "option_id": "CH-T1-01-1-a",
+              "verb_family": "Converse",
+              "player_verb": "witness",
+              "response_slots": [
+                "L-CH-T1-01-1-a-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "thread_move",
+                  "arg": "kinbound-absence"
+                },
+                {
+                  "type": "bond_event",
+                  "arg": "Trust"
+                }
+              ],
+              "rejoin": "gather",
+              "player_line": "L-CH-T1-01-1-a-p"
+            },
+            {
+              "option_id": "CH-T1-01-1-b",
+              "verb_family": "Use",
+              "player_verb": "ease",
+              "response_slots": [
+                "L-CH-T1-01-1-b-r1"
+              ],
+              "state_actions": [],
+              "rejoin": "gather",
+              "surface_action": "take the other end of the banner"
+            }
+          ]
+        },
+        {
+          "choice_id": "CH-T1-01-2",
+          "scene_id": "SC-T1-01",
+          "availability_conditions": [
+            "npc_present(ilsa)"
+          ],
+          "equal_weight_note": "Both options cost the same: one spends the block, the other leaves the surface request standing.",
+          "no_accrual_note": "No counter keys off repeated selection of any option here.",
+          "options": [
+            {
+              "option_id": "CH-T1-01-2-a",
+              "verb_family": "Converse",
+              "player_verb": "witness",
+              "response_slots": [
+                "L-CH-T1-01-2-a-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "knowledge_flag",
+                  "arg": "count_short"
+                },
+                {
+                  "type": "bond_event",
+                  "arg": "Recognition"
+                }
+              ],
+              "rejoin": "gather",
+              "player_line": "L-CH-T1-01-2-a-p"
+            },
+            {
+              "option_id": "CH-T1-01-2-b",
+              "verb_family": "Converse",
+              "player_verb": "sit-with",
+              "response_slots": [
+                "L-CH-T1-01-2-b-r1"
+              ],
+              "state_actions": [],
+              "rejoin": "gather",
+              "player_line": "L-CH-T1-01-2-b-p"
+            }
+          ]
+        },
+        {
+          "choice_id": "CH-T1-01-3",
+          "scene_id": "SC-T1-01",
+          "availability_conditions": [
+            "npc_present(ilsa)"
+          ],
+          "equal_weight_note": "Both options cost the same: one spends the block, the other leaves the surface request standing.",
+          "no_accrual_note": "No counter keys off repeated selection of any option here.",
+          "options": [
+            {
+              "option_id": "CH-T1-01-3-a",
+              "verb_family": "Converse",
+              "player_verb": "ease",
+              "response_slots": [
+                "L-CH-T1-01-3-a-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "thread_move",
+                  "arg": "kinbound-absence"
+                },
+                {
+                  "type": "bond_event",
+                  "arg": "Intimacy"
+                }
+              ],
+              "rejoin": "gather",
+              "player_line": "L-CH-T1-01-3-a-p"
+            },
+            {
+              "option_id": "CH-T1-01-3-b",
+              "verb_family": "Use",
+              "player_verb": "witness",
+              "response_slots": [
+                "L-CH-T1-01-3-b-r1"
+              ],
+              "state_actions": [],
+              "rejoin": "gather",
+              "surface_action": "leave the spare cord on the bench"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scene_id": "SC-T4-02",
+      "soul": "ilsa",
+      "screen_id": "T4",
+      "note": "PROPOSAL, placeholder prose (W1, 2026-07-31). Day-3 beat: Ilsa covers for the relative who does not come, and the covering is by arrangement rather than by accident. Six beats, branch-and-bottleneck, one knows()-gated branch carrying its own choice, one divert. Moves kinbound-absence. Real prose goes through the crew, gated by Roc.",
+      "lines": [
+        {
+          "content_id": "L-SC-T4-02-01",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder set-up: a second set of tools is laid out, clean, and clearly unused.",
+          "choice_id": "CH-T4-02-1"
+        },
+        {
+          "content_id": "L-CH-T4-02-1-a-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "Two sets today.",
+          "choice_id": "CH-T4-02-1",
+          "option_id": "CH-T4-02-1-a"
+        },
+        {
+          "content_id": "L-CH-T4-02-1-a-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: she says the second set is easier than putting it away.",
+          "choice_id": "CH-T4-02-1",
+          "option_id": "CH-T4-02-1-a"
+        },
+        {
+          "content_id": "L-CH-T4-02-1-b-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: she adjusts your grip, and does not mention the other set.",
+          "choice_id": "CH-T4-02-1",
+          "option_id": "CH-T4-02-1-b"
+        },
+        {
+          "content_id": "L-CH-T4-02-1-b-1-a-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "That's not how I was taught.",
+          "choice_id": "CH-T4-02-1-b-1",
+          "option_id": "CH-T4-02-1-b-1-a"
+        },
+        {
+          "content_id": "L-CH-T4-02-1-b-1-a-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: she says the teaching was for a different arm.",
+          "choice_id": "CH-T4-02-1-b-1",
+          "option_id": "CH-T4-02-1-b-1-a"
+        },
+        {
+          "content_id": "L-CH-T4-02-1-b-1-b-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: the rhythm settles, and neither of you names it.",
+          "choice_id": "CH-T4-02-1-b-1",
+          "option_id": "CH-T4-02-1-b-1-b"
+        },
+        {
+          "content_id": "L-CH-T4-02-1-b-1-c-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "Whose grip is this?",
+          "choice_id": "CH-T4-02-1-b-1",
+          "option_id": "CH-T4-02-1-b-1-c"
+        },
+        {
+          "content_id": "L-CH-T4-02-1-b-1-c-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: she gives the correction again, and not the answer.",
+          "choice_id": "CH-T4-02-1-b-1",
+          "option_id": "CH-T4-02-1-b-1-c"
+        },
+        {
+          "content_id": "L-CH-T4-02-1-b-1-c-1-a-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "You didn't answer.",
+          "choice_id": "CH-T4-02-1-b-1-c-1",
+          "option_id": "CH-T4-02-1-b-1-c-1-a"
+        },
+        {
+          "content_id": "L-CH-T4-02-1-b-1-c-1-a-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: she says she did, and moves your thumb a third time.",
+          "choice_id": "CH-T4-02-1-b-1-c-1",
+          "option_id": "CH-T4-02-1-b-1-c-1-a"
+        },
+        {
+          "content_id": "L-CH-T4-02-1-b-1-c-1-a-r2",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder beat: the correction is the answer, and she will not give it twice.",
+          "choice_id": "CH-T4-02-1-b-1-c-1",
+          "option_id": "CH-T4-02-1-b-1-c-1-a"
+        },
+        {
+          "content_id": "L-CH-T4-02-1-b-1-c-1-b-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: she lets the question go by, and the work picks up again.",
+          "choice_id": "CH-T4-02-1-b-1-c-1",
+          "option_id": "CH-T4-02-1-b-1-c-1-b"
+        },
+        {
+          "content_id": "L-CH-T4-02-1-b-1-c-1-b-r2",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder beat: the grip settles, and it is still not yours.",
+          "choice_id": "CH-T4-02-1-b-1-c-1",
+          "option_id": "CH-T4-02-1-b-1-c-1-b"
+        },
+        {
+          "content_id": "L-CH-T4-02-1-b-1-GB",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder beat: the second set stays at the edge of sight, and the work goes on past it.",
+          "choice_id": "CH-T4-02-1-b-1"
+        },
+        {
+          "content_id": "L-CH-T4-02-1-b-2-a-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "I'll put them back when we're done.",
+          "choice_id": "CH-T4-02-1-b-2",
+          "option_id": "CH-T4-02-1-b-2-a"
+        },
+        {
+          "content_id": "L-CH-T4-02-1-b-2-a-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: she says to leave them out.",
+          "choice_id": "CH-T4-02-1-b-2",
+          "option_id": "CH-T4-02-1-b-2-a"
+        },
+        {
+          "content_id": "L-CH-T4-02-1-b-2-b-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: they stay out, and she works around them.",
+          "choice_id": "CH-T4-02-1-b-2",
+          "option_id": "CH-T4-02-1-b-2-b"
+        },
+        {
+          "content_id": "L-CH-T4-02-1-b-2-GB",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder beat: the hour closes with two sets out and one person working.",
+          "choice_id": "CH-T4-02-1-b-2"
+        },
+        {
+          "content_id": "L-SC-T4-02-02",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder set-up: she works a piece that plainly needs two people, alone.",
+          "choice_id": "CH-T4-02-2"
+        },
+        {
+          "content_id": "L-CH-T4-02-2-a-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: the work goes quicker and she does not say so.",
+          "choice_id": "CH-T4-02-2",
+          "option_id": "CH-T4-02-2-a"
+        },
+        {
+          "content_id": "L-CH-T4-02-2-b-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "You've done this alone a while.",
+          "choice_id": "CH-T4-02-2",
+          "option_id": "CH-T4-02-2-b"
+        },
+        {
+          "content_id": "L-CH-T4-02-2-b-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: she agrees in a way that closes the subject.",
+          "choice_id": "CH-T4-02-2",
+          "option_id": "CH-T4-02-2-b"
+        },
+        {
+          "content_id": "L-SC-T4-02-03",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder set-up: with the second set named, she talks about who it was cut for.",
+          "choice_id": "CH-T4-02-3"
+        },
+        {
+          "content_id": "L-CH-T4-02-3-a-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "He'll come when the work's done.",
+          "choice_id": "CH-T4-02-3",
+          "option_id": "CH-T4-02-3-a"
+        },
+        {
+          "content_id": "L-CH-T4-02-3-a-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: she lets the excuse stand without taking it.",
+          "choice_id": "CH-T4-02-3",
+          "option_id": "CH-T4-02-3-a"
+        },
+        {
+          "content_id": "L-CH-T4-02-3-b-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "You cut them to his hand.",
+          "choice_id": "CH-T4-02-3",
+          "option_id": "CH-T4-02-3-b"
+        },
+        {
+          "content_id": "L-CH-T4-02-3-b-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: she looks at the tools as though newly.",
+          "choice_id": "CH-T4-02-3",
+          "option_id": "CH-T4-02-3-b"
+        },
+        {
+          "content_id": "L-CH-T4-02-3-c-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: she leaves them where you put them.",
+          "choice_id": "CH-T4-02-3",
+          "option_id": "CH-T4-02-3-c"
+        },
+        {
+          "content_id": "L-SC-T4-02-04",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder set-up: the forge quiets, and the quiet is the loudest part of the hour.",
+          "choice_id": "CH-T4-02-4"
+        },
+        {
+          "content_id": "L-CH-T4-02-4-a-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: she works slower, and does not fill it either.",
+          "choice_id": "CH-T4-02-4",
+          "option_id": "CH-T4-02-4-a"
+        },
+        {
+          "content_id": "L-CH-T4-02-4-b-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "Coal's holding, at least.",
+          "choice_id": "CH-T4-02-4",
+          "option_id": "CH-T4-02-4-b"
+        },
+        {
+          "content_id": "L-CH-T4-02-4-b-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: she takes the small subject gratefully.",
+          "choice_id": "CH-T4-02-4",
+          "option_id": "CH-T4-02-4-b"
+        },
+        {
+          "content_id": "L-SC-T4-02-05",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder set-up: she describes the arrangement plainly, as a thing agreed years ago.",
+          "choice_id": "CH-T4-02-5"
+        },
+        {
+          "content_id": "L-CH-T4-02-5-a-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "That's an arrangement, not a visit.",
+          "choice_id": "CH-T4-02-5",
+          "option_id": "CH-T4-02-5-a"
+        },
+        {
+          "content_id": "L-CH-T4-02-5-a-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: she does not argue, which is the answer.",
+          "choice_id": "CH-T4-02-5",
+          "option_id": "CH-T4-02-5-a"
+        },
+        {
+          "content_id": "L-CH-T4-02-5-b-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: she moves on, and the hour keeps its shape.",
+          "choice_id": "CH-T4-02-5",
+          "option_id": "CH-T4-02-5-b"
+        },
+        {
+          "content_id": "L-SC-T4-02-06",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder set-up: she banks the forge for the night and counts what is left to do.",
+          "choice_id": "CH-T4-02-6"
+        },
+        {
+          "content_id": "L-CH-T4-02-6-a-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "Same time tomorrow.",
+          "choice_id": "CH-T4-02-6",
+          "option_id": "CH-T4-02-6-a"
+        },
+        {
+          "content_id": "L-CH-T4-02-6-a-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: she says the door is not locked, which is a yes.",
+          "choice_id": "CH-T4-02-6",
+          "option_id": "CH-T4-02-6-a"
+        },
+        {
+          "content_id": "L-CH-T4-02-6-b-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "ilsa",
+          "text": "Placeholder response: she lets you, and checks it anyway.",
+          "choice_id": "CH-T4-02-6",
+          "option_id": "CH-T4-02-6-b"
+        }
+      ],
+      "choice_nodes": [
+        {
+          "choice_id": "CH-T4-02-1",
+          "scene_id": "SC-T4-02",
+          "options": [
+            {
+              "option_id": "CH-T4-02-1-a",
+              "verb_family": "Converse",
+              "response_slots": [
+                "L-CH-T4-02-1-a-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "knowledge_flag",
+                  "arg": "second_set"
+                },
+                {
+                  "type": "bond_event",
+                  "arg": "Trust"
+                }
+              ],
+              "rejoin": "gather",
+              "player_verb": "witness",
+              "player_line": "L-CH-T4-02-1-a-p"
+            },
+            {
+              "option_id": "CH-T4-02-1-b",
+              "verb_family": "Converse",
+              "response_slots": [
+                "L-CH-T4-02-1-b-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "thread_move",
+                  "arg": "kinbound-absence"
+                }
+              ],
+              "rejoin": "gather",
+              "surface_action": "take the near set and start without asking"
+            }
+          ],
+          "availability_conditions": [],
+          "equal_weight_note": "Naming the tools costs her the pretense; working past them costs you the opening.",
+          "no_accrual_note": "No counter keys off either pick; the tools are laid out the same tomorrow."
+        },
+        {
+          "choice_id": "CH-T4-02-1-b-1",
+          "scene_id": "SC-T4-02",
+          "parent_option": "CH-T4-02-1-b",
+          "gather_line": "L-CH-T4-02-1-b-1-GB",
+          "options": [
+            {
+              "option_id": "CH-T4-02-1-b-1-a",
+              "verb_family": "Converse",
+              "response_slots": [
+                "L-CH-T4-02-1-b-1-a-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "bond_event",
+                  "arg": "Respect"
+                }
+              ],
+              "rejoin": "gather",
+              "player_verb": "witness",
+              "player_line": "L-CH-T4-02-1-b-1-a-p"
+            },
+            {
+              "option_id": "CH-T4-02-1-b-1-b",
+              "verb_family": "Use",
+              "response_slots": [
+                "L-CH-T4-02-1-b-1-b-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "bond_event",
+                  "arg": "Intimacy"
+                }
+              ],
+              "rejoin": "gather",
+              "player_verb": "sit-with",
+              "surface_action": "match her pace instead of your own"
+            },
+            {
+              "option_id": "CH-T4-02-1-b-1-c",
+              "verb_family": "Converse",
+              "response_slots": [
+                "L-CH-T4-02-1-b-1-c-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "knowledge_flag",
+                  "arg": "grip_not_yours"
+                }
+              ],
+              "rejoin": "gather",
+              "player_verb": "witness",
+              "player_line": "L-CH-T4-02-1-b-1-c-p"
+            }
+          ],
+          "availability_conditions": [],
+          "equal_weight_note": "Saying it aloud makes her account for the correction; matching her costs you the question; asking whose costs you the answer she will not give.",
+          "no_accrual_note": "No counter keys off any pick; the grip is corrected the same way the next time you take the tools."
+        },
+        {
+          "choice_id": "CH-T4-02-1-b-1-c-1",
+          "scene_id": "SC-T4-02",
+          "parent_option": "CH-T4-02-1-b-1-c",
+          "options": [
+            {
+              "option_id": "CH-T4-02-1-b-1-c-1-a",
+              "verb_family": "Converse",
+              "response_slots": [
+                "L-CH-T4-02-1-b-1-c-1-a-r1",
+                "L-CH-T4-02-1-b-1-c-1-a-r2"
+              ],
+              "state_actions": [
+                {
+                  "type": "thread_move",
+                  "arg": "kinbound-absence"
+                }
+              ],
+              "rejoin": "gather",
+              "player_verb": "witness",
+              "player_line": "L-CH-T4-02-1-b-1-c-1-a-p"
+            },
+            {
+              "option_id": "CH-T4-02-1-b-1-c-1-b",
+              "verb_family": "Use",
+              "response_slots": [
+                "L-CH-T4-02-1-b-1-c-1-b-r1",
+                "L-CH-T4-02-1-b-1-c-1-b-r2"
+              ],
+              "state_actions": [
+                {
+                  "type": "knowledge_flag",
+                  "arg": "grip_kept"
+                }
+              ],
+              "rejoin": "gather",
+              "player_verb": "sit-with",
+              "surface_action": "copy the grip without asking again"
+            }
+          ],
+          "availability_conditions": [],
+          "equal_weight_note": "Pressing costs her the deflection she was using; letting it go costs you the name and hands her back the hour.",
+          "no_accrual_note": "No counter keys off either pick; she corrects the same grip the same way tomorrow."
+        },
+        {
+          "choice_id": "CH-T4-02-1-b-2",
+          "scene_id": "SC-T4-02",
+          "parent_option": "CH-T4-02-1-b",
+          "gather_line": "L-CH-T4-02-1-b-2-GB",
+          "options": [
+            {
+              "option_id": "CH-T4-02-1-b-2-a",
+              "verb_family": "Converse",
+              "response_slots": [
+                "L-CH-T4-02-1-b-2-a-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "thread_move",
+                  "arg": "kinbound-absence"
+                }
+              ],
+              "rejoin": "gather",
+              "player_verb": "ease",
+              "player_line": "L-CH-T4-02-1-b-2-a-p"
+            },
+            {
+              "option_id": "CH-T4-02-1-b-2-b",
+              "verb_family": "Use",
+              "response_slots": [
+                "L-CH-T4-02-1-b-2-b-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "bond_event",
+                  "arg": "Trust"
+                }
+              ],
+              "rejoin": "gather",
+              "player_verb": "sit-with",
+              "surface_action": "keep working and let the set stay where it is"
+            }
+          ],
+          "availability_conditions": [],
+          "equal_weight_note": "Offering to put them back hands her the decision she has been avoiding; leaving them out spares her it and leaves the arrangement standing.",
+          "no_accrual_note": "No counter keys off either pick; the set is out again tomorrow either way."
+        },
+        {
+          "choice_id": "CH-T4-02-2",
+          "scene_id": "SC-T4-02",
+          "options": [
+            {
+              "option_id": "CH-T4-02-2-a",
+              "verb_family": "Use",
+              "response_slots": [
+                "L-CH-T4-02-2-a-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "bond_event",
+                  "arg": "Intimacy"
+                }
+              ],
+              "rejoin": "gather",
+              "surface_action": "take the far end of the piece"
+            },
+            {
+              "option_id": "CH-T4-02-2-b",
+              "verb_family": "Converse",
+              "response_slots": [
+                "L-CH-T4-02-2-b-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "knowledge_flag",
+                  "arg": "alone_a_while"
+                }
+              ],
+              "rejoin": "gather",
+              "player_verb": "witness",
+              "player_line": "L-CH-T4-02-2-b-p"
+            }
+          ],
+          "availability_conditions": [],
+          "equal_weight_note": "Stepping in takes the task off her; standing by leaves her the version she chose.",
+          "no_accrual_note": "Helping repeatedly accumulates nothing — she is not keeping score of hands."
+        },
+        {
+          "choice_id": "CH-T4-02-3",
+          "scene_id": "SC-T4-02",
+          "options": [
+            {
+              "option_id": "CH-T4-02-3-a",
+              "verb_family": "Converse",
+              "response_slots": [
+                "L-CH-T4-02-3-a-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "bond_event",
+                  "arg": "Trust"
+                },
+                {
+                  "type": "thread_move",
+                  "arg": "kinbound-absence"
+                }
+              ],
+              "rejoin": "gather",
+              "player_verb": "ease",
+              "player_line": "L-CH-T4-02-3-a-p"
+            },
+            {
+              "option_id": "CH-T4-02-3-b",
+              "verb_family": "Converse",
+              "response_slots": [
+                "L-CH-T4-02-3-b-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "bond_event",
+                  "arg": "Recognition"
+                },
+                {
+                  "type": "knowledge_flag",
+                  "arg": "cut_to_hand"
+                }
+              ],
+              "rejoin": "gather",
+              "player_verb": "witness",
+              "player_line": "L-CH-T4-02-3-b-p"
+            },
+            {
+              "option_id": "CH-T4-02-3-c",
+              "verb_family": "Converse",
+              "response_slots": [
+                "L-CH-T4-02-3-c-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "bond_event",
+                  "arg": "Intimacy"
+                }
+              ],
+              "rejoin": "gather",
+              "surface_action": "set the second pair back in the rack"
+            }
+          ],
+          "availability_conditions": [
+            "knows(second_set)"
+          ],
+          "equal_weight_note": "Each read gives her something different to correct, and none of them is the right one.",
+          "no_accrual_note": "No pick is tallied; the set stays cut for the same person either way."
+        },
+        {
+          "choice_id": "CH-T4-02-4",
+          "scene_id": "SC-T4-02",
+          "options": [
+            {
+              "option_id": "CH-T4-02-4-a",
+              "verb_family": "Converse",
+              "response_slots": [
+                "L-CH-T4-02-4-a-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "bond_event",
+                  "arg": "Intimacy"
+                }
+              ],
+              "rejoin": "gather",
+              "player_verb": "sit-with",
+              "surface_action": "sit with the quiet"
+            },
+            {
+              "option_id": "CH-T4-02-4-b",
+              "verb_family": "Converse",
+              "response_slots": [
+                "L-CH-T4-02-4-b-r1"
+              ],
+              "state_actions": [],
+              "rejoin": "gather",
+              "player_verb": "ease",
+              "player_line": "L-CH-T4-02-4-b-p"
+            }
+          ],
+          "availability_conditions": [],
+          "equal_weight_note": "Filling the quiet spares her it; holding it lets her decide what goes in.",
+          "no_accrual_note": "Sitting with silence twice is not worth more than sitting with it once."
+        },
+        {
+          "choice_id": "CH-T4-02-5",
+          "scene_id": "SC-T4-02",
+          "options": [
+            {
+              "option_id": "CH-T4-02-5-a",
+              "verb_family": "Converse",
+              "response_slots": [
+                "L-CH-T4-02-5-a-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "bond_event",
+                  "arg": "Recognition"
+                },
+                {
+                  "type": "thread_move",
+                  "arg": "kinbound-absence"
+                }
+              ],
+              "rejoin": "divert",
+              "divert_to": "CH-T4-02-6",
+              "player_verb": "witness",
+              "player_line": "L-CH-T4-02-5-a-p"
+            },
+            {
+              "option_id": "CH-T4-02-5-b",
+              "verb_family": "Converse",
+              "response_slots": [
+                "L-CH-T4-02-5-b-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "bond_event",
+                  "arg": "Intimacy"
+                }
+              ],
+              "rejoin": "gather",
+              "surface_action": "let the word go by"
+            }
+          ],
+          "availability_conditions": [
+            "knows(cut_to_hand)"
+          ],
+          "equal_weight_note": "Calling it an arrangement is accurate and cold; leaving it costs you the plain word.",
+          "no_accrual_note": "Neither reading is banked; the arrangement is the same arrangement."
+        },
+        {
+          "choice_id": "CH-T4-02-6",
+          "scene_id": "SC-T4-02",
+          "options": [
+            {
+              "option_id": "CH-T4-02-6-a",
+              "verb_family": "Converse",
+              "response_slots": [
+                "L-CH-T4-02-6-a-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "bond_event",
+                  "arg": "Recognition"
+                },
+                {
+                  "type": "thread_move",
+                  "arg": "kinbound-absence"
+                }
+              ],
+              "rejoin": "gather",
+              "player_verb": "ease",
+              "player_line": "L-CH-T4-02-6-a-p"
+            },
+            {
+              "option_id": "CH-T4-02-6-b",
+              "verb_family": "Use",
+              "response_slots": [
+                "L-CH-T4-02-6-b-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "bond_event",
+                  "arg": "Intimacy"
+                }
+              ],
+              "rejoin": "gather",
+              "surface_action": "bank the far side of the forge without being asked"
+            }
+          ],
+          "availability_conditions": [],
+          "equal_weight_note": "Offering tomorrow commits you; leaving it open leaves her the room to not ask.",
+          "no_accrual_note": "Coming back is not a tally — the count is the same whether you say so or not."
+        }
+      ]
+    }
+  ]
+}

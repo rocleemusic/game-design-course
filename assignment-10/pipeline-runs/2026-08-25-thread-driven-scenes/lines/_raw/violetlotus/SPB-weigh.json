@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The sacks are lined up against the wall, each a different size and fullness. Toby sets a river stone against the nearest one. It rises a hand's breadth and hangs \u2014 heavy, low. \"That's full,\" he says, fast and exact. He moves on to the next sack, his eyes flicking to the stone, to the sack, to the stone again, checking and rechecking. The flour shifts slightly inside, settling under the weight. Toby adjusts the sack, aligning it with its neighbor. \"Even now,\" he mutters, more to himself than to the player. He picks up another stone, this one smaller, and sets it against the next sack. It too hangs low, not quite matching the first.",
+    "wc": 116,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player looks at the sack, then at Toby. \"Is that one short?\" Toby sets the stone against a third sack. It rises the same, level. \"Hangs low. That's full.\" Fast, exact. He doesn't look up.",
+    "wc": 36,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player sets the stone against a second sack the same way \u2014 it hangs level with the first, matched.\n\nToby glances up, then back to his work. \"Two of a kind now.\" A brief nod, the closest he comes to praise.",
+    "wc": 42,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player sets the stone against the brick oven. The stone clatters to the floor, unmoved. \"Built in. Nothing to bear up,\" Toby says, not looking up from the sacks. He doesn't explain further, already moving on to the next task. The oven stands solid and immovable, offering no information beyond its own unyielding nature. Toby records the boundary in his mind, but doesn't dwell on it. The sacks remain, waiting for his attention. He turns to them, stone forgotten.",
+    "wc": 80,
+    "ok": true,
+    "err": null
+  }
+}

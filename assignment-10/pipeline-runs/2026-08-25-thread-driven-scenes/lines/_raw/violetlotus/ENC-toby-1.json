@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Toby's worktable, morning. His flour sack is open, a bowl of starter working beside it. A chalk tally leans against the sack \u2014 marks made, none crossed off yet. He doesn't stop his hands when the player enters. Toby measures a scoop, frowns, scrapes it back. He says, without looking up, \"The dough went flat overnight, and we're forty loaves short if the whole town turns out \u2014 the starter takes faster with water.\" He pours in a stream from the nearby skin, the starter rising visibly, and keeps measuring, counting under his breath. \"That'll make it. Thanks.\"",
+    "wc": 98,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player brings a skin of spring water over to the starter bowl. Toby glances at it, says nothing, works it into the starter without breaking stride \u2014 the starter takes faster with it. \"The water's good. It'll tighten the crumb.\" He scoops, measures, recalculates the square's yield again in three words. His hands stay steady. \"If we can get the first rise high enough.\" He doesn't slow down. \"The square's still short.\" The water's help is acknowledged but not thanked \u2014 a fact, not a gift. The player's contribution is absorbed into the task. Toby keeps counting out the day's work, one number per thought, as if it's all he has to say",
+    "wc": 114,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player casts *weigh* over the flour sack, and Toby reads the number off the air. \"That's close. We'll need three more bags to make up the difference.\" He recalculates out loud in three words, then keeps working, the starter taking faster with the spring water.",
+    "wc": 46,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "Toby hesitates a half-beat. \"Not yet,\" he says, keeping his hands busy. The player's offer hangs a moment before he turns it aside with a small shake of the head and goes back to measuring.",
+    "wc": 35,
+    "ok": true,
+    "err": null
+  }
+}

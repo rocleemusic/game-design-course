@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The player steps into the Festival Grounds, a wide grassy expanse bordered by the old stone walls of the village. In the center, a priest in simple robes kneels beside a smoking censer, tending to the fragrant wisps of smoke with careful, deliberate movements. The air is filled with the scent of burning herbs and the gentle rustling of leaves in the breeze.",
+    "wc": 63,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "\"Does the wind fight it?\" the player asks.\n\nThe priest glances up, then returns his gaze to the censer. \"Not once it's called straight,\" he says, holding his hands around the steady column of smoke. \"The wind doesn't touch it then.\"",
+    "wc": 41,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player sweeps the dusty floor near the censer, offering it as a second thing to lift. The dust rises in a thin sheet and drifts out the doorway. \"Well, would you look at that,\" the priest murmurs, pleased.",
+    "wc": 39,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player sets a river stone near the censer. The column of smoke flows around the stone, rising undisturbed as if it weren't there. The priest watches, expressionless. \"It rises from what it can.\"",
+    "wc": 34,
+    "ok": true,
+    "err": null
+  }
+}

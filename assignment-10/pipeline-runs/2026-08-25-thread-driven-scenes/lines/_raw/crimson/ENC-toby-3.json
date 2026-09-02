@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The player stands by the worktable, the last tray of Festival rolls waiting to be covered. Toby, his hands dusted with flour, double-checks the tally slate, his brow furrowed in concentration. \"Twelve down from forty, near enough,\" he mutters, setting the slate aside. He reaches for an empty flour sack, his hands already moving to fold it, but pauses, looking up at the player. \"You're back,\" he says, his voice flat, not quite a question.",
+    "wc": 75,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player brings a length of wool and lays it over the last rising batch. Toby checks the cover, nods once, says nothing.",
+    "wc": 23,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "Toby reads the number, crosses the last mark himself. \"Confirmed.\"",
+    "wc": 10,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player says, \"I'll check back after.\"\n\nToby: \"Appreciated,\" and keeps folding, the flat acknowledgment no longer than the task itself.",
+    "wc": 21,
+    "ok": true,
+    "err": null
+  }
+}

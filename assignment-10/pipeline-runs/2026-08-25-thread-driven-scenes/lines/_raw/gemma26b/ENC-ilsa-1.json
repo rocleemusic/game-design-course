@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The forge fire is a sullen thing, casting out smoke instead of heat. Ilsa works the bellows herself, her hands steady on the wood. \"You're on the bellows.\"",
+    "wc": 28,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player brings a bundle of sticks to the forge. Ilsa takes them without pausing and works them into the coals. \"It'll take a while to catch.\"",
+    "wc": 27,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player casts a spark into the banked coals. The fire catches, and Ilsa feels the heat through the bellows handle, her rhythm settling into a new, steady pace.",
+    "wc": 29,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player says, \"Rough morning for it.\"\n\nIlsa returns her gaze to the fire. \"It'll come round.\"",
+    "wc": 17,
+    "ok": true,
+    "err": null
+  }
+}

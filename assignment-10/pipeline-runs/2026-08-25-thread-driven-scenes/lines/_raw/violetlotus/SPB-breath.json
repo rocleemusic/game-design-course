@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The player approaches a weathered farmer, their eyes drawn to the tray of threshed grain sitting on the grass. The farmer looks up, a hint of curiosity in their tired eyes. \"You're new to this festival, aren't you?\" they say, their voice warm with understanding. \"It's a bit different from the ones you might know.\" They gesture to the tray, a subtle smile playing at the corners of their mouth. \"Here, watch this.\" They take a deep breath, and with a short, directed puff, send a gust of wind across the tray. Chaff lifts clear, leaving clean grain behind. The farmer nods, satisfied. \"A small trick, but it makes the work easier.\" They look back at",
+    "wc": 116,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The farmer looks up at the player with a small smile, \"Loose and light, mostly. Grain, leaves.\" They turn back to their work, \"Other things, too, with practice.\" The player nods, understanding dawning.",
+    "wc": 33,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player sweeps a pile of fallen leaves into the farmer's path. The farmer sends a short puff of directed air over the leaves, and they scatter off in one gust. \"Loose and light, mostly. Grain, leaves.\" The farmer nods, pleased at the player's successful attempt. \"You've a knack for it.\"",
+    "wc": 51,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player directs the gust at a standing anvil nearby, out of curiosity. The gust breaks around it, no effect. The farmer looks up, surprised. \"Whoa, careful! That's iron \u2014 it doesn't budge for wind.\" They glance at the player, reassessing. \"You're curious, aren't you? I like that.\" The farmer's respect for the player grows slightly.",
+    "wc": 56,
+    "ok": true,
+    "err": null
+  }
+}

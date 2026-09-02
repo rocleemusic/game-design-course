@@ -1,0 +1,588 @@
+/*
+ * Blueprint node cards (L5b) — the DIALOGUE canvas.
+ *
+ * Its own file, not a block in app.css, for two reasons: the dialogue canvas is
+ * the only consumer (LevelView and the pickers still use .node-card), and the
+ * depth restyle is editing app.css in parallel.
+ *
+ * THE OPACITY RULE (sign-off 6). Every fill below is a solid colour or a mix of
+ * two solid colours. Nothing on a card is translucent, ever. The tempting bug:
+ * a translucent card over the night canvas keeps test/contrast.test.ts green,
+ * because that test parses opaque hex out of tokens.css and can't see that the
+ * real background became a blend — so shipped contrast falls under 4.5:1 while
+ * the suite says fine. Depth here is border + layered shadow + the head/body
+ * step + a lit top lip, in that order.
+ *
+ * Shadows come from the elevation ladder in tokens.css (--elev-*, --edge-lip,
+ * --well) rather than fresh rgba() — one ladder, one place to tune it.
+ */
+
+/* ---------- the wrapper React Flow measures ---------- */
+
+/* The toolbar hangs off this, absolutely, so it never enters the measured box.
+   Card metrics feed dagre through React Flow's `measured`; if the toolbar
+   changed the height, showing it would silently relayout the graph. */
+.bp-wrap {
+  position: relative;
+}
+
+/* ---------- the card ---------- */
+
+.bp-node {
+  /* kind colour: an alias, resolved per kind below */
+  --bp-kind: var(--node-line);
+  /* the head's kind wash — opaque: kind colour mixed INTO paper */
+  --bp-head-bg: color-mix(in srgb, var(--bp-kind) var(--node-wash), var(--node-head));
+
+  position: relative;
+  width: 252px;
+  font-size: var(--text-small);
+  color: var(--ink);
+  background: var(--node-body);
+  border: var(--hairline) solid var(--node-seam);
+  border-top: 3px solid var(--bp-kind); /* the kind bar */
+  /* The review rule down the left edge is a BORDER, not an inset shadow.
+     .node-card could use `inset 4px 0 0` because it had no opaque children; a
+     blueprint card's head/body/foot each paint their own background over the
+     parent's inset shadow, so the rule would simply vanish. It is also always
+     4px wide, so approving a node never reflows the graph. */
+  border-left: 4px solid var(--node-seam);
+  border-radius: var(--r-card);
+  /* overflow clips the head's square corners to the card radius, and keeps a
+     long snippet from painting outside the card */
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: var(--elev-3), var(--edge-lip);
+}
+
+/* hover lifts — shadow only, so it never fights the status rule or the kind bar
+   for the border, and never shifts a pixel of layout */
+.bp-node:hover {
+  box-shadow: var(--elev-4), var(--edge-lip);
+}
+
+.bp-node:focus-visible {
+  outline: 2px solid var(--focus-ring-on-canvas);
+  outline-offset: 2px;
+}
+
+/* ---------- kind aliases ---------- */
+
+/* The wash ramp (D8 #1). tokens.css's --node-wash (8%) is the floor every
+   kind must clear body-darker-than-head at — test/blueprintContrast.test.ts
+   pins exactly that single-token case, using it against EVERY kind alias, so
+   it stays the safe conservative value the test can see.
+   A flat wash cannot go much past that floor: teal and forest are the two
+   darkest primitives, and a uniform bump past ~10% already flips their head
+   darker than the body (checked by hand against tokens.css's own hex values).
+   So instead of one number, each kind alias overrides --node-wash locally to
+   its OWN safe ceiling — a per-kind ramp, lighter primitives (amber, dusk,
+   blossom) carrying more of their own colour, the two darkest kept close to
+   the floor. Custom-property cascade rules mean the more specific selector
+   here always wins over --bp-node's --node-wash fallback, so --bp-head-bg
+   (defined once, above) picks each kind's own number automatically. */
+/* Raised 2026-08-01 (Roc: the head read as too empty next to the app's
+   solid-fill tabs/buttons) to each kind's actual safe ceiling — recomputed
+   the same way the ceiling was originally found (by hand against tokens.css's
+   hex values), leaving ~0.5 point of margin below where any of the three
+   Blueprint-read checks would start failing. teal barely moves (it was
+   already close to its own ceiling); the others gain 1-3 points, which is as
+   far as any of them can go without the head tipping darker than the body or
+   --muted dropping under 4.5:1 on it — both load-bearing, see the file
+   header. test/blueprintContrast.test.ts pins these exact numbers now, not
+   just the conservative single-token floor, so a future change here fails
+   loudly instead of needing another by-hand check. */
+/* Pending-only solid fill (RULED 2026-08-01: the fill IS the "needs review"
+   signal — the blueprint card-head review). Each kind's SOLID pending fill
+   and the text colour that clears 4.5:1 on it — not the wash. Reviewed cards
+   (approved/edited/flagged) never touch these; they still render
+   --bp-head-bg exactly as before, unchanged. Because fill and status colour
+   can therefore never appear on a card at once, TWO kinds safely reuse a
+   status colour: kind-line's fill is --dusk-deep (the "edited" family) and
+   kind-screen's is --forest (the "approved" family) — there is no card state
+   where either fill and its matching status dot coexist.
+   test/blueprintContrast.test.ts pins both of those as deliberate and checks
+   every OTHER kind against colliding the same way by accident.
+   Where a kind's own primitive already clears 4.5:1 (teal, muted, forest —
+   checked by hand against tokens.css) the fill IS the primitive; where it
+   does not (dusk, blossom) the fill is the existing/added -deep variant
+   instead. Amber is the one exception: nothing darker exists for it, so its
+   pending fill stays --amber with --ink text at 4.94:1 — the thinnest margin
+   of the six, worth re-checking first if --amber or --ink is ever retuned. */
+.bp-node.kind-line {
+  --bp-kind: var(--node-line);
+  --node-wash: 14.5%;
+  --bp-pending-fill: var(--dusk-deep);
+  --bp-pending-text: var(--paper);
+}
+.bp-node.kind-choice {
+  --bp-kind: var(--node-choice);
+  --node-wash: 18.5%;
+  --bp-pending-fill: var(--amber);
+  --bp-pending-text: var(--ink);
+}
+.bp-node.kind-option {
+  --bp-kind: var(--node-option);
+  --node-wash: 9.5%;
+  --bp-pending-fill: var(--teal);
+  --bp-pending-text: var(--paper);
+}
+.bp-node.kind-gather {
+  --bp-kind: var(--node-gather);
+  --node-wash: 11%;
+  --bp-pending-fill: var(--muted);
+  --bp-pending-text: var(--paper);
+}
+.bp-node.kind-scene {
+  --bp-kind: var(--node-scene);
+  --node-wash: 12.5%;
+  --bp-pending-fill: var(--blossom-deep);
+  --bp-pending-text: var(--paper);
+}
+.bp-node.kind-screen {
+  --bp-kind: var(--node-screen);
+  --node-wash: 11%;
+  --bp-pending-fill: var(--forest);
+  --bp-pending-text: var(--paper);
+}
+
+/* A choice card is as wide as its options need: each option gets a pin on the
+   bottom edge, and pins closer than ~76px stop being separately readable. */
+.bp-node.kind-choice {
+  width: max(252px, calc(var(--bp-pins, 1) * 76px));
+}
+
+/* ---------- kind colour legend (D8 #7) ---------- */
+
+/* Lives in the dialogue canvas's own toolbar (SceneView.tsx's top-right
+   Panel) — same reasoning as the rest of this file: the dialogue canvas is
+   the only consumer. Aliases onto the same --node-* primitives the cards
+   use, so a legend edit is never possible without also touching the card. */
+.kind-legend {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: var(--space-1) 0 0;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-muted);
+}
+
+.kind-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.kind-legend-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 1px solid var(--border-strong);
+}
+
+.kind-legend-swatch.kind-line {
+  background: var(--node-line);
+}
+.kind-legend-swatch.kind-choice {
+  background: var(--node-choice);
+}
+.kind-legend-swatch.kind-option {
+  background: var(--node-option);
+}
+.kind-legend-swatch.kind-gather {
+  background: var(--node-gather);
+}
+
+/* ---------- head: the kind band ---------- */
+
+.bp-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 5px var(--space-2);
+  background: var(--bp-head-bg);
+  border-bottom: var(--hairline) solid
+    color-mix(in srgb, var(--bp-kind) 40%, var(--node-seam));
+  /* the head sits above the body and casts onto it */
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--bp-kind) 22%, var(--node-head));
+}
+
+/* Pending only: the solid fill IS the "needs review" signal, so it's the one
+   state allowed to be the heaviest surface on the card — the opposite of the
+   body-darker-than-head rule every reviewed state still holds. .play-dim and
+   .sweep-dim both override .bp-head's background again, later in this file,
+   so a dimmed or swept-away pending card still drops to --dim-bg rather than
+   keeping its bold fill — dimming already means "not what you're looking at
+   right now," which the fill contradicts. */
+.bp-node.status-pending .bp-head {
+  background: var(--bp-pending-fill);
+}
+.bp-node.status-pending .bp-kind,
+.bp-node.status-pending .bp-id {
+  color: var(--bp-pending-text);
+}
+
+.bp-kind {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  /* --ink, not the kind colour: amber and blossom are decorative-only, and
+     this label is the smallest type on the card. The 3px bar above carries
+     the hue instead. */
+  color: var(--ink);
+  font-weight: 600;
+  flex: none;
+}
+
+.bp-id {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-muted);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: right;
+}
+
+/* the status dot. Pending stays a plain dashed ring — "one glance, no word
+   to read" still holds there, nothing to disambiguate yet. Reviewed statuses
+   carry the same icon NodeCard's medallion already uses (Check/Pencil/Flag,
+   lucide-react, rendered by BlueprintNode.tsx) — sized up from the plain
+   9px dot so the glyph reads. Shape does the telling now, not just hue: with
+   kind-line's pending fill and the edited status both drawing from the dusk
+   family, the dot needs to say "edited" on its own. */
+.bp-dot {
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1.5px dashed var(--ink-muted); /* pending: an empty ring */
+}
+.bp-node.status-pending .bp-dot {
+  border-color: var(--bp-pending-text);
+}
+
+.bp-node.status-approved .bp-dot,
+.bp-node.status-edited .bp-dot,
+.bp-node.status-flagged .bp-dot {
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--paper);
+}
+.bp-dot svg {
+  width: 8px;
+  height: 8px;
+}
+
+.bp-node.status-approved .bp-dot {
+  background: var(--forest);
+  border: 1.5px solid var(--forest-deep);
+}
+.bp-node.status-edited .bp-dot {
+  background: var(--dusk);
+  border: 1.5px solid var(--dusk-deep);
+}
+.bp-node.status-flagged .bp-dot {
+  background: var(--clay);
+  border: 1.5px solid var(--clay);
+}
+
+/* ---------- body: DARKER than the head ---------- */
+
+/* --ink only in here. --muted on this surface lands near 4.4:1, so every
+   micro-label stays in the head or the foot (both on paper/cream).
+   test/blueprintContrast.test.ts pins the step and the ratios. */
+.bp-node .bp-body {
+  padding: var(--space-2);
+  background: var(--node-body);
+  box-shadow: var(--well);
+}
+
+.bp-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+
+/* .card-text carries the 3-line clamp from app.css — reused, not restated. */
+
+/* ---------- foot: chips, note, option pins ---------- */
+
+.bp-foot {
+  padding: var(--space-1) var(--space-2) var(--space-2);
+  background: var(--node-foot);
+  border-top: var(--hairline) solid var(--node-seam);
+}
+
+.bp-foot .chip-row {
+  margin-top: 0;
+}
+
+/* .chip's own background is --cream, which IS the foot — a chip would read as
+   a stray border. Half a step lighter separates it without a new colour. */
+.bp-foot .chip {
+  background: var(--paper);
+}
+
+/* One pin per option, each sitting exactly over its own edge handle, so which
+   branch leaves where is readable without tracing a line. Fixed height and
+   absolute children: the pins must not make card height depend on option
+   count in a way the measured relayout has to chase. */
+.bp-pins {
+  position: relative;
+  height: 15px;
+  margin-top: var(--space-1);
+}
+
+.bp-pin {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  max-width: 70px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 15px;
+  color: var(--ink);
+  text-align: center;
+}
+
+.bp-pin.status-approved {
+  color: var(--forest-deep);
+}
+.bp-pin.status-edited {
+  color: var(--dusk-deep);
+}
+.bp-pin.status-flagged {
+  color: var(--clay);
+}
+
+/* ---------- pins ---------- */
+
+/* The input pin. app.css keeps .flow-handle invisible because the other canvas
+   has no use for it; on a blueprint card the pin is part of the anatomy, so
+   this one shows. Same class, so the shared rules still reach it. */
+.bp-target.bp-target {
+  width: 9px;
+  height: 9px;
+  min-width: 0;
+  min-height: 0;
+  opacity: 1;
+  border: 1.5px solid var(--surface-canvas);
+  background: var(--edge);
+  pointer-events: none;
+}
+
+/* ---------- per-option handles ---------- */
+
+/* Decoration, not a target: isConnectable={false}, pointer-events off. The
+   44px interaction floor is about things you aim at — nothing is aimed here,
+   so a 9px pin is correct rather than a violation. */
+.bp-handle.bp-handle {
+  width: 9px;
+  height: 9px;
+  min-width: 0;
+  min-height: 0;
+  border: 1.5px solid var(--surface-canvas);
+  background: var(--node-choice);
+  pointer-events: none;
+}
+
+.bp-handle.status-approved {
+  background: var(--forest);
+}
+.bp-handle.status-edited {
+  background: var(--dusk);
+}
+.bp-handle.status-flagged {
+  background: var(--clay);
+}
+
+/* ---------- review toolbar: OFF the card ---------- */
+
+/*
+ * Approve and Flag used to live inside the card, inside its click target, and
+ * got hit while dragging or reading (ruled off the card). They sit here now:
+ * a sibling of the card, floated above it, shown only while the node is
+ * hovered or focused. Absolutely positioned so it stays out of the measured
+ * box. The card keeps `a`/`f`/`c` on the keyboard, so hiding this can never
+ * make approving unreachable.
+ */
+.bp-toolbar {
+  position: absolute;
+  /* Flush against the card's top edge, with NO gap. A gap would sit outside
+     .bp-wrap's box while the toolbar is inside it, so crossing the gap on the
+     way to Approve fired pointerleave and the toolbar vanished under the
+     cursor. Separation comes from the pill's own border and shadow instead. */
+  bottom: 100%;
+  left: 0;
+  z-index: 5;
+  display: flex;
+  gap: var(--space-1);
+  padding: var(--space-1);
+  background: var(--surface-panel);
+  border: var(--hairline) solid var(--border);
+  border-radius: var(--r-pill);
+  box-shadow: var(--elev-4), var(--edge-lip);
+  white-space: nowrap;
+}
+
+.bp-toolbar button {
+  min-height: 30px;
+  min-width: 0;
+  padding: 0 var(--space-2);
+  font-size: var(--text-small);
+}
+
+/* ---------- gather ---------- */
+
+/* Two gathers, one kind. A gather carrying a `gather_line` is a beat you read,
+   so it renders the ordinary blueprint card (head/body/foot, 252px) — the same
+   card a line uses, which is the whole point of GP-18. A gather with no line is
+   pure topology, and stays the compact centred pill it has always been. The
+   compact rules are scoped to .gather-marker so they cannot reach the card;
+   nothing new was invented for either. */
+.bp-node.kind-gather.gather-marker {
+  width: 132px;
+  padding: var(--space-2);
+  text-align: center;
+  color: var(--ink-muted);
+  background: var(--node-foot);
+}
+.bp-node.kind-gather.gather-marker .bp-id {
+  display: block;
+  text-align: center;
+}
+.bp-node.kind-gather.gather-marker .bp-kind {
+  color: var(--ink-muted);
+}
+
+/* ---------- review status on the card edge ---------- */
+
+/* A rule down the left edge, so a status still reads at zoom levels where the
+   9px dot is too small. Colour only — the 4px is already reserved above. */
+.bp-node.status-approved {
+  border-left-color: var(--forest);
+  border-right-color: var(--forest-line);
+  border-bottom-color: var(--forest-line);
+}
+.bp-node.status-edited {
+  border-left-color: var(--dusk);
+  border-right-color: var(--dusk-line);
+  border-bottom-color: var(--dusk-line);
+}
+.bp-node.status-flagged {
+  border-left-color: var(--clay);
+  border-right-color: var(--clay);
+  border-bottom-color: var(--clay);
+}
+
+/* ---------- play states ---------- */
+
+/* UNVISITED — a darker warm paper, OPAQUE. Whole-card opacity would let the
+   night canvas bleed through and read as a grey wash. */
+.bp-node.play-dim {
+  background: var(--dim-bg);
+  border-color: color-mix(in srgb, var(--ink) 12%, var(--dim-bg));
+  border-top-color: color-mix(in srgb, var(--bp-kind) 45%, var(--dim-bg));
+  box-shadow: none;
+  color: var(--dim-ink);
+}
+.bp-node.play-dim :is(.bp-head, .bp-body, .bp-foot) {
+  background: var(--dim-bg);
+  box-shadow: none;
+}
+.bp-node.play-dim :is(.bp-id, .bp-kind, .bp-title, .card-text, .bp-pin) {
+  color: inherit;
+}
+/* hover restores full ink-on-paper contrast — the documented escape from the
+   deliberately de-emphasised dim state */
+.bp-node.play-dim:hover {
+  color: var(--ink);
+}
+.bp-node.play-dim:hover .bp-head {
+  background: var(--bp-head-bg);
+}
+.bp-node.play-dim:hover .bp-body {
+  background: var(--node-body);
+}
+.bp-node.play-dim:hover .bp-foot {
+  background: var(--node-foot);
+}
+
+/* VISITED — gold thread, quiet. Outer ring + the left rule, never an inset
+   shadow: the head/body/foot backgrounds would paint straight over that. */
+.bp-node.play-visited {
+  border-left-color: var(--gold-thread);
+  box-shadow: var(--elev-3), 0 0 0 1px var(--gold-thread);
+}
+
+/* CURRENT — the gold lantern glow, breathing */
+.bp-node.play-current {
+  border-left-color: var(--gold);
+  box-shadow: 0 0 0 2px var(--gold), 0 0 26px var(--gold-glow);
+  animation: bp-breathe 2.8s ease-in-out infinite;
+}
+
+@keyframes bp-breathe {
+  0%,
+  100% {
+    box-shadow: 0 0 0 2px var(--gold), 0 0 16px var(--gold-glow);
+  }
+  50% {
+    box-shadow: 0 0 0 2px var(--gold), 0 0 30px var(--gold-glow);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bp-node.play-current {
+    animation: none;
+  }
+}
+
+/* sweep filter dims reviewed (approved/edited) nodes — opaque, never
+   whole-card transparency over the night canvas */
+.bp-node.sweep-dim,
+.bp-node.sweep-dim :is(.bp-head, .bp-body, .bp-foot) {
+  background: var(--dim-bg);
+  box-shadow: none;
+}
+.bp-node.sweep-dim :is(.bp-id, .bp-kind, .bp-title, .card-text, .bp-pin) {
+  color: var(--dim-ink);
+}
+
+/* variable inspector highlight */
+.bp-node.var-hit {
+  box-shadow: 0 0 0 3px var(--accent), var(--elev-3);
+}
+
+/* the "nothing to edit here" tooltip rides the foot's ledge, not the body */
+.bp-node > .hint {
+  padding: var(--space-1) var(--space-2) var(--space-2);
+  background: var(--node-foot);
+  border-top: var(--hairline) solid var(--node-seam);
+  font-size: var(--text-small);
+  color: var(--ink-muted);
+}
+
+/* an open editor needs the room the clamp normally saves */
+.bp-node.editing {
+  width: 300px;
+}
+.bp-node.editing .card-actions button {
+  min-height: var(--touch-target);
+}

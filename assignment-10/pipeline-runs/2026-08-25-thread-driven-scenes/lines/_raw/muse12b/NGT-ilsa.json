@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The Arch is lit for the festival, the central hearth of the hall blazing with fresh logs, throwing light onto the long tables and benches. The great wooden structure looms at the far end, its beams thick with carvings worn smooth from years of touch. The smell of roasting meat and hot bread wafts through the air as people move about, setting tables and preparing for the feast.\n\nIlsa stands near the centerpiece, a massive arrangement of bread and flowers woven into a living wreath. Her hands rest lightly on the table as she surveys the room, eyes moving methodically as she counts. The second place at the nearest bench is set: a worn apron and tongs laid out, waiting for",
+    "wc": 121,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": null,
+    "wc": 0,
+    "ok": false,
+    "err": "leakage: second-person narration detected (4 you/your tokens outside quotes) \u2014 narrator/action beats are third-person only"
+  },
+  "option_b": {
+    "text": "Ilsa turns slightly, eyes tracking the player as they step closer. She doesn't speak until they stop near the table, then she says, \"It did,\" voice flat and final, as if the subject\u2014whether the Arch or something else entirely\u2014requires no further elaboration.\n\nThe apron and tongs on the bench remain untouched. The second place sits empty, waiting. The player's line acknowledges the work without naming the absence, and Ilsa responds in kind, giving no space for questions she doesn't intend to answer.\n\nThe candlelight catches the faintest crease between her brows as she turns back to the table. The space between them remains, but it is a steady one, measured and accepted. She doesn't look",
+    "wc": 115,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player stands beside Ilsa at the centerpiece, the space between them small but not intrusive. The Arch looms over them both, the flames catching in the polished metal of the second place left empty at the end of the bench. The apron folds crisply, the tongs placed just so.\n\nIlsa does not speak, but she shifts slightly, turning her head toward the player. Not quite looking, but acknowledging the presence beside her. Her hands move as she adjusts something on the table, but there is no real task there\u2014just a small motion, a small delay. Then she turns fully, her face half-lit by the glow of the fire and the distant lanterns.\n\n\"Here,\" she says, and",
+    "wc": 117,
+    "ok": true,
+    "err": null
+  }
+}

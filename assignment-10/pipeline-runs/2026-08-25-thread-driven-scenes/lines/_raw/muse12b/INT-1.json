@@ -1,0 +1,14 @@
+{
+  "beat_a": {
+    "text": "The mage steps into the village as the sun dips low, casting golden light over the cobbled streets. A festival lantern swings lazily overhead, its glow dim but promising. The air is heavy with incense and something warmer\u2014cooked meats and spiced cider from the market stalls below. The player moves among the villagers, noting how the women in their hearthcloths and the men in their thick jackets drift through the streets, their hands clasped with children or carrying bundles of firewood.\n\nA woman catches the mage's eye as she lights a lantern on her doorstep, her fingers curling around the wick before stepping inside. The glow spills out onto the step, and for a",
+    "wc": 114,
+    "ok": true,
+    "err": null
+  },
+  "beat_b": {
+    "text": "The player steps into the dimly lit tavern, the low hum of conversation hushing as the door swings shut behind them. A fire crackles in the hearth, casting a warm glow over the wooden tables and rough-hewn beams above. The air is thick with the smell of stew and ale, the heat of bodies pressing close against the winter chill. Eyes turn, some curious, some dismissive, as the townspeople go back to their drinks and hushed talk.\n\nNear the bar, a woman in a threadbare dress turns to acknowledge the newcomer. She has a sharp gaze and a mouth set in a permanent half-smile. She wipes her hands on a rag before tucking it into her apron and approaching",
+    "wc": 119,
+    "ok": true,
+    "err": null
+  }
+}

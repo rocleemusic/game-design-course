@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The Festival Grounds buzzed with anticipation as dusk settled. A row of lanterns lined the Arch, their wicks dressed and ready for the night's rite. \"We gather to mark the solstice,\" the priest announced, his voice carrying over the crowd. He knelt by the rite-fire, its flames dancing in the cool evening air. \"Let the light be sent, as our hearts and hopes are, to guide us through the dark.\"",
+    "wc": 70,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The priest looks up from the lantern wick, his hands still holding the taper. \"Depends how far it's asked to go. One flame, one send.\"",
+    "wc": 25,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player dips a second taper and sends it to the next lantern along the row \u2014 the wick's dressed, it catches.\n\nThe priest nods, pleased. \"Good. Steady now, one after the other.\"",
+    "wc": 33,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player sends a flame toward the rain barrel at the edge of the grounds instead, out of curiosity. It lands on the water and goes out, the flame spent for nothing. The priest turns, concern in their eyes. \"A misaimed send's a wasted gift. The fire's meant for the lights, to guide us through the night.\"",
+    "wc": 57,
+    "ok": true,
+    "err": null
+  }
+}

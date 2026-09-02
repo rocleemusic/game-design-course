@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The farmer sets a sturdy stick in the soft soil at the field's edge. \"This'll be our starting point,\" they say, patting the earth around it. With a handful of dirt, they draw a straight line through the turned earth. \"First things first,\" they murmur, \"get the ground ready.\"",
+    "wc": 49,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The farmer looks up from their work, a line of tilled soil stretching behind them. \"Does the ground matter?\" the player asks. \"Has to be turned first,\" the farmer explains, prodding the soft earth with a stick. \"Packed ground just scuffs.\"",
+    "wc": 41,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player turns a second patch of soil with a hoe, then offers it for the same treatment. A clean furrow opens. \"Here,\" the farmer says, holding out the hoe, \"you try.\"",
+    "wc": 32,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player tries the cast on the cobbled square nearby instead, out of curiosity. The stone does not part, and remains unbroken. \"That won't work here,\" the farmer says, shaking their head. \"This magic's bound to the earth, not stone.\"",
+    "wc": 40,
+    "ok": true,
+    "err": null
+  }
+}

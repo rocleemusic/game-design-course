@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HUD Relayout — One Bar, Three Tenants</title>
+<style>
+  :root{
+    --forest:#14110c; --panel:#241c14; --panel-hover:#2f2519;
+    --leather:#4a3520; --leather-dark:#2c1f12; --leather-light:#6f5030;
+    --canvas:#e7daba; --canvas2:#dbcaa2; --canvas-edge:#c3b083; --stitch:#b79a63;
+    --ink:#2f2413; --ink-soft:#6b5836;
+    --cream:#ece3d2; --dim:#b0a184;
+    --gold:#c9a15a; --gold-bright:#e6c583;
+    --green:#7f9a5a; --rust:#7a4a2a; --dusk:#a893c9; --ember:#d98a4a;
+    --font-display:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    --font-mono:ui-monospace,"DejaVu Sans Mono","SF Mono",Menlo,monospace;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; }
+  body{
+    color:var(--cream); font:16px/1.55 var(--font-display);
+    background:radial-gradient(120% 80% at 50% -10%, #221f16 0%, #171310 45%, var(--forest) 100%), var(--forest);
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{ font-family:var(--font-mono); }
+  .wrap{ max-width:1640px; margin:0 auto; padding:48px 28px 120px; }
+  :focus-visible{ outline:2px solid var(--gold-bright); outline-offset:3px; border-radius:4px; }
+
+  .masthead{ margin-bottom:20px; max-width:960px; }
+  .eyebrow{ font:12px var(--font-mono); letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin:0 0 10px; }
+  .masthead h1{ margin:0 0 12px; font-size:42px; font-weight:600; color:var(--gold-bright); letter-spacing:.3px; }
+  .masthead p{ margin:0 0 10px; color:var(--dim); font-size:16px; line-height:1.65; }
+  .masthead p b{ color:var(--cream); }
+  .masthead code{ font-family:var(--font-mono); font-size:13.5px; background:rgba(201,161,90,.12); padding:1px 6px; border-radius:4px; color:var(--gold-bright); }
+
+  nav.toc{ display:flex; flex-wrap:wrap; gap:8px 6px; margin:22px 0 0; padding:0; list-style:none; }
+  nav.toc a{ font:12.5px var(--font-mono); color:var(--gold); text-decoration:none; padding:6px 12px;
+    border:1px solid rgba(201,161,90,.3); border-radius:14px; transition:border-color .15s, color .15s; }
+  nav.toc a:hover{ color:var(--gold-bright); border-color:var(--gold-bright); }
+
+  .thesis{ display:flex; align-items:stretch; gap:0; margin:36px 0 8px; border:1px solid rgba(201,161,90,.22);
+    border-radius:14px; overflow:hidden; background:rgba(36,28,20,.5); }
+  .thesis .beat{ flex:1; padding:18px 16px; text-align:center; position:relative; }
+  .thesis .beat + .beat::before{ content:"→"; position:absolute; left:0; top:50%; transform:translate(-50%,-50%);
+    color:var(--gold); font-size:18px; }
+  .thesis .beat .k{ font:11px var(--font-mono); letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); margin:0 0 6px; }
+  .thesis .beat .v{ font-size:14.5px; color:var(--cream); line-height:1.4; }
+
+  section{ margin:64px 0 0; scroll-margin-top:24px; }
+  section > .sec-head{ display:flex; align-items:baseline; gap:14px; margin:0 0 8px;
+    border-bottom:1px solid rgba(201,161,90,.22); padding-bottom:12px; }
+  section > .sec-head .n{ font:13px var(--font-mono); color:var(--gold); }
+  section > .sec-head h2{ margin:0; font-size:26px; font-weight:600; color:var(--gold-bright); }
+  section > p.desc{ margin:10px 0 26px; color:var(--dim); max-width:900px; font-size:15px; }
+  section > p.desc b{ color:var(--cream); }
+
+  .pair{ display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:start; }
+  .single{ max-width:1100px; }
+  .col .tag{ display:flex; align-items:center; gap:8px; margin:0 0 10px; }
+  .col .tag .dot{ width:8px; height:8px; border-radius:50%; }
+  .col.before .tag .dot{ background:var(--rust); }
+  .col.after .tag .dot{ background:var(--green); }
+  .col .tag .lbl{ font:11px var(--font-mono); letter-spacing:2px; text-transform:uppercase; color:var(--dim); }
+  .col.before .tag .lbl{ color:#c48a6e; }
+  .col.after .tag .lbl{ color:var(--green); }
+  .col p.note{ margin:12px 0 0; font-size:13.5px; color:var(--dim); line-height:1.55; }
+  .col p.note b{ color:var(--cream); }
+
+  /* ---- the frame: scaled stand-in for the 1920x1080 game canvas ----- */
+  .frame{ position:relative; aspect-ratio:16/9; border-radius:10px; overflow:hidden;
+    border:2px solid var(--leather-dark); box-shadow:0 18px 40px rgba(0,0,0,.5);
+    background:radial-gradient(120% 90% at 30% 20%, #3a4a2c 0%, #223021 40%, #131b10 100%); }
+  .frame .header-plaque{ position:absolute; left:1.2%; top:1.6%; background:rgba(20,17,12,.85); border-radius:4px;
+    padding:.9% 1.4%; font:11.5px var(--font-mono); color:var(--gold); z-index:4; }
+  .frame .cursor{ position:absolute; width:0; height:0; border-style:solid; border-width:0 0 15px 10px;
+    border-color:transparent transparent #fff transparent; filter:drop-shadow(0 1px 1px rgba(0,0,0,.6)); z-index:6; }
+  .frame .cursor-tag{ position:absolute; font:10px var(--font-mono); background:rgba(230,197,131,.94); color:#1a1208;
+    padding:2px 7px; border-radius:9px; white-space:nowrap; z-index:6; font-weight:600; }
+
+  /* move regions — clickable screen geography, replaces traversal buttons */
+  .frame .move-region{ position:absolute; border:2px dashed rgba(168,147,201,.65); border-radius:10px;
+    background:rgba(168,147,201,.10); }
+  .frame .move-region .rlbl{ position:absolute; left:50%; bottom:-22px; transform:translateX(-50%);
+    font:10px var(--font-mono); color:var(--dusk); background:rgba(20,17,12,.85); padding:2px 8px;
+    border-radius:9px; white-space:nowrap; }
+  .frame .marker{ position:absolute; width:20px; height:20px; margin:-10px 0 0 -10px; transform:rotate(45deg);
+    background:rgba(168,147,201,.22); border:2px solid rgba(168,147,201,.9); }
+
+  /* old top-right icon row (BEFORE frames) */
+  .navrow-old{ position:absolute; top:2.4%; right:1.6%; display:flex; align-items:flex-start; gap:6px; z-index:4; }
+  .navrow-old .tile{ width:34px; height:34px; border-radius:7px; background:rgba(20,17,12,.9);
+    border:2px solid rgba(201,161,90,.35); display:flex; align-items:center; justify-content:center;
+    font-size:14px; color:var(--gold); }
+  .navrow-old .div{ width:2px; height:34px; background:rgba(201,161,90,.2); margin:0 6px; }
+  .navrow-old .cap{ position:absolute; top:38px; font:8.5px var(--font-mono); color:var(--gold); width:34px; text-align:center; }
+
+  /* ---- THE BAR: one centered bottom dock, three tenants ------------- */
+  .hudbar{ position:absolute; left:50%; bottom:2.6%; transform:translateX(-50%);
+    display:flex; align-items:center; gap:8px; padding:8px 14px; z-index:5;
+    background:linear-gradient(180deg, rgba(36,28,20,.92), rgba(20,15,9,.96));
+    border:2px solid var(--leather-dark); border-radius:12px;
+    box-shadow:0 8px 24px rgba(0,0,0,.55), inset 0 1px 0 rgba(201,161,90,.15); }
+  .hudbar .tile{ width:38px; height:38px; border-radius:8px; background:rgba(20,17,12,.9);
+    border:2px solid rgba(201,161,90,.35); display:flex; align-items:center; justify-content:center;
+    font-size:15px; color:var(--gold); position:relative; cursor:pointer; }
+  .hudbar .tile.lit{ border-color:var(--ember); color:var(--ember); background:var(--panel-hover); }
+  .hudbar .tile .hk{ position:absolute; right:2px; bottom:0; font:8px var(--font-mono); color:var(--dim); }
+  .hudbar .div{ width:2px; height:34px; background:rgba(201,161,90,.2); }
+  .hudbar .tooltip{ position:absolute; bottom:110%; left:50%; transform:translateX(-50%);
+    font:10.5px var(--font-mono); color:var(--ember); background:rgba(20,17,12,.96);
+    border:1px solid rgba(201,161,90,.4); border-radius:5px; padding:3px 9px; white-space:nowrap; }
+
+  /* cast tenant: satchel chips in the same bar shell */
+  .hudbar .chip{ height:38px; border-radius:8px; padding:0 11px; display:flex; align-items:center; gap:6px;
+    background:rgba(201,161,90,.12); border:2px solid rgba(183,154,99,.5);
+    font:11px var(--font-mono); color:var(--gold-bright); cursor:pointer; }
+  .hudbar .chip.sel{ border-color:var(--ember); color:var(--ember); background:rgba(217,138,74,.14); }
+  .hudbar .chip .ct{ font-size:9.5px; color:var(--dim); }
+  .hudbar .castlbl{ font:9.5px var(--font-mono); letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); padding:0 4px; }
+  .hudbar .exit{ font:10.5px var(--font-mono); color:var(--dim); border:1px solid rgba(201,161,90,.35);
+    border-radius:14px; padding:4px 10px; cursor:pointer; white-space:nowrap; }
+
+  /* dialogue tenant: VN controls in the same bar shell */
+  .hudbar .vnbtn{ height:34px; border-radius:17px; padding:0 14px; display:flex; align-items:center;
+    font:11px var(--font-mono); color:var(--gold); background:rgba(20,17,12,.9);
+    border:1px solid rgba(201,161,90,.35); cursor:pointer; white-space:nowrap; }
+
+  /* VN dialogue dressing for §3 */
+  .frame .vn-scrim{ position:absolute; left:0; right:0; bottom:0; height:38%;
+    background:linear-gradient(180deg, rgba(20,17,12,0), rgba(20,17,12,.88) 40%); }
+  .frame .vn-name{ position:absolute; left:6%; bottom:26%; font:12px var(--font-mono); color:var(--gold-bright); }
+  .frame .vn-line{ position:absolute; left:6%; right:6%; bottom:15%; font-size:14px; color:var(--cream); font-style:italic; }
+  .frame .vn-choice{ position:absolute; right:6%; display:flex; flex-direction:column; gap:6px; bottom:34%; }
+  .frame .vn-choice .c{ font:11px var(--font-mono); color:var(--gold); background:rgba(20,17,12,.92);
+    border:1px solid rgba(201,161,90,.4); border-radius:14px; padding:5px 12px; text-align:right; }
+  .frame .portrait{ position:absolute; left:8%; bottom:9%; width:14%; aspect-ratio:3/4; border-radius:8px 8px 0 0;
+    background:linear-gradient(180deg, #5a4a6e, #3a3050); border:2px solid var(--leather-dark); border-bottom:none; opacity:.9; }
+
+  /* callout list under frames */
+  ul.calls{ margin:18px 0 0; padding:0 0 0 20px; max-width:900px; }
+  ul.calls li{ margin:0 0 10px; font-size:14.5px; color:var(--dim); line-height:1.55; }
+  ul.calls li b{ color:var(--cream); }
+  ul.calls li code{ font-family:var(--font-mono); font-size:12.5px; background:rgba(201,161,90,.12); padding:1px 5px; border-radius:4px; color:var(--gold-bright); }
+
+  .decision{ margin:18px 0 0; border:1px solid rgba(127,154,90,.4); border-radius:10px; background:rgba(127,154,90,.07);
+    padding:14px 18px; max-width:900px; }
+  .decision .dk{ font:11px var(--font-mono); letter-spacing:2px; text-transform:uppercase; color:var(--green); margin:0 0 6px; }
+  .decision p{ margin:0; font-size:14.5px; color:var(--cream); line-height:1.55; }
+
+  .open{ margin:18px 0 0; border:1px solid rgba(217,138,74,.4); border-radius:10px; background:rgba(217,138,74,.06);
+    padding:14px 18px; max-width:900px; }
+  .open .dk{ font:11px var(--font-mono); letter-spacing:2px; text-transform:uppercase; color:var(--ember); margin:0 0 6px; }
+  .open p{ margin:0 0 8px; font-size:14.5px; color:var(--cream); line-height:1.55; }
+  .open p:last-child{ margin-bottom:0; }
+
+  @media (max-width:980px){ .pair{ grid-template-columns:1fr; } }
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="eyebrow">Game-project · HUD wireframe · 2026-08-23</p>
+    <h1>One Bar, Three Tenants</h1>
+    <p>The HUD collapses to <b>a single centered bottom bar</b>. What lives in it depends on what the
+      player is doing: <b>exploring</b> shows the five nav icons, <b>casting</b> swaps in the satchel
+      strip as the spell picker, <b>dialogue</b> swaps in the VN controls. The top-right corner empties
+      out — <code>NavRow.ts</code>'s icon language, tooltips and Tab-focus all survive, they just move.
+      Movement is not a bar concern at all: you walk by clicking the screen.</p>
+    <nav class="toc" aria-label="sections">
+      <a href="#explore">1 · Explore</a>
+      <a href="#dayactions">1b · Day actions</a>
+      <a href="#cast">2 · Casting</a>
+      <a href="#dialogue">3 · Dialogue</a>
+      <a href="#opens">4 · Open calls</a>
+    </nav>
+  </header>
+
+  <div class="thesis" role="presentation">
+    <div class="beat"><p class="k">Explore</p><p class="v">Five nav icons, centered. Click the world to move.</p></div>
+    <div class="beat"><p class="k">Casting</p><p class="v">Satchel strip replaces the icons — same bar shell.</p></div>
+    <div class="beat"><p class="k">Dialogue</p><p class="v">VN controls replace them — nothing competes with choices.</p></div>
+  </div>
+
+  <!-- ============================================================ -->
+  <section id="explore">
+    <div class="sec-head"><span class="n">§1</span><h2>Explore mode — the bar is the nav row</h2></div>
+    <p class="desc">The five icons keep <code>NavRow.ts</code>'s shipped language — 44px tiles, three clusters
+      (gear · world · system), hairline dividers, hover/Tab tooltip, Decorate caption. Only the anchor
+      changes: bottom-center instead of top-right. Tooltips flip to open <b>above</b> the tile
+      (there is no room below anymore). Move targets are dashed regions on the painting itself.</p>
+
+    <div class="pair">
+      <div class="col before">
+        <div class="tag"><span class="dot"></span><span class="lbl">Before — top-right row</span></div>
+        <div class="frame" role="img" aria-label="Current HUD: five icons top right, traversal buttons bottom">
+          <div class="header-plaque">Riverbend · Day 2 · morning · 3 moves</div>
+          <div class="navrow-old">
+            <div class="tile">🎒</div><div class="tile">📓</div>
+            <div class="div"></div>
+            <div class="tile" style="position:relative">🏠<span class="cap">Decorate</span></div><div class="tile">🗓</div>
+            <div class="div"></div>
+            <div class="tile">⚙</div>
+          </div>
+          <div style="position:absolute; left:50%; bottom:4%; transform:translateX(-50%); display:flex; gap:8px;">
+            <span class="mono" style="font-size:10.5px; color:var(--gold); border:1px solid rgba(201,161,90,.4); border-radius:14px; padding:4px 12px;">[ Go to the Mill ]</span>
+            <span class="mono" style="font-size:10.5px; color:var(--gold); border:1px solid rgba(201,161,90,.4); border-radius:14px; padding:4px 12px;">[ Go to the Hollow ]</span>
+          </div>
+        </div>
+        <p class="note">Icons sit over the sky — the prettiest part of the painting — and traversal
+          is a text-button row that reads as UI, not world.</p>
+      </div>
+
+      <div class="col after">
+        <div class="tag"><span class="dot"></span><span class="lbl">After — centered bottom bar</span></div>
+        <div class="frame" role="img" aria-label="Proposed HUD: centered bottom bar with five icons, move regions on screen">
+          <div class="header-plaque">Riverbend · Day 2 · morning · 3 moves</div>
+
+          <div class="move-region" style="left:64%; top:26%; width:20%; height:30%;">
+            <span class="rlbl">The Mill →</span>
+          </div>
+          <div class="move-region" style="left:8%; top:44%; width:15%; height:26%;">
+            <span class="rlbl">← The Hollow</span>
+          </div>
+          <div class="cursor" style="left:73%; top:39%;"></div>
+          <div class="cursor-tag" style="left:74.5%; top:42.5%;">walk to the Mill</div>
+
+          <div class="hudbar">
+            <div class="tile lit">🎒<span class="hk">S</span><span class="tooltip">Satchel · S</span></div>
+            <div class="tile">📓<span class="hk">N</span></div>
+            <div class="div"></div>
+            <div class="tile">🏠<span class="hk">H</span></div>
+            <div class="tile">🗓<span class="hk">L</span></div>
+            <div class="div"></div>
+            <div class="tile">⚙</div>
+          </div>
+        </div>
+        <p class="note"><b>The sky is clear.</b> The bar hugs the bottom edge at ~5% height —
+          the painting keeps ~92% of the frame. Hotkey letters sit in-tile (small, corner) so the
+          tooltip is confirmation, not the only teacher.</p>
+      </div>
+    </div>
+
+    <div class="decision">
+      <p class="dk">Ruled · Roc 2026-08-23</p>
+      <p>Explore bar = the five nav icons, centered bottom. Movement = clickable screen regions,
+        not buttons. The Decorate caption question moves to §4 — a caption under a bottom-bar tile
+        collides with the screen edge.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section id="dayactions">
+    <div class="sec-head"><span class="n">§1b</span><h2>Day actions — Wait and End the Day</h2></div>
+    <p class="desc">Two more choices sit at the bottom of every screen today — <code>[Wait]</code> and
+      <code>[End the day]</code> — in the same ink text-button row as the traversal buttons §1 just
+      retired. They can't become move regions: neither one is a place on the screen, so there's nothing
+      to draw a dashed box around. They need a home in the bar itself.</p>
+    <p class="desc">Recommendation (frontend-design / ui-ux-pro-max / WCAG 2.2 AA pass): a
+      <b>fourth cluster</b> at the bar's right end, past Settings, behind its own divider — the existing
+      three clusters are all panels (a noun you open); Wait and End Day are verbs that spend a move or
+      close the day, and mixing them into panel tiles risks a misclick that costs the player something
+      real. <b>Wait</b> stays a plain 44px tile (hotkey <b>W</b>) — frequent, low-stakes, same language as
+      the rest of the row. <b>End the Day</b> is a text pill instead of an icon, reusing the cast tenant's
+      <code>Exit cast · Esc</code> shape — reading <b>End day · E</b> — because a one-way commitment
+      shouldn't ride on an icon-only affordance with no persistent caption. A visible label clears WCAG
+      1.1.1/4.1.2 without depending on a hover tooltip, and End the Day should open a one-step confirm
+      before it commits. Wait needs no confirm.</p>
+
+    <div class="single col after">
+      <div class="tag"><span class="dot"></span><span class="lbl">Explore tenant — fourth cluster added</span></div>
+      <div class="frame" role="img" aria-label="Explore bar with a fourth cluster: Wait tile and an End day pill past a divider">
+        <div class="header-plaque">Riverbend · Day 2 · morning · 3 moves</div>
+        <div class="hudbar">
+          <div class="tile">🎒<span class="hk">S</span></div>
+          <div class="tile">📓<span class="hk">N</span></div>
+          <div class="div"></div>
+          <div class="tile">🏠<span class="hk">H</span></div>
+          <div class="tile">🗓<span class="hk">L</span></div>
+          <div class="div"></div>
+          <div class="tile">⚙</div>
+          <div class="div"></div>
+          <div class="tile">⏳<span class="hk">W</span></div>
+          <div class="exit" style="color:var(--ember); border-color:var(--ember);">End day · E</div>
+        </div>
+      </div>
+      <p class="note">Bar grows from ~340px to ~450px — still inside §1's own 340–470px envelope.
+        44px tiles clear WCAG 2.5.8's 24px minimum target with margin to spare; existing focus-visible
+        styling covers 2.4.7 for keyboard/Tab users.</p>
+    </div>
+
+    <div class="decision" style="margin-top:26px;">
+      <p class="dk">Ruled · Roc 2026-08-24 — Option A</p>
+      <p>Always-visible fourth cluster. No drawer. Wait and End the Day sit on the bar every time,
+        same as the other three clusters — one home, zero extra taps. Side-by-side kept below as the
+        decision record.</p>
+    </div>
+
+    <div class="pair" style="margin-top:22px;">
+      <div class="col after">
+        <div class="tag"><span class="dot"></span><span class="lbl">Option A — always-visible cluster</span></div>
+        <div class="frame" role="img" aria-label="Option A: Wait tile and End day pill always visible on the bar">
+          <div class="header-plaque">Riverbend · Day 2 · morning · 3 moves</div>
+          <div class="hudbar">
+            <div class="tile">🎒<span class="hk">S</span></div>
+            <div class="tile">📓<span class="hk">N</span></div>
+            <div class="div"></div>
+            <div class="tile">🏠<span class="hk">H</span></div>
+            <div class="tile">🗓<span class="hk">L</span></div>
+            <div class="div"></div>
+            <div class="tile">⚙</div>
+            <div class="div"></div>
+            <div class="tile">⏳<span class="hk">W</span></div>
+            <div class="exit" style="color:var(--ember); border-color:var(--ember);">End day · E</div>
+          </div>
+        </div>
+        <p class="note">One home, zero extra taps. Widest bar of the options (~450px), but still within
+          §1's envelope.</p>
+      </div>
+
+      <div class="col before">
+        <div class="tag"><span class="dot" style="background:var(--dusk);"></span><span class="lbl" style="color:var(--dusk);">Option B — End Day behind a drawer, Wait stays direct (not taken)</span></div>
+        <div class="frame" role="img" aria-label="Option B: Wait tile direct on the bar, End day pill tucked behind a drawer handle, shown open">
+          <div class="header-plaque">Riverbend · Day 2 · morning · 3 moves</div>
+          <div class="hudbar">
+            <div class="tile">🎒<span class="hk">S</span></div>
+            <div class="tile">📓<span class="hk">N</span></div>
+            <div class="div"></div>
+            <div class="tile">🏠<span class="hk">H</span></div>
+            <div class="tile">🗓<span class="hk">L</span></div>
+            <div class="div"></div>
+            <div class="tile">⚙</div>
+            <div class="div"></div>
+            <div class="tile">⏳<span class="hk">W</span></div>
+            <div class="tile" style="font-size:12px;">›</div>
+            <div class="exit" style="color:var(--ember); border-color:var(--ember); opacity:.85;">End day · E</div>
+          </div>
+        </div>
+        <p class="note">Bar stays ~410px by default (handle tile only, pill collapsed); opening the
+          handle slides the pill out, shown here already open. Saves ~40px over Option A, at the cost of
+          one extra tap on End Day and a drawer interaction the bar doesn't use anywhere else.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section id="cast">
+    <div class="sec-head"><span class="n">§2</span><h2>Casting — the satchel strip takes the bar</h2></div>
+    <p class="desc">Entering cast mode (right-click a receiver, per the cast-flow redesign) swaps the bar's
+      tenant: nav icons out, <b>satchel chips in</b> — the same interactive picker
+      <code>SatchelStrip.ts</code> becomes in that redesign's Option A. Same bar shell, same position,
+      so the player's hand never travels. An <b>Exit-cast</b> pill on the right end is the way back.</p>
+
+    <div class="single col after">
+      <div class="tag"><span class="dot"></span><span class="lbl">Cast tenant — same shell, new contents</span></div>
+      <div class="frame" role="img" aria-label="Cast mode: bar holds satchel chips and an exit pill; receiver marker on screen">
+        <div class="header-plaque">Riverbend · Day 2 · morning · 3 moves</div>
+        <div class="marker" style="left:58%; top:38%;"></div>
+        <div class="cursor" style="left:59.5%; top:41%;"></div>
+        <div class="cursor-tag" style="left:61%; top:44.5%;">cast on the old sluice</div>
+
+        <div class="hudbar">
+          <span class="castlbl">Casting</span>
+          <div class="chip sel">river stones <span class="ct">×3</span></div>
+          <div class="chip">willow bark <span class="ct">×1</span></div>
+          <div class="chip">marsh reed <span class="ct">×2</span></div>
+          <div class="chip">ember moss <span class="ct">×1</span></div>
+          <div class="div"></div>
+          <div class="exit">Exit cast · Esc</div>
+        </div>
+      </div>
+      <p class="note"><b>One bar, not two systems.</b> The cast-flow redesign already rules that the
+        satchel strip is the picker (its Option A) and that the world stays visible while casting.
+        Putting the picker in the HUD bar's slot is the same ruling carried to its conclusion —
+        there is never a moment with two docked strips on screen. The notebook trial dock
+        (bottom-third panel) is unchanged; this tenant swap is the <b>world-cast</b> path only.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section id="dialogue">
+    <div class="sec-head"><span class="n">§3</span><h2>Dialogue — VN controls take the bar</h2></div>
+    <p class="desc">In dialogue the bar's tenant becomes the VN control set. Nav icons hide — nothing on
+      screen competes with the choice list. The controls sit in the exact slot the player already
+      knows, under the dialogue scrim.</p>
+
+    <div class="single col after">
+      <div class="tag"><span class="dot"></span><span class="lbl">Dialogue tenant</span></div>
+      <div class="frame" role="img" aria-label="Dialogue mode: VN scrim with portrait, choices, and the bar holding VN controls">
+        <div class="header-plaque">Riverbend · Day 2 · morning</div>
+        <div class="vn-scrim"></div>
+        <div class="portrait"></div>
+        <div class="vn-choice">
+          <span class="c">Ask about the sluice</span>
+          <span class="c">Show her the river stones</span>
+        </div>
+        <p class="vn-name">ILSA</p>
+        <p class="vn-line">“The river's been quiet since the festival. Too quiet, if you ask the reeds.”</p>
+        <div class="hudbar">
+          <div class="vnbtn">History</div>
+          <div class="vnbtn">Auto</div>
+          <div class="vnbtn">Skip seen</div>
+          <div class="div"></div>
+          <div class="vnbtn">Options</div>
+        </div>
+      </div>
+      <p class="note">This pairs with the Group 2 polish item “VN dialogue buttons hidden unless
+        dialogue active” — that item hides them in explore; this section says where they live
+        when they <b>do</b> show. The exact VN control set is whatever
+        <code>DialogueSystem.ts</code> ships; the wireframe shows placement, not inventory.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section id="opens">
+    <div class="sec-head"><span class="n">§4</span><h2>Open calls — rule before build</h2></div>
+
+    <div class="decision">
+      <p class="dk">Ruled · Roc 2026-08-23</p>
+      <p><b>1 · Decorate caption</b> — cut. Tooltips open above the bar; no persistent caption.
+        Bottom-center placement carries the discoverability.
+        <b>3 · Dev pills</b> — stay top-right, owning the emptied corner (dev builds only).
+        <b>4 · Tenant transition</b> — instant swap, no crossfade.</p>
+    </div>
+
+    <div class="open" style="margin-top:26px;">
+      <p class="dk">Ruled · Roc 2026-08-23 — Option A</p>
+      <p>The clock plaque stays top-left, untouched. Side-by-side kept below as the decision
+        record.</p>
+    </div>
+
+    <div class="pair" style="margin-top:22px;">
+      <div class="col before">
+        <div class="tag"><span class="dot" style="background:var(--dusk);"></span><span class="lbl" style="color:var(--dusk);">Option A — clock stays top-left</span></div>
+        <div class="frame" role="img" aria-label="Clock option A: plaque top-left, short centered bar">
+          <div class="header-plaque">Riverbend · Day 2 · morning · 3 moves</div>
+          <div class="hudbar">
+            <div class="tile">🎒<span class="hk">S</span></div>
+            <div class="tile">📓<span class="hk">N</span></div>
+            <div class="div"></div>
+            <div class="tile">🏠<span class="hk">H</span></div>
+            <div class="tile">🗓<span class="hk">L</span></div>
+            <div class="div"></div>
+            <div class="tile">⚙</div>
+          </div>
+        </div>
+        <p class="note"><b>Short bar, two HUD homes.</b> The bar stays ~340px wide. The eye checks
+          top-left for time, bottom-center for actions. This is today's plaque, untouched — zero
+          build cost.</p>
+      </div>
+
+      <div class="col after">
+        <div class="tag"><span class="dot"></span><span class="lbl">Option B — clock joins the bar</span></div>
+        <div class="frame" role="img" aria-label="Clock option B: clock readout on the bar's left end, no top plaque">
+          <div class="hudbar">
+            <div style="display:flex; flex-direction:column; gap:2px; padding:0 6px; white-space:nowrap;">
+              <span class="mono" style="font-size:10.5px; color:var(--gold-bright);">Day 2 · morning</span>
+              <span class="mono" style="font-size:9.5px; color:var(--dim);">3 moves left</span>
+            </div>
+            <div class="div"></div>
+            <div class="tile">🎒<span class="hk">S</span></div>
+            <div class="tile">📓<span class="hk">N</span></div>
+            <div class="div"></div>
+            <div class="tile">🏠<span class="hk">H</span></div>
+            <div class="tile">🗓<span class="hk">L</span></div>
+            <div class="div"></div>
+            <div class="tile">⚙</div>
+          </div>
+        </div>
+        <p class="note"><b>One HUD home, full Diablo.</b> The top edge goes completely clean — the
+          painting owns everything above the bar. The bar grows ~130px wider. In cast and dialogue
+          tenants the clock stays on the left end, so time never disappears mid-cast. Also worth
+          noting: only Option B keeps the screen name visible nowhere — the plaque's “Riverbend”
+          would need a new home (hover the calendar icon, or drop it).</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

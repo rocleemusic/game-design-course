@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spellbook — design mockup</title>
+<style>
+  :root{
+    --forest:#14110c; --forest3:#0c0a07;
+    --leather:#4a3520; --leather-dark:#2c1f12; --leather-light:#6f5030;
+    --canvas:#e7daba; --canvas2:#dbcaa2; --canvas-edge:#c3b083; --stitch:#b79a63;
+    --ink:#2f2413; --ink-soft:#6b5836;
+    --cream:#ece3d2; --dim:#b0a184;
+    --gold:#c9a15a; --gold-bright:#e6c583; --green:#7f9a5a;
+  }
+  *{ box-sizing:border-box; }
+  body{ margin:0; min-height:100vh; color:var(--ink);
+    font:16px/1.55 "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    background:radial-gradient(120% 80% at 50% -10%, #2c3326 0%, #171b13 45%, var(--forest3) 100%), var(--forest);
+    -webkit-font-smoothing:antialiased; display:flex; align-items:center; justify-content:center; padding:28px 18px; }
+  body::before{ content:""; position:fixed; inset:0; pointer-events:none;
+    background:radial-gradient(75% 60% at 50% 42%, transparent 42%, rgba(6,5,3,.55) 100%); }
+  .mono{ font-family:ui-monospace,"DejaVu Sans Mono",Menlo,monospace; }
+
+  /* the open book */
+  .book{ width:100%; max-width:1040px; display:grid; grid-template-columns:1fr 1fr;
+    border-radius:12px; overflow:hidden; position:relative;
+    box-shadow:0 26px 64px rgba(0,0,0,.6);
+    border:10px solid; border-image:linear-gradient(180deg,#5c4226,#2c1f12) 1;
+    background:linear-gradient(90deg,var(--canvas),var(--canvas2) 48%, #b7a680 50%, var(--canvas2) 52%, var(--canvas)); }
+  /* center spine shadow */
+  .book::after{ content:""; position:absolute; left:50%; top:0; bottom:0; width:34px; transform:translateX(-50%);
+    background:radial-gradient(closest-side, rgba(60,44,20,.4), transparent); pointer-events:none; }
+
+  .page{ padding:26px 28px; min-height:560px; }
+  .page.left{ border-right:1px solid rgba(120,96,55,.25); }
+
+  .page h1{ margin:0 0 2px; font-size:26px; color:#3a2a15; font-weight:600; }
+  .page .sub{ font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--ink-soft); margin-bottom:16px; }
+
+  .group-label{ font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold);
+    margin:16px 0 8px; border-bottom:1px solid var(--canvas-edge); padding-bottom:4px; }
+  .spell{ display:flex; align-items:baseline; gap:8px; width:100%; text-align:left; font-family:inherit;
+    background:transparent; border:none; border-left:2px solid transparent; padding:7px 10px; cursor:pointer;
+    color:#3a2a15; font-size:18px; transition:background .14s, border-color .14s; }
+  .spell:hover{ background:rgba(201,161,90,.14); }
+  .spell.sel{ background:rgba(201,161,90,.2); border-left-color:var(--gold); }
+  .spell .role{ margin-left:auto; font-size:11px; color:var(--ink-soft); }
+  .spell.locked{ color:#9c8a63; cursor:default; }
+  .spell.locked:hover{ background:transparent; }
+  .spell.locked .role{ color:#b09b6f; }
+
+  /* right page: the selected spell */
+  .detail .phrase{ font-size:34px; color:#3a2a15; font-weight:600; margin:0; }
+  .detail .says{ font-style:italic; color:var(--ink-soft); margin:2px 0 16px; }
+
+  /* the VFX preview pane — a scrying window set into the page */
+  .vfx{ position:relative; height:210px; border-radius:10px; overflow:hidden; margin-bottom:18px;
+    background:radial-gradient(120% 100% at 50% 60%, #1c2320, #0e0b07);
+    border:2px solid var(--leather-dark); box-shadow:inset 0 0 30px rgba(0,0,0,.6); }
+  .vfx .play{ position:absolute; right:10px; bottom:10px; z-index:3; font-family:ui-monospace,monospace;
+    font-size:12px; color:var(--gold-bright); background:rgba(20,14,8,.7); border:1px solid var(--leather-light);
+    border-radius:16px; padding:5px 12px; cursor:pointer; }
+  .vfx .play:hover{ border-color:var(--gold-bright); }
+  .vfx .tag{ position:absolute; left:10px; top:10px; z-index:3; font:11px ui-monospace,monospace; color:var(--dim);
+    letter-spacing:.5px; }
+  .stage{ position:absolute; inset:0; }
+
+  .field-label{ font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--ink-soft); margin:0 0 6px; }
+  .comps{ display:flex; flex-wrap:wrap; gap:8px; margin:0 0 16px; }
+  .comp{ font-size:14px; padding:5px 12px; border-radius:8px; color:#3a2a15;
+    background:rgba(201,161,90,.18); border:1px solid var(--stitch); }
+  .plus{ align-self:center; color:var(--ink-soft); }
+  .does{ font-size:16px; line-height:1.6; color:var(--ink-soft); border-top:1px solid var(--canvas-edge); padding-top:14px; }
+  .does b{ color:#3a2a15; }
+  .castrow{ margin-top:16px; }
+  .cast{ font-family:inherit; font-size:15px; color:var(--forest); background:var(--gold);
+    border:1px solid var(--gold-bright); border-radius:8px; padding:9px 18px; cursor:pointer; }
+  .cast:hover{ background:var(--gold-bright); }
+
+  @media (max-width:820px){ .book{ grid-template-columns:1fr; } .page.left{ border-right:none; border-bottom:1px solid rgba(120,96,55,.25);} .book::after{ display:none; } }
+  @media (prefers-reduced-motion:reduce){ .stage *{ animation:none !important; } }
+</style>
+</head>
+<body>
+  <div class="book">
+    <!-- LEFT: the index of spells -->
+    <div class="page left">
+      <h1>Spellbook</h1>
+      <div class="sub" id="learned">3 of 16 learned</div>
+      <div class="group-label">Known</div>
+      <div id="known"></div>
+      <div class="group-label">To learn · from neighbours</div>
+      <div id="tolearn"></div>
+    </div>
+
+    <!-- RIGHT: the selected spell -->
+    <div class="page detail" id="detail" aria-live="polite"></div>
+  </div>
+
+<script>
+  const S = {
+    glimmer:{ role:"Mage", comp:["a river stone"], does:"Raises small dancing lights in an area. On the Festival Grounds on festival night, many years of past casts show at once.", vfx:"lights" },
+    echo:{ role:"Mage", comp:["a captured sound","beeswax"], does:"Replays a captured sound out of a resonant surface.", vfx:"ripple" },
+    fetch:{ role:"Mage", comp:["a feather","wool"], does:"Tugs a small loose object a short way toward the caster.", vfx:"tug" },
+  };
+  const LOCKED = [
+    ["ignite","Blacksmith"],["temper","Blacksmith"],["portion","Baker"],["weigh","Baker"],
+    ["scratch","Postman"],["seal","Postman"],["dry","Postman"],["steep","Herbalist"],
+    ["preserve","Herbalist"],["leap","Priest"],["waft","Priest"],["breath","Farmer"],["furrow","Farmer"],
+  ];
+
+  const knownBox = document.getElementById("known");
+  const learnBox = document.getElementById("tolearn");
+  const detail = document.getElementById("detail");
+  let sel = "glimmer";
+
+  Object.keys(S).forEach(function(id){
+    const b = document.createElement("button");
+    b.className = "spell" + (id===sel?" sel":"");
+    b.innerHTML = id + '<span class="role">Mage</span>';
+    b.addEventListener("click", function(){ pick(id); });
+    knownBox.appendChild(b);
+  });
+  LOCKED.forEach(function(row){
+    const d = document.createElement("div");
+    d.className = "spell locked";
+    d.innerHTML = row[0] + '<span class="role">learn · ' + row[1] + '</span>';
+    learnBox.appendChild(d);
+  });
+
+  // VFX approximations — a stand-in for the shipped Phaser cue, keyed on kind.
+  function stageFor(kind){
+    if(kind==="lights"){
+      let dots="";
+      for(let i=0;i<14;i++){ const x=8+Math.floor((i*673)%84), delay=(i*0.31)%2.6, dur=2.2+((i*0.17)%1.4);
+        dots += '<span style="position:absolute;left:'+x+'%;bottom:-8px;width:7px;height:7px;border-radius:50%;'
+          +'background:radial-gradient(circle,#ffe9b0,#c9a15a);box-shadow:0 0 8px 2px rgba(230,197,131,.7);'
+          +'animation:rise '+dur+'s '+delay+'s infinite ease-in"></span>'; }
+      return dots;
+    }
+    if(kind==="ripple"){
+      let r=""; for(let i=0;i<3;i++){ r+='<span style="position:absolute;left:50%;top:50%;width:20px;height:20px;'
+        +'margin:-10px;border-radius:50%;border:2px solid rgba(230,197,131,.8);'
+        +'animation:ripple 2.4s '+(i*0.8)+'s infinite ease-out"></span>'; } return r;
+    }
+    if(kind==="tug"){
+      return '<span style="position:absolute;top:50%;left:70%;width:12px;height:12px;margin-top:-6px;border-radius:3px;'
+        +'background:#cdd6dd;box-shadow:0 0 6px rgba(205,214,221,.6);animation:tug 1.8s infinite ease-in-out"></span>'
+        +'<span style="position:absolute;top:50%;left:22%;width:2px;height:2px;background:var(--gold-bright);'
+        +'box-shadow:0 0 20px 8px rgba(230,197,131,.5)"></span>';
+    }
+    return "";
+  }
+
+  function pick(id){
+    sel = id;
+    Array.from(knownBox.children).forEach(function(el){ el.classList.toggle("sel", el.textContent.startsWith(id)); });
+    const s = S[id];
+    detail.innerHTML =
+      '<p class="phrase">'+id+'</p>'+
+      '<p class="says">you say &ldquo;'+id+'&rdquo;</p>'+
+      '<div class="vfx"><span class="tag">vfx preview</span><div class="stage" id="stage"></div>'+
+        '<button class="play" id="play">▶ play</button></div>'+
+      '<p class="field-label">components</p>'+
+      '<div class="comps">'+s.comp.map(function(c,i){ return (i?'<span class="plus">+</span>':'')+'<span class="comp">'+c+'</span>'; }).join("")+'</div>'+
+      '<p class="does"><b>What it does.</b> '+s.does+'</p>'+
+      '<div class="castrow"><button class="cast">Cast '+id+'</button></div>';
+    runVfx();
+    document.getElementById("play").addEventListener("click", runVfx);
+  }
+  function runVfx(){
+    const stage = document.getElementById("stage");
+    stage.innerHTML = "";
+    // reflow so re-play restarts the animations
+    void stage.offsetWidth;
+    stage.innerHTML = stageFor(S[sel].vfx);
+  }
+
+  const style = document.createElement("style");
+  style.textContent =
+    "@keyframes rise{0%{transform:translateY(0) scale(.6);opacity:0}20%{opacity:1}100%{transform:translateY(-190px) scale(1);opacity:0}}"+
+    "@keyframes ripple{0%{transform:scale(.3);opacity:.9}100%{transform:scale(6);opacity:0}}"+
+    "@keyframes tug{0%,100%{left:70%}55%{left:26%}}";
+  document.head.appendChild(style);
+
+  pick(sel);
+</script>
+</body>
+</html>

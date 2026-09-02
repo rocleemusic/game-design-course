@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Toby measures a scoop of flour and frowns, scraping the contents back into the sack. \"Dough went flat overnight. Square's forty loaves short if everyone shows up.\"",
+    "wc": 27,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player brings over a skin of spring water and pours it into the bowl. Toby glances at the container, says nothing, and works the liquid into the mixture without breaking stride.",
+    "wc": 32,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player casts *weigh* over the flour sack. Toby reads the number off the air, recalculates out loud in three words, then keeps going.",
+    "wc": 24,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "\"Need a hand?\"",
+    "wc": 3,
+    "ok": true,
+    "err": null
+  }
+}

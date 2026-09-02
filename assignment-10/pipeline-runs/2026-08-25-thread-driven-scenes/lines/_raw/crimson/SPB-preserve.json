@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Mara runs a pinch of salt over the flowers, working it in without ceremony \u2014 cut things need holding fast, before the day turns them.",
+    "wc": 25,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player hands over a small bundle of fresh-cut wildflowers, still dewy at the edges. \"Does it work on anything dried?\"\n\nMara takes the flowers, runs her fingers over the stems, checking their firmness. \"No. Has to still be fresh.\" She sprinkles a pinch of salt into her palm, rubbing it gently into the petals and leaves. \"Cut things need holding fast, before the day turns them.\"",
+    "wc": 67,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "Mara takes the berry basket. \"Good choice, these'll be ripe through the\nfestival. Hold still a moment.\" She runs a pinch of salt over the berries,\nworking it in as she speaks. \"It's the fresh things need this. Once\nsomething's gone, there's no holding it back.\"",
+    "wc": 46,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "Mara's eyes narrow as she watches the salt fall onto the dry herb bundle. \"No. Has to still be fresh,\" she says, her voice flat. The herbs remain unchanged.",
+    "wc": 29,
+    "ok": true,
+    "err": null
+  }
+}

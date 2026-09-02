@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Toby leans a river stone against the nearest flour sack. The stone rises a hand's breadth and hangs heavy against the grain.",
+    "wc": 22,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player asks, \"Is that one short?\"\n\nToby nods, adjusting his grip on the sack. \"Hangs low. That's full.\"",
+    "wc": 19,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player sets the stone against the second sack. The rock holds steady, hanging perfectly level with the first.",
+    "wc": 19,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player sets the stone against the brick oven floor. The stone simply drops, finding no purchase.",
+    "wc": 17,
+    "ok": true,
+    "err": null
+  }
+}

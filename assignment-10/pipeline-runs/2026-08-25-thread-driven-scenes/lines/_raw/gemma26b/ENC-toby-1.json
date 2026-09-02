@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Toby measures a scoop of flour, frowns, and scrapes it back into the sack. \"Dough went flat overnight. If the whole square turns out, we're forty loaves short.\"",
+    "wc": 28,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player brings a skin of spring water over to the starter bowl. Toby glances at the vessel, says nothing, and works the liquid into the starter without breaking stride.",
+    "wc": 30,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player casts weigh over the flour sack. Toby reads the number off the air, mutters the new total, and keeps working. \"Thirteen and a bit. Two more after hers.\"",
+    "wc": 30,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "\"Need a hand?\"\n\nToby hesitates a half-beat. \"Not yet.\"",
+    "wc": 9,
+    "ok": true,
+    "err": null
+  }
+}

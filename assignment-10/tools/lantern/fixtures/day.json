@@ -1,0 +1,62 @@
+{
+  "seed": "d568629dbc5d5a78f53aa858b2dc357bd504e2dc84e23960944b0f264733dd34",
+  "day": 1,
+  "slot_fill": [
+    {
+      "screen_id": "T1",
+      "time_block": "evening",
+      "soul": "toby"
+    },
+    {
+      "screen_id": "T1",
+      "time_block": "morning",
+      "soul": "finch"
+    },
+    {
+      "screen_id": "T1",
+      "time_block": "morning",
+      "soul": "mara"
+    },
+    {
+      "screen_id": "T1",
+      "time_block": "afternoon",
+      "soul": "finch"
+    },
+    {
+      "screen_id": "T1",
+      "time_block": "afternoon",
+      "soul": "toby"
+    },
+    {
+      "screen_id": "T1",
+      "time_block": "evening",
+      "soul": "finch"
+    },
+    {
+      "screen_id": "T2",
+      "time_block": "morning",
+      "soul": "toby"
+    },
+    {
+      "screen_id": "T2",
+      "time_block": "afternoon",
+      "soul": "mara"
+    },
+    {
+      "screen_id": "T2",
+      "time_block": "evening",
+      "soul": "mara"
+    }
+  ],
+  "item_rolls": [
+    {
+      "slot_id": "SL-T2-01",
+      "item": "wool"
+    }
+  ],
+  "live_leads": [
+    "LEAD-03",
+    "LEAD-02"
+  ],
+  "aliveness_band": "quiet"
+}

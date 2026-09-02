@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Mara checks a jar's seal against the light, sets it back \u2014 \"This one won't keep past the week without help,\" she says plainly, no elaboration on what \"help\" costs her to say. The frost is nearer.",
+    "wc": 37,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "Mara hands over a measure of salt. \"This should do it,\" she says, working it into the jar's seal with a practiced touch. She sets the jar back on the shelf and checks it against the light again. This time the seal holds. \"Good,\" she nods, moving the jar to the far end of the shelf. \"That one's safe now.\"",
+    "wc": 60,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player casts *preserve* on the freshly cut herbs. Mara watches without comment as the herbs halt their decay mid-motion. She sets the treated batch aside, then turns her attention back to the jars, working quietly to seal and sort them. \"These two won't last the week,\" she notes, pointing to two jars near the back, \"but the salted one there should keep a few more days.\"",
+    "wc": 67,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "Mara points out two jars, says nothing further.",
+    "wc": 8,
+    "ok": true,
+    "err": null
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "souls": [
+    { "soul_id": "toby", "name": "Toby", "role_tag": "baker", "home_screen": "T1", "deep": true },
+    { "soul_id": "mara", "name": "Mara", "role_tag": "keeper", "home_screen": "T2", "deep": true },
+    { "soul_id": "finch", "name": "Finch", "home_screen": "T1", "deep": false }
+  ],
+  "scenes": [
+    {
+      "scene_id": "SC-T2-01",
+      "soul": "toby",
+      "screen_id": "T2",
+      "lines": [
+        {
+          "content_id": "L-SC-T2-01-01",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder: Toby is behind on the feast trays."
+        },
+        {
+          "content_id": "L-SC-T2-01-02",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder set-up: he waves the player off.",
+          "choice_id": "CH-T2-01"
+        },
+        {
+          "content_id": "L-CH-T2-01-a-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "Placeholder player line: offer to carry the trays.",
+          "choice_id": "CH-T2-01",
+          "option_id": "CH-T2-01-a"
+        },
+        {
+          "content_id": "L-CH-T2-01-a-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder response: Toby goes flat and short, receiving.",
+          "choice_id": "CH-T2-01",
+          "option_id": "CH-T2-01-a"
+        },
+        {
+          "content_id": "L-CH-T2-01-b-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder response: Toby quickens, attention pointed back out.",
+          "choice_id": "CH-T2-01",
+          "option_id": "CH-T2-01-b"
+        }
+      ],
+      "choice_nodes": [
+        {
+          "choice_id": "CH-T2-01",
+          "scene_id": "SC-T2-01",
+          "availability_conditions": ["npc_present(toby)", "time_of_day = morning"],
+          "equal_weight_note": "Helping moves the feast and spends the block; declining respects the surface request and the deflection stands.",
+          "no_accrual_note": "No counter keys off either option; the claimed-beat is Toby's own act, gated on the arc thread.",
+          "options": [
+            {
+              "option_id": "CH-T2-01-a",
+              "verb_family": "Converse",
+              "player_verb": "ease",
+              "player_line": "L-CH-T2-01-a-p",
+              "response_slots": ["L-CH-T2-01-a-r1"],
+              "state_actions": [
+                { "type": "bond_event", "arg": "Intimacy" },
+                { "type": "thread_move", "arg": "giver-receive" }
+              ],
+              "rejoin": "gather"
+            },
+            {
+              "option_id": "CH-T2-01-b",
+              "verb_family": "Converse",
+              "player_verb": "witness",
+              "surface_action": "leave the bread",
+              "response_slots": ["L-CH-T2-01-b-r1"],
+              "state_actions": [{ "type": "thread_move", "arg": "giver-receive" }],
+              "rejoin": "gather"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

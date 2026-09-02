@@ -1,0 +1,266 @@
+[
+  {
+    "scene_id": "GRT-toby-1",
+    "soul": "toby",
+    "screen_id": "T2",
+    "note": "STAGING 2026-08-30 — converts the approved greeting file (pipeline-runs/2026-08-30-approved-lines/greetings/GRT-toby-1.md) into resolver Scene shape. Staging only; not merged into scene-graph.json.",
+    "entry_gate": ["bond_band(toby) = low"],
+    "lines": [
+      {
+        "content_id": "GRT-toby-1-act",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "He wipes the counter in a steady, rhythmic motion."
+      },
+      {
+        "content_id": "GRT-toby-1-line",
+        "slot_type": "dialogue",
+        "speaker_id": "toby",
+        "text": "\"You'll need two more for the back table, and a larger tray if you're bringing the tray-set. I'll have the water ready before they're done.\""
+      }
+    ],
+    "choice_nodes": []
+  },
+  {
+    "scene_id": "GRT-toby-2",
+    "soul": "toby",
+    "screen_id": "T2",
+    "note": "STAGING 2026-08-30 — converts the approved greeting file (pipeline-runs/2026-08-30-approved-lines/greetings/GRT-toby-2.md) into resolver Scene shape. Staging only; not merged into scene-graph.json.",
+    "entry_gate": ["bond_band(toby) = mid"],
+    "lines": [
+      {
+        "content_id": "GRT-toby-2-act",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "Toby sets down the stack of heavy linen cloths and wipes his hands on his apron."
+      },
+      {
+        "content_id": "GRT-toby-2-line",
+        "slot_type": "dialogue",
+        "speaker_id": "toby",
+        "text": "\"I've got the cider on ice, though we'll need more if the crowd keeps up like this. Your plate's almost full, so you can go on. Does that first one's order still count for you?\""
+      }
+    ],
+    "choice_nodes": []
+  },
+  {
+    "scene_id": "GRT-toby-3",
+    "soul": "toby",
+    "screen_id": "T2",
+    "note": "STAGING 2026-08-30 — converts the approved greeting file (pipeline-runs/2026-08-30-approved-lines/greetings/GRT-toby-3.md) into resolver Scene shape. Staging only; not merged into scene-graph.json.",
+    "entry_gate": ["bond_band(toby) = high"],
+    "lines": [
+      {
+        "content_id": "GRT-toby-3-act",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "He brushes the flour from his apron with a swift, practiced motion."
+      },
+      {
+        "content_id": "GRT-toby-3-line",
+        "slot_type": "dialogue",
+        "speaker_id": "toby",
+        "text": "\"You're here. The oven's nearly done, and the cooling rack's full, but we're short on honeyed dough for the second round. If you could fetch another jar from the larder, that would be a start.\""
+      }
+    ],
+    "choice_nodes": []
+  },
+  {
+    "scene_id": "GRT-ilsa-1",
+    "soul": "ilsa",
+    "screen_id": "T4",
+    "note": "STAGING 2026-08-30 — converts the approved greeting file (pipeline-runs/2026-08-30-approved-lines/greetings/GRT-ilsa-1.md) into resolver Scene shape. Staging only; not merged into scene-graph.json.",
+    "entry_gate": ["bond_band(ilsa) = low"],
+    "lines": [
+      {
+        "content_id": "GRT-ilsa-1-act",
+        "slot_type": "action",
+        "speaker_id": "ilsa",
+        "text": "Ilsa lays a fresh cloth over the wooden edge of the table."
+      },
+      {
+        "content_id": "GRT-ilsa-1-line",
+        "slot_type": "dialogue",
+        "speaker_id": "ilsa",
+        "text": "\"There is a stool by the hearth. You'll take the one by the stool.\""
+      }
+    ],
+    "choice_nodes": []
+  },
+  {
+    "scene_id": "GRT-ilsa-2",
+    "soul": "ilsa",
+    "screen_id": "T4",
+    "note": "STAGING 2026-08-30 — converts the approved greeting file (pipeline-runs/2026-08-30-approved-lines/greetings/GRT-ilsa-2.md) into resolver Scene shape. Staging only; not merged into scene-graph.json.",
+    "entry_gate": ["bond_band(ilsa) = mid"],
+    "lines": [
+      {
+        "content_id": "GRT-ilsa-2-act",
+        "slot_type": "action",
+        "speaker_id": "ilsa",
+        "text": "Ilsa lifts a stack of cloth and places it on the empty seat beside her."
+      },
+      {
+        "content_id": "GRT-ilsa-2-line",
+        "slot_type": "dialogue",
+        "speaker_id": "ilsa",
+        "text": "\"You're on the bench by the hearth. The corner is yours.\""
+      }
+    ],
+    "choice_nodes": []
+  },
+  {
+    "scene_id": "GRT-ilsa-3",
+    "soul": "ilsa",
+    "screen_id": "T4",
+    "note": "STAGING 2026-08-30 — converts the approved greeting file (pipeline-runs/2026-08-30-approved-lines/greetings/GRT-ilsa-3.md) into resolver Scene shape. Staging only; not merged into scene-graph.json.",
+    "entry_gate": ["bond_band(ilsa) = high"],
+    "lines": [
+      {
+        "content_id": "GRT-ilsa-3-act",
+        "slot_type": "action",
+        "speaker_id": "ilsa",
+        "text": "Ilsa pulls a heavy-bottomed pitcher from the shelf and begins to pour."
+      },
+      {
+        "content_id": "GRT-ilsa-3-line",
+        "slot_type": "dialogue",
+        "speaker_id": "ilsa",
+        "text": "\"Your spot is still here, by the window. You've brought the smell of the orchards with you today.\""
+      }
+    ],
+    "choice_nodes": []
+  },
+  {
+    "scene_id": "GRT-mara-1",
+    "soul": "mara",
+    "screen_id": "F1",
+    "note": "STAGING 2026-08-30 — converts the approved greeting file (pipeline-runs/2026-08-30-approved-lines/greetings/GRT-mara-1.md) into resolver Scene shape. Staging only; not merged into scene-graph.json.",
+    "entry_gate": ["bond_band(mara) = low"],
+    "lines": [
+      {
+        "content_id": "GRT-mara-1-act",
+        "slot_type": "action",
+        "speaker_id": "mara",
+        "text": "She pulls a chair from the table and drags it across the floorboards to make a place for you to sit."
+      },
+      {
+        "content_id": "GRT-mara-1-line",
+        "slot_type": "dialogue",
+        "speaker_id": "mara",
+        "text": "\"Good, another set of hands — hold this a second while I find a cloth, and tell me your name while you're at it.\""
+      }
+    ],
+    "choice_nodes": []
+  },
+  {
+    "scene_id": "GRT-mara-2",
+    "soul": "mara",
+    "screen_id": "F1",
+    "note": "STAGING 2026-08-30 — converts the approved greeting file (pipeline-runs/2026-08-30-approved-lines/greetings/GRT-mara-2.md) into resolver Scene shape. Staging only; not merged into scene-graph.json.",
+    "entry_gate": ["bond_band(mara) = mid"],
+    "lines": [
+      {
+        "content_id": "GRT-mara-2-act",
+        "slot_type": "action",
+        "speaker_id": "mara",
+        "text": "She adjusts a heavy ceramic pitcher on the table, smoothing the linen cloth beneath it."
+      },
+      {
+        "content_id": "GRT-mara-2-line",
+        "slot_type": "dialogue",
+        "speaker_id": "mara",
+        "text": "\"Good, another set of hands — hold this for a moment, mind the edge, and tell me how the road was on your way in.\""
+      }
+    ],
+    "choice_nodes": []
+  },
+  {
+    "scene_id": "GRT-mara-3",
+    "soul": "mara",
+    "screen_id": "F1",
+    "note": "STAGING 2026-08-30 — converts the approved greeting file (pipeline-runs/2026-08-30-approved-lines/greetings/GRT-mara-3.md) into resolver Scene shape. Staging only; not merged into scene-graph.json.",
+    "entry_gate": ["bond_band(mara) = high"],
+    "lines": [
+      {
+        "content_id": "GRT-mara-3-act",
+        "slot_type": "action",
+        "speaker_id": "mara",
+        "text": "She wipes the surface of the table until it gleams, then looks up with a slow, brightening smile."
+      },
+      {
+        "content_id": "GRT-mara-3-line",
+        "slot_type": "dialogue",
+        "speaker_id": "mara",
+        "text": "\"You're just in time to help, and there's a little extra work to go around this week, so mind the flour on your sleeves and tell me if the wind has finally turned.\""
+      }
+    ],
+    "choice_nodes": []
+  },
+  {
+    "scene_id": "GRT-juno",
+    "soul": "juno",
+    "screen_id": "T1",
+    "note": "STAGING 2026-08-30 — converts the approved greeting file (pipeline-runs/2026-08-30-approved-lines/greetings/GRT-juno.md) into resolver Scene shape. Staging only; not merged into scene-graph.json. Texture soul — single greeting, no bond gating.",
+    "entry_gate": [],
+    "lines": [
+      {
+        "content_id": "GRT-juno-act",
+        "slot_type": "action",
+        "speaker_id": "juno",
+        "text": "Juno settles the edge of a wooden bowl against the table with a soft thud."
+      },
+      {
+        "content_id": "GRT-juno-line",
+        "slot_type": "dialogue",
+        "speaker_id": "juno",
+        "text": "\"You arrived without a companion, so sit with us.\""
+      }
+    ],
+    "choice_nodes": []
+  },
+  {
+    "scene_id": "GRT-pip",
+    "soul": "pip",
+    "screen_id": "T1",
+    "note": "STAGING 2026-08-30 — converts the approved greeting file (pipeline-runs/2026-08-30-approved-lines/greetings/GRT-pip.md) into resolver Scene shape. Staging only; not merged into scene-graph.json. Texture soul — single greeting, no bond gating.",
+    "entry_gate": [],
+    "lines": [
+      {
+        "content_id": "GRT-pip-act",
+        "slot_type": "action",
+        "speaker_id": "pip",
+        "text": "Pip catches your sleeve and pulls you toward the basket of silver-dusted fruit."
+      },
+      {
+        "content_id": "GRT-pip-line",
+        "slot_type": "dialogue",
+        "speaker_id": "pip",
+        "text": "\"Quick, before the market-men take these.\""
+      }
+    ],
+    "choice_nodes": []
+  },
+  {
+    "scene_id": "GRT-bex",
+    "soul": "bex",
+    "screen_id": "T2",
+    "note": "STAGING 2026-08-30 — converts the approved greeting file (pipeline-runs/2026-08-30-approved-lines/greetings/GRT-bex.md) into resolver Scene shape. Staging only; not merged into scene-graph.json. Texture soul — single greeting, no bond gating.",
+    "entry_gate": [],
+    "lines": [
+      {
+        "content_id": "GRT-bex-act",
+        "slot_type": "action",
+        "speaker_id": "bex",
+        "text": "Bex wipes a smudge of flour from the edge of the table."
+      },
+      {
+        "content_id": "GRT-bex-line",
+        "slot_type": "dialogue",
+        "speaker_id": "bex",
+        "text": "\"You're a stranger. Say so.\""
+      }
+    ],
+    "choice_nodes": []
+  }
+]

@@ -1,0 +1,1360 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mode 5 — Pickup &amp; Cast Flow, UX Wireframe</title>
+<style>
+  :root{
+    --forest:#14110c; --panel:#241c14; --panel-hover:#2f2519;
+    --leather:#4a3520; --leather-dark:#2c1f12; --leather-light:#6f5030;
+    --canvas:#e7daba; --canvas2:#dbcaa2; --canvas-edge:#c3b083; --stitch:#b79a63;
+    --pocket:#c9b78d; --ink:#2f2413; --ink-soft:#6b5836;
+    --cream:#ece3d2; --dim:#b0a184;
+    --gold:#c9a15a; --gold-bright:#e6c583;
+    --green:#7f9a5a; --rust:#7a4a2a; --dusk:#a893c9;
+    --font-display:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    --font-mono:ui-monospace,"DejaVu Sans Mono","SF Mono",Menlo,monospace;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; }
+  body{
+    color:var(--cream); font:16px/1.55 var(--font-display);
+    background:radial-gradient(120% 80% at 50% -10%, #221f16 0%, #171310 45%, var(--forest) 100%), var(--forest);
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{ font-family:var(--font-mono); }
+  .wrap{ max-width:1640px; margin:0 auto; padding:48px 28px 120px; }
+
+  /* ---- masthead ---------------------------------------------------- */
+  .masthead{ margin-bottom:20px; max-width:960px; }
+  .eyebrow{ font:12px var(--font-mono); letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin:0 0 10px; }
+  .masthead h1{ margin:0 0 12px; font-size:42px; font-weight:600; color:var(--gold-bright); letter-spacing:.3px; }
+  .masthead p{ margin:0 0 10px; color:var(--dim); font-size:16px; line-height:1.65; }
+  .masthead p b{ color:var(--cream); }
+  .masthead code{ font-family:var(--font-mono); font-size:13.5px; background:rgba(201,161,90,.12); padding:1px 6px; border-radius:4px; color:var(--gold-bright); }
+
+  nav.toc{ display:flex; flex-wrap:wrap; gap:8px 6px; margin:22px 0 0; padding:0; list-style:none; }
+  nav.toc a{ font:12.5px var(--font-mono); color:var(--gold); text-decoration:none; padding:6px 12px;
+    border:1px solid rgba(201,161,90,.3); border-radius:14px; transition:border-color .15s, color .15s; }
+  nav.toc a:hover{ color:var(--gold-bright); border-color:var(--gold-bright); }
+
+  /* ---- the five-beat thesis strip ----------------------------------- */
+  .thesis{ display:flex; align-items:stretch; gap:0; margin:36px 0 8px; border:1px solid rgba(201,161,90,.22);
+    border-radius:14px; overflow:hidden; background:rgba(36,28,20,.5); }
+  .thesis .beat{ flex:1; padding:18px 16px; text-align:center; position:relative; }
+  .thesis .beat + .beat::before{ content:"→"; position:absolute; left:0; top:50%; transform:translate(-50%,-50%);
+    color:var(--gold); font-size:18px; }
+  .thesis .beat .k{ font:11px var(--font-mono); letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); margin:0 0 6px; }
+  .thesis .beat .v{ font-size:14.5px; color:var(--cream); line-height:1.4; }
+
+  section{ margin:64px 0 0; scroll-margin-top:24px; }
+  section > .sec-head{ display:flex; align-items:baseline; gap:14px; margin:0 0 8px;
+    border-bottom:1px solid rgba(201,161,90,.22); padding-bottom:12px; }
+  section > .sec-head .n{ font:13px var(--font-mono); color:var(--gold); }
+  section > .sec-head h2{ margin:0; font-size:26px; font-weight:600; color:var(--gold-bright); }
+  section > p.desc{ margin:10px 0 26px; color:var(--dim); max-width:900px; font-size:15px; }
+  section > p.desc b{ color:var(--cream); }
+
+  .pair{ display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:start; }
+  .pair.triple{ grid-template-columns:1fr 1fr 1fr; }
+  .col .tag{ display:flex; align-items:center; gap:8px; margin:0 0 10px; }
+  .col .tag .dot{ width:8px; height:8px; border-radius:50%; }
+  .col.before .tag .dot{ background:var(--rust); }
+  .col.after .tag .dot{ background:var(--green); }
+  .col .tag .lbl{ font:11px var(--font-mono); letter-spacing:2px; text-transform:uppercase; color:var(--dim); }
+  .col.before .tag .lbl{ color:#c48a6e; }
+  .col.after .tag .lbl{ color:var(--green); }
+
+  /* ---- the frame: a scaled stand-in for the 1920x1080 game canvas --- */
+  .frame{ position:relative; aspect-ratio:16/9; border-radius:10px; overflow:hidden;
+    border:2px solid var(--leather-dark); box-shadow:0 18px 40px rgba(0,0,0,.5);
+    background:
+      radial-gradient(120% 90% at 30% 20%, #3a4a2c 0%, #223021 40%, #131b10 100%);
+  }
+  .frame .scrim-top{ position:absolute; left:0; right:0; top:0; height:9%; background:rgba(20,17,12,.6); }
+  .frame .scrim-bottom{ position:absolute; left:0; right:0; bottom:0; height:21%; background:rgba(20,17,12,.55); }
+  .frame .scrim-choices{ position:absolute; left:0; right:0; bottom:21%; height:14%; background:rgba(20,17,12,.6); }
+  .frame .header-plaque{ position:absolute; left:1.2%; top:1.6%; background:rgba(20,17,12,.85); border-radius:4px;
+    padding:.9% 1.4%; font:11.5px var(--font-mono); color:var(--gold); }
+
+  .frame .nav-row{ position:absolute; right:1.2%; top:1.9%; display:flex; gap:6px; }
+  .frame .nav-btn{ font:9.5px var(--font-mono); color:var(--gold); background:rgba(20,17,12,.9);
+    border:1.4px solid rgba(201,161,90,.35); border-radius:9px; padding:4px 8px; white-space:nowrap; }
+  .frame .nav-icon{ width:26px; height:26px; border-radius:8px; background:rgba(20,17,12,.9);
+    border:1.4px solid rgba(201,161,90,.35); display:flex; align-items:center; justify-content:center;
+    font-size:13px; color:var(--gold); position:relative; }
+  .frame .nav-icon.hot::after{ content:attr(data-tip); position:absolute; top:120%; right:0; white-space:nowrap;
+    font:9px var(--font-mono); background:rgba(20,17,12,.96); color:var(--gold-bright);
+    border:1px solid rgba(201,161,90,.4); border-radius:5px; padding:3px 6px; }
+  .frame .nav-cluster{ display:flex; gap:6px; padding-right:6px; border-right:1px solid rgba(201,161,90,.2); }
+  .frame .nav-cluster:last-child{ border-right:none; padding-right:0; }
+
+  /* forage hotspot */
+  .frame .hotspot{ position:absolute; width:26px; height:26px; margin:-13px 0 0 -13px; border-radius:50%;
+    background:rgba(201,161,90,.55); border:2px solid rgba(201,161,90,.9); }
+  .frame .hotspot.dim{ background:rgba(201,161,90,.28); border-color:rgba(201,161,90,.5); }
+
+  /* receiver marker */
+  .frame .marker{ position:absolute; width:22px; height:22px; margin:-11px 0 0 -11px; transform:rotate(45deg);
+    background:rgba(168,147,201,.22); border:2px solid rgba(168,147,201,.9); }
+
+  /* cursor callout used in static frames to show a hover/click beat */
+  .frame .cursor{ position:absolute; width:0; height:0; border-style:solid; border-width:0 0 15px 10px;
+    border-color:transparent transparent #fff transparent; filter:drop-shadow(0 1px 1px rgba(0,0,0,.6)); z-index:5; }
+  .frame .cursor-tag{ position:absolute; font:10px var(--font-mono); background:rgba(230,197,131,.94); color:#1a1208;
+    padding:2px 7px; border-radius:9px; white-space:nowrap; z-index:5; font-weight:600; }
+
+  /* examine card (parchment) */
+  .frame .examine{ position:absolute; width:34%; background:linear-gradient(180deg,var(--canvas),var(--canvas2));
+    border:1.5px solid var(--canvas-edge); border-radius:9px; padding:2.2% 2.4%; box-shadow:0 10px 22px rgba(0,0,0,.4); }
+  .frame .examine .icon{ width:15%; margin-bottom:4%; }
+  .frame .examine .nm{ font-size:15px; font-weight:600; color:#3a2a15; margin:0 0 2px; }
+  .frame .examine .ds{ font-size:11.5px; font-style:italic; color:var(--ink-soft); margin:0 0 8px; line-height:1.35; }
+  .frame .examine .take{ display:inline-block; font:10.5px var(--font-mono); color:var(--ink); background:transparent;
+    border:1px solid var(--stitch); border-radius:8px; padding:4px 10px; }
+
+  /* satchel toast */
+  .frame .toast{ position:absolute; left:1.2%; bottom:23%; font:11px var(--font-mono); color:var(--green);
+    background:rgba(20,17,12,.92); border:1px solid rgba(127,154,90,.5); border-radius:7px; padding:5px 10px; }
+
+  /* choice pills for traversal row */
+  .frame .pill{ position:absolute; font:12px var(--font-display); color:var(--cream);
+    background:rgba(36,28,20,.94); border:1.6px solid rgba(201,161,90,.55); border-radius:9px; padding:6px 12px; }
+  .frame .pill.locked{ color:var(--dim); border-color:rgba(201,161,90,.25); }
+  .frame .pill.locked .why{ color:#c48a6e; font-family:var(--font-mono); font-size:10px; }
+  .frame .pill .qmark{ display:inline-flex; align-items:center; justify-content:center; width:14px; height:14px;
+    border-radius:50%; border:1px solid var(--dim); color:var(--dim); font:9px var(--font-mono); margin-left:6px; }
+
+  /* cast modal */
+  .frame .modal{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:78%;
+    background:linear-gradient(180deg,#241a10,#181009); border:2px solid var(--leather-dark); border-radius:12px;
+    padding:3%; box-shadow:0 20px 50px rgba(0,0,0,.55); }
+  .frame .modal .title{ font-size:16px; color:var(--gold-bright); margin:0 0 2%; }
+  .frame .modal .sub{ font-size:11px; color:var(--dim); margin:0 0 3%; font-style:italic; }
+  .frame .modal .actions{ display:flex; gap:8px; margin-bottom:3%; }
+  .frame .modal .btn{ font:11px var(--font-mono); color:var(--gold); background:rgba(20,17,12,.9);
+    border:1.6px solid rgba(201,161,90,.35); border-radius:7px; padding:5px 12px; }
+  .frame .modal .btn.dead{ color:#c48a6e; border-color:rgba(226,131,107,.4); }
+  .frame .modal .result{ font-size:11px; color:var(--dim); font-style:italic; margin-top:2%; }
+
+  .spellgrid{ display:grid; grid-template-columns:repeat(4,1fr); gap:5px; }
+  .spellgrid .sp{ font:10.5px var(--font-mono); text-align:center; padding:5px 3px; border-radius:6px;
+    background:rgba(36,28,20,.9); border:1px solid rgba(201,161,90,.3); color:var(--cream); }
+
+  .worthgrid{ display:flex; flex-direction:column; gap:8px; }
+  .worthgrid .grp-lbl{ font:9.5px var(--font-mono); letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); }
+  .worthgrid .row{ display:flex; gap:6px; flex-wrap:wrap; }
+  .worthgrid .sp{ font:11px var(--font-mono); padding:5px 10px; border-radius:14px;
+    background:rgba(127,154,90,.22); border:1px solid var(--green); color:var(--cream); }
+  .worthgrid .sp.dim{ background:rgba(255,255,255,.03); border-color:rgba(201,161,90,.18); color:var(--dim); }
+  .worthgrid .fold{ font:9.5px var(--font-mono); color:var(--dim); text-decoration:underline; text-underline-offset:2px; }
+
+  .hint-pill{ display:inline-block; margin-top:2%; font:10.5px var(--font-mono); color:var(--gold-bright);
+    background:rgba(201,161,90,.14); border:1px solid rgba(201,161,90,.4); border-radius:14px; padding:4px 10px; }
+
+  /* mystery / undiscovered examine card — first encounter with an item, ever */
+  .frame .examine.mystery{ text-align:center; border-style:dashed; }
+  .frame .examine.mystery .nm{ font-size:22px; letter-spacing:3px; color:var(--ink-soft); }
+  .frame .examine.mystery .ds{ font-style:normal; }
+
+  /* a control already agreed — build as shown, no before/after needed */
+  .badge-approved{ display:inline-flex; align-items:center; gap:6px; font:11px var(--font-mono);
+    color:var(--green); background:rgba(127,154,90,.14); border:1px solid rgba(127,154,90,.5);
+    border-radius:14px; padding:4px 12px; margin-bottom:14px; }
+
+  /* VN dialogue box — loosely matched to the shipped DialogueSystem panel */
+  .frame .vn{ position:absolute; left:4%; right:4%; bottom:3%; background:rgba(20,17,12,.94);
+    border:1.6px solid rgba(201,161,90,.5); border-radius:10px; padding:2.6% 3%; display:flex; gap:3%; align-items:flex-start; }
+  .frame .vn .bust{ width:13%; aspect-ratio:1/1; border-radius:50%; flex:none;
+    background:linear-gradient(160deg,#6f5a3a,#2c1f12); border:1.5px solid rgba(201,161,90,.6); }
+  .frame .vn .who{ font:11px var(--font-mono); letter-spacing:1px; text-transform:uppercase; color:var(--gold);
+    margin:0 0 3px; }
+  .frame .vn .line{ font-size:13px; color:var(--cream); line-height:1.4; }
+  .frame .vn .cont{ position:absolute; right:3%; bottom:2.4%; font:10px var(--font-mono); color:var(--dim); }
+
+  /* segmented control — the options mockup's Text Speed pattern, reused for hint strength */
+  .seg{ display:inline-flex; border:1px solid var(--leather-light); border-radius:8px; overflow:hidden; }
+  .seg span{ padding:7px 16px; font:12.5px var(--font-mono); color:var(--dim); background:rgba(20,17,12,.4); }
+  .seg span.on{ background:var(--gold); color:#1a1208; font-weight:600; }
+
+  /* satchel / banked source toggle, inside the trial-cast frame */
+  .tabtoggle{ display:inline-flex; gap:4px; margin-bottom:3%; }
+  .tabtoggle span{ font:10.5px var(--font-mono); padding:4px 10px; border-radius:12px; color:var(--dim);
+    border:1px solid rgba(201,161,90,.3); }
+  .tabtoggle span.on{ background:var(--gold); color:#1a1208; border-color:var(--gold); }
+
+  /* selectable component chips for a trial cast */
+  .trialrow{ display:flex; flex-wrap:wrap; gap:5px; margin-bottom:3%; }
+  .trial-chip{ font:10.5px var(--font-mono); padding:4px 9px; border-radius:12px; color:var(--dim);
+    background:rgba(255,255,255,.03); border:1px solid rgba(201,161,90,.25); }
+  .trial-chip.on{ background:rgba(201,161,90,.22); border-color:var(--gold); color:var(--cream); }
+
+  /* the "book" alternative treatment for the cast-on-a-thing picker */
+  .frame .bookpage{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:70%;
+    background:linear-gradient(180deg,var(--canvas),var(--canvas2)); border:1.5px solid var(--canvas-edge);
+    border-radius:6px 12px 12px 6px; padding:3.4%; box-shadow:0 20px 50px rgba(0,0,0,.5); color:var(--ink); }
+  .frame .bookpage::before{ content:""; position:absolute; left:0; top:6%; bottom:6%; width:5px;
+    background:linear-gradient(90deg, rgba(0,0,0,.3), transparent); }
+  .frame .bookpage .title{ font-size:17px; color:#3a2a15; margin:0 0 1%; }
+  .frame .bookpage .sub{ font-size:10.5px; color:var(--ink-soft); font-style:italic; margin:0 0 3%; }
+  .frame .bookpage .sp{ background:rgba(201,161,90,.16); border-color:var(--stitch); color:#3a2a15; }
+  .frame .bookpage .result{ font-size:11px; color:var(--ink-soft); font-style:italic; margin-top:2%; }
+  .frame .bookpage .hint-pill{ color:#3a2a15; background:rgba(201,161,90,.28); border-color:var(--stitch); }
+
+  /* the real two-page spellbook, scaled down — matches NotebookScene.drawSpellbook() */
+  .frame .book2{ position:absolute; left:6%; top:5%; right:6%; bottom:5%; display:flex;
+    border-radius:8px; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,.5); border:6px solid var(--leather-dark); }
+  .frame .book2 .pg{ flex:1; background:linear-gradient(180deg,var(--canvas),var(--canvas2)); padding:4% 4.4%; color:var(--ink); position:relative; }
+  .frame .book2 .pg.left{ border-right:1px solid rgba(120,96,55,.35); }
+  .frame .book2 .booktitle{ font-size:13px; color:#3a2a15; font-weight:600; margin:0 0 1%; }
+  .frame .book2 .booksub{ font-size:9px; color:var(--ink-soft); margin:0 0 6%; }
+  .frame .book2 .grp{ font:8px var(--font-mono); letter-spacing:1.5px; text-transform:uppercase; color:var(--gold);
+    border-bottom:1px solid var(--canvas-edge); padding-bottom:2%; margin:5% 0 3%; }
+  .frame .book2 .row{ display:flex; justify-content:space-between; align-items:baseline; padding:2% 4%; border-radius:4px; font-size:11px; }
+  .frame .book2 .row.sel{ background:rgba(201,161,90,.22); border-left:2px solid var(--gold); }
+  .frame .book2 .row .role{ font:8px var(--font-mono); color:var(--ink-soft); }
+  .frame .book2 .row.locked{ color:#9c8a63; }
+  .frame .book2 .phrase{ font-size:19px; color:#3a2a15; margin:0 0 1%; }
+  .frame .book2 .says{ font-size:9.5px; font-style:italic; color:var(--ink-soft); margin:0 0 5%; }
+  .frame .book2 .lbl{ font:8px var(--font-mono); letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); margin:0 0 2%; }
+  .frame .book2 .comprow{ display:flex; gap:5px; margin-bottom:5%; }
+  .frame .book2 .comprow .sp{ background:rgba(201,161,90,.16); border-color:var(--stitch); color:#3a2a15; font-size:9.5px; padding:3px 8px; }
+  .frame .book2 .does{ font-size:10.5px; color:var(--ink-soft); line-height:1.4; margin-bottom:4%; }
+  .frame .book2 .fromline{ font-size:9px; font-style:italic; color:var(--ink-soft); border-top:1px dashed var(--canvas-edge); padding-top:3%; }
+  .frame .book2 .trybtn{ display:inline-block; margin-top:4%; font:10px var(--font-mono); color:#3a2a15;
+    background:rgba(201,161,90,.28); border:1px solid var(--gold); border-radius:6px; padding:4px 12px; }
+
+  /* satchel inspect panel — the existing parchment card, plus a drop action */
+  .frame .inspect{ position:absolute; right:5%; top:8%; bottom:8%; width:30%;
+    background:linear-gradient(180deg,var(--canvas2),var(--canvas)); border-radius:0 8px 8px 0; padding:4%; color:var(--ink); }
+  .frame .inspect .kind{ font:8px var(--font-mono); letter-spacing:1.5px; text-transform:uppercase; color:var(--ink-soft); }
+  .frame .inspect .nm{ font-size:17px; color:#3a2a15; margin:2% 0; }
+  .frame .inspect .ds{ font-size:10px; font-style:italic; color:var(--ink-soft); margin-bottom:6%; }
+  .frame .inspect .warn-btn{ display:inline-block; font:9.5px var(--font-mono); color:var(--rust);
+    border:1px solid transparent; border-radius:8px; padding:5px 12px; background:transparent; }
+  .frame .inspect .warn-btn.hi{ border-color:var(--rust); background:rgba(150,70,40,.14); }
+  .frame .inspect .warnline{ font-size:9px; color:var(--rust); margin-top:5%; }
+  .frame .pockets3{ position:absolute; left:5%; top:8%; width:56%; display:grid; grid-template-columns:repeat(3,1fr); gap:4%; }
+  .frame .pockets3 .pk{ aspect-ratio:1/1; border-radius:6px; background:var(--pocket); border:1px solid var(--leather-dark);
+    display:flex; align-items:center; justify-content:center; font:9px var(--font-display); color:var(--ink); text-align:center; padding:6%; }
+  .frame .pockets3 .pk.sel{ border:2px solid var(--gold); }
+  .frame .pockets3 .pk.armed{ border:2px dashed var(--gold-bright); opacity:.55; }
+  .frame .pockets3 .pk.empty{ background:repeating-linear-gradient(45deg,#6b5a3a,#6b5a3a 6px,#5f4f32 6px,#5f4f32 12px);
+    color:#9c8a63; font-style:italic; }
+
+  /* the real home-hub backdrop, embedded at its own aspect ratio */
+  .frame.photo{ aspect-ratio:2432/1664; background:#f3ede0; }
+  .frame.photo img{ position:absolute; inset:0; width:100%; height:100%; object-fit:contain; }
+  .frame .surface-box{ position:absolute; border:2px dashed var(--gold-bright); border-radius:4px; }
+  .frame .surface-box .lbl{ position:absolute; left:0; top:-22px; font:10px var(--font-mono); color:#1a1208;
+    background:var(--gold-bright); border-radius:4px; padding:2px 8px; white-space:nowrap; }
+  .frame .dot-marker{ position:absolute; width:22px; height:22px; margin:-11px 0 0 -11px; border-radius:50%;
+    background:var(--dusk); border:2px solid #1a1208; color:#1a1208; font:10px var(--font-mono); font-weight:700;
+    display:flex; align-items:center; justify-content:center; }
+
+  /* CSS approximation of the frontal shelf reference — a stand-in, not the real art.
+     Overflows the frame on purpose (inset's negative bottom value) so the cabinet band
+     bleeds off the visible edge — a zoomed crop, not the whole reference image fitted in. */
+  .shelfart{ position:absolute; left:5%; right:5%; top:5%; bottom:-22%;
+    background:linear-gradient(180deg,#8a6a3e,#6b4d2a); border-radius:6px;
+    display:grid; grid-template-rows:repeat(4,1fr) .6fr; gap:2.5%; padding:3%;
+    box-shadow:inset 0 0 50px rgba(0,0,0,.35), 0 14px 30px rgba(0,0,0,.4); }
+  .shelfart .cubbyrow{ display:grid; grid-template-columns:repeat(4,1fr); gap:2.5%; }
+  .shelfart .cubby{ background:linear-gradient(160deg,#5a3f22,#3f2c17); border:1px solid #2c1f12; border-radius:3px;
+    display:flex; align-items:center; justify-content:center; position:relative; }
+  .shelfart .cubby .occ{ font:8.5px var(--font-mono); color:#1a1208; background:var(--pocket); border-radius:5px;
+    padding:3px 6px; max-width:88%; text-align:center; line-height:1.25; }
+  .shelfart .drawers{ grid-row:5; background:linear-gradient(160deg,#5a3f22,#3f2c17); border-radius:3px;
+    border:1px solid #2c1f12; }
+
+  /* home hub palette + selection chrome */
+  .frame .hubpalette{ position:absolute; left:0; right:0; bottom:0; height:20%; background:rgba(18,15,10,.92);
+    border-top:2px solid #3a3228; display:flex; align-items:center; gap:2%; padding:0 3%; flex-wrap:wrap; }
+  .frame .hubchip{ display:flex; align-items:center; gap:5px; font:10px var(--font-display); color:#1a1208;
+    background:#cbbfa3; border-radius:6px; padding:5px 10px; }
+  .frame .hubchip .ic{ width:14px; height:14px; border-radius:50%; background:var(--dusk); flex:none; }
+  .frame .hub-piece{ position:absolute; font:12px var(--font-display); color:#1a1208; background:#e8dcc0;
+    border-radius:5px; padding:5px 10px; }
+  .frame .hub-piece.sel{ background:var(--gold); }
+  .frame .piece-actions{ position:absolute; display:flex; gap:4px; }
+  .frame .piece-actions span{ font:8.5px var(--font-mono); color:var(--gold); background:rgba(20,17,12,.92);
+    border:1px solid rgba(201,161,90,.4); border-radius:5px; padding:3px 7px; }
+  .frame .piece-actions span.rm{ color:var(--rust); border-color:rgba(122,74,42,.5); }
+
+  /* annotation notes under each frame */
+  .note{ margin-top:14px; font-size:13.5px; color:var(--dim); line-height:1.55; }
+  .note b{ color:var(--cream); }
+  .note code{ font-family:var(--font-mono); font-size:12px; color:var(--gold); }
+
+  /* connected walkthrough strip */
+  .strip{ display:flex; gap:0; overflow-x:auto; padding:6px 2px 18px; }
+  .strip .step{ flex:0 0 300px; margin-right:22px; position:relative; }
+  .strip .step:last-child{ margin-right:0; }
+  .strip .step::after{ content:"→"; position:absolute; right:-19px; top:38%; color:var(--gold); font-size:20px; }
+  .strip .step:last-child::after{ content:""; }
+  .strip .num{ font:11px var(--font-mono); color:var(--gold); margin-bottom:6px; }
+  .strip .cap{ font-size:12.5px; color:var(--dim); margin-top:8px; line-height:1.4; }
+  .strip .cap b{ color:var(--cream); }
+
+  footer{ text-align:center; color:var(--dim); font:12px var(--font-mono); margin-top:56px; }
+  @media (max-width:1100px){ .pair, .pair.triple{ grid-template-columns:1fr; } .strip{ flex-wrap:nowrap; } }
+  @media (prefers-reduced-motion:reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="masthead">
+    <p class="eyebrow mono">phaser · mode5 · ux wireframe</p>
+    <h1>Pickup &amp; Cast Flow</h1>
+    <p>A structure-and-flow wireframe for Mode 5's forage, cast, HUD-nav, traversal and learn-a-spell
+      controls — read alongside <b>the screens they'd have to stay consistent with</b> if built
+      (<code>satchel.html</code>, <code>spellbook.html</code>, <code>save-load.html</code>, <code>options.html</code>)
+      and the tokens in <code>design-system.html</code>. <b>Not final art</b> — composition and copy only, so the
+      flow can be argued about before any Phaser code changes. Grounded in what's actually shipped today:
+      <code>CollectScene.ts</code>, <code>HotspotSystem.ts</code>, <code>ReceiverHotspots.ts</code>,
+      <code>HedgeCastPrompt.ts</code>, <code>TraversalRow.ts</code>, <code>NpcTalkSystem.ts</code>,
+      <code>SpellTrialScene.ts</code>, <code>Knowledge.ts</code>.</p>
+    <p><b>Revision 2</b> — folds in review notes: discovery-gated pickup identity, a known-spells-only
+      picker with the plausibility ranking pulled back to an opt-in hint level, a new Options setting for
+      that, and a proposed learn-a-spell arc (clue → a taught moment → trial-cast from what you're carrying
+      or, at Home, what's banked).</p>
+    <p><b>Revision 3</b> — checks the learn-a-spell arc against the real, already-built
+      <code>NotebookScene.drawSpellbook()</code> instead of an invented panel, and applies the same loop to
+      two screens with no proposal yet: <code>SatchelScene.ts</code> has no way to drop or manage what you
+      carry, and <code>HubScene.ts</code>'s decoration palette and chrome could use the same notice/act
+      fixes as the HUD nav row.</p>
+    <p><b>Revision 4</b> — closes all eight open questions from the revision-2/3 pass, Roc's call on each:
+      the cast-on-a-thing picker reads as the spellbook itself, not a generic modal (§2); a trial cast draws
+      from Satchel and Banked at once, no toggle (§6); satchel management gets a move action alongside drop,
+      constrained by a free hand and an empty target pocket, and drop-confirmation becomes a setting
+      defaulting to "only when a known spell needs it" (§7); and Home Hub keeps the shelf close-up as a
+      genuinely separate view from room zoom, keeps chest and counter pending a real name check, keeps both
+      grid and free-drag slot shapes depending on the surface, and treats room zoom as a scale on the
+      existing view rather than a second projection (§8).</p>
+    <p><b>Revision 5</b> — two more, both extensions of behavior already shipped, not new mechanics. The
+      Notebook's locked "to learn" rows mask the phrase and teacher as <code>???</code> until
+      <code>hasSeen()</code> is true — today's build already names both upfront for spells nobody's ever
+      mentioned (§6). And the Home Hub palette's existing <code>N found so far</code> note gets its missing
+      other half: <code>X of Y found</code>, where <code>Y</code> is the same collectible-item count the
+      code already computes, just without the discovery filter (§8).</p>
+    <nav class="toc mono">
+      <a href="#thesis">The loop</a>
+      <a href="#pickup">Pickup</a>
+      <a href="#cast">Cast‑on‑a‑thing</a>
+      <a href="#hints">Hint strength</a>
+      <a href="#nav">HUD nav</a>
+      <a href="#traversal">Traversal</a>
+      <a href="#learn">Learning a spell</a>
+      <a href="#satchel">Satchel management</a>
+      <a href="#hub">Home Hub decoration</a>
+      <a href="#walkthrough">Full walkthrough</a>
+    </nav>
+  </div>
+
+  <!-- ============================================================ THESIS -->
+  <section id="thesis" style="margin-top:24px">
+    <div class="sec-head"><span class="n">§0</span><h2>The loop this aims for</h2></div>
+    <p class="desc">Every control below should read as one step in the same five-beat loop — a player should
+      always be able to tell which beat they're on. Today's controls skip straight from <b>notice</b> to
+      <b>done</b>, with no beat in between to invite curiosity.</p>
+    <div class="thesis">
+      <div class="beat"><div class="k">Notice</div><div class="v">something's here — a hotspot, a marker</div></div>
+      <div class="beat"><div class="k">Examine</div><div class="v">a look before a commit — what is it, what might it do</div></div>
+      <div class="beat"><div class="k">Act</div><div class="v">take it, or try a spell on it — a deliberate choice, not a reflex click</div></div>
+      <div class="beat"><div class="k">Learn</div><div class="v">the game answers — plainly, even when the answer is "nothing happens"</div></div>
+      <div class="beat"><div class="k">Next</div><div class="v">the answer points somewhere — a new thing worth trying</div></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ PICKUP -->
+  <section id="pickup">
+    <div class="sec-head"><span class="n">§1</span><h2>Pickup — the forage hotspot</h2></div>
+    <p class="desc">Today a hotspot is a mystery dot; the click <b>is</b> the pickup — there's no beat between
+      notice and done. The fix is one look before the take — and <b>the look itself is honest about what
+      you actually know</b>: a card names the item once you've held one before, and stays a mystery until
+      then, tracked off <code>Inventory.discoveredIds()</code> (the same "ever held" set
+      <code>HubScene</code>'s decoration palette already reads) — no new state to invent.</p>
+
+    <div class="pair triple">
+      <div class="col before">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">today</span></div>
+        <div class="frame">
+          <div class="scrim-top"></div>
+          <div class="header-plaque">Day 1 · Morning · Forager's Clearing</div>
+          <div class="scrim-choices"></div>
+          <div class="scrim-bottom"></div>
+          <div class="hotspot" style="left:38%; top:44%"></div>
+          <div class="cursor" style="left:38%; top:44%"></div>
+          <div class="cursor-tag" style="left:41%; top:41%">click → gone</div>
+        </div>
+        <div class="note">One state, one gesture. <code>HotspotSystem.ts</code>'s dot fires
+          <code>ink.player.pickup(...)</code> straight off <code>pointerdown</code> — nothing renders
+          between "notice" and "in the satchel." Even the label is withheld until after: the status line
+          only ever says <b>"something's out there."</b></div>
+      </div>
+
+      <div class="col after">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">proposed — first ever encounter</span></div>
+        <div class="frame">
+          <div class="scrim-top"></div>
+          <div class="header-plaque">Day 1 · Morning · Forager's Clearing</div>
+          <div class="scrim-choices"></div>
+          <div class="scrim-bottom"></div>
+          <div class="hotspot" style="left:38%; top:44%"></div>
+          <div class="cursor" style="left:38%; top:44%"></div>
+          <div class="examine mystery" style="left:44%; top:30%">
+            <div class="nm">???</div>
+            <div class="ds">not sure what this is — pick it up to find out</div>
+            <span class="take">take — click</span>
+          </div>
+        </div>
+        <div class="note"><b>Never held this item before, so it stays unnamed.</b> The card still invites a
+          look and a take — it just doesn't spoil what the take is <i>for</i>. The moment it lands in the
+          satchel, the pickup toast is where the name is finally said (see §7, step 3).</div>
+      </div>
+
+      <div class="col after">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">proposed — after you've held one</span></div>
+        <div class="frame">
+          <div class="scrim-top"></div>
+          <div class="header-plaque">Day 3 · Morning · Forest Unlock 1</div>
+          <div class="scrim-choices"></div>
+          <div class="scrim-bottom"></div>
+          <div class="hotspot" style="left:38%; top:44%"></div>
+          <div class="cursor" style="left:38%; top:44%"></div>
+          <div class="examine" style="left:44%; top:30%">
+            <div class="nm">Sticks</div>
+            <div class="ds">dry kindling, snapped at the forest floor</div>
+            <span class="take">take — click</span>
+          </div>
+        </div>
+        <div class="note">Same item id, a different day and screen — <code>discoveredIds()</code> is
+          per item type, not per hotspot instance, so the reveal is permanent once earned and travels with
+          the player, not the location. Name and flavor pull straight from
+          <code>content/items/*.json</code>'s own <code>description</code>, never invented.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ CAST -->
+  <section id="cast">
+    <div class="sec-head"><span class="n">§2</span><h2>Cast‑on‑a‑thing — the receiver marker</h2></div>
+    <p class="desc">Today's modal offers a real choice ("Cast") beside a dead one ("Use" always answers
+      the same line, <code>HedgeCastPrompt.ts:111</code>) and then hands over the spellbook <b>unsorted</b>.
+      It's already limited to spells you know (<code>knowledge.spellbook()</code> — this file's first pass
+      undersold that), so the actual fix is narrower than "filter": drop the dead option, keep the list flat
+      and known-only, and <b>stop there</b> — no plausibility ranking baked into the list itself. Guessing
+      which known spell might work is the point; see <a href="#hints">§3</a> for where the "worth trying"
+      idea from the first pass moved instead.</p>
+
+    <div class="pair">
+      <div class="col before">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">today — step 1</span></div>
+        <div class="frame">
+          <div class="scrim-top"></div>
+          <div class="header-plaque">Day 2 · Morning · Forager's Clearing</div>
+          <div class="marker" style="left:60%; top:52%"></div>
+          <div class="modal">
+            <div class="title mono">Cast on river stone?</div>
+            <div class="actions">
+              <div class="btn">Cast</div>
+              <div class="btn dead">Use</div>
+            </div>
+          </div>
+        </div>
+        <div class="note">Two buttons, one of which can never do anything —
+          <code>"You check the satchel — nothing you're carrying does that."</code> every time,
+          regardless of what's held. A stub left visible reads as a broken promise, not a choice.</div>
+      </div>
+
+      <div class="col before">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">today — step 2</span></div>
+        <div class="frame">
+          <div class="scrim-top"></div>
+          <div class="header-plaque">Day 2 · Morning · Forager's Clearing</div>
+          <div class="modal">
+            <div class="title mono">Which spell?</div>
+            <div class="spellgrid">
+              <div class="sp">glimmer</div><div class="sp">furrow</div><div class="sp">dry</div><div class="sp">fetch</div>
+              <div class="sp">cool</div><div class="sp">breath</div><div class="sp">echo</div><div class="sp">portion</div>
+              <div class="sp">seal</div><div class="sp">knead</div><div class="sp">leap</div><div class="sp">mist</div>
+              <div class="sp">ignite</div><div class="sp">temper</div><div class="sp">weigh</div><div class="sp">sift</div>
+            </div>
+          </div>
+        </div>
+        <div class="note">Sixteen spells shown here because the dev-unlock knows all of them — in a real
+          life this grid is already only <code>knowledge.spellbook()</code>, laid out in learn order with
+          no further structure. That part was already right; four flat columns just isn't a good <i>shape</i>
+          for a list this size.</div>
+      </div>
+
+      <div class="col after">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">decided — revision 4, one step</span></div>
+        <div class="frame">
+          <div class="scrim-top"></div>
+          <div class="header-plaque">Day 2 · Morning · Forager's Clearing</div>
+          <div class="marker" style="left:60%; top:52%"></div>
+          <div class="bookpage">
+            <div class="title">River stone</div>
+            <div class="sub">smooth, cool, worn round by the current</div>
+            <div class="worthgrid">
+              <div class="grp-lbl">what you know</div>
+              <div class="row">
+                <div class="sp">glimmer</div><div class="sp">echo</div><div class="sp">fetch</div><div class="sp">ignite</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="note"><b>No "Use" — it's cut, not hidden.</b> Just <code>knowledge.spellbook()</code>,
+          flat and unranked, in a single readable column instead of a 4-up grid — no plausibility sort, no
+          dimming, nothing telling the player which one is "right." Guessing stays the point: the components
+          are visible on the spell (open the notebook to check), the receiver isn't. One page, one step, not
+          two. <b>Decided (revision 4):</b> it's a parchment page, not a leather modal — see below.</div>
+      </div>
+    </div>
+
+    <p class="desc" style="margin-top:30px"><b>Decided (revision 4) — the picker reads as the book.</b> The
+      Notebook's own spellbook tab (<code>NotebookScene.drawSpellbook()</code>) is already an open leather
+      book with parchment pages, ported from <code>spellbook.html</code>. Roc's call: casting on something
+      should feel like paging through your own spellbook to find the line, not filling out a generic
+      prompt — so the picker adopts that language rather than the dark leather-modal family every other
+      prompt uses. The plain-modal version below is kept only as the option that was considered and set
+      aside.</p>
+    <div class="pair">
+      <div class="col before">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">considered, not chosen — a modal</span></div>
+        <div class="frame">
+          <div class="scrim-top"></div>
+          <div class="marker" style="left:60%; top:52%"></div>
+          <div class="modal">
+            <div class="title mono">River stone</div>
+            <div class="sub">smooth, cool, worn round by the current</div>
+            <div class="worthgrid">
+              <div class="row"><div class="sp">glimmer</div><div class="sp">echo</div><div class="sp">fetch</div><div class="sp">ignite</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="note">Same family as the traversal/dialogue pills — cheapest to build
+          (<code>ModalFrame</code> already does this), quick in and out. Reads as a quick prompt, which is
+          exactly why it was set aside: casting shouldn't read as a quick prompt.</div>
+      </div>
+      <div class="col after">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">decided — a single book page</span></div>
+        <div class="frame">
+          <div class="scrim-top"></div>
+          <div class="marker" style="left:60%; top:52%"></div>
+          <div class="bookpage">
+            <div class="title">River stone</div>
+            <div class="sub">smooth, cool, worn round by the current</div>
+            <div class="worthgrid">
+              <div class="row"><div class="sp">glimmer</div><div class="sp">echo</div><div class="sp">fetch</div><div class="sp">ignite</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="note">One parchment leaf, same visual family as the real spellbook — "you're paging
+          through what you know" stays consistent whether you opened the book yourself or a receiver
+          prompted it. Costs more than reusing <code>ModalFrame</code> (a new panel shape), accepted because
+          the book feeling is the point.</div>
+      </div>
+    </div>
+
+    <div class="pair" style="margin-top:30px">
+      <div class="col before">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">today — outcome</span></div>
+        <div class="frame">
+          <div class="scrim-top"></div>
+          <div class="header-plaque">Day 2 · Morning · Forager's Clearing</div>
+          <div class="modal">
+            <div class="title mono">ignite</div>
+            <div class="result">Takes the heat and glows through, holding it — too hot to lift.</div>
+          </div>
+        </div>
+        <div class="note">The narration lands, the modal closes on a 1.4s timer
+          (<code>HedgeCastPrompt.ts</code>'s <code>delayedCall</code>), and that's the whole beat.
+          A heated stone now exists in the world, and nothing on screen says so.</div>
+      </div>
+      <div class="col after">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">decided — outcome, on the page</span></div>
+        <div class="frame">
+          <div class="scrim-top"></div>
+          <div class="header-plaque">Day 2 · Morning · Forager's Clearing</div>
+          <div class="bookpage">
+            <div class="title">ignite</div>
+            <div class="result">Takes the heat and glows through, holding it — too hot to lift.</div>
+            <div class="hint-pill">worth trying once it cools: temper</div>
+          </div>
+        </div>
+        <div class="note">Same authored narration, unchanged — but the outcome closes on a pointer to the
+          <b>next</b> thing worth trying, drawn straight from the receiver's own
+          <code>produces</code> chain (<code>item_heated_stone</code> → <code>temper</code>'s components),
+          not invented per-spell copy. <b>This one hint stays</b> — it lands after the fact, once curiosity
+          already paid off, rather than steering the guess beforehand. Shown at the default hint level; see
+          <a href="#hints">§3</a> for the setting that turns it up or off.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ HINTS -->
+  <section id="hints">
+    <div class="sec-head"><span class="n">§3</span><h2>A hint-strength setting</h2></div>
+    <p class="desc">The "worth trying" ranking from the first pass was too strong as the only mode — it
+      pre-solves the guess. But it isn't a bad idea, it's a <b>strong hint</b>, and some players want more
+      scaffolding than others. So it becomes an option instead of a default: one new setting, same shape as
+      the two real ones <code>PlayerSettings.ts</code> already persists (a <code>localStorage</code> key,
+      clamped/validated, outliving a save slot), shown as the segmented control the Options mockup already
+      draws for Text Speed — no new control language.</p>
+    <div class="frame" style="aspect-ratio:auto; max-width:640px">
+      <div style="padding:5%; background:linear-gradient(180deg,var(--canvas),var(--canvas2)); color:var(--ink)">
+        <div style="font:11px var(--font-mono); letter-spacing:1.5px; text-transform:uppercase; color:var(--ink-soft); margin-bottom:10px">Options · Accessibility</div>
+        <div style="display:flex; align-items:center; gap:20px; padding:10px 0">
+          <span style="width:160px; font-size:15px; color:#3a2a15">Hint strength</span>
+          <div class="seg mono"><span>Off</span><span class="on">Subtle</span><span>Generous</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="note" style="max-width:900px; margin-top:16px">
+      <b>Off</b> — no proactive hints anywhere: no post-cast "worth trying" pill, cast pickers stay flat.
+      The traversal <code>?</code> tooltip (§5) stays available regardless of this setting — it's a reveal
+      the player already chose to ask for, not something pushed at them.<br><br>
+      <b>Subtle (default)</b> — the picker stays a flat known-only list; only the <i>post-cast</i> next-step
+      pill shows, and only when a cast actually produced something new to try.<br><br>
+      <b>Generous</b> — brings back the plausibility grouping from the first pass (§2's "worth trying" split)
+      inside the cast picker itself, for players who'd rather be nudged toward what's promising than guess
+      cold. Same data either way — <code>components you hold ∩ this receiver's class</code> — just whether
+      it's shown before the guess or only after.
+    </div>
+  </section>
+
+  <!-- ============================================================ NAV -->
+  <section id="nav">
+    <div class="sec-head"><span class="n">§4</span><h2>HUD nav row</h2></div>
+    <div class="badge-approved">✓ approved as shown — build this</div>
+    <p class="desc">Today five-to-six controls sit as equal-weight bracket text, in the order they were
+      added rather than by what they're for — <b>gear</b> (things you're carrying), <b>world</b> (where and
+      when you are), and <b>system</b> (dev/options) all read the same. Three clusters instead, icon-first,
+      label and hotkey on hover rather than always-on.</p>
+
+    <div class="pair">
+      <div class="col before">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">today</span></div>
+        <div class="frame">
+          <div class="scrim-top"></div>
+          <div class="header-plaque">Day 1 · Morning · Forager's Clearing</div>
+          <div class="nav-row">
+            <div class="nav-btn">[ Satchel — S ]</div>
+            <div class="nav-btn">[ Edit — E ]</div>
+            <div class="nav-btn">[ Home — H ]</div>
+            <div class="nav-btn">[ Calendar — L ]</div>
+            <div class="nav-btn">[ Notebook — N ]</div>
+          </div>
+        </div>
+        <div class="note"><code>CollectScene.create()</code>'s <code>nav</code> array, pushed in
+          construction order and laid out by <code>ModalFrame.buttonRow()</code> as one row.</div>
+      </div>
+
+      <div class="col after">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">proposed</span></div>
+        <div class="frame">
+          <div class="scrim-top"></div>
+          <div class="header-plaque">Day 1 · Morning · Forager's Clearing</div>
+          <div class="nav-row">
+            <div class="nav-cluster">
+              <div class="nav-icon hot" data-tip="Satchel · S">🎒</div>
+              <div class="nav-icon hot" data-tip="Notebook · N">📓</div>
+            </div>
+            <div class="nav-cluster">
+              <div class="nav-icon hot" data-tip="Home · H">🏠</div>
+              <div class="nav-icon hot" data-tip="Calendar · L">🗓</div>
+            </div>
+            <div class="nav-cluster">
+              <div class="nav-icon hot" data-tip="Options">⚙</div>
+            </div>
+          </div>
+        </div>
+        <div class="note">Three clusters — <b>gear</b>, <b>world</b>, <b>system</b> — with a divider
+          between them. Dev-only entries (Edit) drop out of the always-visible row entirely, same as
+          today's <code>import.meta.env.DEV</code> gate.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ TRAVERSAL -->
+  <section id="traversal">
+    <div class="sec-head"><span class="n">§5</span><h2>Traversal — a locked path</h2></div>
+    <div class="badge-approved">✓ approved as shown — build this</div>
+    <p class="desc">A blocked move already reads as "a fact, not an error" in color (the 2026-08-20 pass
+      moved it off <code>danger</code> red) — but the pill text itself is still debug output. Fiction-first
+      label, mechanical reason behind a tap-to-reveal.</p>
+
+    <div class="pair">
+      <div class="col before">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">today</span></div>
+        <div class="frame">
+          <div class="scrim-top"></div>
+          <div class="scrim-choices"></div>
+          <div class="scrim-bottom"></div>
+          <div class="pill locked" style="left:6%; bottom:32%">Go to The Cave — locked
+            <div class="why">[needs: cast ignite with effect on dry_hedge]</div>
+          </div>
+        </div>
+        <div class="note"><code>TraversalRow.ts</code>'s <code>DEBUG_GATE_HINTS</code> flag prints the raw
+          gate rule inline, always on — useful for playtesting, but it's the only copy a real player would
+          ever see too.</div>
+      </div>
+
+      <div class="col after">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">proposed</span></div>
+        <div class="frame">
+          <div class="scrim-top"></div>
+          <div class="scrim-choices"></div>
+          <div class="scrim-bottom"></div>
+          <div class="pill locked" style="left:6%; bottom:32%">The Cave — the way is blocked
+            <span class="qmark">?</span>
+          </div>
+        </div>
+        <div class="note">Same string, gated behind the <b>?</b> glyph instead of deleted — playtesting
+          keeps its diagnostic without a player ever reading a gate id unasked.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ LEARN -->
+  <section id="learn">
+    <div class="sec-head"><span class="n">§6</span><h2>Learning a spell</h2></div>
+    <p class="desc">Not a fix to something shipped — a proposed shape for something only half-built.
+      <code>Knowledge.ts</code> already tracks two real states, <b>seen</b> (a clue) and
+      <b>learned</b> (confirmed by a successful cast), and <code>NpcTalkSystem.ts</code> already gives
+      clues and <code>SpellTrialScene.ts</code> already lets you guess components from what you're
+      carrying. What's missing is the <b>middle beat</b> — the moment an NPC actually teaches you, not
+      just mentions something exists — and a way to try from what's <b>banked at Home</b>, not only the
+      satchel. Checked against <code>NotebookScene.drawSpellbook()</code> below: the clue and the Try
+      button are already exactly where this sequence needs them to land — nothing about the book's own
+      layout needs to change, only what feeds it.</p>
+
+    <div class="strip">
+      <div class="step">
+        <div class="num mono">1 · hear it exists</div>
+        <div class="frame">
+          <div class="scrim-top"></div>
+          <div class="header-plaque">Day 1 · Morning · Market Row</div>
+          <div class="vn">
+            <div class="bust"></div>
+            <div>
+              <div class="who">The Baker</div>
+              <div class="line">You'd love "portion" — needs a river stone, if you ever find one.</div>
+            </div>
+            <div class="cont">▼</div>
+          </div>
+        </div>
+        <div class="cap"><b>Already built</b> — <code>shareClueOnFirstTalk</code> fires this,
+          unprompted, the first time you talk to a role-holder each day. Today it's a floating modal
+          line; here it's restyled into the VN box mode5 already runs everywhere else, so it reads as
+          the Baker <i>saying</i> it.</div>
+      </div>
+      <div class="step">
+        <div class="num mono">2 · ask, and get taught</div>
+        <div class="frame">
+          <div class="scrim-top"></div>
+          <div class="header-plaque">Day 1 · Morning · Market Row</div>
+          <div class="vn">
+            <div class="bust"></div>
+            <div>
+              <div class="who">The Baker</div>
+              <div class="line">Watch me divide the feast batch at the counter — a whole town served
+                alike, no scale big enough, and no argument over who got more.</div>
+            </div>
+            <div class="cont">▼</div>
+          </div>
+        </div>
+        <div class="cap"><b>New.</b> Clicking the clue row — today a silent <code>knowledge.see()</code>
+          — instead opens a short 2–3 line VN beat before landing the clue. The line isn't invented: every
+          spell already authors a <code>learn_source</code> field (<code>content/magic/portion.json</code>,
+          quoted above near-verbatim) that no UI currently shows the player at all.</div>
+      </div>
+    </div>
+
+    <p class="desc" style="margin-top:30px"><b>3 · it's already in your spellbook.</b> No new screen —
+      this is <code>NotebookScene.drawSpellbook()</code> as it exists today, ported straight from
+      <code>spellbook.html</code>. "Portion" lands in the left page's <b>KNOWN</b> group as a
+      "seen · try it" row the moment <code>knowledge.see()</code> fires in step 2, no extra wiring. The
+      right detail page already shows the full component list for a clue, on purpose — Roc's 2026-08-13
+      ruling was "a clue should say what it needs, not just name the spell," so the trial in step 4 is a
+      confirming ritual, not a blind guess.</p>
+    <div class="frame" style="max-width:900px; margin:0 auto">
+      <div class="book2">
+        <div class="pg left">
+          <div class="booktitle">Notebook</div>
+          <div class="booksub">3 of 16 learned</div>
+          <div class="grp">Known</div>
+          <div class="row"><span>glimmer</span><span class="role">Mage</span></div>
+          <div class="row"><span>echo</span><span class="role">Mage</span></div>
+          <div class="row sel"><span>portion</span><span class="role">seen · try it</span></div>
+          <div class="grp">To learn · from neighbours</div>
+          <div class="row locked"><span>???</span><span class="role">not yet mentioned</span></div>
+          <div class="row locked"><span>???</span><span class="role">not yet mentioned</span></div>
+          <div class="row locked"><span>???</span><span class="role">not yet mentioned</span></div>
+        </div>
+        <div class="pg">
+          <div class="phrase">portion</div>
+          <div class="says">you say "portion"</div>
+          <div class="lbl">Components</div>
+          <div class="comprow"><span class="sp">a river stone</span></div>
+          <div class="lbl">What it does</div>
+          <div class="does">a river stone → parts cleanly into equal loaf-measures, each the match of
+            the next.</div>
+          <div class="fromline">clue from: the Baker, dividing the feast batch at the counter</div>
+          <span class="trybtn">Try portion</span>
+        </div>
+      </div>
+    </div>
+    <div class="note" style="max-width:900px; margin:16px auto 0">
+      <b>Decided (revision 5) — locked rows are masked until a neighbour verifies the spell exists.</b>
+      This is a real behavior change, not just a mockup fix: <code>NotebookScene.ts</code>'s
+      <code>drawIndexPage()</code> already filters the "to learn" list to
+      <code>!knows(id) && !hasSeen(id)</code>, then still prints the real <code>phrase</code> and the real
+      <code>learn · role</code> for every row in it — every spell in the game is named and its teacher
+      identified before any neighbour has ever mentioned it. The fix is narrow: when a row is locked, show
+      <code>???</code> and "not yet mentioned" instead of the real strings. The moment <code>hasSeen()</code>
+      flips true — the exact clue beat in step 2 above — the row moves out of "locked" into the seen-clue
+      group and both are revealed together, same as today. No new state: <code>Knowledge.ts</code> already
+      has exactly the <code>seen</code>/<code>learned</code> pair this needs, nothing lighter to add.
+    </div>
+
+    <p class="desc" style="margin-top:30px"><b>4 · confirm, from what you hold.</b> "Try" launches
+      <code>SpellTrialScene</code> exactly as it does today — pick components from what's reachable,
+      submit, an exact match learns it. One addition: at Home, the same picker also offers what's
+      <b>banked</b>, not only the satchel. <b>Decided (revision 4):</b> both pools are live at once, not a
+      toggle — a trial cast can mix a satchel item and a banked one in the same attempt.</p>
+    <div class="frame" style="max-width:640px; margin:0 auto">
+      <div class="scrim-top"></div>
+      <div class="header-plaque">Notebook · trial cast · "portion"</div>
+      <div class="modal" style="top:56%">
+        <div class="title mono">seen but not confirmed — try a few components</div>
+        <div class="worthgrid" style="margin-bottom:3%">
+          <div class="grp-lbl">satchel</div>
+          <div class="trialrow" style="margin-bottom:0">
+            <span class="trial-chip on">river stone</span>
+            <span class="trial-chip">sticks</span>
+          </div>
+          <div class="grp-lbl">banked at home</div>
+          <div class="trialrow" style="margin-bottom:0">
+            <span class="trial-chip">feather</span>
+            <span class="trial-chip">cooled ember</span>
+          </div>
+        </div>
+        <span class="take" style="border-color:var(--gold)">try it</span>
+      </div>
+    </div>
+    <div class="note" style="max-width:900px; margin:16px auto 0">
+      <b>Everything except the second pool already ships.</b> <code>SpellTrialScene.held()</code> reads
+      <code>Inventory.availableOn(null)</code> — the satchel, always-available materials, and world items
+      on screen. It never reads <code>view.banked</code>, and nothing in <code>Inventory</code> models "at
+      Home" as a location the trial can check. This is not a toggle to wire up — it's a second source feeding
+      the same chip row, the way <code>HubScene</code>'s <code>discoveredOnly</code> already threads a
+      similar gate elsewhere — not a big change, but a real one, not just a UI skin.
+    </div>
+    <p class="desc" style="margin-top:20px"><b>What this doesn't change.</b> The confirm rules stay exactly
+      as authored — an exact component match, one try at a time, no partial credit — this only changes
+      where the "give" beat lives and what you can try casting with, not how confirmation works.</p>
+  </section>
+
+  <!-- ============================================================ SATCHEL MANAGEMENT -->
+  <section id="satchel">
+    <div class="sec-head"><span class="n">§7</span><h2>Satchel — managing what you carry</h2></div>
+    <p class="desc"><code>SatchelScene.ts</code> is view-only. Click a pocket, the parchment inspect card
+      on the right shows kind, name, description, and which known spells it's <b>carried for</b> — that
+      card is already a good "examine" beat, the same shape as §1's hover card. But there's no <b>act</b>:
+      no button anywhere drops an item, and <code>Inventory</code> itself has no method that removes one at
+      the player's discretion — the one comment in the file about removal is about a separate consumed-count
+      ledger, not this. Today the only way a pocket empties is <b>pack-triage</b>, forced when foraging with
+      a full satchel. There's no voluntary version.</p>
+
+    <div class="pair">
+      <div class="col before">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">today</span></div>
+        <div class="frame">
+          <div class="pockets3">
+            <div class="pk sel">river<br>stone</div>
+            <div class="pk">sticks</div>
+            <div class="pk empty">Empty</div>
+          </div>
+          <div class="inspect">
+            <div class="kind">component</div>
+            <div class="nm">River Stone</div>
+            <div class="ds">smooth, cool, worn round by the current</div>
+          </div>
+        </div>
+        <div class="note">The inspect card is a dead end — no matter what's selected, the only exits are
+          picking a different pocket or closing the satchel. Full is full until the game forces a choice.</div>
+      </div>
+      <div class="col after">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">proposed</span></div>
+        <div class="frame">
+          <div class="pockets3">
+            <div class="pk sel">river<br>stone</div>
+            <div class="pk">sticks</div>
+            <div class="pk empty">Empty</div>
+          </div>
+          <div class="inspect">
+            <div class="kind">component</div>
+            <div class="nm">River Stone</div>
+            <div class="ds">smooth, cool, worn round by the current</div>
+            <span class="warn-btn hi">drop it</span>
+            <div class="warnline">portion and temper still need this</div>
+          </div>
+        </div>
+        <div class="note">A <b>drop</b> action on the parchment side, styled as the existing on-canvas
+          <b>warn</b> button (§14 — the same family <code>save-load.html</code> uses for "Start over," not
+          a new color invented for this). The warning line reuses data the card already computes —
+          <code>pocket.carriedFor</code> — so dropping something a known spell needs is an informed choice,
+          not a silent loss. This is the same "examine before you act" idea as §1's hover card, applied to
+          giving something up instead of picking it up. <b>Decided (revision 4):</b> this warning is a
+          setting, not a fixed rule — see below.</div>
+      </div>
+    </div>
+
+    <p class="desc" style="margin-top:30px"><b>Decided (revision 4) — drop-confirmation is a setting.</b>
+      Same shape as §3's hint-strength control: a persisted choice in Options, not hardcoded behavior.
+      Default is <b>only warn when a known spell needs the item</b> — exactly the <code>carriedFor</code>
+      check shown above — with an <b>always warn</b> option for players who'd rather be asked every time.
+      No new control language; it's another row in the same Options panel §3 already proposes.</p>
+
+    <div class="badge-approved" style="margin-bottom:6px">✓ decided — move between pockets, revision 4</div>
+    <p class="desc">A real gap, not out of scope: rearranging what's in the satchel should be possible
+      without dropping and re-taking. Roc's rule — <b>you need a free hand to hold what you're moving, and
+      the target pocket has to be empty to receive it.</b> Functionally this can be built as drop-then-pickup
+      under the hood; what matters is that it reads as one continuous move on screen.</p>
+    <div class="pair">
+      <div class="col before">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">step 1 — pick up into your hand</span></div>
+        <div class="frame">
+          <div class="pill" style="left:5%; top:6%">holding: river stone — pick an empty pocket</div>
+          <div class="pockets3" style="top:26%">
+            <div class="pk armed">river<br>stone</div>
+            <div class="pk">sticks</div>
+            <div class="pk empty">Empty</div>
+          </div>
+        </div>
+        <div class="note">Selecting "move" on the inspect card lifts the item into your hand — the pocket it
+          came from is now the one open target it can't be placed back into pointlessly, everything else
+          is fair game if it's empty.</div>
+      </div>
+      <div class="col after">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">step 2 — place in an empty pocket</span></div>
+        <div class="frame">
+          <div class="pill" style="left:5%; top:6%">placed — satchel resorted</div>
+          <div class="pockets3" style="top:26%">
+            <div class="pk">sticks</div>
+            <div class="pk empty">Empty</div>
+            <div class="pk sel">river<br>stone</div>
+          </div>
+        </div>
+        <div class="note">Only an <b>empty</b> pocket accepts the placement — moving onto an occupied one is
+          not a swap, it's simply not a legal target. If the player changes their mind mid-move, the same
+          drop action still works: hand back to satchel, no pocket required.</div>
+      </div>
+    </div>
+
+    <div class="note" style="max-width:1000px; margin-top:22px">
+      <b>Not just a UI change.</b> The satchel display doesn't read <code>Inventory.held</code> directly —
+      <code>effectiveSatchel()</code> reconciles it against <code>view.satchel</code>, the pool array
+      <code>LanternPlayer</code> (ink-side) owns. Both drop and move need a real method on
+      <code>Inventory</code> that doesn't exist yet, and each has to land on both sides of that
+      reconciliation or the pocket will reappear the next time the view resyncs. Flagging this so it's
+      scoped as the two-sided fix it is, not a one-file button add.
+    </div>
+  </section>
+
+  <!-- ============================================================ HOME HUB -->
+  <section id="hub">
+    <div class="sec-head"><span class="n">§8</span><h2>Home Hub decoration</h2></div>
+    <p class="desc">Same five-beat loop as §0, checked against <code>HubScene.ts</code>. The good news:
+      <b>act</b> is already solid — free drag on a soft grid, scroll to resize, already the recommended
+      direction in <code>FINDINGS.md</code>. Three rougher spots, all in the parts the loop calls
+      <b>notice</b> and <b>learn</b>.</p>
+
+    <div class="pair">
+      <div class="col before">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">today — the palette</span></div>
+        <div class="frame">
+          <div class="hubpalette">
+            <div class="hubchip">a river stone</div>
+            <div class="hubchip">captured sound</div>
+            <div class="hubchip">a feather</div>
+          </div>
+        </div>
+        <div class="note"><code>drawPalette()</code> draws plain text pills — the exact look of a debug
+          button row, not an object you'd want on a shelf. The satchel already solved this with real SVG
+          material icons; the hub never adopted them.</div>
+      </div>
+      <div class="col after">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">proposed — the palette</span></div>
+        <div class="frame">
+          <div class="hubpalette" style="flex-direction:column; align-items:flex-start; gap:6px; padding-top:10px">
+            <div class="mono" style="font-size:11px; color:var(--gold)">12 of 34 found</div>
+            <div style="display:flex; gap:2%; flex-wrap:wrap">
+              <div class="hubchip"><span class="ic"></span>a river stone</div>
+              <div class="hubchip"><span class="ic"></span>captured sound</div>
+              <div class="hubchip"><span class="ic"></span>a feather</div>
+            </div>
+          </div>
+        </div>
+        <div class="note">The same six SVGs <code>SatchelScene</code> already loads
+          (<code>public/art/ui/satchel/*.svg</code>), reused rather than redrawn — one icon set, two
+          screens, matching §11 of the style guide's own rule about not redrawing icons per screen.
+          <b>Decided (revision 5):</b> a found-count sits above the row. Not new data —
+          <code>HubScene.ts</code>'s <code>drawPalette()</code> already renders
+          <code>${palette.length} found so far</code> when <code>discoveredOnly</code> is set; the
+          denominator is the same <code>items.filter(collectible && persistence !== "world")</code> list,
+          just run without that gate. "12 of 34" here is illustrative, not a real content count.</div>
+      </div>
+    </div>
+
+    <div class="pair" style="margin-top:30px">
+      <div class="col before">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">today — a selected piece</span></div>
+        <div class="frame">
+          <div class="hub-piece sel" style="left:44%; top:40%">a river stone</div>
+        </div>
+        <div class="note">Selecting a piece only changes its own fill color. Removing or flipping it
+          needs the <b>Del</b> or <b>F</b> key — real, working, and named nowhere on screen except one
+          dense status line at the very top: "12 pieces placed · drag to move · scroll to resize · F
+          flips · Del removes · Esc leaves." A player who hasn't read that line has no way to find out.</div>
+      </div>
+      <div class="col after">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">proposed — a selected piece</span></div>
+        <div class="frame">
+          <div class="hub-piece sel" style="left:44%; top:40%">a river stone</div>
+          <div class="piece-actions" style="left:44%; top:32%">
+            <span>flip · F</span>
+            <span class="rm">remove · Del</span>
+          </div>
+        </div>
+        <div class="note">Selecting a piece — already the "examine" beat, same as clicking a satchel
+          pocket — now surfaces the two things you can do with it, right where you're looking. The keys
+          still work for anyone who's learned them; the buttons are for everyone else.</div>
+      </div>
+    </div>
+
+    <div class="pair" style="margin-top:30px">
+      <div class="col before">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">today — the chrome</span></div>
+        <div class="frame">
+          <div class="nav-row" style="top:1.9%">
+            <div class="nav-btn">In-Game Home</div>
+            <div class="nav-btn">Meta-Hub</div>
+            <div class="nav-btn" style="color:var(--rust)">New Life (empties home)</div>
+            <div class="nav-btn">Close</div>
+          </div>
+          <div class="nav-row" style="top:9.5%; right:auto; left:1.2%">
+            <div class="nav-btn">Free Drag</div>
+            <div class="nav-btn">Snap Slots</div>
+          </div>
+        </div>
+        <div class="note">Two separate control clusters in two corners — one a tab pair for which
+          <i>space</i> you're in, one for which <i>placement mode</i>, plus a destructive "New Life"
+          pill sitting flush against "Close" with no confirmation. A slightly wrong click empties the
+          room.</div>
+      </div>
+      <div class="col after">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">proposed — the chrome</span></div>
+        <div class="frame">
+          <div class="nav-row">
+            <div class="nav-cluster">
+              <div class="nav-icon hot" data-tip="In-Game Home">🏠</div>
+              <div class="nav-icon hot" data-tip="Meta-Hub">🗺</div>
+            </div>
+            <div class="nav-cluster">
+              <div class="nav-icon hot" data-tip="Free Drag">✥</div>
+              <div class="nav-icon hot" data-tip="Snap Slots">▦</div>
+            </div>
+            <div class="nav-cluster">
+              <div class="nav-icon hot" data-tip="Close">✕</div>
+            </div>
+          </div>
+        </div>
+        <div class="note">Same three-cluster grouping as §4's HUD row — <b>space</b>, <b>placement</b>,
+          <b>session</b> — one row, consistent language across every screen that uses it. "New Life" moves
+          out of the always-visible row entirely, into a confirm step off the Close/session cluster, the
+          same way §7's drop action confirms before it commits.</div>
+      </div>
+    </div>
+
+    <h3 style="color:var(--gold-bright); font-size:20px; margin:44px 0 6px; font-weight:600">Two views of one shelf</h3>
+    <div class="badge-approved">✓ decided, revision 4 — the close-up stays, it's a different view</div>
+    <p class="desc">Checked against the real backdrop, <code>lantern-projects/v01/images/home-hub-diorama.png</code>
+      (below, unedited) — Roc's reference for a close-up shelf view is the same shelving unit, drawn
+      front-on instead of at the room's isometric angle. Worth building, but it exposes a real gap: today's
+      <code>HOME_SURFACES</code> has exactly one entry for that whole unit — <code>id: "shelf"</code>, a
+      single 12%×7% zone — and <code>Decor.occupant(surfaceId)</code> allows <b>one placement per
+      surface, full stop</b>. The art has sixteen open cubbies; the code has one slot. Room zoom (below)
+      doesn't replace this — it's a scale on the same isometric image, and the shelf close-up is a genuinely
+      different projection no amount of zoom produces.</p>
+
+    <div class="pair">
+      <div class="col before">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">the real backdrop, today's one slot</span></div>
+        <div class="frame photo">
+          <img src="../../../../lantern-projects/v01/images/home-hub-diorama.png" alt="Home Hub backdrop — the shelving unit">
+          <div class="surface-box" style="left:41%; top:6%; width:15%; height:9%">
+            <span class="lbl">shelf — 1 slot</span>
+          </div>
+        </div>
+        <div class="note">The dashed box is <code>HOME_SURFACES</code>'s actual authored rect for
+          <code>"shelf"</code> — roughly eyeballed against the real art here, not pixel-measured. It covers
+          one shelf-row, not the sixteen-cubby grid the piece obviously has.</div>
+      </div>
+      <div class="col after">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">decided — Roc's reference, zoomed to the cubbies</span></div>
+        <div class="frame">
+          <div class="scrim-top"></div>
+          <div class="header-plaque">Home Hub · Shelf</div>
+          <div class="shelfart">
+            <div class="cubbyrow">
+              <div class="cubby"><span class="occ">river stone</span></div>
+              <div class="cubby"></div>
+              <div class="cubby"></div>
+              <div class="cubby"></div>
+            </div>
+            <div class="cubbyrow">
+              <div class="cubby"></div>
+              <div class="cubby"></div>
+              <div class="cubby"><span class="occ">captured sound</span></div>
+              <div class="cubby"></div>
+            </div>
+            <div class="cubbyrow">
+              <div class="cubby"></div>
+              <div class="cubby"><span class="occ">a feather</span></div>
+              <div class="cubby"></div>
+              <div class="cubby"></div>
+            </div>
+            <div class="cubbyrow">
+              <div class="cubby"></div><div class="cubby"></div><div class="cubby"></div><div class="cubby"></div>
+            </div>
+            <div class="drawers"></div>
+          </div>
+        </div>
+        <div class="note"><b>Confirmed — Roc's reference is the shelf-close-up art</b>, cropped to just the
+          sixteen cubbies; the cabinet band under them (visible in the reference, the doors and drawers)
+          bleeds off the bottom edge here rather than being fit whole into frame. Sixteen named cubbies,
+          <code>shelf-r0c0</code> through <code>shelf-r3c3</code>, each a real <code>Surface</code> in the
+          existing model — more entries, same shape, not a new system. Standing in with CSS here, not the
+          real asset, until the reference is exported as a game backdrop.</div>
+      </div>
+    </div>
+
+    <div class="note" style="max-width:1000px; margin:20px auto 0">
+      <b>Why the placement can't just be an x/y percentage of one backdrop.</b> The room art draws the
+      shelf at an isometric angle — a cubby is a parallelogram on screen, not a rectangle. The reference
+      art draws it front-on — a cubby <i>is</i> a rectangle. There's no simple shared math between a point
+      in one projection and the matching point in the other. So a placement should store <b>which cubby</b>
+      (<code>surfaceId: "shelf-r1c2"</code> — <code>Decor.place()</code> already threads a surface id
+      through in slots mode, this just needed more of them), never a raw x/y against either specific image.
+      Each view then owns its own small rect table for the sixteen ids — the same hand-authored-rect
+      pattern the project already uses for hotspots and regions (<code>HotspotPlacement</code>, Lantern's
+      region editor) — and rendering a placement is "look up this cubby's rect in <i>this</i> view's
+      table," nothing more. That's what makes "stays in the same relative place" true by construction
+      instead of something to get right by eye.
+    </div>
+
+    <div class="pair" style="margin-top:26px">
+      <div class="col before">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">back in the room — same three items</span></div>
+        <div class="frame photo">
+          <img src="../../../../lantern-projects/v01/images/home-hub-diorama.png" alt="Home Hub backdrop — the shelving unit">
+          <div class="dot-marker" style="left:37%; top:14%">1</div>
+          <div class="dot-marker" style="left:57%; top:20%">2</div>
+          <div class="dot-marker" style="left:47%; top:28%">3</div>
+        </div>
+        <div class="note">Illustrative placement, not measured to the pixel — the point is that switching
+          views is a re-render against a different rect table, never a re-placement. <b>1</b> river stone,
+          <b>2</b> captured sound, <b>3</b> a feather — same cubbies as the close-up, left.</div>
+      </div>
+      <div class="col after">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">entering the close-up</span></div>
+        <div class="frame photo">
+          <img src="../../../../lantern-projects/v01/images/home-hub-diorama.png" alt="Home Hub backdrop — the shelving unit">
+          <div class="surface-box" style="left:29%; top:5%; width:52%; height:32%">
+            <span class="lbl">click the shelf — look closer</span>
+          </div>
+        </div>
+        <div class="note">Entry point matches §0's loop — <b>notice</b> the whole unit, <b>examine</b> by
+          clicking it (a cursor affordance, not a separate nav button), which is what opens the close-up as
+          a paused overlay — the same convention Satchel, Notebook and the Hub itself already use, so this
+          is one more scene of that shape, not a new pattern.</div>
+      </div>
+    </div>
+
+    <h3 style="color:var(--gold-bright); font-size:20px; margin:44px 0 6px; font-weight:600">Zoom and pan the room</h3>
+    <div class="badge-approved">✓ decided, revision 4 — a zoom % of the current view, not a second camera</div>
+    <p class="desc"><code>HubScene.create()</code> draws the backdrop at one fixed cover-fit scale and
+      never touches it again — no zoom, no pan, the whole room or nothing. Roc wants scroll-to-zoom and
+      drag-to-pan on the room view itself. That's a different interaction from the "look around" pan
+      <code>PanModel.ts</code> already gives <code>CollectScene</code>: that one holds a <b>fixed</b>
+      blow-up (<code>PAN_ZOOM = 1.22</code>) and drifts toward wherever the pointer happens to be — ambient,
+      for atmosphere while reading dialogue. Placing something precisely in a sill pot wants the opposite:
+      a <b>deliberate</b> zoom level the player sets, and a pan that only moves when they drag for it. Same
+      underlying shape (scale, offset, slack — <code>panFit()</code>'s own math already models exactly
+      that triangle), driven by different input.</p>
+
+    <div class="strip">
+      <div class="step">
+        <div class="num mono">1 · today</div>
+        <div class="frame photo">
+          <img src="../../../../lantern-projects/v01/images/home-hub-diorama.png" alt="Home Hub backdrop, fit to the whole room">
+        </div>
+        <div class="cap">One fixed frame, always the whole room. No affordance to get closer to anything.</div>
+      </div>
+      <div class="step">
+        <div class="num mono">2 · scroll to zoom</div>
+        <div class="frame photo" style="overflow:hidden">
+          <img src="../../../../lantern-projects/v01/images/home-hub-diorama.png" alt="Home Hub backdrop, zoomed toward the desk" style="transform:scale(1.9); transform-origin:22% 78%">
+          <div class="nav-btn" style="position:absolute; left:2%; top:3%">165% · scroll to zoom</div>
+          <div class="nav-btn" style="position:absolute; right:2%; top:3%">Fit — Esc</div>
+        </div>
+        <div class="cap">Cursor-centered zoom, same gesture <code>ReceiverHotspots</code>/pockets already
+          use elsewhere for hover-scale, just continuous. A visible <b>Fit</b> control is the escape hatch
+          — without one, a player zoomed into the desk has no obvious way back to the whole room.</div>
+      </div>
+      <div class="step">
+        <div class="num mono">3 · drag to pan</div>
+        <div class="frame photo" style="overflow:hidden">
+          <img src="../../../../lantern-projects/v01/images/home-hub-diorama.png" alt="Home Hub backdrop, panned toward the window sill" style="transform:scale(1.9); transform-origin:8% 48%">
+          <div class="nav-btn" style="position:absolute; left:2%; top:3%">165% · drag to pan</div>
+          <div class="cursor" style="left:50%; top:55%"></div>
+          <div class="cursor-tag" style="left:53%; top:52%">drag</div>
+        </div>
+        <div class="cap">Only pans while zoomed in and only where dragged — nothing moves on its own. One
+          real conflict to design around: a decor piece is already draggable
+          (<code>chip.setInteractive({ draggable: editable })</code>). A drag that starts ON a piece must
+          move the piece; a drag starting on empty backdrop must pan the room. Phaser's own hit-testing
+          already resolves that order — the piece's interactive zone simply has to sit above the pan
+          listener, not a new problem to invent.</div>
+      </div>
+    </div>
+
+    <h3 style="color:var(--gold-bright); font-size:20px; margin:44px 0 6px; font-weight:600">Where you can actually put something</h3>
+    <div class="badge-approved">✓ decided, revision 4 — keep chest and counter, verify the names against the art</div>
+    <p class="desc">Reconciled <code>HOME_SURFACES</code> against the real backdrop, not against the code's
+      own labels. <b>Sill</b> and <b>floor</b> hold up — the window sill with its three pots, the rug by
+      the door, both clearly visible. <b>Table</b> doesn't exist yet as a surface at all, though the desk
+      with a book already on it is the single most obvious flat surface in the whole room. <b>Chest</b> and
+      <b>counter</b> are harder to place with confidence — nothing in the art reads unambiguously as either
+      one, though the cabinet doors and drawers under the shelf are furniture they could plausibly have
+      meant. <code>GAPS.md</code>'s own G14 already flags why: <i>"regions.json has geometry for T1 only,
+      and none for HOME at all"</i> — every one of these five rects was hand-eyeballed once, never checked
+      against the art the way a real screen's hotspots are.</p>
+
+    <div class="frame photo" style="max-width:760px; margin:0 auto">
+      <img src="../../../../lantern-projects/v01/images/home-hub-diorama.png" alt="Home Hub backdrop with proposed surfaces marked">
+      <div class="surface-box" style="left:2%; top:38%; width:14%; height:14%"><span class="lbl">sill ✓</span></div>
+      <div class="surface-box" style="left:29%; top:5%; width:52%; height:32%"><span class="lbl">shelf ✓ (needs cubbies)</span></div>
+      <div class="surface-box" style="left:15%; top:63%; width:26%; height:26%"><span class="lbl">table — new</span></div>
+      <div class="surface-box" style="left:28%; top:80%; width:42%; height:17%"><span class="lbl">floor ✓</span></div>
+      <div class="surface-box" style="left:58%; top:38%; width:20%; height:20%; border-color:var(--rust)"><span class="lbl" style="background:var(--rust); color:var(--cream)">chest / counter — unverified</span></div>
+    </div>
+    <div class="note" style="max-width:1000px; margin:16px auto 0">
+      <b>The fix isn't more hand-eyeballing.</b> The project already has a region-authoring tool
+      (Lantern's) that writes exactly this geometry for real screens — the README's own rule is "do not
+      build a region editor, Lantern already has one." The Home Hub backdrop has just never been run
+      through it. That's the actual next step here: author <code>sill</code>, <code>shelf</code>,
+      <code>table</code>, and <code>chest</code>/<code>counter</code> (kept, not cut — the names get
+      checked against the art through this same pass rather than renamed on a guess) through the same tool
+      T1 used, instead of adding a sixth guessed rect by hand. And once real geometry exists, the same
+      multi-slot fix §8's shelf finding calls for isn't shelf-only — the sill already visibly holds three
+      pots at once, and the desk has room beside the book. One occupant per surface was never going to be
+      enough for any of these, not just the one with sixteen cubbies. <b>Decided (revision 4):</b> both slot
+      shapes stay, matched per surface — grid cells where the surface is naturally gridded (the shelf's
+      sixteen cubbies), free-drag zones where it isn't (table, floor, sill). Every placement is stored
+      against a surface/cubby id, never a raw x/y, which is what makes it possible to render the same
+      placement correctly in both the room view and a close-up view without the two ever needing to agree
+      on a shared coordinate space.
+    </div>
+  </section>
+
+  <!-- ============================================================ WALKTHROUGH -->
+  <section id="walkthrough">
+    <div class="sec-head"><span class="n">§9</span><h2>One connected walkthrough</h2></div>
+    <p class="desc">The fixes above as a single sequence, in the fiction: forage a never-seen-before item,
+      notice a stone, try a known spell blind, get pointed at what's next — the loop from §0, played out
+      at the default (Subtle) hint level.</p>
+
+    <div class="strip">
+      <div class="step">
+        <div class="num mono">1</div>
+        <div class="frame">
+          <div class="scrim-bottom"></div>
+          <div class="hotspot" style="left:40%; top:42%"></div>
+          <div class="cursor" style="left:40%; top:42%"></div>
+        </div>
+        <div class="cap"><b>Notice.</b> A dot in the clearing, nothing more said yet.</div>
+      </div>
+      <div class="step">
+        <div class="num mono">2</div>
+        <div class="frame">
+          <div class="scrim-bottom"></div>
+          <div class="hotspot" style="left:40%; top:42%"></div>
+          <div class="examine mystery" style="left:45%; top:26%">
+            <div class="nm">???</div>
+            <div class="ds">pick it up to find out</div>
+            <span class="take">take</span>
+          </div>
+        </div>
+        <div class="cap"><b>Examine.</b> Never held one before — the card invites the take without
+          spoiling what it's for.</div>
+      </div>
+      <div class="step">
+        <div class="num mono">3</div>
+        <div class="frame">
+          <div class="scrim-bottom"></div>
+          <div class="toast">+ sticks · satchel 1/6</div>
+        </div>
+        <div class="cap"><b>Act, and learn.</b> The name is finally said here, at the moment of taking —
+          every hover after this reveals it up front.</div>
+      </div>
+      <div class="step">
+        <div class="num mono">4</div>
+        <div class="frame">
+          <div class="scrim-bottom"></div>
+          <div class="marker" style="left:58%; top:50%"></div>
+          <div class="cursor" style="left:58%; top:50%"></div>
+        </div>
+        <div class="cap"><b>Notice, again.</b> A dusk diamond — a river stone, castable, not pickable.</div>
+      </div>
+      <div class="step">
+        <div class="num mono">5</div>
+        <div class="frame">
+          <div class="scrim-bottom"></div>
+          <div class="bookpage" style="width:88%">
+            <div class="title">River stone</div>
+            <div class="worthgrid">
+              <div class="row"><div class="sp">glimmer</div><div class="sp">echo</div><div class="sp">fetch</div><div class="sp">ignite</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="cap"><b>Act.</b> Every known spell, flat, unranked, on the page — no dead "Use," no hint
+          which one fits. The guess is the point.</div>
+      </div>
+      <div class="step">
+        <div class="num mono">6</div>
+        <div class="frame">
+          <div class="scrim-bottom"></div>
+          <div class="bookpage" style="width:88%">
+            <div class="title">ignite</div>
+            <div class="result">Too hot to lift.</div>
+            <div class="hint-pill">worth trying once it cools: temper</div>
+          </div>
+        </div>
+        <div class="cap"><b>Learn, and next.</b> The one hint that survives — arriving after the guess
+          paid off, not before it.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>Festival of Souls — Mode 5 UX wireframe · structure and copy only, no art pass ·
+    generated 2026-08-22 · for review, not yet built</footer>
+</div>
+</body>
+</html>

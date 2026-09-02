@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Ilsa sets a bundle of sticks into the forge mouth, arranges them with practiced hands, then steps back half a pace, waiting. The forge is cold, the coals dormant beneath. She glances at the player, then back to the fire, her hands poised. \"Always clear back first,\" she says, a statement of fact, not an invitation to debate.",
+    "wc": 58,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "Ilsa pauses, turning her head slightly at the player's question. \"You clear back first. Always.\" Settled, certain, no elaboration beyond the practical. She turns back to the forge, her hands already moving to the bellows.",
+    "wc": 35,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player tries the same clearing motion on a second stick, off to the side. It catches, small and steady. Ilsa nods once, a slight dip of the chin. \"Good,\" she says, and returns to the bellows.",
+    "wc": 37,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player picks up a river stone and holds it near the coals. Ilsa glances at it, then back to the forge fire. \"That's not the right kind,\" she says, her voice matter-of-fact. She sets the bellows aside and takes the stone from the player's hand, placing it back on the ground. \"We use wood. Sometimes coal, but not stones.\" She returns to the bellows, resuming her work as if the interruption never happened.",
+    "wc": 74,
+    "ok": true,
+    "err": null
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The communal tables, cleared of the meal, lantern light up. Toby is behind the near table stacking empty trays \u2014 still working, even now. Behind him, visible on the shelf through the open kitchen door, sit the unopened jars \u2014 more than at the arc's start, none opened. He doesn't look at them. The player sits at the table, watching Toby work. After a moment, they say, \"That's a lot of thank-yous stacking up.\" Toby's hands stop on the tray for exactly one beat. He says \"Yeah\" \u2014 nothing else \u2014 and goes back to stacking, faster than before. The jars on the shelf seem to multiply under his gaze, a silent testament to the debts he feels he must",
+    "wc": 120,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player says, \"That's a lot of thank-yous stacking up.\"\n\nToby's hands stop on the tray for exactly one beat. He says, \"Yeah,\" and goes back to stacking, faster than before.",
+    "wc": 31,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player sets a folded cloth on the table by Toby's elbow, unremarked. Toby notices, doesn't comment, tucks it under the stack of trays.",
+    "wc": 24,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player says, \"Come sit a minute.\" Toby replies, \"In a bit.\" He doesn't sit, but he slows down his work, taking a moment to glance at the player before continuing to stack the trays. His pace is still measured, but the pause acknowledges the request without fully complying. The lantern light flickers softly, casting long shadows across the room as the evening stretches on. Toby's hands move with practiced efficiency, the trays stacking neatly one on top of the other. The player watches him for a moment before turning their attention back to the room, taking in the quiet bustle of the community as they prepare for the night. The tension in the air is palpable, a mixture of exhaustion and anticipation,",
+    "wc": 123,
+    "ok": true,
+    "err": null
+  }
+}

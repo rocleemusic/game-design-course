@@ -1,0 +1,48 @@
+{
+  "provisional": true,
+  "generated": "layout-pass 2026-07-29",
+  "status": "architect-proposal — pending Roc's gate — not wired",
+  "target": {
+    "screen_id": "T1",
+    "examinable": "arch",
+    "promotion": "ambient -> hard-key"
+  },
+  "ruled_inputs": {
+    "allowed": [
+      "thread progress, via the arc doc's thread_move ladders",
+      "role-goal progress (the festival-tier engine)"
+    ],
+    "barred": [
+      "bond — dropped by Roc's ruling (2026-07-29); check 2 independently bars bond from gating"
+    ]
+  },
+  "proposed_formula": "promote(T1.arch) := threads_moved(THREADS_MOVED_MIN) AND role_goals_advanced(ROLE_GOALS_ADVANCED_MIN)",
+  "thresholds": {
+    "THREADS_MOVED_MIN": {
+      "value": 3,
+      "meaning": "at least 3 of the arc doc's 5 tracked threads have moved (a thread_move fired) at least once this life"
+    },
+    "ROLE_GOALS_ADVANCED_MIN": {
+      "value": 2,
+      "meaning": "at least 2 present souls' role-goals have advanced at least one stage this life"
+    }
+  },
+  "proposed_predicates": [
+    {
+      "predicate": "threads_moved(N)",
+      "meaning": "count of arc-doc threads whose thread_move ladder has advanced at least once this life is >= N",
+      "schema_status": "NEW — not in the screen-spec predicate vocabulary; adding it is a schema change at the gate"
+    },
+    {
+      "predicate": "role_goals_advanced(N)",
+      "meaning": "count of present souls whose role-goal has advanced at least one stage this life is >= N",
+      "schema_status": "NEW — same schema change at the gate"
+    }
+  ],
+  "rationale": "The Arch is the calendar-read landmark: it should sharpen from scenery into a hard-key exactly when the town's stories have visibly moved, so the promotion reads as the world aging rather than as a reward. Both inputs are ladders the pipeline already tracks — thread_move on the arc doc's five threads, and role-goal stages, the same engine that feeds the festival tier. Requiring 3 of 5 threads moved plus 2 role-goals advanced demands breadth (the player has been in the town's life, not maxing one lane) while staying reachable inside a 5-day run. Bond is excluded by the ruling and by check 2, which keeps the promotion about the town's motion, never the player's closeness to any one soul.",
+  "notes": [
+    "Schema gap: the current predicate vocabulary cannot express either ruled input — the vocabulary table closes with 'anything not in this table is not a predicate.' This proposal therefore doubles as a schema-change request at the gate (the same rule as state_actions).",
+    "Thread identifiers: the arc doc's thread table names threads in prose without IDs; the choice-node acceptance case references 'giver-receive' as a thread_id. The formula counts threads by whatever canonical thread_id list the arc doc adopts — not proposed here.",
+    "'Advanced one stage' for role-goals assumes role-goal progress is staged; if it is continuous, the threshold shape needs Roc's read."
+  ]
+}

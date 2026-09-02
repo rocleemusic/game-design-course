@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Options — design mockup</title>
+<style>
+  :root{
+    --forest:#14110c; --forest3:#0c0a07;
+    --leather-dark:#2c1f12; --leather-light:#6f5030;
+    --canvas:#e7daba; --canvas2:#dbcaa2; --canvas-edge:#c3b083; --stitch:#b79a63;
+    --ink:#2f2413; --ink-soft:#6b5836;
+    --cream:#ece3d2; --dim:#b0a184;
+    --gold:#c9a15a; --gold-bright:#e6c583; --green:#7f9a5a;
+  }
+  *{ box-sizing:border-box; }
+  body{ margin:0; min-height:100vh; color:var(--cream);
+    font:16px/1.55 "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    background:radial-gradient(120% 80% at 50% -10%, #2c3326 0%, #171b13 45%, var(--forest3) 100%), var(--forest);
+    -webkit-font-smoothing:antialiased; display:flex; align-items:center; justify-content:center; padding:30px 20px; }
+  body::before{ content:""; position:fixed; inset:0; pointer-events:none;
+    background:radial-gradient(75% 60% at 50% 42%, transparent 45%, rgba(6,5,3,.5) 100%); }
+  .mono{ font-family:ui-monospace,"DejaVu Sans Mono",Menlo,monospace; }
+
+  .panel{ position:relative; width:100%; max-width:1080px; min-height:600px; border-radius:16px; overflow:hidden;
+    display:grid; grid-template-columns:230px 1fr 260px;
+    background:linear-gradient(180deg,#241a10,#181009);
+    border:2px solid var(--leather-dark);
+    box-shadow:0 24px 60px rgba(0,0,0,.55), inset 0 0 0 1px rgba(201,161,90,.12); }
+  /* gold corner filigree — asset-set menu-frame language in warm gold */
+  .corner{ position:absolute; width:52px; height:52px; color:var(--gold-bright); opacity:.85; z-index:2; pointer-events:none; }
+  .corner.tl{ top:8px; left:8px; } .corner.tr{ top:8px; right:8px; transform:scaleX(-1); }
+  .corner.bl{ bottom:8px; left:8px; transform:scaleY(-1); } .corner.br{ bottom:8px; right:8px; transform:scale(-1,-1); }
+  .btn{ display:inline-flex; align-items:center; gap:8px; }
+  .btn svg{ width:15px; height:15px; }
+
+  /* left: category rail */
+  .rail{ padding:26px 16px; border-right:1px solid rgba(201,161,90,.16); }
+  .rail h1{ margin:0 8px 22px; font-size:26px; font-weight:600; color:var(--gold-bright); letter-spacing:1px; }
+  .cat{ display:block; width:100%; text-align:left; font-family:inherit; font-size:16px; color:var(--dim);
+    background:transparent; border:none; border-left:2px solid transparent; padding:10px 14px; cursor:pointer;
+    transition:color .16s, background .16s, border-color .16s; }
+  .cat:hover{ color:var(--cream); background:rgba(255,255,255,.03); }
+  .cat.on{ color:var(--gold-bright); background:rgba(201,161,90,.12); border-left-color:var(--gold-bright); }
+  .cat:focus-visible{ outline:2px solid var(--gold-bright); outline-offset:-2px; }
+
+  /* middle: setting rows */
+  .rows{ padding:30px 30px 20px; }
+  .rows .eyebrow{ font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin:0 0 14px; }
+  .row{ display:flex; align-items:center; gap:16px; padding:15px 6px; cursor:pointer;
+    border-bottom:1px solid rgba(201,161,90,.14); transition:background .14s; }
+  .row:hover{ background:rgba(201,161,90,.06); }
+  .row.sel{ background:rgba(201,161,90,.1); }
+  .row .label{ flex:1; font-size:17px; }
+  .row .hint{ color:var(--dim); font-size:13px; }
+
+  /* controls */
+  .slider{ width:170px; height:8px; border-radius:6px; position:relative;
+    background:linear-gradient(90deg,var(--gold) 0 70%, #3a2c18 70% 100%); }
+  .slider::after{ content:""; position:absolute; left:70%; top:50%; width:16px; height:16px; margin-left:-8px;
+    transform:translateY(-50%); border-radius:50%; background:var(--gold-bright); border:2px solid #241a10;
+    box-shadow:0 1px 3px rgba(0,0,0,.5); }
+  .val{ min-width:44px; text-align:right; color:var(--gold-bright); }
+  .toggle{ width:52px; height:28px; border-radius:16px; position:relative; background:var(--green); }
+  .toggle.off{ background:#3a2c18; }
+  .toggle::after{ content:""; position:absolute; top:3px; left:27px; width:22px; height:22px; border-radius:50%;
+    background:var(--cream); transition:left .16s; }
+  .toggle.off::after{ left:3px; }
+  .seg{ display:flex; border:1px solid var(--leather-light); border-radius:8px; overflow:hidden; }
+  .seg span{ padding:6px 12px; font-size:14px; color:var(--dim); }
+  .seg span.on{ background:var(--gold); color:#241a10; }
+
+  /* right: help card */
+  .help{ padding:30px 24px; border-left:1px solid rgba(201,161,90,.16);
+    background:linear-gradient(180deg,var(--canvas),var(--canvas2)); color:var(--ink); }
+  .help .k{ font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--ink-soft); }
+  .help h2{ margin:4px 0 12px; font-size:24px; color:#3a2a15; font-weight:600; }
+  .help p{ margin:0 0 16px; font-size:15px; line-height:1.6; color:var(--ink-soft); }
+  .help .cur{ font-size:13px; color:var(--ink-soft); border-top:1px solid var(--canvas-edge); padding-top:12px; }
+  .help .cur b{ color:#3a2a15; }
+
+  .foot{ grid-column:1 / -1; display:flex; align-items:center; gap:10px; padding:14px 30px;
+    border-top:1px solid rgba(201,161,90,.16); }
+  .foot .sp{ flex:1; }
+  .btn{ font-family:ui-monospace,monospace; font-size:13px; color:var(--gold-bright); background:transparent;
+    border:1px solid var(--leather-light); border-radius:8px; padding:8px 16px; cursor:pointer; }
+  .btn:hover{ border-color:var(--gold-bright); }
+
+  @media (max-width:860px){ .panel{ grid-template-columns:1fr; } .help,.rail{ border:none; } }
+  @media (prefers-reduced-motion:reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+  <div class="panel">
+    <svg width="0" height="0" aria-hidden="true"><symbol id="fil" viewBox="0 0 52 52">
+      <path d="M6 6h18M6 6v18" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/>
+      <path d="M11 11c9 0 15 2 19 8M11 11c0 9 2 15 8 19" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".8"/>
+      <path d="M11 11c8-1 11 3 11 8 0 4-3 5-5 4-2-1-2-3 0-4 1 0 1 1 1 1" fill="none" stroke="currentColor" stroke-width="1.4"/>
+      <circle cx="7" cy="7" r="2" fill="currentColor"/>
+    </symbol></svg>
+    <svg class="corner tl"><use href="#fil"/></svg>
+    <svg class="corner tr"><use href="#fil"/></svg>
+    <svg class="corner bl"><use href="#fil"/></svg>
+    <svg class="corner br"><use href="#fil"/></svg>
+
+    <!-- category rail -->
+    <nav class="rail" aria-label="Options categories">
+      <h1>Options</h1>
+      <button class="cat on">Sound</button>
+      <button class="cat">Text &amp; speed</button>
+      <button class="cat">Display</button>
+      <button class="cat">Accessibility</button>
+      <button class="cat">Saves</button>
+    </nav>
+
+    <!-- setting rows -->
+    <section class="rows" aria-label="Sound settings">
+      <p class="eyebrow">Sound</p>
+      <div class="row sel"><span class="label">Music</span><div class="slider" role="slider" aria-label="Music volume" aria-valuenow="70"></div><span class="val mono">70</span></div>
+      <div class="row"><span class="label">Sound effects</span><div class="slider" role="slider" aria-label="Sound effects volume" aria-valuenow="70"></div><span class="val mono">70</span></div>
+      <div class="row"><span class="label">Forest &amp; town ambience</span><div class="slider" role="slider" aria-label="Ambience volume" aria-valuenow="70"></div><span class="val mono">70</span></div>
+      <div class="row"><span class="label">Spell cast sounds</span><div class="toggle" role="switch" aria-checked="true" aria-label="Spell cast sounds"></div></div>
+      <div class="row"><span class="label">Mute when window is hidden</span><div class="toggle off" role="switch" aria-checked="false" aria-label="Mute when hidden"></div></div>
+    </section>
+
+    <!-- context help -->
+    <aside class="help" aria-live="polite">
+      <div class="k">Sound</div>
+      <h2>Music</h2>
+      <p>The score that plays under exploration. It fades on its own during a soul's conversation, so lines are never buried.</p>
+      <div class="cur">Now set to <b>70</b>. Drag, or use ← →.</div>
+    </aside>
+
+    <div class="foot">
+      <button class="btn mono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5v6h6M4 11a8 8 0 1 1 2 6"/></svg> reset category</button>
+      <span class="sp"></span>
+      <button class="btn mono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 6"/></svg> done · Esc</button>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "A basket of just-cut flowers sits beside a bundle of herbs already gone dry on Mara's stall. Mara runs a pinch of salt over the blossoms, working the granules into the petals without ceremony. \"Cut things need holding fast, before the day turns them.\"",
+    "wc": 44,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player asks, \"Does it work on anything dried?\" Mara shakes her head while continuing her work. \"No. Has to still be fresh. Once the sap has drawn back and the cells have collapsed, the salt can't find anything left to hold onto.\"",
+    "wc": 43,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player hands over a basket of fresh-picked berries for the salt treatment. Mara accepts them with a nod and runs her fingers through the fruit, coating them in the white granules. \"These will hold at ripe, keeping their color even as the sun sets.\"",
+    "wc": 45,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player sets a pinch of salt onto the dried bundle. Mara shakes her head slowly. \"Those have already given up their life to the air, so there is nothing left for the salt to hold.\"",
+    "wc": 36,
+    "ok": true,
+    "err": null
+  }
+}

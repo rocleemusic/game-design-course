@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Soft earth yields beneath the sun, tilled recently to prepare for the festival planting. The farmer presses sticks and dirt into the soil and draws a line.",
+    "wc": 27,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player asks, \"Does the ground matter?\" The farmer wipes sweat from his brow. \"Has to be turned first. Packed ground just scuffs.\"",
+    "wc": 23,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player turns a second patch of soil with a hoe before offering it. The farmer nods approvingly as a clean furrow opens across the earth.",
+    "wc": 26,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player tries the cast on the cobblestones instead. The stone remains solid and unyielding.",
+    "wc": 15,
+    "ok": true,
+    "err": null
+  }
+}

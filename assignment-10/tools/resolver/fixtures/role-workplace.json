@@ -1,0 +1,4 @@
+[
+  { "role_tag": "baker", "workplace_screens": ["T2"], "time_blocks": ["morning", "afternoon"] },
+  { "role_tag": "keeper", "workplace_screens": ["T1"], "time_blocks": ["morning", "evening"] }
+]

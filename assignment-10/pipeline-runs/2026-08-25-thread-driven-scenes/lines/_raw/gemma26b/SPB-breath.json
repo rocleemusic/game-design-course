@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The farmer stands by the field edge, a tray of threshed grain resting before him. He exhales a short, directed puff of air that lifts the chaff clear from the grain in one pass.",
+    "wc": 34,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player asks, \"Does it work on anything loose?\"\n\nThe farmer puffs again, the air swirling over a patch of dry leaves. \"Loose and light, mostly. Grain, leaves.\"",
+    "wc": 28,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player sweeps a pile of fallen leaves into the farmer's path. The puff of air catches the pile and scatters the leaves away in one gust.",
+    "wc": 27,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player directs the puff at a standing anvil nearby. The gust breaks around the heavy metal without moving it.",
+    "wc": 20,
+    "ok": true,
+    "err": null
+  }
+}

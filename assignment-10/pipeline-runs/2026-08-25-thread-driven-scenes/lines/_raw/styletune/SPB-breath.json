@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "A tray of threshed grain rests at the field's edge, waiting for cleaning. The farmer exhales a focused puff of air across the tray. The chaff lifts away in a single sweep while the clean grain remains undisturbed.",
+    "wc": 38,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player asks, \"Does it work on anything loose?\"\n\nThe farmer nods with a pleased smile. \"Loose and light things work best, like grain or fallen leaves.\"",
+    "wc": 27,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player sweeps a pile of fallen leaves into the farmer's path. The leaves scatter away in one sharp gust. \"That's a useful trick for clearing the yard.\"",
+    "wc": 28,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player directs the gust at the standing anvil. The air breaks around the metal without moving it.",
+    "wc": 18,
+    "ok": true,
+    "err": null
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Ilsa sets a bundle of sticks into the forge mouth, settling them into the ash. She steps back a half-pace.",
+    "wc": 20,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player asks, \"How do you get it going?\"\n\nIlsa steps back a half-pace. \"You clear back first. Always.\"",
+    "wc": 19,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player tries the same clearing motion on a second stick, off to the side. It catches, small and steady.",
+    "wc": 20,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player picks up a river stone lying nearby and holds it near the coals. The light catches the edge of the rock, but the stone remains cold.",
+    "wc": 28,
+    "ok": true,
+    "err": null
+  }
+}

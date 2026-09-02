@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Ilsa lays out her tools around the gaping socket, the empty space a quiet admission of what's missing. She picks up a river stone, turning it once in her calloused hands. \"That'll do for now,\" she says, and sets to work.",
+    "wc": 41,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player hands Ilsa a river stone, already picked from the forest. Ilsa turns it once in the light, sets to work on it as the substitute. \"That's hands enough, the two of us.\"",
+    "wc": 34,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "Ilsa nods at the player's suggestion, her hands already moving to the components. \"Might as well see,\" she says, placing the river stone on the anvil and heating it. The player watches as she sprinkles spring water over the glowing stone, whispering a spell. The stone hisses and hardens, and Ilsa picks it up, turning it in the light. \"That'll do,\" she says, fitting it into the socket with a satisfied nod.",
+    "wc": 72,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "Ilsa looks up as the player approaches, her expression unreadable. \"Waiting on something?\" the player asks. Ilsa's gaze returns to the anvil. \"It'll turn up,\" she says, her voice flat and certain, as if the very fact of her words makes it so. She doesn't elaborate on what exactly will turn up, and the player is left to wonder as Ilsa resumes her work, the unspoken question hanging in the air.",
+    "wc": 71,
+    "ok": true,
+    "err": null
+  }
+}

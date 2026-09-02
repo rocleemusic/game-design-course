@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Ilsa turns the piece under the light, checking the join. \"Near enough now.\"",
+    "wc": 13,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player brings the river stone to the bench and sets it in the socket. Ilsa fits the ore into the join, her eyes on the seam, and she works it for a moment longer than she did the substitute.",
+    "wc": 40,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player casts a brief, warm light over the seam. \"It's coming together.\"\n\nIlsa sets her tongs aside. \"It is.\"",
+    "wc": 20,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "\"It's coming together.\"\n\nThe player watches the centerpiece, then Ilsa nods. \"It is.\"",
+    "wc": 13,
+    "ok": true,
+    "err": null
+  }
+}

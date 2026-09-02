@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Ilsa works the bellows steadily, smoke still coiling up from the forge's mouth. She looks over at the player. \"You're on the bellows.\" Her voice is flat, certain. \"The near end of the bench is yours.\" She steps back, giving the player space at the bellows. \"Put us down for it, then. That's hands enough, the two of us.\" She returns to her work, hands sure on the lever. The forge waits, fire ready to be coaxed back.",
+    "wc": 78,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player brings a bundle of sticks to the fire. Ilsa takes them without pausing, works them in. \"That's hands enough, the two of us.\" The forge fire catches properly, and she feels the heat change through the bellows handle. She adjusts her rhythm to match, wordless. \"You'll sit here.\" She indicates the place at the bellows, already decided and stated as fact. The player takes their place, ready to help. The fire settles into a working heat. Ilsa goes back to the bellows without comment, and they work the forge together in a new rhythm. The fire's warmth is the closing image.",
+    "wc": 103,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player casts ignite on the banked coals, and the fire catches properly. Ilsa feels the heat change through the bellows handle and adjusts her rhythm to match, wordless. The fire settles into a working heat. She goes back to the bellows without comment.",
+    "wc": 44,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "Ilsa adjusts the bellows' rhythm, feeling the fire's new heat through the handle. \"It'll come round.\" Flat, certain, no elaboration. The forge fire settles into a working heat. Ilsa goes back to the bellows without comment.",
+    "wc": 36,
+    "ok": true,
+    "err": null
+  }
+}

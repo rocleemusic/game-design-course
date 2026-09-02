@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Toby eyes the mass of dough, then picks up a river stone kept for this purpose and sets it against the pile without wasting a word. \"Stone does that part.\"",
+    "wc": 30,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player asks, \"How do you get it even?\" Toby picks up a river stone and presses it against the mass. \"Stone does that part.\"",
+    "wc": 25,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player hands Toby a second river stone for the smaller batch. It parts clean into matched measures. \"Stone does that part.\"",
+    "wc": 22,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player picks up a single berry from a nearby bowl and sets it where the stone would go instead. There is not enough there to divide.",
+    "wc": 27,
+    "ok": true,
+    "err": null
+  }
+}

@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cast Flow, Reimagined — UX Wireframe</title>
+<style>
+  :root{
+    --forest:#14110c; --panel:#241c14; --panel-hover:#2f2519;
+    --leather:#4a3520; --leather-dark:#2c1f12; --leather-light:#6f5030;
+    --canvas:#e7daba; --canvas2:#dbcaa2; --canvas-edge:#c3b083; --stitch:#b79a63;
+    --pocket:#c9b78d; --ink:#2f2413; --ink-soft:#6b5836;
+    --cream:#ece3d2; --dim:#b0a184;
+    --gold:#c9a15a; --gold-bright:#e6c583;
+    --green:#7f9a5a; --rust:#7a4a2a; --dusk:#a893c9; --ember:#d98a4a;
+    --font-display:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    --font-mono:ui-monospace,"DejaVu Sans Mono","SF Mono",Menlo,monospace;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; }
+  body{
+    color:var(--cream); font:16px/1.55 var(--font-display);
+    background:radial-gradient(120% 80% at 50% -10%, #221f16 0%, #171310 45%, var(--forest) 100%), var(--forest);
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{ font-family:var(--font-mono); }
+  .wrap{ max-width:1640px; margin:0 auto; padding:48px 28px 120px; }
+  :focus-visible{ outline:2px solid var(--gold-bright); outline-offset:3px; border-radius:4px; }
+
+  /* ---- masthead (matches mode5-ux-flow-wireframe.html) ------------- */
+  .masthead{ margin-bottom:20px; max-width:960px; }
+  .eyebrow{ font:12px var(--font-mono); letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin:0 0 10px; }
+  .masthead h1{ margin:0 0 12px; font-size:42px; font-weight:600; color:var(--gold-bright); letter-spacing:.3px; }
+  .masthead p{ margin:0 0 10px; color:var(--dim); font-size:16px; line-height:1.65; }
+  .masthead p b{ color:var(--cream); }
+  .masthead code{ font-family:var(--font-mono); font-size:13.5px; background:rgba(201,161,90,.12); padding:1px 6px; border-radius:4px; color:var(--gold-bright); }
+
+  nav.toc{ display:flex; flex-wrap:wrap; gap:8px 6px; margin:22px 0 0; padding:0; list-style:none; }
+  nav.toc a{ font:12.5px var(--font-mono); color:var(--gold); text-decoration:none; padding:6px 12px;
+    border:1px solid rgba(201,161,90,.3); border-radius:14px; transition:border-color .15s, color .15s; }
+  nav.toc a:hover{ color:var(--gold-bright); border-color:var(--gold-bright); }
+
+  .thesis{ display:flex; align-items:stretch; gap:0; margin:36px 0 8px; border:1px solid rgba(201,161,90,.22);
+    border-radius:14px; overflow:hidden; background:rgba(36,28,20,.5); }
+  .thesis .beat{ flex:1; padding:18px 16px; text-align:center; position:relative; }
+  .thesis .beat + .beat::before{ content:"→"; position:absolute; left:0; top:50%; transform:translate(-50%,-50%);
+    color:var(--gold); font-size:18px; }
+  .thesis .beat .k{ font:11px var(--font-mono); letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); margin:0 0 6px; }
+  .thesis .beat .v{ font-size:14.5px; color:var(--cream); line-height:1.4; }
+
+  section{ margin:64px 0 0; scroll-margin-top:24px; }
+  section > .sec-head{ display:flex; align-items:baseline; gap:14px; margin:0 0 8px;
+    border-bottom:1px solid rgba(201,161,90,.22); padding-bottom:12px; }
+  section > .sec-head .n{ font:13px var(--font-mono); color:var(--gold); }
+  section > .sec-head h2{ margin:0; font-size:26px; font-weight:600; color:var(--gold-bright); }
+  section > p.desc{ margin:10px 0 26px; color:var(--dim); max-width:900px; font-size:15px; }
+  section > p.desc b{ color:var(--cream); }
+
+  .pair{ display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:start; }
+  .col .tag{ display:flex; align-items:center; gap:8px; margin:0 0 10px; }
+  .col .tag .dot{ width:8px; height:8px; border-radius:50%; }
+  .col.before .tag .dot{ background:var(--rust); }
+  .col.after .tag .dot{ background:var(--green); }
+  .col .tag .lbl{ font:11px var(--font-mono); letter-spacing:2px; text-transform:uppercase; color:var(--dim); }
+  .col.before .tag .lbl{ color:#c48a6e; }
+  .col.after .tag .lbl{ color:var(--green); }
+
+  /* ---- the frame: a scaled stand-in for the 1920x1080 game canvas --- */
+  .frame{ position:relative; aspect-ratio:16/9; border-radius:10px; overflow:hidden;
+    border:2px solid var(--leather-dark); box-shadow:0 18px 40px rgba(0,0,0,.5);
+    background:
+      radial-gradient(120% 90% at 30% 20%, #3a4a2c 0%, #223021 40%, #131b10 100%); }
+  .frame .scrim-top{ position:absolute; left:0; right:0; top:0; height:9%; background:rgba(20,17,12,.6); }
+  .frame .header-plaque{ position:absolute; left:1.2%; top:1.6%; background:rgba(20,17,12,.85); border-radius:4px;
+    padding:.9% 1.4%; font:11.5px var(--font-mono); color:var(--gold); }
+  .frame .marker{ position:absolute; width:22px; height:22px; margin:-11px 0 0 -11px; transform:rotate(45deg);
+    background:rgba(168,147,201,.22); border:2px solid rgba(168,147,201,.9); cursor:pointer; }
+  .frame .cursor{ position:absolute; width:0; height:0; border-style:solid; border-width:0 0 15px 10px;
+    border-color:transparent transparent #fff transparent; filter:drop-shadow(0 1px 1px rgba(0,0,0,.6)); z-index:6; }
+  .frame .cursor-tag{ position:absolute; font:10px var(--font-mono); background:rgba(230,197,131,.94); color:#1a1208;
+    padding:2px 7px; border-radius:9px; white-space:nowrap; z-index:6; font-weight:600; }
+
+  /* fully-opaque backing — today's shipped SpellTrialScene panel */
+  .frame .fullscrim{ position:absolute; inset:0; background:var(--forest); }
+  .frame .leathermodal{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:74%; height:78%;
+    background:linear-gradient(180deg,#241a10,#181009); border:2px solid var(--leather-dark); border-radius:12px;
+    padding:3%; box-shadow:0 20px 50px rgba(0,0,0,.55); }
+  .frame .leathermodal .title{ font-size:15px; color:var(--gold-bright); margin:0 0 4%; }
+  .frame .leathermodal .sub{ font-size:11px; color:var(--dim); margin:0 0 5%; font-style:italic; }
+
+  /* the two open pages behind the shipped modal, dimmed by the opaque scrim — makes the loss visible */
+  .frame .ghost-book{ position:absolute; left:6%; top:5%; right:6%; bottom:5%; display:flex; opacity:.16;
+    border-radius:8px; overflow:hidden; border:6px solid var(--leather-dark); }
+  .frame .ghost-book .pg{ flex:1; background:linear-gradient(180deg,var(--canvas),var(--canvas2)); }
+
+  /* ---- NEW: the docked, non-blocking trial panel -------------------- */
+  .frame .book2{ position:absolute; left:6%; top:5%; right:6%; bottom:5%; display:flex;
+    border-radius:8px; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,.5); border:6px solid var(--leather-dark); }
+  .frame .book2 .pg{ flex:1; background:linear-gradient(180deg,var(--canvas),var(--canvas2)); padding:4% 4.4%; color:var(--ink); position:relative; }
+  .frame .book2 .pg.left{ border-right:1px solid rgba(120,96,55,.35); }
+  .frame .book2 .booktitle{ font-size:13px; color:#3a2a15; font-weight:600; margin:0 0 1%; }
+  .frame .book2 .phrase{ font-size:19px; color:#3a2a15; margin:0 0 1%; }
+  .frame .book2 .says{ font-size:9.5px; font-style:italic; color:var(--ink-soft); margin:0 0 5%; }
+  .frame .book2 .lbl{ font:8px var(--font-mono); letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); margin:0 0 2%; }
+  .frame .book2 .comprow{ display:flex; gap:5px; margin-bottom:5%; }
+  .frame .book2 .comprow .sp{ background:rgba(201,161,90,.16); border-color:var(--stitch); color:#3a2a15; font-size:9.5px; padding:3px 8px; border:1px solid var(--stitch); border-radius:12px; }
+  .frame .book2 .does{ font-size:10.5px; color:var(--ink-soft); line-height:1.4; margin-bottom:4%; }
+
+  .frame .dock{ position:absolute; left:0; right:0; bottom:0; height:34%;
+    background:linear-gradient(180deg, rgba(20,17,12,.2), rgba(18,15,10,.96) 30%); border-top:2px solid var(--leather-dark);
+    padding:2.6% 3.5%; display:flex; flex-direction:column; gap:1.4%; }
+  .frame .dock .dockhead{ display:flex; justify-content:space-between; align-items:baseline; }
+  .frame .dock .dockhead .ttl{ font:13px var(--font-mono); color:var(--gold-bright); }
+  .frame .dock .dockhead .x{ font:11px var(--font-mono); color:var(--dim); border:1px solid rgba(201,161,90,.35);
+    border-radius:14px; padding:3px 10px; cursor:pointer; }
+  .frame .dock .liveresult{ font:11px var(--font-display); font-style:italic; color:var(--green); min-height:1.4em; }
+
+  /* icon-strip picker — the satchel strip made interactive (Option A) */
+  .iconstrip{ display:flex; gap:6px; flex-wrap:wrap; align-items:center; }
+  .iconstrip .grp-lbl{ font:8.5px var(--font-mono); letter-spacing:1.5px; text-transform:uppercase; color:var(--gold);
+    margin-right:4px; flex:0 0 100%; }
+  .islot{ width:9%; aspect-ratio:1/1; border-radius:7px; background:var(--pocket); border:2px solid var(--leather-dark);
+    display:flex; align-items:center; justify-content:center; font-size:14px; cursor:pointer; position:relative; }
+  .islot.on{ border-color:var(--gold-bright); box-shadow:0 0 0 2px rgba(230,197,131,.35); }
+  .islot.empty{ background:repeating-linear-gradient(45deg,#6b5a3a,#6b5a3a 6px,#5f4f32 6px,#5f4f32 12px); }
+  .islot .tip{ position:absolute; bottom:112%; left:50%; transform:translateX(-50%); white-space:nowrap;
+    font:8.5px var(--font-mono); background:rgba(20,17,12,.96); color:var(--gold-bright); border:1px solid rgba(201,161,90,.4);
+    border-radius:5px; padding:3px 6px; }
+
+  .trypill{ align-self:flex-start; font:11.5px var(--font-mono); color:#1a1208; background:var(--gold);
+    border:none; border-radius:14px; padding:6px 16px; cursor:pointer; margin-top:2px; }
+  .trypill:hover{ background:var(--gold-bright); }
+  .trypill:disabled{ background:rgba(201,161,90,.25); color:var(--dim); cursor:not-allowed; }
+
+  /* ---- NEW: right-click world-cast popover -------------------------- */
+  .frame .popover{ position:absolute; width:26%; background:linear-gradient(180deg,#241a10,#181009);
+    border:1.6px solid var(--leather-light); border-radius:10px; padding:4%; box-shadow:0 16px 34px rgba(0,0,0,.55); }
+  .frame .popover::before{ content:""; position:absolute; width:12px; height:12px; background:inherit;
+    border-left:1.6px solid var(--leather-light); border-top:1.6px solid var(--leather-light); transform:rotate(45deg); }
+  .frame .popover.arrow-bl::before{ left:14%; bottom:-7px; transform:rotate(225deg); border-left:none; border-top:none;
+    border-right:1.6px solid var(--leather-light); border-bottom:1.6px solid var(--leather-light); }
+  .frame .popover .ttl{ font:11px var(--font-mono); color:var(--gold-bright); margin-bottom:6%; }
+  .frame .popover .chiprow{ display:flex; flex-wrap:wrap; gap:5px; }
+  .frame .popover .sp{ font:10.5px var(--font-mono); padding:5px 10px; border-radius:14px;
+    background:rgba(201,161,90,.16); border:1px solid var(--gold); color:var(--cream); cursor:pointer; }
+
+  .rmb-badge{ display:inline-flex; align-items:center; gap:5px; font:10px var(--font-mono); color:var(--dusk);
+    background:rgba(168,147,201,.14); border:1px solid rgba(168,147,201,.5); border-radius:12px; padding:3px 9px; }
+
+  /* ---- NEW: vfx burst mockup ----------------------------------------- */
+  .vfx-burst{ position:absolute; width:14%; aspect-ratio:1/1; margin:-7% 0 0 -7%; border-radius:50%;
+    background:radial-gradient(circle, rgba(230,197,131,.9) 0%, rgba(217,138,74,.55) 35%, rgba(217,138,74,0) 70%);
+    pointer-events:none; }
+  .vfx-burst::after{ content:""; position:absolute; inset:-40%; border-radius:50%;
+    border:1.5px solid rgba(230,197,131,.5); }
+
+  /* satchel strip, today's shipped text-only HUD row (for comparison) */
+  .frame .textstrip{ position:absolute; left:1.2%; bottom:2.4%; font:11px var(--font-mono); color:var(--dim);
+    background:rgba(20,17,12,.85); border-radius:6px; padding:5px 10px; }
+
+  /* annotation notes + step strip (shared language) */
+  .note{ margin-top:14px; font-size:13.5px; color:var(--dim); line-height:1.55; }
+  .note b{ color:var(--cream); }
+  .note code{ font-family:var(--font-mono); font-size:12px; color:var(--gold); }
+  .badge-approved{ display:inline-flex; align-items:center; gap:6px; font:11px var(--font-mono);
+    color:var(--green); background:rgba(127,154,90,.14); border:1px solid rgba(127,154,90,.5);
+    border-radius:14px; padding:4px 12px; margin-bottom:14px; }
+  .badge-open{ display:inline-flex; align-items:center; gap:6px; font:11px var(--font-mono);
+    color:var(--ember); background:rgba(217,138,74,.14); border:1px solid rgba(217,138,74,.5);
+    border-radius:14px; padding:4px 12px; margin-bottom:14px; }
+
+  .a11y-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+  .a11y-card{ border:1px solid rgba(201,161,90,.25); border-radius:10px; padding:16px 18px; background:rgba(36,28,20,.4); }
+  .a11y-card h3{ margin:0 0 8px; font-size:14px; color:var(--gold-bright); display:flex; align-items:center; gap:8px; }
+  .a11y-card p{ margin:0; font-size:13.5px; color:var(--dim); line-height:1.55; }
+  .a11y-card p b{ color:var(--cream); }
+  .a11y-card code{ font-family:var(--font-mono); font-size:12px; color:var(--gold); }
+
+  .decision-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
+  .decision-list li{ border:1px solid rgba(201,161,90,.22); border-radius:10px; padding:12px 16px;
+    font-size:13.5px; color:var(--dim); line-height:1.5; }
+  .decision-list li b{ color:var(--cream); }
+  .decision-list .q{ font:10.5px var(--font-mono); color:var(--ember); text-transform:uppercase; letter-spacing:1.5px;
+    display:block; margin-bottom:4px; }
+  .decision-list .q.decided{ color:var(--green); }
+
+  footer{ text-align:center; color:var(--dim); font:12px var(--font-mono); margin-top:56px; }
+  @media (max-width:1100px){ .pair, .a11y-grid{ grid-template-columns:1fr; } }
+  @media (prefers-reduced-motion:reduce){ *{ transition:none !important; } .vfx-burst{ animation:none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="masthead">
+    <p class="eyebrow mono">phaser · mode5 · cast flow redesign</p>
+    <h1>Cast Flow, Reimagined</h1>
+    <p><code>SpellTrialScene.ts</code>'s framed-panel pass just shipped and is <b>correct chrome</b> — the
+      leather board, the filigree, the shipped pill buttons. This wireframe questions the <b>shape</b>
+      underneath that chrome: a full-bleed opaque backing that hides everything behind it, one screen at a
+      time. That shape fights the thing casting is supposed to feel like — reaching into what you're
+      carrying and trying it on the world in front of you, not filling out a form that blacks the world
+      out first.</p>
+    <p><b>Decided (Roc, 2026-08-23) — all four open calls from §6 ruled:</b> satchel Option A (the strip
+      itself becomes the picker); dock position is the bottom third, not a side rail; left-click stays
+      examine and right-click fully replaces left-click as the cast trigger, no dual-path; VFX intensity
+      stays uniform — no quieter version for a repeated trial miss. §6 below is now a decision record, not
+      an open list.</p>
+    <p>Not final art — composition and interaction only, grounded in what's actually shipped:
+      <code>VfxSystem</code> / <code>VfxBackend.ts</code> (cast VFX already exists and already knows how to
+      anchor to a receiver's world position — <code>CastScene.ts</code> — or to screen-center when there's
+      no receiver — <code>CollectScene.ts</code>), <code>ReceiverHotspots.ts</code> +
+      <code>HedgeCastPrompt.ts</code> (today's left-click cast-on-a-thing), and <code>SatchelStrip.ts</code>
+      (an always-on HUD row that already shows what you're carrying, today as text only). Right-click is
+      unused anywhere in the codebase — a clean slot, not a collision.</p>
+    <nav class="toc mono">
+      <a href="#thesis">Why not hide the screen</a>
+      <a href="#trial">Trial-cast: dock, not modal</a>
+      <a href="#world">World-cast: right-click</a>
+      <a href="#satchel">The picker is the satchel</a>
+      <a href="#vfx">VFX, always visible</a>
+      <a href="#a11y">Accessibility pass</a>
+      <a href="#open">Decisions</a>
+    </nav>
+  </div>
+
+  <!-- ============================================================ THESIS -->
+  <section id="thesis" style="margin-top:24px">
+    <div class="sec-head"><span class="n">§0</span><h2>Why not hide the screen</h2></div>
+    <p class="desc">A blocking modal turns casting into a dead end you have to re-enter: try, get told no,
+      close, re-open, try again. An inline surface turns it into a loop you never leave — every failed
+      guess is one click from the next guess, and the thing you're casting <i>at</i> stays in view the
+      whole time you're deciding what to throw at it.</p>
+    <div class="thesis">
+      <div class="beat"><div class="k">Reach</div><div class="v">the satchel is already on screen — tap what you're holding</div></div>
+      <div class="beat"><div class="k">Aim</div><div class="v">at yourself (trial) or at something in the world (right-click)</div></div>
+      <div class="beat"><div class="k">Try</div><div class="v">commit inline, no screen to close first</div></div>
+      <div class="beat"><div class="k">See it land</div><div class="v">VFX plays where you're looking, not behind a blackout</div></div>
+      <div class="beat"><div class="k">Try again</div><div class="v">still right there — nothing to re-open</div></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ TRIAL -->
+  <section id="trial">
+    <div class="sec-head"><span class="n">§1</span><h2>Trial-cast — a dock, not a modal</h2></div>
+    <p class="desc">The shipped panel is <code>ModalFrame.modalFrame()</code> at 900px, backed by a fully
+      opaque scrim (<code>COLOR.night, 1</code> — the correct fix for the occlusion bug it had). Correct
+      for a screen meant to replace what's behind it. Wrong for a screen meant to be tried <i>against</i>
+      what's behind it — the notebook page you were just reading, and the satchel you're about to reach
+      into.</p>
+    <div class="pair">
+      <div class="col before">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">shipped, today</span></div>
+        <div class="frame">
+          <div class="fullscrim"></div>
+          <div class="ghost-book"><div class="pg"></div><div class="pg"></div></div>
+          <div class="leathermodal">
+            <div class="title mono">trial cast · "portion"</div>
+            <div class="sub">seen but not confirmed — try a few components</div>
+          </div>
+        </div>
+        <div class="note">The notebook page underneath is fully gone — not dimmed, not visible at the
+          edges, <b>gone</b>. Closing the trial to go check something on the page you were just reading is
+          a real, repeated tax on the "guess, check, guess again" loop this screen exists for.</div>
+      </div>
+      <div class="col after">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">decided — docked panel, bottom third</span></div>
+        <div class="frame">
+          <div class="book2">
+            <div class="pg left">
+              <div class="booktitle">Notebook</div>
+              <div class="lbl">Components</div>
+              <div class="comprow"><span class="sp">river stone</span></div>
+              <div class="does">a river stone → parts cleanly into equal loaf-measures.</div>
+            </div>
+            <div class="pg"></div>
+          </div>
+          <div class="dock">
+            <div class="dockhead"><span class="ttl mono">trial cast · "portion"</span><span class="x">close — esc</span></div>
+            <div class="iconstrip">
+              <span class="grp-lbl">satchel</span>
+              <div class="islot on">🪨<span class="tip">river stone</span></div>
+              <div class="islot">🪵<span class="tip">sticks</span></div>
+              <div class="islot empty"></div>
+              <span class="grp-lbl">banked at home</span>
+              <div class="islot">🪶<span class="tip">feather</span></div>
+            </div>
+            <button class="trypill">try it</button>
+            <div class="liveresult">"portion" — it works. now known.</div>
+          </div>
+        </div>
+        <div class="note"><b>The book stays visible above the dock.</b> Only the bottom third gets a scrim,
+          and it fades in rather than cutting hard, so the page you were reading is still there to glance
+          back at mid-guess. The dock owns roughly a third of the frame — enough room for every chip a full
+          satchel produces (13 items in the shipped build's worst case), not a token strip.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ WORLD CAST -->
+  <section id="world">
+    <div class="sec-head"><span class="n">§2</span><h2>World-cast — right-click, not a marker click</h2></div>
+    <p class="desc">Today, clicking a receiver marker <i>is</i> the cast prompt — there's no other verb
+      available on it. <b>Decided (Roc, 2026-08-23):</b> left-click means "look" (matches §1's pickup-hotspot
+      language elsewhere in this build — a look before a commit); right-click <b>replaces</b> left-click as
+      the cast trigger — one path, not a dual left/right-click route to the same popover.</p>
+    <div class="pair">
+      <div class="col before">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">today — left-click opens a page</span></div>
+        <div class="frame">
+          <div class="scrim-top"></div>
+          <div class="header-plaque">Day 2 · Morning · Forager's Clearing</div>
+          <div class="marker" style="left:60%; top:52%"></div>
+          <div class="cursor" style="left:60%; top:52%"></div>
+          <div class="book2" style="left:22%; right:22%">
+            <div class="pg" style="padding:6% 6%">
+              <div class="phrase" style="font-size:16px">River stone</div>
+              <div class="says">smooth, cool, worn round by the current</div>
+              <div class="lbl">what you know</div>
+              <div class="comprow"><span class="sp">glimmer</span><span class="sp">echo</span><span class="sp">fetch</span><span class="sp">ignite</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="note">A 70%-wide page takes over the whole lower two-thirds of the frame to offer four
+          chips. The world the receiver sits in is mostly gone for the length of the decision.</div>
+      </div>
+      <div class="col after">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">decided — right-click, anchored popover</span></div>
+        <div class="frame">
+          <div class="scrim-top"></div>
+          <div class="header-plaque">Day 2 · Morning · Forager's Clearing</div>
+          <div class="rmb-badge" style="position:absolute; right:1.4%; top:1.6%">right-click ⌐ cast</div>
+          <div class="marker" style="left:55%; top:48%"></div>
+          <div class="cursor" style="left:55%; top:48%"></div>
+          <div class="popover arrow-bl" style="left:44%; top:15%">
+            <div class="ttl">river stone — cast?</div>
+            <div class="chiprow">
+              <span class="sp">glimmer</span><span class="sp">echo</span><span class="sp">fetch</span><span class="sp">ignite</span>
+            </div>
+          </div>
+        </div>
+        <div class="note">A compact card, pinned to the marker itself with a pointer arrow, sized to its
+          own four chips instead of a fixed 70%-wide page. Everything else in the clearing stays lit and in
+          frame — the forest, other hotspots, whatever else is worth noticing while you decide.</div>
+      </div>
+    </div>
+    <div class="note" style="max-width:900px"><b>Keyboard parity, not a right-click-only feature.</b>
+      Tab already needs to reach a receiver marker for any of this to pass a keyboard-only playthrough —
+      once it can, <code>Enter</code>/<code>Space</code> opens the identical popover right-click does. See
+      <a href="#a11y">§5</a>.</div>
+  </section>
+
+  <!-- ============================================================ SATCHEL -->
+  <section id="satchel">
+    <div class="sec-head"><span class="n">§3</span><h2>The picker is the satchel, not a copy of it</h2></div>
+    <p class="desc"><code>SatchelStrip.ts</code> is already a non-modal HUD row, always on screen during
+      play, already reading live off <code>Inventory</code> — it just renders as text
+      ("Satchel 4/6 · river stone, sticks..."). <b>Decided (Roc, 2026-08-23): Option A.</b> Option B is kept
+      below only as the alternative that was considered and set aside.</p>
+    <div class="pair">
+      <div class="col after">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">decided — option A</span></div>
+        <div class="frame" style="aspect-ratio:auto; height:220px">
+          <div class="header-plaque" style="position:static; display:inline-block; margin:14px 0 0 14px">SatchelStrip.ts, made clickable</div>
+          <div class="iconstrip" style="position:absolute; left:3%; right:3%; bottom:14px">
+            <div class="islot on">🪨</div><div class="islot">🪵</div><div class="islot">🪶</div><div class="islot empty"></div>
+          </div>
+        </div>
+        <div class="note"><b>The strip you see during normal play is the same object you tap during a
+          cast.</b> No separate tray to keep in sync, no second source of truth — click a slot in the HUD,
+          it's offered; click again, it isn't. This is the "no new state to invent" pattern the rest of this
+          build already leans on (<code>discoveredIds()</code> for pickup identity, <code>Knowledge.ts</code>
+          for seen/learned). Selection state lives wherever the active cast-attempt object already lives
+          (dock or popover), the strip just reflects and toggles it.</div>
+      </div>
+      <div class="col before">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">option B — considered, not chosen</span></div>
+        <div class="frame" style="aspect-ratio:auto; height:220px">
+          <div class="header-plaque" style="position:static; display:inline-block; margin:14px 0 0 14px">a second, cast-only tray</div>
+          <div class="iconstrip" style="position:absolute; left:3%; right:3%; bottom:14px; opacity:.55">
+            <div class="islot on">🪨</div><div class="islot">🪵</div>
+          </div>
+        </div>
+        <div class="note">A tray that only exists while a cast is open, separate from the always-on strip
+          underneath it. Two views of the same inventory now have to agree — drop an item from one, the
+          other has to notice. Buys nothing the strip doesn't already do, at the cost of a sync bug waiting
+          to happen.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ VFX -->
+  <section id="vfx">
+    <div class="sec-head"><span class="n">§4</span><h2>VFX — always visible, because nothing's hiding it anymore</h2></div>
+    <p class="desc"><code>VfxSystem</code>/<code>VfxBackend.ts</code> already exists and already knows two
+      anchor modes — a real receiver world position (<code>CastScene.ts</code>) or screen-center when
+      there's no receiver (<code>CollectScene.ts</code>, gated on <code>mode.systems.includes("vfx")</code>).
+      <code>SpellTrialScene.ts</code> mounts neither today — a landed trial-cast is text only. The fix isn't
+      new VFX, it's <b>wiring the existing system into two places that don't call it yet</b>, now that
+      neither place blacks out the frame it would render into. <b>Decided (Roc, 2026-08-23):</b> one
+      intensity everywhere — no quieter trial-miss variant. A miss doesn't play a burst at all (nothing
+      landed); every landed cast, trial or world, gets the same weight.</p>
+    <div class="pair">
+      <div class="col after">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">trial-cast · no receiver → screen-center</span></div>
+        <div class="frame">
+          <div class="book2"><div class="pg left"></div><div class="pg"></div></div>
+          <div class="dock">
+            <div class="dockhead"><span class="ttl mono">cast · "portion"</span><span class="x">close — esc</span></div>
+            <div class="liveresult">"portion" — it works.</div>
+          </div>
+          <div class="vfx-burst" style="left:50%; top:38%"></div>
+        </div>
+        <div class="note">Same anchor <code>CollectScene.ts</code> already uses for a no-receiver cast —
+          <code>anchorFor: () =&gt; null</code> resolves to screen-center. The burst sits over the visible
+          notebook page, in the upper two-thirds the dock doesn't cover.</div>
+      </div>
+      <div class="col after">
+        <div class="tag"><span class="dot"></span><span class="lbl mono">world-cast · real receiver position</span></div>
+        <div class="frame">
+          <div class="scrim-top"></div>
+          <div class="header-plaque">Day 2 · Morning · Forager's Clearing</div>
+          <div class="marker" style="left:55%; top:48%"></div>
+          <div class="vfx-burst" style="left:55%; top:48%"></div>
+        </div>
+        <div class="note">Exactly <code>CastScene.startVfx()</code>'s existing path —
+          <code>receiverAnchors.get(id)</code> resolves the marker's own world position. This already
+          works today; the only reason it hasn't mattered is that a centered modal used to sit on top of
+          it. Once the popover is a small anchored card instead, the burst it was always capable of playing
+          finally lands somewhere the player can see.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ ACCESSIBILITY -->
+  <section id="a11y">
+    <div class="sec-head"><span class="n">§5</span><h2>Accessibility pass</h2></div>
+    <p class="desc">Two new interaction patterns this proposal adds — right-click, and a modal-less inline
+      surface that used to be a dialog — each remove a default the browser/engine gave the old modal for
+      free. Both need an explicit replacement, not an assumption that removing the blackout is purely a
+      visual change.</p>
+    <div class="a11y-grid">
+      <div class="a11y-card">
+        <h3>Right-click has a keyboard path</h3>
+        <p>A pointer-only gesture can never be the <i>only</i> way to reach a control (WCAG 2.1.1,
+          Keyboard). <code>Tab</code> reaches a receiver marker, <code>Enter</code>/<code>Space</code> opens
+          the same popover right-click does. Left-click's existing "examine" meaning is unaffected.</p>
+      </div>
+      <div class="a11y-card">
+        <h3>No focus trap, but a clear focus order</h3>
+        <p>The old modal likely trapped focus by being the only thing in the frame. An inline dock/popover
+          living beside real content needs <b>focus sent to itself on open</b> (the first chip or the try
+          pill) and <b>returned to the trigger on close</b> — without ever preventing Tab from reaching the
+          notebook page or the world behind it, since that's the whole point of not blocking it.</p>
+      </div>
+      <div class="a11y-card">
+        <h3>Cast outcomes are announced, not just shown</h3>
+        <p>The old modal's result text sat inside a dialog a screen reader announces on open. A dock/popover
+          that was already on screen doesn't get that for free — <code>liveresult</code> needs
+          <code>aria-live="polite"</code> so a landed or failed cast is spoken, not just repainted.</p>
+      </div>
+      <div class="a11y-card">
+        <h3>VFX respects reduced motion</h3>
+        <p>A screen-center or receiver-anchored burst is exactly the kind of motion
+          <code>prefers-reduced-motion</code> exists for. Keep the outcome legible without it — the result
+          text and the recipe's ✓/✗ marks already carry the information the burst is decorating, so a
+          reduced-motion pass can drop the burst to a static ring or drop it entirely, not invent a second
+          way to convey "it worked."</p>
+      </div>
+      <div class="a11y-card">
+        <h3>Icon slots meet the 44×44 touch minimum</h3>
+        <p>The icon-strip picker (§3) reads fine as a dense HUD row on a 1920-wide desktop frame, but each
+          <code>islot</code> needs a real 44×44px hit target regardless of its drawn size — pad the hit
+          area past the visible icon rather than shrinking the icon to fit a cramped hit box.</p>
+      </div>
+      <div class="a11y-card">
+        <h3>Contrast holds on both new surfaces</h3>
+        <p>The dock's scrim fades from transparent to opaque rather than a flat fill — check the
+          <code>--gold</code>-on-scrim label contrast at the <i>faded</i> top edge, not just the opaque
+          bottom, since that's where it's weakest. The popover's card background is already the same
+          leather-modal fill the design system's contrast pass covers.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ DECISIONS -->
+  <section id="open">
+    <div class="sec-head"><span class="n">§6</span><h2>Decisions — ruled, 2026-08-23</h2></div>
+    <span class="badge-approved">all four calls made — ready to become a build handoff</span>
+    <ul class="decision-list">
+      <li><span class="q decided">Satchel picker — Option A</span><code>SatchelStrip.ts</code> becomes the
+        picker in place, not a second synced tray — §3. Option B stays in the doc only as the alternative
+        that was considered and set aside.</li>
+      <li><span class="q decided">Dock position — bottom third</span>Not a side rail. Keeps the notebook's
+        two-page spread fully intact above it, as mocked throughout §1/§4.</li>
+      <li><span class="q decided">Right-click replaces left-click for casting</span>One path, not two.
+        Left-click keeps meaning "look" (examine); right-click is the only way to open the cast popover on a
+        receiver marker — see §2's keyboard-parity note for the non-pointer equivalent.</li>
+      <li><span class="q decided">VFX intensity stays uniform</span>No quieter variant for a repeated
+        trial-miss loop. Every landed cast — trial or world — plays the same weight of burst; a miss plays
+        none at all, since nothing landed.</li>
+    </ul>
+  </section>
+
+  <footer>cast-flow-redesign-wireframe.html · not final art · composition and interaction only</footer>
+</div>
+</body>
+</html>

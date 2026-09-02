@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The priest kneels beside a censer smoking unevenly in the breeze. He works grass and sap into the embers, cupping his hands around the rising smoke until it steadies and climbs straight, undisturbed by the wind. \"Not once it's called straight.\"",
+    "wc": 41,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player asks, \"Does the wind fight it?\" The priest smiles at the smoke. \"Not once it's called straight.\"",
+    "wc": 19,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player sweeps a dusting of dirt from the floor near the censer, sending a thin sheet of dust to rise and drift out the doorway. The priest watches the particles climb in a steady line, his eyes following them to the very edge of the smoke.",
+    "wc": 47,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player places a river stone near the censer. The heavy object rests firmly on the earth, unable to rise or drift with the breeze.",
+    "wc": 25,
+    "ok": true,
+    "err": null
+  }
+}

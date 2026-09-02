@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The centerpiece sits nearly finished on the workbench, the socket still holding the substitute stone from the river. Ilsa turns the piece under the lamp and examines the join. \"Near enough now.\"",
+    "wc": 32,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player slides the river stone into the socket. Ilsa sets it in place and examines the seat. \"It fits now.\"",
+    "wc": 21,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player casts *ignite* over the joint. Ilsa works the seam until it seats, then sets her tools down. \"It is finished.\"",
+    "wc": 22,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player watches the metal settle into place. \"It's coming together.\"\n\nIlsa nods toward the work. \"It is.\"",
+    "wc": 18,
+    "ok": true,
+    "err": null
+  }
+}

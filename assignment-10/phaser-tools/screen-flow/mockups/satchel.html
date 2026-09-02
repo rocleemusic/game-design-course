@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Satchel — design mockup</title>
+<style>
+  :root {
+    --forest:#14110c; --forest2:#1d2018; --forest3:#0c0a07;
+    --leather:#4a3520; --leather-dark:#2c1f12; --leather-light:#6f5030;
+    --canvas:#e7daba; --canvas2:#dbcaa2; --canvas-edge:#c3b083; --stitch:#b79a63;
+    --ink:#2f2413; --ink-soft:#6b5836;
+    --cream:#ece3d2; --dim:#b0a184;
+    --gold:#c9a15a; --gold-bright:#e6c583; --pocket:#c9b78d;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ height:100%; }
+  body{
+    margin:0; color:var(--cream);
+    font:16px/1.55 "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    /* Stands in for the live forest backdrop the satchel opens over. */
+    background:
+      radial-gradient(120% 80% at 50% -10%, #2c3326 0%, #171b13 45%, var(--forest3) 100%),
+      var(--forest);
+    -webkit-font-smoothing:antialiased;
+  }
+  /* dim + vignette so the game reads as paused behind the satchel */
+  body::before{
+    content:""; position:fixed; inset:0; pointer-events:none;
+    background:radial-gradient(75% 60% at 50% 42%, transparent 40%, rgba(6,5,3,.55) 100%);
+  }
+  .mono{ font-family:ui-monospace,"DejaVu Sans Mono","SF Mono",Menlo,monospace; }
+
+  .stage{ min-height:100vh; display:flex; flex-direction:column; align-items:center;
+    justify-content:center; padding:32px 20px; gap:18px; }
+
+  /* --- header ------------------------------------------------------------ */
+  .head{ width:100%; max-width:1040px; display:flex; align-items:baseline; gap:16px; }
+  .head h1{ margin:0; font-size:34px; font-weight:600; letter-spacing:.5px;
+    color:var(--gold-bright); text-shadow:0 2px 0 rgba(0,0,0,.35); }
+  .head .meta{ margin-left:auto; color:var(--dim); font-size:14px; letter-spacing:.4px; }
+
+  /* --- the satchel -------------------------------------------------------- */
+  .satchel{ width:100%; max-width:1040px; display:grid; grid-template-columns:1.15fr .85fr;
+    gap:0; border-radius:16px; overflow:hidden;
+    box-shadow:0 24px 60px rgba(0,0,0,.55), 0 2px 0 rgba(255,236,200,.05) inset;
+    border:2px solid var(--leather-dark); }
+
+  /* left: the open pouch with cloth pockets */
+  .pouch{ position:relative; padding:26px 26px 30px;
+    background:
+      linear-gradient(180deg, var(--leather-light), var(--leather) 18%, var(--leather-dark));
+  }
+  /* the flap, folded back over the top */
+  .flap{ position:absolute; left:0; right:0; top:0; height:22px;
+    background:linear-gradient(180deg, #5c4226, #3a2a18);
+    border-bottom:2px solid #1f160c;
+    box-shadow:0 4px 10px rgba(0,0,0,.4); }
+  .flap::after{ content:""; position:absolute; left:50%; top:12px; width:34px; height:20px;
+    transform:translateX(-50%); border-radius:0 0 18px 18px;
+    background:#2a1d10; border:2px solid #17100a; border-top:none; } /* clasp */
+
+  .pockets{ margin-top:16px; display:grid; grid-template-columns:repeat(3,1fr);
+    gap:14px; }
+  .pocket{ position:relative; aspect-ratio:1/1; border-radius:12px; cursor:pointer;
+    background:
+      linear-gradient(180deg, #d8c49a, var(--pocket) 55%, #b39c6f);
+    border:1px solid #8f7a4f;
+    box-shadow:0 2px 0 #8f7a4f, inset 0 2px 6px rgba(255,255,255,.35),
+      inset 0 -8px 14px rgba(120,96,55,.5);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+    transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease; }
+  /* stitched top edge of each cloth pocket */
+  .pocket::before{ content:""; position:absolute; left:8px; right:8px; top:9px; height:0;
+    border-top:2px dashed var(--stitch); opacity:.7; }
+  .pocket:hover{ transform:translateY(-2px); border-color:var(--gold); }
+  .pocket:focus-visible{ outline:3px solid var(--gold-bright); outline-offset:2px; }
+  .pocket.sel{ border-color:var(--gold-bright);
+    box-shadow:0 0 0 2px var(--gold-bright), 0 6px 18px rgba(0,0,0,.4),
+      inset 0 -8px 14px rgba(120,96,55,.5); }
+  .pocket.empty{ background:
+      repeating-linear-gradient(45deg,#6b5a3a,#6b5a3a 8px,#5f4f32 8px,#5f4f32 16px);
+    border-color:#4c3f28; box-shadow:inset 0 4px 10px rgba(0,0,0,.4); cursor:default; }
+  .pocket.empty:hover{ transform:none; border-color:#4c3f28; }
+  .pocket svg{ width:46%; height:46%; filter:drop-shadow(0 2px 2px rgba(60,44,20,.5)); }
+  .pocket .nm{ font-size:12.5px; color:var(--ink); letter-spacing:.2px; text-align:center;
+    padding:0 4px; line-height:1.15; }
+  .pocket .ct{ position:absolute; right:6px; bottom:6px; min-width:18px; height:18px;
+    padding:0 4px; border-radius:9px; background:#2c1f12; color:var(--gold-bright);
+    font-size:11px; line-height:18px; text-align:center; }
+  .pocket .ct.free{ background:#3a2a15; color:var(--gold-bright); font-size:10px; }
+  .pocket.empty .nm{ color:#9c8a63; font-style:italic; }
+
+  /* right: the pulled-out item on a hand-written index card */
+  .inspect{ position:relative; padding:30px 30px 26px;
+    background:linear-gradient(180deg, var(--canvas), var(--canvas2));
+    color:var(--ink); }
+  /* torn/deckled inner edge where it meets the pouch */
+  .inspect::before{ content:""; position:absolute; left:0; top:0; bottom:0; width:10px;
+    background:linear-gradient(90deg, rgba(0,0,0,.28), transparent); }
+  .inspect .kind{ font-size:11px; letter-spacing:2px; text-transform:uppercase;
+    color:var(--ink-soft); }
+  .inspect h2{ margin:4px 0 2px; font-size:30px; font-weight:600; color:#3a2a15; }
+  .inspect .desc{ font-style:italic; color:var(--ink-soft); margin:0 0 18px; }
+  .card-art{ height:150px; display:flex; align-items:center; justify-content:center;
+    margin:6px 0 18px;
+    background:radial-gradient(60% 60% at 50% 45%, rgba(201,161,90,.20), transparent 70%); }
+  .card-art svg{ height:120px; width:auto; filter:drop-shadow(0 6px 8px rgba(80,60,26,.4)); }
+
+  .row-label{ font-size:11px; letter-spacing:1.5px; text-transform:uppercase;
+    color:var(--ink-soft); margin:0 0 8px; }
+  .spellchips{ display:flex; flex-wrap:wrap; gap:8px; margin:0 0 18px; }
+  .chip{ font-size:13px; padding:5px 12px; border-radius:20px; color:#3a2a15;
+    background:rgba(201,161,90,.22); border:1px solid var(--stitch); }
+  .chip.start{ background:rgba(127,176,105,.24); border-color:#7f9a5a; }
+  .note{ font-size:14px; line-height:1.6; color:var(--ink-soft); border-top:1px solid var(--canvas-edge);
+    padding-top:14px; }
+  .note b{ color:#3a2a15; font-weight:600; }
+
+  /* --- footer chips ------------------------------------------------------- */
+  .foot{ width:100%; max-width:1040px; display:flex; gap:10px; align-items:center; }
+  .tab{ font-family:inherit; font-size:14px; color:var(--dim); background:transparent;
+    border:1px solid transparent; border-radius:8px; padding:8px 14px; cursor:pointer;
+    transition:color .16s, border-color .16s, background .16s; }
+  .tab:hover{ color:var(--cream); background:rgba(255,255,255,.04); }
+  .tab.on{ color:var(--forest); background:var(--gold); border-color:var(--gold-bright); font-weight:600; }
+  .foot .sp{ flex:1; }
+  .close{ font-family:ui-monospace,monospace; font-size:13px; color:var(--gold-bright);
+    background:transparent; border:1px solid var(--leather-light); border-radius:8px;
+    padding:8px 14px; cursor:pointer; }
+  .close:hover{ border-color:var(--gold-bright); }
+
+  @media (max-width:820px){
+    .satchel{ grid-template-columns:1fr; }
+    .inspect::before{ inset:0 0 auto 0; width:auto; height:10px;
+      background:linear-gradient(180deg, rgba(0,0,0,.28), transparent); }
+  }
+  @media (prefers-reduced-motion:reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="head">
+    <h1>Satchel</h1>
+    <div class="meta mono">day 1 · morning · <span id="count">5 / 6</span> carried</div>
+  </div>
+
+  <div class="satchel" role="group" aria-label="Satchel contents">
+    <!-- LEFT: the open pouch -->
+    <div class="pouch">
+      <div class="flap" aria-hidden="true"></div>
+      <div class="pockets" id="pockets" role="listbox" aria-label="Carried materials"></div>
+    </div>
+
+    <!-- RIGHT: the selected item, pulled onto an index card -->
+    <div class="inspect" id="inspect" aria-live="polite"></div>
+  </div>
+
+  <div class="foot">
+    <button class="tab on">Satchel</button>
+    <button class="tab">Arms</button>
+    <button class="tab">Notebook</button>
+    <span class="sp"></span>
+    <button class="close mono">[ close — Esc ]</button>
+  </div>
+</div>
+
+<script>
+  // Small SVG glyphs for each foraged material — no emoji, drawn to read at 46px.
+  const ART = {
+    stone: '<svg viewBox="0 0 48 48"><path d="M9 30c-2-7 4-14 12-16 9-3 18 1 19 9 1 7-6 12-15 12S11 37 9 30z" fill="#8a8f96"/><path d="M14 24c3-4 9-6 14-5" stroke="#c7ccd2" stroke-width="2" fill="none" stroke-linecap="round"/></svg>',
+    sound: '<svg viewBox="0 0 48 48"><g fill="none" stroke="#b9863f" stroke-width="3" stroke-linecap="round"><path d="M24 8v32"/><path d="M16 15v18" opacity=".85"/><path d="M32 15v18" opacity=".85"/><path d="M9 21v6" opacity=".6"/><path d="M39 21v6" opacity=".6"/></g></svg>',
+    wax: '<svg viewBox="0 0 48 48"><path d="M24 7c6 9 11 15 11 22a11 11 0 1 1-22 0c0-7 5-13 11-22z" fill="#e0b24e"/><path d="M20 26c0 5 2 8 5 9" stroke="#fff2c8" stroke-width="2" fill="none" stroke-linecap="round" opacity=".7"/></svg>',
+    feather: '<svg viewBox="0 0 48 48"><path d="M36 10c-14 2-22 12-24 26l4 2c10-10 16-16 22-24-2 6-7 12-14 17 9-2 15-11 12-21z" fill="#cdd6dd"/><path d="M12 38l6-6" stroke="#8a97a1" stroke-width="2" stroke-linecap="round"/></svg>',
+    wool: '<svg viewBox="0 0 48 48"><g fill="none" stroke="#e7ddc9" stroke-width="3"><circle cx="24" cy="24" r="13" fill="#efe8d6"/><path d="M14 20c4 3 4 9 0 12M24 12c4 5 4 15 0 20M34 20c-4 3-4 9 0 12" stroke="#c9bfa4"/></g></svg>',
+    sticks: '<svg viewBox="0 0 48 48"><g stroke="#7a5a34" stroke-width="4" stroke-linecap="round"><path d="M12 36L34 12"/><path d="M18 36L38 16"/></g><path d="M20 20l6-2" stroke="#9c7a48" stroke-width="3" stroke-linecap="round"/></svg>',
+  };
+
+  // A plausible day-one satchel: the three starter spells' materials.
+  const ITEMS = [
+    { id:"river stone", art:"stone", count:1, kind:"stone · foraged",
+      desc:"a smooth river stone",
+      spells:[["glimmer","start"],["portion",""],["weigh",""],["temper",""]],
+      note:"The workhorse of the set. <b>glimmer</b> needs it, and it turns up on four more spells — worth keeping one in the pouch." },
+    { id:"captured sound", art:"sound", count:1, kind:"sound · free", free:true,
+      desc:"a captured sound",
+      spells:[["echo","start"]],
+      note:"Weightless — costs no pocket. <b>echo</b> replays it out of a resonant surface, and casting never spends it." },
+    { id:"beeswax", art:"wax", count:2, kind:"wax · foraged",
+      desc:"a knob of beeswax",
+      spells:[["echo","start"],["seal",""]],
+      note:"Pairs with the captured sound for <b>echo</b>. Also what <b>seal</b> closes a letter with." },
+    { id:"feather", art:"feather", count:1, kind:"plume · foraged",
+      desc:"a stray feather",
+      spells:[["fetch","start"]],
+      note:"Half of <b>fetch</b> — the tug that pulls a loose thing your way." },
+    { id:"wool", art:"wool", count:3, kind:"fibre · foraged",
+      desc:"a tuft of wool",
+      spells:[["fetch","start"],["scratch",""]],
+      note:"The other half of <b>fetch</b>, and what <b>scratch</b> soothes an out-of-reach itch with." },
+    null, // an empty pocket — room for one more find today
+  ];
+
+  const pockets = document.getElementById("pockets");
+  const inspect = document.getElementById("inspect");
+  let sel = 0;
+
+  function drawInspect(i){
+    const it = ITEMS[i];
+    if(!it){ inspect.innerHTML = '<p class="desc" style="margin-top:40%">An empty pocket — room for one more find today.</p>'; return; }
+    inspect.innerHTML =
+      '<div class="kind mono">'+it.kind+'</div>'+
+      '<h2>'+it.id+'</h2>'+
+      '<div class="desc">'+it.desc+'</div>'+
+      '<div class="card-art">'+ART[it.art]+'</div>'+
+      '<p class="row-label">carried for</p>'+
+      '<div class="spellchips">'+it.spells.map(function(s){
+        return '<span class="chip'+(s[1]==="start"?" start":"")+'">'+s[0]+(s[1]==="start"?" · known":"")+'</span>';
+      }).join("")+'</div>'+
+      '<p class="note">'+it.note+'</p>';
+  }
+
+  ITEMS.forEach(function(it,i){
+    const b = document.createElement("button");
+    b.className = "pocket"+(it?"":" empty")+(i===sel?" sel":"");
+    b.setAttribute("role","option");
+    b.setAttribute("aria-selected", i===sel ? "true":"false");
+    if(it){
+      b.innerHTML = ART[it.art] + '<span class="nm">'+it.id+'</span>'+
+        '<span class="ct'+(it.free?" free":"")+'">'+(it.free?"free":it.count)+'</span>';
+      b.setAttribute("aria-label", it.id+", "+(it.free?"free item":it.count+" carried"));
+      b.addEventListener("click", function(){ select(i); });
+    } else {
+      b.innerHTML = '<span class="nm">empty</span>';
+      b.setAttribute("aria-label","empty pocket");
+    }
+    pockets.appendChild(b);
+  });
+
+  function select(i){
+    sel = i;
+    Array.from(pockets.children).forEach(function(el,n){
+      el.classList.toggle("sel", n===i);
+      el.setAttribute("aria-selected", n===i ? "true":"false");
+    });
+    drawInspect(i);
+  }
+  drawInspect(sel);
+</script>
+</body>
+</html>

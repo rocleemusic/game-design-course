@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The forge bench, its stones warm underfoot. Ilsa, sleeves rolled up, turns the billet in the coals. \"Glowing, not just warm,\" she says, flat and exact. The metal's color deepens to the point she needs. She swings it to the anvil with a solid clink. The player watches, a stick in hand, wondering if the water will change it too.",
+    "wc": 60,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "Ilsa turns to face the player. \"Glowing, not just warm.\" Flat, exact.",
+    "wc": 12,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player hands Ilsa a second river stone, already sitting warm near the fire. Ilsa takes it without a word and begins to work it the same way, shaping it evenly under her hands. The stone hardens, holding the temper. Ilsa sets it aside, giving a small nod. \"That one's ready.\" The player's choice has proven they understand the process.",
+    "wc": 60,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "Ilsa shakes her head. \"Wood won't take a temper.\" She turns back to the glowing billet. \"It's the metal that has to change.\" She taps the tongs against the anvil, setting a rhythm as the metal cools. \"Steady, like this.\" She demonstrates, working the billet in time. \"You'll feel it start to harden.\" The billet hisses as she dips it into the water. \"There. It'll hold now.\" She sets the piece aside and reaches for the next. \"Your turn.\" She offers the tongs to the player. \"See what you can do.\"",
+    "wc": 91,
+    "ok": true,
+    "err": null
+  }
+}

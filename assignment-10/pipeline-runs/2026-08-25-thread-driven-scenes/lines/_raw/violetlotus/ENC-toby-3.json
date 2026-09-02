@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Toby sets the last tray in place, covers it with a length of wool, then picks up the empty flour sack. \"Twelve down from forty,\" he says flatly, already moving to the next job. The worktable is nearly clear, the tally slate showing just one line left unmarked. He starts folding the proofing cloths, hands busy as he glances up at the player. \"Overnight rise,\" he explains briefly, not stopping his work. \"Morning's the busy part.\" The wool-covered tray waits, the last task before the feast. Toby doesn't ask for help, but his glance lingers, a silent invitation to the player's next move. The tension in the room is palpable \u2014 the work",
+    "wc": 113,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "Toby: \"Twelve down from forty, near enough.\" He sets the empty flour sack aside and starts folding proofing cloths, hands already busy with the next job whether or not anyone answers.\n\nThe player brings a length of wool (item_wool) to lay over the last rising batch, keeping the heat in overnight. Toby checks the cover, nods once, says nothing.\n\n[End]",
+    "wc": 60,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "Toby reads the number, crosses the last mark himself. \"Twelve down from forty, near enough.\" He says it fast, already moving to the next thing before the sentence finishes.",
+    "wc": 29,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "Toby: \"You're still here, then?\" \u2014 flat, quick, already back to folding. The player: \"I'll check back after.\" Toby: \"Alright. I'll be here.\" \u2014 flat, fast, no pause. He doesn't look up from the cloths. The player's line is the only break in his rhythm; Toby returns to his work as if it never happened. The folding continues, steady and unceasing, as if to emphasize the futility of stopping. The player watches for a moment longer, then turns away. The scene ends with Toby's hands moving, the rhythm of the work table continuing on into the night. The player's words hang in the air for a moment, then fade",
+    "wc": 109,
+    "ok": true,
+    "err": null
+  }
+}

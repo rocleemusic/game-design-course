@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Smoke drifts from the forge where the fire has gone sullen. Ilsa works the bellows alone, her rhythm steady and practiced. \"You're on the bellows.\"",
+    "wc": 25,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "Ilsa accepts the bundle of sticks without pausing.",
+    "wc": 8,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player casts *ignite* on the banked coals, sending a flare through the forge. Ilsa's hands tighten on the bellows handle as the heat shifts through the metal, her rhythm falling into steady alignment with the new flame.",
+    "wc": 38,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player watches the smoke curl from the coals. \"Rough morning for it.\"\n\nIlsa keeps her rhythm against the bellows. \"It'll come round.\"",
+    "wc": 23,
+    "ok": true,
+    "err": null
+  }
+}

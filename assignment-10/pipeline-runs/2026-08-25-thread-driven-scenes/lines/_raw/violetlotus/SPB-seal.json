@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The player finds themselves in the Square, a quiet, open space with a few scattered crates and a lone postman. On one crate sits a stack of folded letters, their creases crisp and clean. The postman, a warm, friendly figure with a twinkle in his eye, is holding a lump of beeswax in his hand. He works it along the edge of one of the letters, his fingers deft and practiced. \"A letter that opens in the rain is a letter lost,\" he says, his voice rich with experience and wisdom. The wax seals the fold shut with a satisfying snap. He looks up, noticing the player's presence, and smiles. \"Just the ones going out today. Rain's coming",
+    "wc": 118,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The postman looks up from his wax, a gentle smile on his face. \"A letter that opens in the rain is a letter lost,\" he says, warm and explaining. \"Just the ones going out today. Rain's coming.\" The player nods, taking in the information.",
+    "wc": 44,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player hands over a second folded letter. The postman takes it, pressing the warm beeswax along its fold, sealing it shut with practiced ease. \"There you go,\" he says, \"one more letter that'll weather the rain.\" The player's letter joins the stack, ready for the postman's rounds.",
+    "wc": 48,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player picks up an already-sealed letter and tries it again, out of curiosity \u2014 nothing changes, it's already closed. \"It's no use, once it's sealed,\" the postman says, with a hint of patience in his voice. \"This one's been bound shut for a while now.\" He gently takes the letter back, adding it to the stack of sealed envelopes.",
+    "wc": 60,
+    "ok": true,
+    "err": null
+  }
+}

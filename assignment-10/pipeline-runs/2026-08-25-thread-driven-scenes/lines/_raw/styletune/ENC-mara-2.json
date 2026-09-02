@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The jars line the cleared shelf, roughly half filled as the frost draws nearer. Mara checks a jar's seal against the light before setting it back down. \"This one won't keep past the week without help.\"",
+    "wc": 36,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player hands over a measure of salt. Mara works it into the jar's seal, checks it again, and nods.",
+    "wc": 20,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player casts *preserve* on the herbs. The wilting stems stiffen at once, their green color deepening as the decay halts mid-motion. Mara glances at the batch without lifting her head. \"That'll stay green through the thaw, that will.\"",
+    "wc": 39,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player asks, \"Which ones are close?\" Mara points toward two jars at the shelf's edge and says nothing further.",
+    "wc": 20,
+    "ok": true,
+    "err": null
+  }
+}

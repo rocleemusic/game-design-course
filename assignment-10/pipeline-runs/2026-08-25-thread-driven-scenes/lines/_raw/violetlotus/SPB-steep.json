@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The player enters Mara's stall, where a kettle of water sits over a low flame, berries already dropped in. Mara sets her hand near the kettle, explaining as she works \u2014 the water takes the berries' color fast when the cast draws it, slow otherwise, and either way it's better than waiting on the fire alone. She smiles warmly at the player. \"Good, another set of hands \u2014 hold this a second, mind the third step, and tell me your name while you're at it.\"",
+    "wc": 85,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player looks at the kettle, curious. \"Does it work on plain water?\" Mara's hands pause near the kettle as she answers, \"Not on its own. Needs something in it first.\" She resumes her work, explaining as she does. \"The water takes the berries' color fast when the cast draws it, slow otherwise, and either way it's better than waiting on the fire alone.\" She sets the kettle down, letting the berries steep. \"The cast helps the water draw the color in, but it still needs a start. That's the trick.\" She looks up, catching the player's eye with a small smile. \"Just like most things, I suppose.\" The kettle's water turns",
+    "wc": 112,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player hands over a fresh skin of spring water and a handful of berries. Mara nods, accepting the offer. \"Good, another set of hands \u2014 hold this a second, mind the third step, and tell me your name while you're at it.\" She takes the water and berries, placing them gently in the kettle. The water begins to take on the deep, rich color almost immediately, far faster than the first kettle. \"See that? The cast draws it quicker when there's more to pull from. That's how you know it's working right.\" She smiles warmly, appreciating the player's help and the successful demonstration. \"What did you say your name was?\" she asks, turning her attention back",
+    "wc": 117,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "Mara watches the player dip a cup into the well water. She frowns, a moment of confusion before understanding. \"Not like that,\" she says, gently. \"The well's too shallow, too much leaf-litter. It needs a draw from the deep water, a touch of magic to bring out the color.\" She takes the cup, sets it aside, and pours fresh water from the kettle into another cup. \"This is the right way.\" She hands the steaming cup to the player. \"The cast takes the water's color much faster than the well ever could.\"",
+    "wc": 92,
+    "ok": true,
+    "err": null
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Toby stands before the line of flour sacks leaning against the wall. He pulls a smooth river stone from his apron, checking its weight in his palm before setting it against the nearest sack. It hangs low, the fabric bulging a hand's breadth above the ground. \"Hangs low. That's full.\"",
+    "wc": 50,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player asks, \"Is that one short?\"\n\nToby's gaze stays on the sack. \"Hangs low. That's full.\"",
+    "wc": 17,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player sets the stone against a second sack the same way. It hangs level with the first.",
+    "wc": 18,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player sets the stone against the brick oven instead. It sits flat against the floor, leaving the weight unmeasured.",
+    "wc": 20,
+    "ok": true,
+    "err": null
+  }
+}

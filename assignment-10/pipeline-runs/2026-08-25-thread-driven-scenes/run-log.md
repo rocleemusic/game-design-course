@@ -1,0 +1,550 @@
+
+
+## Phase 2 run: model=muse12b group=night started 2026-08-25 13:56:42
+
+- **INT-1-a::muse12b** attempt 1/3: SUCCESS (21.7s, 150 words)
+- **INT-1-b::muse12b** attempt 1/3: SUCCESS (12.9s, 119 words)
+- **NGT-ilsa::setup::muse12b** attempt 1/3: SUCCESS (41.8s, 192 words)
+- **NGT-ilsa::option_a::muse12b** attempt 1/3: SUCCESS (41.2s, 187 words)
+- **NGT-ilsa::option_b::muse12b** attempt 1/3: SUCCESS (40.1s, 182 words)
+- **NGT-ilsa::option_c::muse12b** attempt 1/3: SUCCESS (41.3s, 178 words)
+- **NGT-mara::setup::muse12b** attempt 1/3: SUCCESS (47.9s, 187 words)
+- **NGT-mara::option_a::muse12b** attempt 1/3: SUCCESS (55.1s, 186 words)
+- **NGT-mara::option_b::muse12b** attempt 1/3: SUCCESS (147.1s, 185 words)
+- **NGT-mara::option_c::muse12b** attempt 1/3: SUCCESS (57.6s, 195 words)
+- **NGT-toby::setup::muse12b** attempt 1/3: SUCCESS (62.8s, 198 words)
+- **NGT-toby::option_a::muse12b** attempt 1/3: SUCCESS (65.5s, 175 words)
+- **NGT-toby::option_b::muse12b** attempt 1/3: SUCCESS (63.8s, 192 words)
+- **NGT-toby::option_c::muse12b** attempt 1/3: SUCCESS (63.3s, 173 words)
+
+## Phase 2 run finished 2026-08-25 14:09:24
+
+
+## Phase 2 run: model=violetlotus group=night started 2026-08-25 14:10:11
+
+- **INT-1-a::violetlotus** attempt 1/3: SUCCESS (13.5s, 118 words)
+- **INT-1-b::violetlotus** attempt 1/3: SUCCESS (5.0s, 34 words)
+- **NGT-ilsa::setup::violetlotus** attempt 1/3: SUCCESS (27.2s, 102 words)
+- **NGT-ilsa::option_a::violetlotus** attempt 1/3: SUCCESS (13.8s, 27 words)
+- **NGT-ilsa::option_b::violetlotus** attempt 1/3: SUCCESS (10.3s, 15 words)
+- **NGT-ilsa::option_c::violetlotus** attempt 1/3: SUCCESS (11.7s, 31 words)
+- **NGT-mara::setup::violetlotus** attempt 1/3: SUCCESS (46.9s, 187 words)
+- **NGT-ilsa::setup::spotcheck** attempt 1/3: SUCCESS (31.2s, 101 words)
+- **NGT-ilsa::option_a::spotcheck** attempt 1/3: SUCCESS (8.6s, 31 words)
+- **NGT-ilsa::option_b::spotcheck** attempt 1/3: LEAKAGE (7.2s, 16 words) - structural marker leaked into output: 'Records '
+- **NGT-ilsa::option_b::spotcheck** attempt 2/3: LEAKAGE (8.2s, 17 words) - structural marker leaked into output: 'Records '
+- **NGT-ilsa::option_b::spotcheck** attempt 3/3: LEAKAGE (8.5s, 25 words) - structural marker leaked into output: 'Records '
+- **NGT-ilsa::option_b::spotcheck** SKIPPED after 3 failed attempts. Last error: leakage: structural marker leaked into output: 'Records '
+- **NGT-ilsa::option_c::spotcheck** attempt 1/3: SUCCESS (16.2s, 69 words)
+- **NGT-ilsa::setup::spotcheck** attempt 1/3: SUCCESS (23.2s, 116 words)
+- **NGT-ilsa::option_a::spotcheck** attempt 1/3: SUCCESS (12.5s, 50 words)
+- **NGT-ilsa::option_b::spotcheck** attempt 1/3: SUCCESS (11.1s, 46 words)
+- **NGT-ilsa::option_c::spotcheck** attempt 1/3: SUCCESS (13.0s, 56 words)
+- **NGT-ilsa::setup::spotcheck** attempt 1/3: LEAKAGE (32.7s, 110 words) - backtick-wrapped internal id leaked into output: '`ilsa_second_apron`'
+- **NGT-ilsa::setup::spotcheck** attempt 2/3: SUCCESS (17.9s, 74 words)
+- **NGT-ilsa::option_a::spotcheck** attempt 1/3: SUCCESS (9.8s, 32 words)
+- **NGT-ilsa::option_b::spotcheck** attempt 1/3: LEAKAGE (8.0s, 16 words) - structural marker leaked into output: 'Records '
+- **NGT-ilsa::option_b::spotcheck** attempt 2/3: LEAKAGE (10.5s, 28 words) - structural marker leaked into output: 'Records '
+- **NGT-ilsa::option_b::spotcheck** attempt 3/3: SUCCESS (5.6s, 14 words)
+- **NGT-ilsa::option_c::spotcheck** attempt 1/3: SUCCESS (18.0s, 82 words)
+- **NGT-ilsa::setup::spotcheck** attempt 1/3: SUCCESS (32.5s, 112 words)
+- **NGT-ilsa::option_a::spotcheck** attempt 1/3: SUCCESS (22.3s, 96 words)
+- **NGT-ilsa::option_b::spotcheck** attempt 1/3: SUCCESS (6.3s, 13 words)
+- **NGT-ilsa::option_c::spotcheck** attempt 1/3: SUCCESS (6.4s, 17 words)
+- **NGT-ilsa::setup::spotcheck** attempt 1/3: SUCCESS (22.2s, 66 words)
+- **NGT-ilsa::option_a::spotcheck** attempt 1/3: LEAKAGE (25.7s, 112 words) - out-of-scene character invented: 'Ovin' is not in this scene's notes
+- **NGT-ilsa::option_a::spotcheck** attempt 2/3: LEAKAGE (13.4s, 42 words) - structural marker leaked into output: 'Records '
+- **NGT-ilsa::option_a::spotcheck** attempt 3/3: LEAKAGE (18.4s, 74 words) - out-of-scene character invented: 'Toby' is not in this scene's notes
+- **NGT-ilsa::option_a::spotcheck** SKIPPED after 3 failed attempts. Last error: leakage: out-of-scene character invented: 'Toby' is not in this scene's notes
+- **NGT-ilsa::option_b::spotcheck** attempt 1/3: LEAKAGE (26.1s, 97 words) - structural marker leaked into output: '**'
+- **NGT-ilsa::option_b::spotcheck** attempt 2/3: LEAKAGE (18.2s, 55 words) - structural marker leaked into output: '**'
+- **NGT-ilsa::option_b::spotcheck** attempt 3/3: SUCCESS (23.6s, 103 words)
+- **NGT-ilsa::option_c::spotcheck** attempt 1/3: SUCCESS (25.3s, 119 words)
+- **NGT-ilsa::setup::spotcheck** attempt 1/3: LEAKAGE (21.8s, 92 words) - structural marker leaked into output: '**'
+- **NGT-ilsa::setup::spotcheck** attempt 2/3: SUCCESS (16.6s, 65 words)
+- **NGT-ilsa::option_a::spotcheck** attempt 1/3: LEAKAGE (15.4s, 62 words) - out-of-scene character invented: 'Ovin' is not in this scene's notes
+- **NGT-ilsa::option_a::spotcheck** attempt 2/3: SUCCESS (18.0s, 65 words)
+- **NGT-ilsa::option_b::spotcheck** attempt 1/3: SUCCESS (17.5s, 76 words)
+- **NGT-ilsa::option_c::spotcheck** attempt 1/3: SUCCESS (26.1s, 116 words)
+
+
+## Phase 2 run: model=violetlotus group=night started 2026-08-25 14:28:12
+
+- **INT-1-a::violetlotus** attempt 1/3: SUCCESS (12.3s, 78 words)
+- **INT-1-b::violetlotus** attempt 1/3: SUCCESS (15.4s, 108 words)
+- **NGT-ilsa::setup::violetlotus** attempt 1/3: SUCCESS (32.3s, 98 words)
+- **NGT-ilsa::option_a::violetlotus** attempt 1/3: LEAKAGE (26.2s, 108 words) - structural marker leaked into output: '**'
+- **NGT-ilsa::option_a::violetlotus** attempt 2/3: SUCCESS (17.9s, 68 words)
+- **NGT-ilsa::option_b::violetlotus** attempt 1/3: LEAKAGE (16.0s, 52 words) - structural marker leaked into output: 'Records '
+- **NGT-ilsa::option_b::violetlotus** attempt 2/3: SUCCESS (7.2s, 14 words)
+- **NGT-ilsa::option_c::violetlotus** attempt 1/3: LEAKAGE (12.8s, 49 words) - structural marker leaked into output: 'Records '
+- **NGT-ilsa::option_c::violetlotus** attempt 2/3: SUCCESS (24.6s, 106 words)
+- **NGT-mara::setup::violetlotus** attempt 1/3: SUCCESS (40.4s, 116 words)
+- **NGT-mara::option_a::violetlotus** attempt 1/3: SUCCESS (29.6s, 111 words)
+- **NGT-mara::option_b::violetlotus** attempt 1/3: SUCCESS (26.7s, 110 words)
+- **NGT-mara::option_c::violetlotus** attempt 1/3: SUCCESS (29.3s, 121 words)
+- **NGT-toby::setup::violetlotus** attempt 1/3: SUCCESS (35.1s, 120 words)
+- **NGT-toby::option_a::violetlotus** attempt 1/3: SUCCESS (9.6s, 31 words)
+- **NGT-toby::option_b::violetlotus** attempt 1/3: LEAKAGE (10.3s, 34 words) - structural marker leaked into output: '**'
+- **NGT-toby::option_b::violetlotus** attempt 2/3: SUCCESS (8.9s, 24 words)
+- **NGT-toby::option_c::violetlotus** attempt 1/3: FAILED (9.1s) - JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+- **NGT-toby::option_c::violetlotus** attempt 2/3: SUCCESS (27.7s, 123 words)
+
+## Phase 2 run finished 2026-08-25 14:34:50
+
+
+## Phase 2 run: model=muse12b group=night started 2026-08-25 14:35:53
+
+- **INT-1-a::muse12b** attempt 1/3: SUCCESS (11.5s, 114 words)
+- **INT-1-b::muse12b** attempt 1/3: LEAKAGE (7.9s, 110 words) - second-person narration detected (3 you/your tokens outside quotes) — narrator/action beats are third-person only
+- **INT-1-b::muse12b** attempt 2/3: SUCCESS (7.9s, 119 words)
+- **NGT-ilsa::setup::muse12b** attempt 1/3: SUCCESS (17.7s, 121 words)
+- **NGT-ilsa::option_a::muse12b** attempt 1/3: LEAKAGE (7.1s, 116 words) - second-person narration detected (2 you/your tokens outside quotes) — narrator/action beats are third-person only
+- **NGT-ilsa::option_a::muse12b** attempt 2/3: LEAKAGE (7.4s, 109 words) - out-of-scene character invented: 'Ovin' is not in this scene's notes
+- **NGT-ilsa::option_a::muse12b** attempt 3/3: LEAKAGE (6.4s, 117 words) - second-person narration detected (4 you/your tokens outside quotes) — narrator/action beats are third-person only
+- **NGT-ilsa::option_a::muse12b** SKIPPED after 3 failed attempts. Last error: leakage: second-person narration detected (4 you/your tokens outside quotes) — narrator/action beats are third-person only
+- **NGT-ilsa::option_b::muse12b** attempt 1/3: SUCCESS (7.1s, 115 words)
+- **NGT-ilsa::option_c::muse12b** attempt 1/3: SUCCESS (6.9s, 117 words)
+- **NGT-mara::setup::muse12b** attempt 1/3: SUCCESS (17.8s, 116 words)
+- **NGT-mara::option_a::muse12b** attempt 1/3: SUCCESS (7.3s, 122 words)
+- **NGT-mara::option_b::muse12b** attempt 1/3: LEAKAGE (7.8s, 116 words) - second-person narration detected (2 you/your tokens outside quotes) — narrator/action beats are third-person only
+- **NGT-mara::option_b::muse12b** attempt 2/3: LEAKAGE (7.9s, 114 words) - second-person narration detected (2 you/your tokens outside quotes) — narrator/action beats are third-person only
+- **NGT-mara::option_b::muse12b** attempt 3/3: SUCCESS (6.9s, 120 words)
+- **NGT-mara::option_c::muse12b** attempt 1/3: SUCCESS (7.5s, 118 words)
+- **NGT-toby::setup::muse12b** attempt 1/3: SUCCESS (15.8s, 122 words)
+- **NGT-toby::option_a::muse12b** attempt 1/3: SUCCESS (7.6s, 118 words)
+- **NGT-toby::option_b::muse12b** attempt 1/3: SUCCESS (7.3s, 120 words)
+- **NGT-toby::option_c::muse12b** attempt 1/3: LEAKAGE (7.2s, 113 words) - second-person narration detected (4 you/your tokens outside quotes) — narrator/action beats are third-person only
+- **NGT-toby::option_c::muse12b** attempt 2/3: LEAKAGE (7.4s, 120 words) - second-person narration detected (7 you/your tokens outside quotes) — narrator/action beats are third-person only
+- **NGT-toby::option_c::muse12b** attempt 3/3: SUCCESS (7.6s, 119 words)
+
+## Phase 2 run finished 2026-08-25 14:39:09
+
+
+## Phase 2 run: model=styletune group=conv started 2026-08-25 15:09:27
+
+- **ENC-ilsa-1::setup::styletune** attempt 1/3: SUCCESS (35.7s, 25 words)
+- **ENC-ilsa-1::option_a::styletune** attempt 1/3: SUCCESS (6.1s, 8 words)
+- **ENC-ilsa-1::option_b::styletune** attempt 1/3: SUCCESS (13.6s, 38 words)
+- **ENC-ilsa-1::option_c::styletune** attempt 1/3: SUCCESS (10.7s, 23 words)
+- **ENC-ilsa-2::setup::styletune** attempt 1/3: SUCCESS (25.4s, 48 words)
+- **ENC-ilsa-2::option_a::styletune** attempt 1/3: SUCCESS (8.2s, 24 words)
+- **ENC-ilsa-2::option_b::styletune** attempt 1/3: SUCCESS (8.8s, 26 words)
+- **ENC-ilsa-2::option_c::styletune** attempt 1/3: SUCCESS (10.1s, 16 words)
+- **ENC-ilsa-3::setup::styletune** attempt 1/3: SUCCESS (24.0s, 32 words)
+- **ENC-ilsa-3::option_a::styletune** attempt 1/3: SUCCESS (10.1s, 21 words)
+- **ENC-ilsa-3::option_b::styletune** attempt 1/3: SUCCESS (10.9s, 22 words)
+- **ENC-ilsa-3::option_c::styletune** attempt 1/3: SUCCESS (9.7s, 18 words)
+- **ENC-mara-1::setup::styletune** attempt 1/3: SUCCESS (37.1s, 45 words)
+- **ENC-mara-1::option_a::styletune** attempt 1/3: SUCCESS (12.6s, 50 words)
+- **ENC-mara-1::option_b::styletune** attempt 1/3: SUCCESS (11.8s, 40 words)
+- **ENC-mara-1::option_c::styletune** attempt 1/3: SUCCESS (14.6s, 38 words)
+- **ENC-mara-2::setup::styletune** attempt 1/3: SUCCESS (23.4s, 36 words)
+- **ENC-mara-2::option_a::styletune** attempt 1/3: SUCCESS (11.3s, 20 words)
+- **ENC-mara-2::option_b::styletune** attempt 1/3: SUCCESS (18.4s, 39 words)
+- **ENC-mara-2::option_c::styletune** attempt 1/3: SUCCESS (9.5s, 20 words)
+- **ENC-mara-3::setup::styletune** attempt 1/3: SUCCESS (19.5s, 32 words)
+- **ENC-mara-3::option_a::styletune** attempt 1/3: SUCCESS (15.1s, 44 words)
+- **ENC-mara-3::option_b::styletune** attempt 1/3: SUCCESS (10.7s, 27 words)
+- **ENC-mara-3::option_c::styletune** attempt 1/3: SUCCESS (13.0s, 37 words)
+- **ENC-toby-1::setup::styletune** attempt 1/3: SUCCESS (30.6s, 27 words)
+- **ENC-toby-1::option_a::styletune** attempt 1/3: SUCCESS (8.2s, 32 words)
+- **ENC-toby-1::option_b::styletune** attempt 1/3: SUCCESS (6.8s, 24 words)
+- **ENC-toby-1::option_c::styletune** attempt 1/3: SUCCESS (3.9s, 3 words)
+- **ENC-toby-2::setup::styletune** attempt 1/3: SUCCESS (14.0s, 20 words)
+- **ENC-toby-2::option_a::styletune** attempt 1/3: SUCCESS (7.5s, 20 words)
+- **ENC-toby-2::option_b::styletune** attempt 1/3: SUCCESS (6.3s, 25 words)
+- **ENC-toby-2::option_c::styletune** attempt 1/3: SUCCESS (4.6s, 16 words)
+- **ENC-toby-3::setup::styletune** attempt 1/3: SUCCESS (5.9s, 12 words)
+- **ENC-toby-3::option_a::styletune** attempt 1/3: SUCCESS (3.8s, 21 words)
+- **ENC-toby-3::option_b::styletune** attempt 1/3: SUCCESS (4.1s, 28 words)
+- **ENC-toby-3::option_c::styletune** attempt 1/3: SUCCESS (3.6s, 20 words)
+- **SPB-breath::setup::styletune** attempt 1/3: SUCCESS (8.2s, 38 words)
+- **SPB-breath::option_a::styletune** attempt 1/3: SUCCESS (4.0s, 27 words)
+- **SPB-breath::option_b::styletune** attempt 1/3: SUCCESS (4.0s, 28 words)
+- **SPB-breath::option_c::styletune** attempt 1/3: SUCCESS (3.4s, 18 words)
+- **SPB-dry::setup::styletune** attempt 1/3: SUCCESS (9.6s, 37 words)
+- **SPB-dry::option_a::styletune** attempt 1/3: SUCCESS (4.1s, 22 words)
+- **SPB-dry::option_b::styletune** attempt 1/3: SUCCESS (4.1s, 29 words)
+- **SPB-dry::option_c::styletune** attempt 1/3: SUCCESS (3.8s, 21 words)
+- **SPB-furrow::setup::styletune** attempt 1/3: SUCCESS (9.0s, 27 words)
+- **SPB-furrow::option_a::styletune** attempt 1/3: SUCCESS (3.8s, 23 words)
+- **SPB-furrow::option_b::styletune** attempt 1/3: SUCCESS (3.6s, 26 words)
+- **SPB-furrow::option_c::styletune** attempt 1/3: SUCCESS (3.5s, 15 words)
+- **SPB-ignite::setup::styletune** attempt 1/3: SUCCESS (7.8s, 24 words)
+- **SPB-ignite::option_a::styletune** attempt 1/3: SUCCESS (4.0s, 22 words)
+- **SPB-ignite::option_b::styletune** attempt 1/3: SUCCESS (3.8s, 24 words)
+- **SPB-ignite::option_c::styletune** attempt 1/3: SUCCESS (3.3s, 16 words)
+- **SPB-leap::setup::styletune** attempt 1/3: SUCCESS (6.1s, 33 words)
+- **SPB-leap::option_a::styletune** attempt 1/3: SUCCESS (4.1s, 30 words)
+- **SPB-leap::option_b::styletune** attempt 1/3: SUCCESS (3.8s, 28 words)
+- **SPB-leap::option_c::styletune** attempt 1/3: SUCCESS (2.9s, 14 words)
+- **SPB-portion::setup::styletune** attempt 1/3: SUCCESS (7.1s, 33 words)
+- **SPB-portion::option_a::styletune** attempt 1/3: SUCCESS (4.0s, 26 words)
+- **SPB-portion::option_b::styletune** attempt 1/3: SUCCESS (3.3s, 15 words)
+- **SPB-portion::option_c::styletune** attempt 1/3: SUCCESS (3.9s, 30 words)
+- **SPB-preserve::setup::styletune** attempt 1/3: SUCCESS (9.3s, 44 words)
+- **SPB-preserve::option_a::styletune** attempt 1/3: SUCCESS (5.4s, 43 words)
+- **SPB-preserve::option_b::styletune** attempt 1/3: SUCCESS (5.2s, 45 words)
+- **SPB-preserve::option_c::styletune** attempt 1/3: SUCCESS (5.1s, 36 words)
+- **SPB-scratch::setup::styletune** attempt 1/3: SUCCESS (7.9s, 28 words)
+- **SPB-scratch::option_a::styletune** attempt 1/3: SUCCESS (5.7s, 31 words)
+- **SPB-scratch::option_b::styletune** attempt 1/3: SUCCESS (4.6s, 28 words)
+- **SPB-scratch::option_c::styletune** attempt 1/3: SUCCESS (3.4s, 11 words)
+- **SPB-seal::setup::styletune** attempt 1/3: SUCCESS (14.3s, 41 words)
+- **SPB-seal::option_a::styletune** attempt 1/3: SUCCESS (5.6s, 31 words)
+- **SPB-seal::option_b::styletune** attempt 1/3: SUCCESS (4.3s, 23 words)
+- **SPB-seal::option_c::styletune** attempt 1/3: SUCCESS (4.3s, 24 words)
+- **SPB-steep::setup::styletune** attempt 1/3: SUCCESS (10.4s, 40 words)
+- **SPB-steep::option_a::styletune** attempt 1/3: SUCCESS (5.9s, 48 words)
+- **SPB-steep::option_b::styletune** attempt 1/3: SUCCESS (6.2s, 56 words)
+- **SPB-steep::option_c::styletune** attempt 1/3: SUCCESS (4.7s, 27 words)
+- **SPB-temper::setup::styletune** attempt 1/3: SUCCESS (10.3s, 44 words)
+- **SPB-temper::option_a::styletune** attempt 1/3: SUCCESS (4.4s, 19 words)
+- **SPB-temper::option_b::styletune** attempt 1/3: SUCCESS (4.7s, 31 words)
+- **SPB-temper::option_c::styletune** attempt 1/3: SUCCESS (4.3s, 27 words)
+- **SPB-waft::setup::styletune** attempt 1/3: SUCCESS (8.1s, 49 words)
+- **SPB-waft::option_a::styletune** attempt 1/3: SUCCESS (3.9s, 19 words)
+- **SPB-waft::option_b::styletune** attempt 1/3: SUCCESS (4.3s, 29 words)
+- **SPB-waft::option_c::styletune** attempt 1/3: SUCCESS (3.7s, 19 words)
+- **SPB-weigh::setup::styletune** attempt 1/3: SUCCESS (7.4s, 22 words)
+- **SPB-weigh::option_a::styletune** attempt 1/3: SUCCESS (4.4s, 19 words)
+- **SPB-weigh::option_b::styletune** attempt 1/3: SUCCESS (3.8s, 19 words)
+- **SPB-weigh::option_c::styletune** attempt 1/3: SUCCESS (3.7s, 17 words)
+
+## Phase 2 run finished 2026-08-25 15:21:59
+
+
+## Phase 2 run: model=violetlotus group=conv started 2026-08-25 18:18:46
+
+- **ENC-ilsa-1::setup::violetlotus** attempt 1/3: SUCCESS (60.7s, 78 words)
+- **ENC-ilsa-1::option_a::violetlotus** attempt 1/3: SUCCESS (34.9s, 103 words)
+- **ENC-ilsa-1::option_b::violetlotus** attempt 1/3: SUCCESS (17.4s, 44 words)
+- **ENC-ilsa-1::option_c::violetlotus** attempt 1/3: SUCCESS (16.1s, 36 words)
+- **ENC-ilsa-2::setup::violetlotus** attempt 1/3: LEAKAGE (26.8s, 54 words) - out-of-scene character invented: 'Toby' is not in this scene's notes
+- **ENC-ilsa-2::setup::violetlotus** attempt 2/3: SUCCESS (29.4s, 93 words)
+- **ENC-ilsa-2::option_a::violetlotus** attempt 1/3: LEAKAGE (22.6s, 60 words) - structural marker leaked into output: 'Records '
+- **ENC-ilsa-2::option_a::violetlotus** attempt 2/3: SUCCESS (35.5s, 113 words)
+- **ENC-ilsa-2::option_b::violetlotus** attempt 1/3: LEAKAGE (20.2s, 77 words) - out-of-scene character invented: 'Toby' is not in this scene's notes
+- **ENC-ilsa-2::option_b::violetlotus** attempt 2/3: LEAKAGE (13.5s, 32 words) - backtick-wrapped internal id leaked into output: '`item_river_stone`'
+- **ENC-ilsa-2::option_b::violetlotus** attempt 3/3: SUCCESS (19.7s, 68 words)
+- **ENC-ilsa-2::option_c::violetlotus** attempt 1/3: LEAKAGE (11.3s, 27 words) - structural marker leaked into output: '**'
+- **ENC-ilsa-2::option_c::violetlotus** attempt 2/3: SUCCESS (73.3s, 108 words)
+- **ENC-ilsa-3::setup::violetlotus** attempt 1/3: LEAKAGE (24.2s, 82 words) - structural marker leaked into output: '**'
+- **ENC-ilsa-3::setup::violetlotus** attempt 2/3: SUCCESS (26.3s, 111 words)
+- **ENC-ilsa-3::option_a::violetlotus** attempt 1/3: SUCCESS (17.9s, 64 words)
+- **ENC-ilsa-3::option_b::violetlotus** attempt 1/3: SUCCESS (6.1s, 10 words)
+- **ENC-ilsa-3::option_c::violetlotus** attempt 1/3: LEAKAGE (13.6s, 35 words) - structural marker leaked into output: 'Records '
+- **ENC-ilsa-3::option_c::violetlotus** attempt 2/3: SUCCESS (15.6s, 71 words)
+- **ENC-mara-1::setup::violetlotus** attempt 1/3: SUCCESS (34.9s, 116 words)
+- **ENC-mara-1::option_a::violetlotus** attempt 1/3: LEAKAGE (23.2s, 115 words) - out-of-scene character invented: 'Toby' is not in this scene's notes
+- **ENC-mara-1::option_a::violetlotus** attempt 2/3: LEAKAGE (10.6s, 43 words) - out-of-scene character invented: 'Toby' is not in this scene's notes
+- **ENC-mara-1::option_a::violetlotus** attempt 3/3: LEAKAGE (22.1s, 118 words) - out-of-scene character invented: 'Toby' is not in this scene's notes
+- **ENC-mara-1::option_a::violetlotus** SKIPPED after 3 failed attempts. Last error: leakage: out-of-scene character invented: 'Toby' is not in this scene's notes
+- **ENC-mara-1::option_b::violetlotus** attempt 1/3: SUCCESS (10.9s, 57 words)
+- **ENC-mara-1::option_c::violetlotus** attempt 1/3: SUCCESS (19.2s, 119 words)
+- **ENC-mara-2::setup::violetlotus** attempt 1/3: SUCCESS (15.8s, 72 words)
+- **ENC-mara-2::option_a::violetlotus** attempt 1/3: LEAKAGE (18.8s, 122 words) - backtick-wrapped internal id leaked into output: '`item_salt`'
+- **ENC-mara-2::option_a::violetlotus** attempt 2/3: SUCCESS (20.5s, 120 words)
+- **ENC-mara-2::option_b::violetlotus** attempt 1/3: SUCCESS (18.8s, 118 words)
+- **ENC-mara-2::option_c::violetlotus** attempt 1/3: SUCCESS (7.8s, 36 words)
+- **ENC-mara-3::setup::violetlotus** attempt 1/3: SUCCESS (23.4s, 126 words)
+- **ENC-mara-3::option_a::violetlotus** attempt 1/3: LEAKAGE (19.1s, 111 words) - out-of-scene character invented: 'Toby' is not in this scene's notes
+- **ENC-mara-3::option_a::violetlotus** attempt 2/3: SUCCESS (20.5s, 122 words)
+- **ENC-mara-3::option_b::violetlotus** attempt 1/3: SUCCESS (14.5s, 82 words)
+- **ENC-mara-3::option_c::violetlotus** attempt 1/3: SUCCESS (10.1s, 51 words)
+- **ENC-toby-1::setup::violetlotus** attempt 1/3: SUCCESS (25.5s, 98 words)
+- **ENC-toby-1::option_a::violetlotus** attempt 1/3: SUCCESS (18.8s, 114 words)
+- **ENC-toby-1::option_b::violetlotus** attempt 1/3: LEAKAGE (11.1s, 40 words) - structural marker leaked into output: 'Records '
+- **ENC-toby-1::option_b::violetlotus** attempt 2/3: LEAKAGE (19.6s, 93 words) - backtick-wrapped internal id leaked into output: '`item_river_stone`'
+- **ENC-toby-1::option_b::violetlotus** attempt 3/3: SUCCESS (9.3s, 46 words)
+- **ENC-toby-1::option_c::violetlotus** attempt 1/3: SUCCESS (7.9s, 35 words)
+- **ENC-toby-2::setup::violetlotus** attempt 1/3: SUCCESS (21.8s, 122 words)
+- **ENC-toby-2::option_a::violetlotus** attempt 1/3: LEAKAGE (14.8s, 90 words) - structural marker leaked into output: '**'
+- **ENC-toby-2::option_a::violetlotus** attempt 2/3: LEAKAGE (18.6s, 93 words) - structural marker leaked into output: 'Records '
+- **ENC-toby-2::option_a::violetlotus** attempt 3/3: SUCCESS (18.0s, 113 words)
+- **ENC-toby-2::option_b::violetlotus** attempt 1/3: SUCCESS (9.3s, 46 words)
+- **ENC-toby-2::option_c::violetlotus** attempt 1/3: SUCCESS (18.1s, 120 words)
+- **ENC-toby-3::setup::violetlotus** attempt 1/3: SUCCESS (21.5s, 113 words)
+- **ENC-toby-3::option_a::violetlotus** attempt 1/3: LEAKAGE (9.4s, 45 words) - structural marker leaked into output: '**'
+- **ENC-toby-3::option_a::violetlotus** attempt 2/3: SUCCESS (11.9s, 60 words)
+- **ENC-toby-3::option_b::violetlotus** attempt 1/3: SUCCESS (6.6s, 29 words)
+- **ENC-toby-3::option_c::violetlotus** attempt 1/3: SUCCESS (18.0s, 109 words)
+- **SPB-breath::setup::violetlotus** attempt 1/3: SUCCESS (18.6s, 116 words)
+- **SPB-breath::option_a::violetlotus** attempt 1/3: SUCCESS (6.8s, 33 words)
+- **SPB-breath::option_b::violetlotus** attempt 1/3: LEAKAGE (10.0s, 58 words) - structural marker leaked into output: 'Records '
+- **SPB-breath::option_b::violetlotus** attempt 2/3: SUCCESS (9.4s, 51 words)
+- **SPB-breath::option_c::violetlotus** attempt 1/3: SUCCESS (9.5s, 56 words)
+- **SPB-dry::setup::violetlotus** attempt 1/3: SUCCESS (11.0s, 59 words)
+- **SPB-dry::option_a::violetlotus** attempt 1/3: SUCCESS (14.8s, 109 words)
+- **SPB-dry::option_b::violetlotus** attempt 1/3: SUCCESS (13.7s, 92 words)
+- **SPB-dry::option_c::violetlotus** attempt 1/3: SUCCESS (7.2s, 41 words)
+- **SPB-furrow::setup::violetlotus** attempt 1/3: SUCCESS (12.7s, 74 words)
+- **SPB-furrow::option_a::violetlotus** attempt 1/3: SUCCESS (6.8s, 31 words)
+- **SPB-furrow::option_b::violetlotus** attempt 1/3: LEAKAGE (8.9s, 61 words) - second-person narration detected (3 you/your tokens outside quotes) — narrator/action beats are third-person only
+- **SPB-furrow::option_b::violetlotus** attempt 2/3: SUCCESS (9.6s, 55 words)
+- **SPB-furrow::option_c::violetlotus** attempt 1/3: SUCCESS (9.0s, 55 words)
+- **SPB-ignite::setup::violetlotus** attempt 1/3: SUCCESS (24.9s, 109 words)
+- **SPB-ignite::option_a::violetlotus** attempt 1/3: LEAKAGE (6.6s, 19 words) - structural marker leaked into output: 'Records '
+- **SPB-ignite::option_a::violetlotus** attempt 2/3: SUCCESS (19.0s, 106 words)
+- **SPB-ignite::option_b::violetlotus** attempt 1/3: SUCCESS (13.0s, 76 words)
+- **SPB-ignite::option_c::violetlotus** attempt 1/3: SUCCESS (12.2s, 73 words)
+- **SPB-leap::setup::violetlotus** attempt 1/3: SUCCESS (15.7s, 82 words)
+- **SPB-leap::option_a::violetlotus** attempt 1/3: SUCCESS (5.4s, 24 words)
+- **SPB-leap::option_b::violetlotus** attempt 1/3: LEAKAGE (8.5s, 44 words) - structural marker leaked into output: 'Records '
+- **SPB-leap::option_b::violetlotus** attempt 2/3: SUCCESS (16.1s, 113 words)
+- **SPB-leap::option_c::violetlotus** attempt 1/3: SUCCESS (11.0s, 83 words)
+- **SPB-portion::setup::violetlotus** attempt 1/3: SUCCESS (15.4s, 62 words)
+- **SPB-portion::option_a::violetlotus** attempt 1/3: SUCCESS (5.2s, 17 words)
+- **SPB-portion::option_b::violetlotus** attempt 1/3: SUCCESS (6.5s, 31 words)
+- **SPB-portion::option_c::violetlotus** attempt 1/3: LEAKAGE (16.6s, 110 words) - structural marker leaked into output: 'Records '
+- **SPB-portion::option_c::violetlotus** attempt 2/3: SUCCESS (8.7s, 47 words)
+- **SPB-preserve::setup::violetlotus** attempt 1/3: SUCCESS (20.7s, 79 words)
+- **SPB-preserve::option_a::violetlotus** attempt 1/3: SUCCESS (18.6s, 115 words)
+- **SPB-preserve::option_b::violetlotus** attempt 1/3: SUCCESS (18.6s, 112 words)
+- **SPB-preserve::option_c::violetlotus** attempt 1/3: SUCCESS (18.7s, 113 words)
+- **SPB-scratch::setup::violetlotus** attempt 1/3: SUCCESS (14.4s, 71 words)
+- **SPB-scratch::option_a::violetlotus** attempt 1/3: SUCCESS (11.1s, 84 words)
+- **SPB-scratch::option_b::violetlotus** attempt 1/3: SUCCESS (8.6s, 55 words)
+- **SPB-scratch::option_c::violetlotus** attempt 1/3: LEAKAGE (8.9s, 52 words) - structural marker leaked into output: 'Records '
+- **SPB-scratch::option_c::violetlotus** attempt 2/3: SUCCESS (9.2s, 51 words)
+- **SPB-seal::setup::violetlotus** attempt 1/3: SUCCESS (16.3s, 118 words)
+- **SPB-seal::option_a::violetlotus** attempt 1/3: SUCCESS (7.2s, 44 words)
+- **SPB-seal::option_b::violetlotus** attempt 1/3: SUCCESS (8.0s, 48 words)
+- **SPB-seal::option_c::violetlotus** attempt 1/3: SUCCESS (9.0s, 60 words)
+- **SPB-steep::setup::violetlotus** attempt 1/3: SUCCESS (22.6s, 85 words)
+- **SPB-steep::option_a::violetlotus** attempt 1/3: LEAKAGE (9.6s, 46 words) - out-of-scene character invented: 'Toby' is not in this scene's notes
+- **SPB-steep::option_a::violetlotus** attempt 2/3: SUCCESS (19.9s, 112 words)
+- **SPB-steep::option_b::violetlotus** attempt 1/3: LEAKAGE (18.6s, 114 words) - structural marker leaked into output: '**'
+- **SPB-steep::option_b::violetlotus** attempt 2/3: SUCCESS (20.0s, 117 words)
+- **SPB-steep::option_c::violetlotus** attempt 1/3: SUCCESS (15.8s, 92 words)
+- **SPB-temper::setup::violetlotus** attempt 1/3: SUCCESS (17.7s, 60 words)
+- **SPB-temper::option_a::violetlotus** attempt 1/3: SUCCESS (5.0s, 12 words)
+- **SPB-temper::option_b::violetlotus** attempt 1/3: LEAKAGE (17.2s, 105 words) - structural marker leaked into output: 'Records '
+- **SPB-temper::option_b::violetlotus** attempt 2/3: LEAKAGE (15.6s, 94 words) - out-of-scene character invented: 'Toby' is not in this scene's notes
+- **SPB-temper::option_b::violetlotus** attempt 3/3: SUCCESS (9.7s, 60 words)
+- **SPB-temper::option_c::violetlotus** attempt 1/3: SUCCESS (15.7s, 91 words)
+- **SPB-waft::setup::violetlotus** attempt 1/3: SUCCESS (13.9s, 50 words)
+- **SPB-waft::option_a::violetlotus** attempt 1/3: LEAKAGE (13.3s, 91 words) - structural marker leaked into output: 'Records '
+- **SPB-waft::option_a::violetlotus** attempt 2/3: LEAKAGE (8.5s, 41 words) - structural marker leaked into output: 'Records '
+- **SPB-waft::option_a::violetlotus** attempt 3/3: SUCCESS (12.0s, 86 words)
+- **SPB-waft::option_b::violetlotus** attempt 1/3: LEAKAGE (12.2s, 82 words) - structural marker leaked into output: 'Records '
+- **SPB-waft::option_b::violetlotus** attempt 2/3: LEAKAGE (8.5s, 34 words) - structural marker leaked into output: 'Records '
+- **SPB-waft::option_b::violetlotus** attempt 3/3: SUCCESS (13.3s, 97 words)
+- **SPB-waft::option_c::violetlotus** attempt 1/3: LEAKAGE (11.4s, 80 words) - structural marker leaked into output: 'Records '
+- **SPB-waft::option_c::violetlotus** attempt 2/3: LEAKAGE (12.0s, 76 words) - out-of-scene character invented: 'Toby' is not in this scene's notes
+- **SPB-waft::option_c::violetlotus** attempt 3/3: LEAKAGE (8.1s, 45 words) - structural marker leaked into output: 'Records '
+- **SPB-waft::option_c::violetlotus** SKIPPED after 3 failed attempts. Last error: leakage: structural marker leaked into output: 'Records '
+- **SPB-weigh::setup::violetlotus** attempt 1/3: SUCCESS (22.1s, 116 words)
+- **SPB-weigh::option_a::violetlotus** attempt 1/3: SUCCESS (7.4s, 36 words)
+- **SPB-weigh::option_b::violetlotus** attempt 1/3: SUCCESS (7.3s, 42 words)
+- **SPB-weigh::option_c::violetlotus** attempt 1/3: SUCCESS (12.3s, 80 words)
+
+## Phase 2 run finished 2026-08-25 18:50:51
+
+
+## Phase 2 run: model=crimson group=conv started 2026-08-25 19:13:13
+
+- **ENC-ilsa-1::setup::crimson** attempt 1/3: SUCCESS (25.7s, 35 words)
+- **ENC-ilsa-1::option_a::crimson** attempt 1/3: SUCCESS (11.4s, 35 words)
+- **ENC-ilsa-1::option_b::crimson** attempt 1/3: SUCCESS (9.4s, 29 words)
+- **ENC-ilsa-1::option_c::crimson** attempt 1/3: SUCCESS (11.6s, 38 words)
+- **ENC-ilsa-2::setup::crimson** attempt 1/3: SUCCESS (14.8s, 41 words)
+- **ENC-ilsa-2::option_a::crimson** attempt 1/3: SUCCESS (9.6s, 34 words)
+- **ENC-ilsa-2::option_b::crimson** attempt 1/3: LEAKAGE (11.1s, 38 words) - backtick-wrapped internal id leaked into output: '`surface_action`'
+- **ENC-ilsa-2::option_b::crimson** attempt 2/3: SUCCESS (18.9s, 72 words)
+- **ENC-ilsa-2::option_c::crimson** attempt 1/3: SUCCESS (17.0s, 71 words)
+- **ENC-ilsa-3::setup::crimson** attempt 1/3: SUCCESS (23.2s, 86 words)
+- **ENC-ilsa-3::option_a::crimson** attempt 1/3: SUCCESS (16.0s, 69 words)
+- **ENC-ilsa-3::option_b::crimson** attempt 1/3: SUCCESS (10.2s, 37 words)
+- **ENC-ilsa-3::option_c::crimson** attempt 1/3: SUCCESS (5.0s, 8 words)
+- **ENC-mara-1::setup::crimson** attempt 1/3: SUCCESS (23.2s, 38 words)
+- **ENC-mara-1::option_a::crimson** attempt 1/3: SUCCESS (12.1s, 44 words)
+- **ENC-mara-1::option_b::crimson** attempt 1/3: SUCCESS (13.6s, 47 words)
+- **ENC-mara-1::option_c::crimson** attempt 1/3: SUCCESS (16.1s, 61 words)
+- **ENC-mara-2::setup::crimson** attempt 1/3: SUCCESS (14.8s, 37 words)
+- **ENC-mara-2::option_a::crimson** attempt 1/3: SUCCESS (15.4s, 60 words)
+- **ENC-mara-2::option_b::crimson** attempt 1/3: LEAKAGE (9.7s, 26 words) - out-of-scene character invented: 'Toby' is not in this scene's notes
+- **ENC-mara-2::option_b::crimson** attempt 2/3: SUCCESS (18.3s, 67 words)
+- **ENC-mara-2::option_c::crimson** attempt 1/3: SUCCESS (5.0s, 8 words)
+- **ENC-mara-3::setup::crimson** attempt 1/3: SUCCESS (25.6s, 95 words)
+- **ENC-mara-3::option_a::crimson** attempt 1/3: SUCCESS (18.5s, 75 words)
+- **ENC-mara-3::option_b::crimson** attempt 1/3: LEAKAGE (13.4s, 42 words) - out-of-scene character invented: 'Toby' is not in this scene's notes
+- **ENC-mara-3::option_b::crimson** attempt 2/3: SUCCESS (15.3s, 41 words)
+- **ENC-mara-3::option_c::crimson** attempt 1/3: SUCCESS (7.5s, 18 words)
+- **ENC-toby-1::setup::crimson** attempt 1/3: SUCCESS (24.0s, 48 words)
+- **ENC-toby-1::option_a::crimson** attempt 1/3: LEAKAGE (9.2s, 30 words) - structural marker leaked into output: '**'
+- **ENC-toby-1::option_a::crimson** attempt 2/3: SUCCESS (10.0s, 33 words)
+- **ENC-toby-1::option_b::crimson** attempt 1/3: SUCCESS (7.4s, 16 words)
+- **ENC-toby-1::option_c::crimson** attempt 1/3: LEAKAGE (10.2s, 30 words) - structural marker leaked into output: '**'
+- **ENC-toby-1::option_c::crimson** attempt 2/3: SUCCESS (29.5s, 107 words)
+- **ENC-toby-2::setup::crimson** attempt 1/3: SUCCESS (19.5s, 66 words)
+- **ENC-toby-2::option_a::crimson** attempt 1/3: SUCCESS (7.0s, 20 words)
+- **ENC-toby-2::option_b::crimson** attempt 1/3: SUCCESS (9.5s, 30 words)
+- **ENC-toby-2::option_c::crimson** attempt 1/3: LEAKAGE (9.9s, 25 words) - structural marker leaked into output: '**'
+- **ENC-toby-2::option_c::crimson** attempt 2/3: SUCCESS (6.2s, 10 words)
+- **ENC-toby-3::setup::crimson** attempt 1/3: SUCCESS (22.3s, 75 words)
+- **ENC-toby-3::option_a::crimson** attempt 1/3: SUCCESS (7.0s, 23 words)
+- **ENC-toby-3::option_b::crimson** attempt 1/3: SUCCESS (5.4s, 10 words)
+- **ENC-toby-3::option_c::crimson** attempt 1/3: SUCCESS (8.0s, 21 words)
+- **SPB-breath::setup::crimson** attempt 1/3: SUCCESS (14.6s, 48 words)
+- **SPB-breath::option_a::crimson** attempt 1/3: SUCCESS (12.2s, 60 words)
+- **SPB-breath::option_b::crimson** attempt 1/3: SUCCESS (11.1s, 52 words)
+- **SPB-breath::option_c::crimson** attempt 1/3: SUCCESS (10.1s, 45 words)
+- **SPB-dry::setup::crimson** attempt 1/3: SUCCESS (13.5s, 51 words)
+- **SPB-dry::option_a::crimson** attempt 1/3: SUCCESS (6.0s, 17 words)
+- **SPB-dry::option_b::crimson** attempt 1/3: SUCCESS (12.2s, 65 words)
+- **SPB-dry::option_c::crimson** attempt 1/3: SUCCESS (9.0s, 42 words)
+- **SPB-furrow::setup::crimson** attempt 1/3: SUCCESS (12.7s, 49 words)
+- **SPB-furrow::option_a::crimson** attempt 1/3: SUCCESS (9.4s, 41 words)
+- **SPB-furrow::option_b::crimson** attempt 1/3: SUCCESS (7.7s, 32 words)
+- **SPB-furrow::option_c::crimson** attempt 1/3: SUCCESS (9.5s, 40 words)
+- **SPB-ignite::setup::crimson** attempt 1/3: SUCCESS (21.9s, 58 words)
+- **SPB-ignite::option_a::crimson** attempt 1/3: SUCCESS (10.3s, 35 words)
+- **SPB-ignite::option_b::crimson** attempt 1/3: SUCCESS (10.1s, 37 words)
+- **SPB-ignite::option_c::crimson** attempt 1/3: SUCCESS (17.3s, 74 words)
+- **SPB-leap::setup::crimson** attempt 1/3: LEAKAGE (16.6s, 52 words) - structural marker leaked into output: '**'
+- **SPB-leap::setup::crimson** attempt 2/3: SUCCESS (15.8s, 70 words)
+- **SPB-leap::option_a::crimson** attempt 1/3: SUCCESS (6.9s, 25 words)
+- **SPB-leap::option_b::crimson** attempt 1/3: SUCCESS (8.0s, 33 words)
+- **SPB-leap::option_c::crimson** attempt 1/3: SUCCESS (11.1s, 57 words)
+- **SPB-portion::setup::crimson** attempt 1/3: SUCCESS (14.9s, 32 words)
+- **SPB-portion::option_a::crimson** attempt 1/3: SUCCESS (7.1s, 24 words)
+- **SPB-portion::option_b::crimson** attempt 1/3: SUCCESS (9.9s, 41 words)
+- **SPB-portion::option_c::crimson** attempt 1/3: SUCCESS (9.7s, 43 words)
+- **SPB-preserve::setup::crimson** attempt 1/3: SUCCESS (16.5s, 25 words)
+- **SPB-preserve::option_a::crimson** attempt 1/3: SUCCESS (17.3s, 67 words)
+- **SPB-preserve::option_b::crimson** attempt 1/3: SUCCESS (13.6s, 46 words)
+- **SPB-preserve::option_c::crimson** attempt 1/3: SUCCESS (9.1s, 29 words)
+- **SPB-scratch::setup::crimson** attempt 1/3: SUCCESS (17.0s, 61 words)
+- **SPB-scratch::option_a::crimson** attempt 1/3: SUCCESS (11.2s, 54 words)
+- **SPB-scratch::option_b::crimson** attempt 1/3: SUCCESS (7.6s, 32 words)
+- **SPB-scratch::option_c::crimson** attempt 1/3: SUCCESS (6.5s, 23 words)
+- **SPB-seal::setup::crimson** attempt 1/3: SUCCESS (11.0s, 36 words)
+- **SPB-seal::option_a::crimson** attempt 1/3: SUCCESS (7.4s, 25 words)
+- **SPB-seal::option_b::crimson** attempt 1/3: SUCCESS (11.9s, 58 words)
+- **SPB-seal::option_c::crimson** attempt 1/3: SUCCESS (8.7s, 36 words)
+- **SPB-steep::setup::crimson** attempt 1/3: SUCCESS (24.3s, 58 words)
+- **SPB-steep::option_a::crimson** attempt 1/3: SUCCESS (12.9s, 33 words)
+- **SPB-steep::option_b::crimson** attempt 1/3: SUCCESS (20.8s, 82 words)
+- **SPB-steep::option_c::crimson** attempt 1/3: SUCCESS (15.7s, 64 words)
+- **SPB-temper::setup::crimson** attempt 1/3: SUCCESS (17.4s, 35 words)
+- **SPB-temper::option_a::crimson** attempt 1/3: SUCCESS (10.1s, 31 words)
+- **SPB-temper::option_b::crimson** attempt 1/3: LEAKAGE (19.7s, 83 words) - structural marker leaked into output: '**'
+- **SPB-temper::option_b::crimson** attempt 2/3: SUCCESS (14.7s, 59 words)
+- **SPB-temper::option_c::crimson** attempt 1/3: SUCCESS (10.1s, 39 words)
+- **SPB-waft::setup::crimson** attempt 1/3: SUCCESS (16.7s, 63 words)
+- **SPB-waft::option_a::crimson** attempt 1/3: SUCCESS (9.3s, 41 words)
+- **SPB-waft::option_b::crimson** attempt 1/3: SUCCESS (8.9s, 39 words)
+- **SPB-waft::option_c::crimson** attempt 1/3: SUCCESS (8.2s, 34 words)
+- **SPB-weigh::setup::crimson** attempt 1/3: SUCCESS (14.8s, 28 words)
+- **SPB-weigh::option_a::crimson** attempt 1/3: SUCCESS (9.5s, 34 words)
+- **SPB-weigh::option_b::crimson** attempt 1/3: SUCCESS (8.6s, 35 words)
+- **SPB-weigh::option_c::crimson** attempt 1/3: SUCCESS (8.9s, 32 words)
+
+## Phase 2 run finished 2026-08-25 19:33:55
+
+
+## Phase 2 run: model=gemma26b group=conv started 2026-08-25 19:45:16
+
+- **ENC-ilsa-1::setup::gemma26b** attempt 1/3: SUCCESS (7.1s, 28 words)
+- **ENC-ilsa-1::option_a::gemma26b** attempt 1/3: SUCCESS (3.8s, 27 words)
+- **ENC-ilsa-1::option_b::gemma26b** attempt 1/3: SUCCESS (4.0s, 29 words)
+- **ENC-ilsa-1::option_c::gemma26b** attempt 1/3: SUCCESS (3.7s, 17 words)
+- **ENC-ilsa-2::setup::gemma26b** attempt 1/3: SUCCESS (5.0s, 36 words)
+- **ENC-ilsa-2::option_a::gemma26b** attempt 1/3: SUCCESS (3.6s, 23 words)
+- **ENC-ilsa-2::option_b::gemma26b** attempt 1/3: SUCCESS (3.6s, 23 words)
+- **ENC-ilsa-2::option_c::gemma26b** attempt 1/3: SUCCESS (3.5s, 14 words)
+- **ENC-ilsa-3::setup::gemma26b** attempt 1/3: SUCCESS (4.1s, 13 words)
+- **ENC-ilsa-3::option_a::gemma26b** attempt 1/3: SUCCESS (4.3s, 40 words)
+- **ENC-ilsa-3::option_b::gemma26b** attempt 1/3: SUCCESS (3.7s, 20 words)
+- **ENC-ilsa-3::option_c::gemma26b** attempt 1/3: SUCCESS (3.4s, 13 words)
+- **ENC-mara-1::setup::gemma26b** attempt 1/3: SUCCESS (7.7s, 62 words)
+- **ENC-mara-1::option_a::gemma26b** attempt 1/3: SUCCESS (4.4s, 43 words)
+- **ENC-mara-1::option_b::gemma26b** attempt 1/3: SUCCESS (4.3s, 36 words)
+- **ENC-mara-1::option_c::gemma26b** attempt 1/3: SUCCESS (3.6s, 18 words)
+- **ENC-mara-2::setup::gemma26b** attempt 1/3: SUCCESS (4.9s, 35 words)
+- **ENC-mara-2::option_a::gemma26b** attempt 1/3: SUCCESS (3.8s, 26 words)
+- **ENC-mara-2::option_b::gemma26b** attempt 1/3: SUCCESS (3.9s, 31 words)
+- **ENC-mara-2::option_c::gemma26b** attempt 1/3: SUCCESS (3.4s, 16 words)
+- **ENC-mara-3::setup::gemma26b** attempt 1/3: SUCCESS (5.9s, 57 words)
+- **ENC-mara-3::option_a::gemma26b** attempt 1/3: SUCCESS (4.6s, 44 words)
+- **ENC-mara-3::option_b::gemma26b** attempt 1/3: SUCCESS (3.6s, 24 words)
+- **ENC-mara-3::option_c::gemma26b** attempt 1/3: SUCCESS (3.4s, 15 words)
+- **ENC-toby-1::setup::gemma26b** attempt 1/3: SUCCESS (6.3s, 28 words)
+- **ENC-toby-1::option_a::gemma26b** attempt 1/3: SUCCESS (3.9s, 30 words)
+- **ENC-toby-1::option_b::gemma26b** attempt 1/3: SUCCESS (4.0s, 30 words)
+- **ENC-toby-1::option_c::gemma26b** attempt 1/3: SUCCESS (3.3s, 9 words)
+- **ENC-toby-2::setup::gemma26b** attempt 1/3: SUCCESS (5.4s, 44 words)
+- **ENC-toby-2::option_a::gemma26b** attempt 1/3: SUCCESS (3.3s, 13 words)
+- **ENC-toby-2::option_b::gemma26b** attempt 1/3: SUCCESS (3.4s, 17 words)
+- **ENC-toby-2::option_c::gemma26b** attempt 1/3: SUCCESS (3.4s, 14 words)
+- **ENC-toby-3::setup::gemma26b** attempt 1/3: SUCCESS (4.1s, 12 words)
+- **ENC-toby-3::option_a::gemma26b** attempt 1/3: SUCCESS (3.7s, 26 words)
+- **ENC-toby-3::option_b::gemma26b** attempt 1/3: SUCCESS (3.4s, 15 words)
+- **ENC-toby-3::option_c::gemma26b** attempt 1/3: SUCCESS (3.3s, 10 words)
+- **SPB-breath::setup::gemma26b** attempt 1/3: SUCCESS (5.7s, 34 words)
+- **SPB-breath::option_a::gemma26b** attempt 1/3: SUCCESS (4.0s, 28 words)
+- **SPB-breath::option_b::gemma26b** attempt 1/3: SUCCESS (3.7s, 27 words)
+- **SPB-breath::option_c::gemma26b** attempt 1/3: SUCCESS (3.4s, 20 words)
+- **SPB-dry::setup::gemma26b** attempt 1/3: SUCCESS (5.6s, 27 words)
+- **SPB-dry::option_a::gemma26b** attempt 1/3: SUCCESS (3.8s, 24 words)
+- **SPB-dry::option_b::gemma26b** attempt 1/3: SUCCESS (3.8s, 28 words)
+- **SPB-dry::option_c::gemma26b** attempt 1/3: SUCCESS (4.0s, 31 words)
+- **SPB-furrow::setup::gemma26b** attempt 1/3: SUCCESS (5.6s, 27 words)
+- **SPB-furrow::option_a::gemma26b** attempt 1/3: SUCCESS (3.8s, 26 words)
+- **SPB-furrow::option_b::gemma26b** attempt 1/3: SUCCESS (3.5s, 22 words)
+- **SPB-furrow::option_c::gemma26b** attempt 1/3: SUCCESS (3.3s, 16 words)
+- **SPB-ignite::setup::gemma26b** attempt 1/3: SUCCESS (5.2s, 20 words)
+- **SPB-ignite::option_a::gemma26b** attempt 1/3: SUCCESS (3.7s, 19 words)
+- **SPB-ignite::option_b::gemma26b** attempt 1/3: SUCCESS (3.5s, 20 words)
+- **SPB-ignite::option_c::gemma26b** attempt 1/3: SUCCESS (3.7s, 28 words)
+- **SPB-leap::setup::gemma26b** attempt 1/3: SUCCESS (5.2s, 40 words)
+- **SPB-leap::option_a::gemma26b** attempt 1/3: SUCCESS (3.8s, 22 words)
+- **SPB-leap::option_b::gemma26b** attempt 1/3: SUCCESS (3.6s, 25 words)
+- **SPB-leap::option_c::gemma26b** attempt 1/3: SUCCESS (3.7s, 28 words)
+- **SPB-portion::setup::gemma26b** attempt 1/3: SUCCESS (5.4s, 30 words)
+- **SPB-portion::option_a::gemma26b** attempt 1/3: SUCCESS (3.7s, 25 words)
+- **SPB-portion::option_b::gemma26b** attempt 1/3: SUCCESS (3.6s, 22 words)
+- **SPB-portion::option_c::gemma26b** attempt 1/3: SUCCESS (3.7s, 27 words)
+- **SPB-preserve::setup::gemma26b** attempt 1/3: SUCCESS (6.1s, 35 words)
+- **SPB-preserve::option_a::gemma26b** attempt 1/3: SUCCESS (3.9s, 26 words)
+- **SPB-preserve::option_b::gemma26b** attempt 1/3: SUCCESS (4.4s, 42 words)
+- **SPB-preserve::option_c::gemma26b** attempt 1/3: SUCCESS (4.3s, 38 words)
+- **SPB-scratch::setup::gemma26b** attempt 1/3: SUCCESS (5.3s, 23 words)
+- **SPB-scratch::option_a::gemma26b** attempt 1/3: SUCCESS (3.7s, 19 words)
+- **SPB-scratch::option_b::gemma26b** attempt 1/3: SUCCESS (3.5s, 21 words)
+- **SPB-scratch::option_c::gemma26b** attempt 1/3: SUCCESS (3.2s, 14 words)
+- **SPB-seal::setup::gemma26b** attempt 1/3: SUCCESS (4.3s, 32 words)
+- **SPB-seal::option_a::gemma26b** attempt 1/3: SUCCESS (3.7s, 21 words)
+- **SPB-seal::option_b::gemma26b** attempt 1/3: SUCCESS (3.4s, 19 words)
+- **SPB-seal::option_c::gemma26b** attempt 1/3: SUCCESS (3.9s, 26 words)
+- **SPB-steep::setup::gemma26b** attempt 1/3: SUCCESS (6.5s, 36 words)
+- **SPB-steep::option_a::gemma26b** attempt 1/3: SUCCESS (3.9s, 24 words)
+- **SPB-steep::option_b::gemma26b** attempt 1/3: SUCCESS (5.1s, 55 words)
+- **SPB-steep::option_c::gemma26b** attempt 1/3: SUCCESS (5.0s, 48 words)
+- **SPB-temper::setup::gemma26b** attempt 1/3: SUCCESS (6.5s, 39 words)
+- **SPB-temper::option_a::gemma26b** attempt 1/3: SUCCESS (3.6s, 17 words)
+- **SPB-temper::option_b::gemma26b** attempt 1/3: SUCCESS (3.5s, 20 words)
+- **SPB-temper::option_c::gemma26b** attempt 1/3: SUCCESS (3.6s, 24 words)
+- **SPB-waft::setup::gemma26b** attempt 1/3: SUCCESS (5.4s, 41 words)
+- **SPB-waft::option_a::gemma26b** attempt 1/3: SUCCESS (3.6s, 19 words)
+- **SPB-waft::option_b::gemma26b** attempt 1/3: SUCCESS (4.4s, 47 words)
+- **SPB-waft::option_c::gemma26b** attempt 1/3: SUCCESS (3.6s, 25 words)
+- **SPB-weigh::setup::gemma26b** attempt 1/3: SUCCESS (6.5s, 50 words)
+- **SPB-weigh::option_a::gemma26b** attempt 1/3: SUCCESS (3.7s, 17 words)
+- **SPB-weigh::option_b::gemma26b** attempt 1/3: SUCCESS (3.3s, 18 words)
+- **SPB-weigh::option_c::gemma26b** attempt 1/3: SUCCESS (3.5s, 20 words)
+
+## Phase 2 run finished 2026-08-25 19:51:30
+
+
+## Phase 2 run: model=gemma26b group=greetings started 2026-08-25 20:16:54
+
+- **GRT-linnet-generic** attempt 1/3: SUCCESS (4.5s, 16 words)
+- **GRT-nell-generic** attempt 1/3: SUCCESS (4.1s, 14 words)
+- **GRT-juno-generic** attempt 1/3: SUCCESS (4.3s, 14 words)
+- **GRT-pip-generic** attempt 1/3: SUCCESS (4.5s, 10 words)
+- **GRT-bex-generic** attempt 1/3: SUCCESS (4.7s, 12 words)
+
+## Phase 2 run finished 2026-08-25 20:17:17

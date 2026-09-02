@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The Arch, lit and festive, stood at the center of the room. Ilsa hovered nearby, her gaze fixed on the intricate centerpiece she'd crafted. A bench stood nearby, adorned with an apron and tongs at one end, a silent testament to a place once occupied. Ilsa counted the gathered crowd, her eyes flickering over each face, seeking one she couldn't quite find. The room hummed with anticipation, but for Ilsa, something crucial was still missing. She sighed, her shoulders slumping ever so slightly, as she turned back to the Arch, her unspoken thoughts hanging heavy in the air.",
+    "wc": 98,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player quietly takes the second place at the bench-end, without asking whose it was. Ilsa's eyes go to the seat, then away. She doesn't correct the player, doesn't explain it. She says, \"Put us down as\u2014\" and reaches toward the second place, but stops partway, turning back to the Arch instead. Nothing finishes the sentence. The lit Arch and the still-laid second place are the last image.",
+    "wc": 68,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player says: \"The Arch turned out fine.\" Ilsa responds: \"It did.\" Settled, certain.",
+    "wc": 14,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player steps closer to Ilsa. \"I'll stand here with you a minute.\" Ilsa doesn't answer in words. She shifts half a step, making room. The space between them widens, just a little, like a gap opening up in a sentence. Ilsa's hand starts to move, then stops, hovering near the bench end as if searching for something to finish the thought that never came. She turns back to the Arch, the lit centerpiece standing between them like a sentence waiting to be filled. The player stands with her, waiting, and together they look out at the gathering crowd, the festival night stretching out in silence.",
+    "wc": 106,
+    "ok": true,
+    "err": null
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The postman shifts his weight, settling into the shelter of the eaves as the rain peters out. He sets his satchel down, the worn leather creaking, and flips the top open. Inside, the letters lie damp at the edges, the ink already smudging. He tuts softly, a sound of long-practiced disappointment.",
+    "wc": 51,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player: \"Does it work once the ink's run?\"\nThe postman: \"No. Has to be caught early.\"",
+    "wc": 17,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player hands over a second damp letter from the bag. The postman takes it, sprinkles the same pinch of ash over its surface. Slowly, the water beads up and rolls away, leaving the ink crisp and untouched. He looks up at the player, a hint of pleased surprise in his eyes. \"Well, that works a treat. Never had a volunteer to test it before.\"",
+    "wc": 65,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player tries the ash on a parcel that's already dry, out of curiosity. The postman watches, a small furrow appearing in his brow as the dry parcel remains unchanged. \"No water to take out, no effect. It's only good for damp.\"",
+    "wc": 42,
+    "ok": true,
+    "err": null
+  }
+}

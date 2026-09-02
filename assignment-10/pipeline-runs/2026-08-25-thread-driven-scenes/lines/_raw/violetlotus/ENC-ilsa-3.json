@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Ilsa waits, the centerpiece nearly finished on the bench, the substitute stone still in the socket. She sets her tools down, the first time she's visibly not mid-task as the player arrives. \"Near enough now,\" she says, settled, no elaboration. The light through the workshop window casts shadows across the piece, illuminating the intricate join that holds it together. She looks up at the player, her expression neutral but warm in a way that seems to welcome their presence. The workshop is quiet, the only sound the soft hum of the furnace in the corner, waiting for its next task. Ilsa's hands rest on the workbench, ready for what comes next.",
+    "wc": 111,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "Ilsa sets the real special ore into the socket, checking the seat with care. She works over this piece a beat longer than the substitute, her hands steady and sure. The centerpiece stands finished, the true ore gleaming under the light. \"It's done,\" she says, her voice flat and satisfied. \"Let's go home.\" She gathers her tools and begins to pack up the forge.",
+    "wc": 64,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "Ilsa finishes the seam, sets her tools down. \"It'll do.\"",
+    "wc": 10,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player sets the tray down. \"It's coming together.\" Ilsa looks up from her work, her face softening for a moment. \"It is.\" Then she turns back to her tools, the space between them filled with unspoken understanding. A bond, forged in silence and shared purpose, holds strong. `bond_event(Recognition, weight 2)` is recorded, but no thread move occurs, as the scene finds its natural close with the completion of the centerpiece.",
+    "wc": 71,
+    "ok": true,
+    "err": null
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Mara sorts the remaining bundles on the counter, her fingers working with a steady rhythm as she glances toward the frosted window. \"The frost stays for the week, it looks,\" she says, her voice as calm as the morning. \"We'll have to keep the baskets close to the hearth, and make sure the covers are pulled tight, just as they were before.\"",
+    "wc": 62,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player hands over a basket of berries gathered from the clearing. Mara checks their color and firmness, then adds them to the working pile. \"These will hold, even with the frost coming, if we keep them in the cool of the cellar.\"",
+    "wc": 43,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player casts a steep over the vessel, pulling the virtue into the spring water. Mara watches the color change, then sets the vessel aside to work. \"That'll do. The frost is coming, but it keeps.\"",
+    "wc": 36,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "\"How's it looking?\"\n\nMara adjusts the remaining baskets, her gaze sweeping the empty shelf. \"Tight, but it keeps.\"",
+    "wc": 18,
+    "ok": true,
+    "err": null
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Mara rests her hand near the kettle as steam rises, watching the water darken. \"The water takes the berries' color fast when the cast draws it, but slower otherwise, and either way it's better than waiting on the fire alone.\"",
+    "wc": 40,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player asks, \"Does it work on plain water?\"\n\nMara continues to stir the pot without looking up. \"Not on its own, no. It needs something in it first to give the magic a handle to grab onto, otherwise the color just sits there like a stubborn stain.\"",
+    "wc": 48,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player hands over a fresh skin of spring water and a handful of berries. Mara pours the mixture into the second kettle and watches as the water transforms. \"That's the trick to it\u2014when you give the heat something to grab onto first, the draw takes hold much faster than it ever would on its own.\"",
+    "wc": 56,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player dips the cup into the well water instead. The liquid turns a pale, unappetizing gray from the sediment below, failing to draw any true color.",
+    "wc": 27,
+    "ok": true,
+    "err": null
+  }
+}

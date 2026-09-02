@@ -1,0 +1,15 @@
+{
+  "seed": 40712,
+  "day": 1,
+  "slot_fill": [
+    { "screen_id": "T2", "time_block": "morning", "soul": "toby" },
+    { "screen_id": "T1", "time_block": "midday", "soul": "mara" },
+    { "screen_id": "T1", "time_block": "evening", "soul": "toby" }
+  ],
+  "item_rolls": [
+    { "slot_id": "SL-T1-01", "item": "empty" },
+    { "slot_id": "SL-F1-01", "item": "sticks" }
+  ],
+  "live_leads": ["G-T1-showask", "G-F1-fernpath"],
+  "aliveness_band": "mid"
+}

@@ -1,0 +1,659 @@
+{
+  "provisional": true,
+  "generated": "layout-pass 2026-07-29",
+  "source": "resources/level-layout_draft.md (ratified structure) transcribed per narrative-pipeline/templates/screen-spec-schema.md",
+  "note": "PROVISIONAL — pending human review. Transcription only; every uncertainty is a 'note' field, not a decision. Region shapes are null placeholders until screen images exist (schema permits placeholder rectangles; geometry not invented here).",
+  "screens": [
+    {
+      "screen_id": "HOME",
+      "location": "home",
+      "name": "Home",
+      "status": "hub",
+      "vibe": "Your home for the night — GDD 08-levels.md's Home Hub.",
+      "note": "D2 iteration 3 (graph.ts's HOME_SCREEN_ID): the real ScreenSpec entry main.ink's hand-authored home_hub/calendar knots tag themselves with (ink.ts's emitMain), so the stage pane resolves the Home Hub instead of showing whatever real screen the player last stood on. Never a start screen (status is 'hub', not 'start', so screen_hub/the calendar never offer it) and never a DayInput.picked_location value (location 'home' is never town/forest/farm, and the calendar can only ever pick from start screens). ink.ts excludes this id from the generic per-screen world-file loop — the Home Hub's flow is hand-authored, not generated from a ScreenSpec — so it mints no world/*.ink file. Bank/decorate/satchel-triage (GDD: 'bank what fits the satchel, and decorate it') are D6's build; this entry only carries enough shape for the stage pane to show a real, honest 'you are home' screen — no exits, no NPCs, no items.",
+      "gates": [],
+      "examinables": [],
+      "forage": [],
+      "npc_slots": [],
+      "item_slots": [],
+      "time_states": [],
+      "connects_to": [],
+      "regions": []
+    },
+    {
+      "screen_id": "T1",
+      "location": "town",
+      "name": "Town Square",
+      "status": "start",
+      "vibe": "The festival's home; the Lantern Arch landmark",
+      "gates": [
+        {
+          "gate_id": "G-T1-showask",
+          "archetype": "Signpost",
+          "preview": true,
+          "five_field_ref": "opening Show/Ask intro (no gate-map stub)"
+        }
+      ],
+      "note": "The Ahnonay/Landmark state (the Arch aged across years) rides as the arch examinable's state, not a lock — per the schema's T1 worked instance. Part of the distributed opening (draft §Opening).",
+      "examinables": [
+        {
+          "id": "arch",
+          "clue_tier": "ambient",
+          "promotes_to": {
+            "tier": "hard-key",
+            "condition": "RULED (Roc, 2026-07-29): a formula over thread progress (thread_move ladders) plus role-goal progress; bond is barred. Exact predicate is an architect-proposal, pending gate — see arch-promote-proposal.json"
+          },
+          "region": "r_arch"
+        },
+        {
+          "id": "notice_board",
+          "clue_tier": "soft-signpost",
+          "region": "r_board"
+        }
+      ],
+      "forage": ["item_ash", "item_feather"],
+      "npc_slots": [
+        { "time_block": "morning", "count": 2 },
+        { "time_block": "afternoon", "count": 2 },
+        { "time_block": "evening", "count": 2 }
+      ],
+      "item_slots": [],
+      "time_states": ["morning", "afternoon", "evening"],
+      "connects_to": [
+        { "screen_id": "T2" },
+        { "screen_id": "T3" },
+        { "screen_id": "F1", "seam": "forest_path" }
+      ],
+      "regions": [
+        { "region_id": "r_arch", "shape": null },
+        { "region_id": "r_board", "shape": null }
+      ]
+    },
+    {
+      "screen_id": "T2",
+      "location": "town",
+      "name": "Market Row",
+      "status": "start",
+      "vibe": "Stalls, trade, small folk-magic",
+      "gates": [
+        {
+          "gate_id": "G-T2-make",
+          "archetype": "Demo",
+          "five_field_ref": "Make intro — combine at a stall (no gate-map stub)",
+          "note": "RULED (Roc, 2026-07-30, review items D2-6): the five verb intros (T2 Make, T3 Use, F1 Collect, F2 Use, F3 Make) are typed Demo — a new archetype for the place a verb is first taught. A Demo blocks nothing and holds no key; it is kept as a gate entry so Lantern and the scene-mapping instrumentation can see where each verb enters the game. T1's Show/Ask intro keeps its Signpost(preview) typing — it previews a real door."
+        }
+      ],
+      "note": "Draft §Opening credits T2 with the Collect demo (forage) as well as Make, but the table's gate column lists only the Make intro — Make transcribed as the gate; Collect demo noted here, not minted.",
+      "examinables": [
+        {
+          "id": "stall_goods",
+          "clue_tier": "soft-signpost",
+          "region": "r_stall_goods"
+        },
+        {
+          "id": "ex-shelf",
+          "clue_tier": "soft-signpost",
+          "region": "r_ex_shelf",
+          "knowledge_flag": "shelf_seen",
+          "note": "The shelf thread's only pickup (lantern-projects/v01/threads/toby-the-shelf.md, Proposed examinables). Sets shelf_seen, reopening C1's closed path for a player who never asked about the jars — without it C4 is lost rather than shallowed (R5). clue_tier RULED (Roc, 2026-08-07): soft-signpost, the same tier as the examine-arch-style button already in Lantern."
+        }
+      ],
+      "forage": ["item_wool", "item_feather"],
+      "npc_slots": [
+        { "time_block": "morning", "count": 2 },
+        { "time_block": "afternoon", "count": 2 }
+      ],
+      "item_slots": [],
+      "time_states": ["morning", "afternoon"],
+      "connects_to": [{ "screen_id": "T1" }, { "screen_id": "T4" }],
+      "regions": [
+        { "region_id": "r_stall_goods", "shape": null },
+        { "region_id": "r_ex_shelf", "shape": null }
+      ]
+    },
+    {
+      "screen_id": "T3",
+      "location": "town",
+      "name": "The Commons / Well",
+      "status": "start",
+      "vibe": "A cluster of homes; daily life",
+      "gates": [
+        {
+          "gate_id": "G-T3-use",
+          "archetype": "Demo",
+          "five_field_ref": "Use intro — ignite a brazier/lantern; no effect on a person, receiver-determined (no gate-map stub)",
+          "note": "RULED (Roc, 2026-07-30, review items D2-6): typed Demo — the place this verb is first taught. Blocks nothing, has no key (see G-T2-make note)."
+        }
+      ],
+      "examinables": [
+        { "id": "well", "clue_tier": "ambient", "region": "r_well" },
+        { "id": "doorsteps", "clue_tier": "ambient", "region": "r_doorsteps" }
+      ],
+      "forage": ["item_spring_water", "item_berry"],
+      "npc_slots": [
+        { "time_block": "morning", "count": 2 },
+        { "time_block": "afternoon", "count": 2 },
+        { "time_block": "evening", "count": 2 }
+      ],
+      "item_slots": [],
+      "time_states": ["morning", "afternoon", "evening"],
+      "connects_to": [{ "screen_id": "T1" }, { "screen_id": "T5" }],
+      "regions": [
+        { "region_id": "r_well", "shape": null },
+        { "region_id": "r_doorsteps", "shape": null }
+      ]
+    },
+    {
+      "screen_id": "T4",
+      "location": "town",
+      "name": "The Workshop",
+      "status": "start",
+      "vibe": "Where Make gets deep",
+      "gates": [
+        {
+          "gate_id": "G-T4-recipe",
+          "archetype": "Knowledge",
+          "five_field_ref": "Kadish recipe-lock — know the recipe, the door is trivial (no gate-map stub)",
+          "note": "RULED (Roc, 2026-08-13): rescinded — the Workshop should not be recipe-gated. Kept on record rather than deleted (Gates.ts's own posture: this lock was already advisory-only and unenforced by ink — see that file's header — so rescinding it is a status-field change, not new mechanic removal)."
+        }
+      ],
+      "note": "Draft says T4 also 'holds deep Make gates' (plural, unenumerated) — not minted here; flagged for a later pass. Draft's F4 row names the Workshop as one of two places the 'still the water' phrase is learned.",
+      "examinables": [
+        {
+          "id": "tools",
+          "clue_tier": "hard-key",
+          "region": "r_tools",
+          "note": "Draft writes 'tools, recipe-board (hard-key)' — the tier annotation reads as shared across the listed pair (parallel to T3's shared 'ambient'), but confirm tools is truly hard-key."
+        },
+        {
+          "id": "recipe_board",
+          "clue_tier": "hard-key",
+          "region": "r_recipe_board"
+        }
+      ],
+      "forage": ["item_ash", "item_wool"],
+      "npc_slots": [
+        { "time_block": "afternoon", "count": 1 },
+        {
+          "time_block": "evening",
+          "count": 1,
+          "note": "Added 2026-08-31: Ilsa is now fixed here afternoons AND evenings (Soul.fixed_placement, day.ts) — the evening slot exists so her guaranteed placement has real capacity to land in, not just her afternoon one."
+        }
+      ],
+      "item_slots": [],
+      "time_states": ["afternoon", "evening"],
+      "connects_to": [{ "screen_id": "T2" }],
+      "regions": [
+        { "region_id": "r_tools", "shape": null },
+        { "region_id": "r_recipe_board", "shape": null }
+      ]
+    },
+    {
+      "screen_id": "T5",
+      "location": "town",
+      "name": "A Neighbor's Home",
+      "status": "locked(G-T5-trust)",
+      "vibe": "Deeper social interior",
+      "gates": [
+        {
+          "gate_id": "G-T5-trust",
+          "archetype": "Signpost",
+          "preview": true,
+          "five_field_ref": "G1"
+        }
+      ],
+      "note": "The draft's 'Garrison-preview' door and its 'Show/Ask relationship gate' are transcribed as one gate (G1's five fields describe both the named key-type and the trust-threshold solution). A relationship lock is locked(gate_id) with a Signpost gate per the schema's status row.",
+      "examinables": [
+        {
+          "id": "mementos",
+          "clue_tier": "hard-key",
+          "region": "r_mementos",
+          "note": "Draft marks these 'hard-key echo-carriers'."
+        }
+      ],
+      "forage": [],
+      "npc_slots": [
+        {
+          "time_block": "evening",
+          "count": 1,
+          "restrict": "deep",
+          "note": "Draft marks this slot 'a deep NPC'. RULED (Roc, 2026-07-30, review item C3): npc_slot takes an optional restrict qualifier. Who stands here is still the resolver's output."
+        }
+      ],
+      "item_slots": [],
+      "time_states": ["evening"],
+      "connects_to": [{ "screen_id": "T3" }],
+      "regions": [{ "region_id": "r_mementos", "shape": null }]
+    },
+    {
+      "screen_id": "T6",
+      "location": "town",
+      "name": "The Tavern / Inn",
+      "status": "locked(G-T6-evening)",
+      "vibe": "Evening social hub",
+      "gates": [
+        {
+          "gate_id": "G-T6-evening",
+          "archetype": "Knowledge",
+          "five_field_ref": "G4"
+        }
+      ],
+      "note": "Draft says 'a Garrison-preview names time as the key' — transcribed as part of G4's clues rather than minted as a separate Signpost gate entry; flag for review (the schema's '-preview forms are Signpost entries' rule could also read as a second gate here).",
+      "examinables": [
+        { "id": "hearth", "clue_tier": "soft-signpost", "region": "r_hearth" },
+        { "id": "ledger", "clue_tier": "soft-signpost", "region": "r_ledger" }
+      ],
+      "forage": [],
+      "npc_slots": [
+        { "time_block": "evening", "count": 3 },
+        { "time_block": "night", "count": 3 }
+      ],
+      "item_slots": [],
+      "time_states": ["evening", "night"],
+      "connects_to": [{ "screen_id": "T1" }],
+      "regions": [
+        { "region_id": "r_hearth", "shape": null },
+        { "region_id": "r_ledger", "shape": null }
+      ]
+    },
+    {
+      "screen_id": "T7",
+      "location": "town",
+      "name": "Festival Grounds",
+      "status": "reachable",
+      "vibe": "Where the run's build-up pays off",
+      "note": "RULED (Roc, 2026-07-30, review item D11): the access lock is REMOVED. The Festival Grounds can be visited from the start; the festival itself happens on the last day. That is a calendar event in the day/progression data, not a screen lock — so the design law (locks open by performing knowledge) needs no exception here. Open by default, but not a main screen: it carries a story-NPC slot at a reduced draw weight (tuning.json story_guarantee.rare_screens). Status is \"reachable\" rather than \"start\" (D2, 2026-08-01): 08-levels.md calls this screen \"the final screen\", never a day-opening pick, and \"reachable\" (bare, no gate) keeps it unlocked without offering it at day_start/the calendar.",
+      "gates": [
+        {
+          "gate_id": "G-T7-recognition",
+          "archetype": "Proof",
+          "five_field_ref": "G3"
+        }
+      ],
+      "examinables": [
+        { "id": "stage", "clue_tier": "hard-key", "region": "r_stage" },
+        { "id": "lanterns", "clue_tier": "hard-key", "region": "r_lanterns" }
+      ],
+      "forage": ["item_beeswax", "item_grass"],
+      "npc_slots": [
+        { "time_block": "evening", "count": 3 },
+        { "time_block": "night", "count": 3 }
+      ],
+      "item_slots": [],
+      "time_states": ["evening", "night"],
+      "connects_to": [{ "screen_id": "T1" }],
+      "regions": [
+        { "region_id": "r_stage", "shape": null },
+        { "region_id": "r_lanterns", "shape": null }
+      ]
+    },
+    {
+      "screen_id": "T9",
+      "location": "town",
+      "name": "Festival Vignette",
+      "status": "hub",
+      "vibe": "The festival night's closing vignette, shaped by the life just lived.",
+      "note": "New 2026-08-01 (plans/2026-08-01-festival-night-transition-plan.md, section B). Entered only from T7's night hub — once every festival-night scene there has been played, or by the player's own early choice (RULED 2026-08-01) — via main.ink's hand-authored `festival_vignette` knot (graph.ts's VIGNETTE_SCREEN_ID). Not generated by emitScreen's generic per-screen pipeline, same reasoning as HOME_SCREEN_ID: status \"hub\" keeps it out of screen_hub/the calendar, and ink.ts's emitInk excludes this id from the generic world-file loop so no dead world/t9.ink is minted. No exits back into the world (the final sequence is one-way, RULED 2026-08-01) — the only way out is forward into FS. Placeholder prose only, tagged #screen:T9; real prose is the prose pass's job.",
+      "gates": [],
+      "examinables": [],
+      "forage": [],
+      "npc_slots": [],
+      "item_slots": [],
+      "time_states": ["night"],
+      "connects_to": [],
+      "regions": []
+    },
+    {
+      "screen_id": "TN",
+      "location": "town",
+      "name": "Festival Night",
+      "status": "hub",
+      "vibe": "The town under festival night — the night version of the world, held for a moment before the results.",
+      "note": "New 2026-08-02 (GP-51, Roc's playtest note: \"needs a Night time screen that shows night version before the Final Screen\"). Sits between T9 and FS in the final sequence: festival_vignette diverts here, and the player's single forward choice (\"Go to the results\") diverts on to final_screen. Hand-authored in main.ink (graph.ts's NIGHT_SCREEN_ID), same reasoning as HOME_SCREEN_ID/VIGNETTE_SCREEN_ID/FINAL_SCREEN_ID: status \"hub\" keeps it out of screen_hub/the calendar, and ink.ts's emitInk excludes this id from the generic world-file loop so no dead world/tn.ink is minted. No exits back into the world (the final sequence is one-way, RULED 2026-08-01) — the only way out is forward into FS. Placeholder prose only, tagged #screen:TN; real prose is the prose pass's job.",
+      "gates": [],
+      "examinables": [],
+      "forage": [],
+      "npc_slots": [],
+      "item_slots": [],
+      "time_states": ["night"],
+      "connects_to": [],
+      "regions": []
+    },
+    {
+      "screen_id": "FS",
+      "location": "town",
+      "name": "Final Screen",
+      "status": "hub",
+      "vibe": "Summary, results, and the prompt to live it again.",
+      "note": "New 2026-08-01 (plans/2026-08-01-festival-night-transition-plan.md, section B). The final sequence's terminus (GDD 03-core-loop.md's day-5 exception; the ratified \"final sequence\" definition). Entered only from T9, via main.ink's hand-authored `final_screen` knot (graph.ts's FINAL_SCREEN_ID) — same hand-authored/non-generated treatment as HOME_SCREEN_ID and VIGNETTE_SCREEN_ID. The results slots (festival tier, bonds, threads) are named as placeholders until role_goals_advanced compiles (out of scope for this plan). No exits — the restart prompt is its content, and `-> END` here is the story's only ending now that the old SYS-CYCLE-END day-overrun ending is retired.",
+      "gates": [],
+      "examinables": [],
+      "forage": [],
+      "npc_slots": [],
+      "item_slots": [],
+      "time_states": ["night"],
+      "connects_to": [],
+      "regions": []
+    },
+    {
+      "screen_id": "VIGQ",
+      "location": "town",
+      "name": "Festival Vignette — Quiet",
+      "status": "hub",
+      "vibe": "The quiet tier of the festival-night vignette (festival_score 0–3).",
+      "note": "New 2026-08-30 (Roc's festival-vignette tier ruling). One of the three tier screens the final-sequence `festival_vignette` router (ink.ts's emitMain) branches to on `festival_score`: 0–3 → VIGQ. Its content is a `narrator`-soul scene (VIG-quiet in scene-graph.json, ink stitch narrator.vig_quiet) that plays straight through and ends `-> night_screen`. BLACK placeholder on purpose — no manifest art. Hand-authored/non-generated like T9/TN/FS (graph.ts's VIGNETTE_QUIET_SCREEN_ID): status 'hub' keeps it out of screen_hub/the calendar, and ink.ts's emitInk excludes this id from the generic world-file loop so no dead world/vigq.ink is minted. No hub of its own — the narrator scene is played by the router, not entered from a hub.",
+      "gates": [],
+      "examinables": [],
+      "forage": [],
+      "npc_slots": [],
+      "item_slots": [],
+      "time_states": ["night"],
+      "connects_to": [],
+      "regions": []
+    },
+    {
+      "screen_id": "VIGW",
+      "location": "town",
+      "name": "Festival Vignette — Warm",
+      "status": "hub",
+      "vibe": "The warm tier of the festival-night vignette (festival_score 3.5–6.5).",
+      "note": "New 2026-08-30 (Roc's festival-vignette tier ruling). One of the three tier screens the final-sequence `festival_vignette` router (ink.ts's emitMain) branches to on `festival_score`: 3.5–6.5 → VIGW. Its content is a `narrator`-soul scene (VIG-warm in scene-graph.json, ink stitch narrator.vig_warm) that plays straight through and ends `-> night_screen`. BLACK placeholder on purpose — no manifest art. Hand-authored/non-generated like T9/TN/FS (graph.ts's VIGNETTE_WARM_SCREEN_ID): status 'hub' keeps it out of screen_hub/the calendar, and ink.ts's emitInk excludes this id from the generic world-file loop so no dead world/vigw.ink is minted. No hub of its own — the narrator scene is played by the router, not entered from a hub.",
+      "gates": [],
+      "examinables": [],
+      "forage": [],
+      "npc_slots": [],
+      "item_slots": [],
+      "time_states": ["night"],
+      "connects_to": [],
+      "regions": []
+    },
+    {
+      "screen_id": "VIGG",
+      "location": "town",
+      "name": "Festival Vignette — Grand",
+      "status": "hub",
+      "vibe": "The grand tier of the festival-night vignette (festival_score 7–9).",
+      "note": "New 2026-08-30 (Roc's festival-vignette tier ruling). One of the three tier screens the final-sequence `festival_vignette` router (ink.ts's emitMain) branches to on `festival_score`: 7–9 → VIGG. Its content is a `narrator`-soul scene (VIG-grand in scene-graph.json, ink stitch narrator.vig_grand) that plays straight through and ends `-> night_screen`; its final line interpolates {player_name}. BLACK placeholder on purpose — no manifest art. Hand-authored/non-generated like T9/TN/FS (graph.ts's VIGNETTE_GRAND_SCREEN_ID): status 'hub' keeps it out of screen_hub/the calendar, and ink.ts's emitInk excludes this id from the generic world-file loop so no dead world/vigg.ink is minted. No hub of its own — the narrator scene is played by the router, not entered from a hub.",
+      "gates": [],
+      "examinables": [],
+      "forage": [],
+      "npc_slots": [],
+      "item_slots": [],
+      "time_states": ["night"],
+      "connects_to": [],
+      "regions": []
+    },
+    {
+      "screen_id": "T8",
+      "location": "town",
+      "name": "The Old Shrine (Town)",
+      "status": "reachable(G-T8-cipher)",
+      "vibe": "A quiet edge-of-town relic",
+      "gates": [
+        {
+          "gate_id": "G-T8-cipher",
+          "archetype": "Traveler",
+          "five_field_ref": "G2"
+        }
+      ],
+      "note": "Stretch 8th Town screen. Reading the carvings is the C1 knowledge-demonstration — reachable, never flag-locked; bidirectional with F6. Ambiguity: G2's clue 'readable only at night — moonlight' says 'either site', but only F6's row states the night restriction explicitly; whether T8's carvings also need night is unconfirmed — flagged, not decided. seen-tracking is narrative-only (never gates the read).",
+      "examinables": [
+        {
+          "id": "shrine_carvings",
+          "clue_tier": "hard-key",
+          "region": "r_shrine_carvings"
+        }
+      ],
+      "forage": [],
+      "npc_slots": [],
+      "item_slots": [],
+      "time_states": ["evening", "night"],
+      "connects_to": [{ "screen_id": "T3" }],
+      "regions": [{ "region_id": "r_shrine_carvings", "shape": null }]
+    },
+    {
+      "screen_id": "F1",
+      "location": "forest",
+      "name": "Forager's Clearing",
+      "status": "start",
+      "vibe": "Sun-dappled edge of the wood",
+      "gates": [
+        {
+          "gate_id": "G-F1-collect",
+          "archetype": "Demo",
+          "five_field_ref": "Collect intro — forage (no gate-map stub)",
+          "note": "RULED (Roc, 2026-07-30, review items D2-6): typed Demo — the place this verb is first taught. Blocks nothing, has no key (see G-T2-make note)."
+        },
+        {
+          "gate_id": "G-F1-showask",
+          "archetype": "Signpost",
+          "preview": true,
+          "five_field_ref": "opening Show/Ask intro, forest side (no gate-map stub)",
+          "note": "Archetype and preview mirrored from the schema's T1 worked instance for the same intro type; the draft itself names no archetype — pending review."
+        }
+      ],
+      "note": "Part of the distributed opening (draft §Opening).",
+      "examinables": [
+        {
+          "id": "trail_signs",
+          "clue_tier": "soft-signpost",
+          "region": "r_trail_signs"
+        }
+      ],
+      "forage": ["item_sticks", "item_dirt", "item_grass"],
+      "npc_slots": [
+        { "time_block": "morning", "count": 1 },
+        { "time_block": "afternoon", "count": 1 },
+        { "time_block": "evening", "count": 1 }
+      ],
+      "item_slots": [],
+      "time_states": ["morning", "afternoon", "evening"],
+      "connects_to": [
+        { "screen_id": "T1", "seam": "forest_path" },
+        { "screen_id": "F2" },
+        { "screen_id": "F3" }
+      ],
+      "regions": [{ "region_id": "r_trail_signs", "shape": null }]
+    },
+    {
+      "screen_id": "F2",
+      "location": "forest",
+      "name": "The Stream",
+      "status": "start",
+      "vibe": "Running water, a crossing",
+      "gates": [
+        {
+          "gate_id": "G-F2-use",
+          "archetype": "Demo",
+          "five_field_ref": "Use intro — ignite a fire-ring / gathered kindling; no effect on the water, receiver-determined (no gate-map stub)",
+          "note": "RULED (Roc, 2026-07-30, review items D2-6): typed Demo — the place this verb is first taught. Blocks nothing, has no key (see G-T2-make note)."
+        }
+      ],
+      "note": "Draft's F4 row names F2 as one of two places the 'still the water' phrase is learned (the other is the Workshop, T4) — content, not a gate held here.",
+      "examinables": [
+        { "id": "ford", "clue_tier": "soft-signpost", "region": "r_ford" }
+      ],
+      "forage": ["item_river_stone", "item_spring_water"],
+      "npc_slots": [],
+      "item_slots": [],
+      "time_states": ["morning", "afternoon"],
+      "connects_to": [{ "screen_id": "F1" }, { "screen_id": "F4" }],
+      "regions": [{ "region_id": "r_ford", "shape": null }]
+    },
+    {
+      "screen_id": "F3",
+      "location": "forest",
+      "name": "The Grove",
+      "status": "start",
+      "vibe": "Deeper, quieter woods",
+      "gates": [
+        {
+          "gate_id": "G-F3-make",
+          "archetype": "Demo",
+          "five_field_ref": "Make intro — field-craft, combine two forageables (no gate-map stub)",
+          "note": "RULED (Roc, 2026-07-30, review items D2-6): typed Demo — the place this verb is first taught. Blocks nothing, has no key (see G-T2-make note)."
+        }
+      ],
+      "examinables": [
+        {
+          "id": "old_carvings",
+          "clue_tier": "ambient",
+          "promotes_to": {
+            "tier": "hard-key",
+            "condition": null,
+            "note": "Draft writes 'ambient→hard-key' with no promotion condition and no ruling (unlike T1's arch, which is RULED) — condition left null; flagged for the gate."
+          },
+          "region": "r_old_carvings"
+        }
+      ],
+      "forage": ["item_grass", "item_tree_sap"],
+      "npc_slots": [
+        { "time_block": "afternoon", "count": 1 },
+        { "time_block": "evening", "count": 1 }
+      ],
+      "item_slots": [],
+      "time_states": ["afternoon", "evening"],
+      "connects_to": [{ "screen_id": "F1" }, { "screen_id": "F5" }],
+      "regions": [{ "region_id": "r_old_carvings", "shape": null }]
+    },
+    {
+      "screen_id": "F4",
+      "location": "forest",
+      "name": "The Still Pool",
+      "status": "reachable",
+      "vibe": "A waterfall pool",
+      "gates": [
+        {
+          "gate_id": "G-F4-still",
+          "archetype": "Knowledge",
+          "five_field_ref": "Kadish phrase-lock: knowledge-key phrase 'still the water', learned at F2 or the Workshop T4 (no gate-map stub)"
+        }
+      ],
+      "note": "Draft calls this the 'metroidbrainia gate at the map level'.",
+      "examinables": [
+        { "id": "pool_bed", "clue_tier": "hard-key", "region": "r_pool_bed" }
+      ],
+      "forage": ["item_spring_water", "item_berry"],
+      "npc_slots": [],
+      "item_slots": [],
+      "time_states": ["afternoon"],
+      "connects_to": [{ "screen_id": "F2" }],
+      "regions": [{ "region_id": "r_pool_bed", "shape": null }]
+    },
+    {
+      "screen_id": "F5",
+      "location": "forest",
+      "name": "Old-Growth Hollow",
+      "status": "locked(G-F5-cascade)",
+      "vibe": "Ancient trees, one chokepoint",
+      "gates": [
+        {
+          "gate_id": "G-F5-cascade",
+          "archetype": "Cascade",
+          "five_field_ref": "Teledahn chokepoint — one insight lights up F6 + F7 at once (supporting archetype in the gate-map; no numbered stub)"
+        }
+      ],
+      "note": "Prose-ambiguous: the status column locks F5 on 'an observation' while the gate column says 'one insight here lights up F6 + F7'. Whether the observation that opens F5 is the same insight that cascades to F6/F7, or a separate prior observation (made where?), the draft does not say — transcribed as one Cascade gate, flagged for the gate.",
+      "examinables": [
+        {
+          "id": "great_trunk",
+          "clue_tier": "hard-key",
+          "region": "r_great_trunk"
+        }
+      ],
+      "forage": [],
+      "npc_slots": [
+        { "time_block": "afternoon", "count": 1 },
+        { "time_block": "evening", "count": 1 }
+      ],
+      "item_slots": [],
+      "time_states": ["afternoon", "evening"],
+      "connects_to": [{ "screen_id": "F3" }],
+      "regions": [{ "region_id": "r_great_trunk", "shape": null }]
+    },
+    {
+      "screen_id": "F6",
+      "location": "forest",
+      "name": "The Old Shrine (Forest) / Ruin",
+      "status": "locked(G-F5-cascade)",
+      "vibe": "A ruin the past inhabitants used",
+      "gates": [
+        {
+          "gate_id": "G-F6-cipher",
+          "archetype": "Traveler",
+          "five_field_ref": "G2"
+        },
+        {
+          "gate_id": "G-F6-night",
+          "archetype": "Knowledge",
+          "five_field_ref": "G4"
+        }
+      ],
+      "note": "Two layers the draft keeps distinct: traversal to F6 is locked by the F5 Teledahn cascade (status references G-F5-cascade, held on F5), while the cipher read itself is a knowledge-demonstration, never flag-locked, bidirectional with T8. Tension flagged, not resolved: the seam section says 'Both shrines are reachable; nothing gates walking up to them,' but this row's status is [LOCK: Teledahn cascade] (traversal) — table transcribed as primary. Marks readable only at night (moonlight, G4). seen-tracking is narrative-only.",
+      "examinables": [
+        {
+          "id": "ritual_marks",
+          "clue_tier": "hard-key",
+          "region": "r_ritual_marks",
+          "note": "The travelling cipher (C1)."
+        }
+      ],
+      "forage": [],
+      "npc_slots": [],
+      "item_slots": [],
+      "time_states": ["evening", "night"],
+      "connects_to": [{ "screen_id": "F5" }],
+      "regions": [{ "region_id": "r_ritual_marks", "shape": null }]
+    },
+    {
+      "screen_id": "F7",
+      "location": "forest",
+      "name": "The Cave",
+      "status": "locked(G-F7-light)",
+      "vibe": "Dark, deep, a payoff space",
+      "gates": [
+        {
+          "gate_id": "G-F7-light",
+          "archetype": "Knowledge",
+          "five_field_ref": "light-source knowledge-key (no gate-map stub)",
+          "note": "Draft: 'Unlock via the F5 insight + a light-source knowledge-key'. RULED (Roc, 2026-07-30, review item C1): the schema's status now takes locked(a, b), conjunction only. Both keys are required — the cascade AND the light key."
+        }
+      ],
+      "note": "Reward-space-as-destination (pnc-grammar §7).",
+      "examinables": [
+        { "id": "cave_walls", "clue_tier": "hard-key", "region": "r_cave_walls" }
+      ],
+      "forage": ["item_captured_sound", "key_raw_ore"],
+      "npc_slots": [],
+      "item_slots": [],
+      "time_states": ["night"],
+      "connects_to": [{ "screen_id": "F5" }],
+      "regions": [{ "region_id": "r_cave_walls", "shape": null }]
+    },
+    {
+      "screen_id": "F8",
+      "location": "forest",
+      "name": "Heart of the Wood",
+      "status": "locked(G-F8-combine)",
+      "vibe": "The forest's deepest secret",
+      "gates": [
+        {
+          "gate_id": "G-F8-combine",
+          "archetype": "Traveler",
+          "five_field_ref": "Laki combine — two fragments, 'neither sufficient alone' (no gate-map stub)"
+        }
+      ],
+      "note": "Stretch 8th Forest screen. F8 heated-stone chain (Roc, 2026-08-19): the approach hosts the three cast receivers of G-F8-combine — a loose river_stone worked at the wall (ignite -> heated_stone -> temper -> tempered), and the stone_wall feature fetch seats it into to open the way in.",
+      "examinables": [
+        { "id": "heart_tree", "clue_tier": "hard-key", "region": "r_heart_tree" }
+      ],
+      "receivers": ["river_stone", "heated_stone", "stone_wall"],
+      "forage": ["key_raw_ore"],
+      "npc_slots": [],
+      "item_slots": [],
+      "time_states": ["evening", "night"],
+      "connects_to": [{ "screen_id": "F5" }],
+      "regions": [{ "region_id": "r_heart_tree", "shape": null }]
+    }
+  ]
+}

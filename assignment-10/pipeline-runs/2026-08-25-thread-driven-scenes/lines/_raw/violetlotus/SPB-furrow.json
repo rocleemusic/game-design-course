@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The farmer stands at the field's edge, the earth soft and ready from the morning's work. She sets a pair of sticks into the ground and scoops up a handful of soil. \"First the ground has to be turned,\" she says, drawing a line with her foot. A clean furrow opens, dark and waiting. \"Packed dirt just scuffs, but this...\" She trails off, nodding at the neat line of disturbed earth. \"This is right.\"",
+    "wc": 74,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The farmer looks up, pleased. \"Has to be turned first. Packed ground just scuffs.\"\n\nThe player: \"Does the ground matter?\"\nThe farmer: \"Has to be turned first. Packed ground just scuffs.\"",
+    "wc": 31,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player turns a second patch of soil with a hoe, then offers it for the same treatment. \"Go ahead,\" the farmer says, \"try it here.\" A clean furrow opens the length of the cast. \"See? The ground's soft enough.\" The farmer smiles, pleased to see the player succeed. \"It's a good day for planting.\"",
+    "wc": 55,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player tries the cast on the cobbled square instead, out of curiosity. \"That doesn't work,\" the farmer says with a shake of the head. \"The magic needs earth.\" The cobblestones remain unparted, unchanged. The farmer picks up the cast, dusting it off. \"Come on, let's try it again in the field where it belongs.\"",
+    "wc": 55,
+    "ok": true,
+    "err": null
+  }
+}

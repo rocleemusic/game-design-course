@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The stall is quiet, the second stool set out as always, a single cup placed opposite Mara's own. She moves through the space with the ease of repetition, a rag in her hand, wiping down surfaces that don't need it\u2014habit more than necessity. A half-open drawer reveals the shapes of forgotten things, some familiar, others less so. A pocket-knife with a worn leather grip, the blade folded shut. The lanterns that used to hang here, now waiting in their boxes for the evening's lighting. She doesn't stop when the player approaches.\n\n\"Good, another set of hands.\" She doesn't pause, doesn't turn to look at you, just moves to the side to give space. \"Hold this a",
+    "wc": 116,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player picks up the folding pocket-knife from the open drawer, turning it over in their hands. Its handle is worn smooth by years of use, the steel catch still springing true when they press it open. The blade is dull from years of sharpening, but the edge remains serviceable\u2014just like the soul who once held it. Mara does not look up from her cloth, her hands methodical as she wipes the shelf.\n\n\"That was Ovin's, before.\"\n\nShe speaks the words flatly, with none of her usual descriptive flourishes. No past tense slipping into her speech now. The words land like a final nail in the coffin of a life no longer spoken in the present. She turns away, moving to the",
+    "wc": 122,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "Mara does not look up as the player takes the second cup. Her hands move over the shelf, wiping, straightening, her cloth making small circles around each object. She pauses only to fill the cup from the bottle on the counter, her motions steady and unhurried. \"There,\" she says, setting the full cup down opposite her own. \"It's usually empty anyway.\"\n\nShe turns back to the shelf, but her fingers slow. The cloth hovers a moment longer than necessary over the glass bottle of dark syrup before she resumes wiping. The corner is clean, the cup is filled, and there is nothing left to do but wait, as the festival murmurs outside. She does not sit, does not drink. Instead",
+    "wc": 120,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "Mara wipes the shelf clean with her cloth, methodical in her motion, before she finally turns to the player. She pauses for a fraction of a second, assessing, then resumes moving.\n\n\"It's usually empty anyway,\" she says, not stopping the motion of her hands. \"Another set of hands is good though. Hold this a second, mind the third step, and tell me your name while you're at it.\" She offers the player a small bundle of cloth-wrapped tools, their fingers brushing as the exchange is made.\n\nShe turns back to her work, wiping down the counter near the drawer, her motions precise but unhurried. A quiet tension hangs between you\u2014this corner of the stall has always been empty,",
+    "wc": 118,
+    "ok": true,
+    "err": null
+  }
+}

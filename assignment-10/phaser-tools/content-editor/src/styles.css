@@ -1,0 +1,192 @@
+/* The Lantern theme, borrowed for a dev tool: lamp-lit wood panels, parchment
+   ink, lantern gold for anything actionable, ember for warmth, a flag red only
+   for a real orphan. Values mirror src/ui/theme.ts. */
+:root {
+  --night: #14110c;
+  --panel: #241c14;
+  --panel-hover: #2f2519;
+  --ink: #f4ead6;
+  --muted: #a89a7c;
+  --gold: #ffd479;
+  --ember: #ff9d5c;
+  --dusk: #a893c9;
+  --success: #9fd7a0;
+  --danger: #e2836b;
+  --on-accent: #1a1208;
+  --border: rgba(255, 212, 121, 0.22);
+}
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  background: var(--night);
+  color: var(--ink);
+  font-family: ui-monospace, "Cascadia Code", monospace;
+  font-size: 13px;
+  line-height: 1.4;
+  overflow: hidden; /* scrolling happens inside .panel, not the page */
+}
+
+/* A fixed-height column: header + preview dock stay put, .panel scrolls. */
+#app {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 24px 0;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+#app > header, #app > .unchecked, #app > .preview-dock, #app > .tabs { flex: none; }
+
+header h1 { margin: 0 0 4px; font-size: 20px; color: var(--gold); }
+.meta { margin: 0 0 12px; color: var(--muted); font-size: 12px; }
+
+.unchecked {
+  background: rgba(226, 131, 107, 0.12);
+  border: 1px solid var(--danger);
+  border-radius: 6px;
+  padding: 8px 10px;
+  margin-bottom: 14px;
+  color: var(--ink);
+  font-size: 12px;
+}
+
+/* Tabs */
+.tabs { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
+.tab {
+  background: var(--panel);
+  color: var(--ink);
+  border: 1px solid var(--border);
+  border-radius: 6px 6px 0 0;
+  padding: 8px 14px;
+  cursor: pointer;
+  font: inherit;
+}
+.tab:hover { background: var(--panel-hover); }
+.tab.active { color: var(--on-accent); background: var(--gold); border-color: var(--gold); font-weight: 600; }
+
+.panel {
+  border: 1px solid var(--border);
+  border-radius: 0 6px 6px 6px;
+  padding: 12px;
+  overflow-x: auto;
+  flex: 1 1 auto;
+  min-height: 0; /* lets a flex child actually shrink and scroll instead of overflowing the page */
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+.tab-note { color: var(--muted); margin: 0 0 10px; font-size: 12px; }
+h3.group { color: var(--gold); margin: 14px 0 6px; font-size: 14px; }
+
+/* Grid tables */
+table.grid { width: 100%; border-collapse: collapse; }
+table.grid th {
+  text-align: left;
+  color: var(--gold);
+  font-weight: 600;
+  border-bottom: 1px solid var(--border);
+  padding: 6px 8px;
+  position: sticky;
+  top: 0;
+  background: var(--night);
+}
+table.grid td { padding: 8px; border-bottom: 1px solid rgba(168, 154, 124, 0.15); vertical-align: top; }
+table.grid tr[data-status="approved"] { background: rgba(159, 215, 160, 0.07); }
+table.grid tr[data-status="rejected"] { background: rgba(226, 131, 107, 0.07); }
+tr.row-flag { background: rgba(226, 131, 107, 0.1) !important; }
+tr.row-stateful td:first-child { border-left: 3px solid var(--dusk); }
+
+.sub { color: var(--muted); font-size: 11px; margin-top: 2px; }
+code { color: var(--ember); font-size: 11px; }
+
+.learn { color: var(--ink); }
+.teacher { margin-top: 4px; font-size: 11px; }
+.teacher.ok { color: var(--muted); }
+.teacher.flag { color: var(--danger); font-weight: 600; }
+
+.ok { color: var(--success); }
+.flag { color: var(--danger); font-weight: 600; }
+
+.tag { display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 11px; margin: 0 4px 4px 0; }
+.tag.stateful { background: rgba(168, 147, 201, 0.2); color: var(--dusk); }
+.tag.ok { background: rgba(159, 215, 160, 0.15); color: var(--success); }
+.tag.flag { background: rgba(226, 131, 107, 0.18); color: var(--danger); }
+
+.findings { margin: 6px 0 0; padding-left: 16px; color: var(--muted); font-size: 11px; }
+
+/* VFX preview */
+.vfx { display: flex; gap: 6px; flex-wrap: wrap; }
+.vfx-cell { white-space: nowrap; }
+.btn {
+  background: var(--panel);
+  color: var(--ink);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+}
+.btn:hover { background: var(--panel-hover); border-color: var(--gold); }
+.btn.play { color: var(--gold); }
+.btn.play-missing { color: var(--muted); border-style: dashed; }
+
+/* Its own pane, docked above the scrolling tab content — not a floating box
+   overlapping whatever rows happen to sit under it. */
+.preview-dock {
+  background: var(--panel);
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 14px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+.preview-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+.preview-title { color: var(--gold); font-size: 12px; }
+.preview-toggle { background: none; border: 1px solid var(--gold); color: var(--gold); border-radius: 4px;
+  cursor: pointer; font-size: 13px; line-height: 1; padding: 1px 7px; }
+.preview-toggle:hover { background: var(--gold); color: var(--night); }
+.preview-body { display: flex; align-items: flex-start; gap: 16px; }
+.preview-canvas { flex: none; width: 320px; height: 200px; background: var(--night); border-radius: 4px; overflow: hidden; }
+.preview-canvas canvas { display: block; }
+.preview-hint { flex: 1 1 auto; color: var(--muted); font-size: 11px; padding-top: 4px; }
+/* Collapsed: only the title bar shows, so the pane shrinks to a thin strip
+   instead of taking up space the scrollable list below could use. */
+.preview-dock.collapsed .preview-body { display: none; }
+.preview-dock.collapsed .preview-head { margin-bottom: 0; }
+.btn.export { margin-top: 10px; background: var(--night); border: 1px solid var(--gold); color: var(--gold); }
+.btn.export:hover:not(:disabled) { background: var(--gold); color: var(--night); }
+
+/* Review controls */
+.review-cell { min-width: 200px; }
+.review { display: flex; flex-direction: column; gap: 6px; }
+.pill {
+  align-self: flex-start;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+.pill[data-status="approved"] { color: var(--success); border-color: var(--success); }
+.pill[data-status="rejected"] { color: var(--danger); border-color: var(--danger); }
+.note {
+  background: var(--night);
+  color: var(--ink);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 5px;
+  font: inherit;
+  font-size: 12px;
+  resize: vertical;
+  width: 100%;
+}
+.btn-row { display: flex; gap: 4px; }
+.btn.approve { color: var(--success); }
+.btn.reject { color: var(--danger); }
+.btn.clear { color: var(--muted); }
+
+.error { color: var(--danger); white-space: pre-wrap; }

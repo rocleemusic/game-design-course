@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "A censer smokes unevenly in the breeze across the Festival Grounds. The priest kneels beside it in an unhurried manner, working grass and sap into the container before cupping his hands around the rising smoke. The smoke steadies beneath his touch and climbs straight upward, undisturbed by the wind.",
+    "wc": 49,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player asks, \"Does the wind fight it?\" The priest looks up and replies, \"Not once it's called straight.\"",
+    "wc": 19,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player sweeps the dusty floor near the censer, offering it as a second thing to lift. The dust rises in a thin sheet and drifts out the doorway.",
+    "wc": 29,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player sets a river stone near the censer. The stone remains stubbornly in place, neither rising nor drifting.",
+    "wc": 19,
+    "ok": true,
+    "err": null
+  }
+}

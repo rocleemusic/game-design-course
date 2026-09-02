@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The postman stands in the shadow of the eaves, the rain having just passed. He opens his satchel, revealing a stack of damp letters inside. With practiced hands, he takes out the topmost envelope and begins to work a pinch of ash over it, turning it slowly. \"Rounds run in all weather,\" he says, his voice steady and unhurried.",
+    "wc": 59,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The postman nods, \"Ink's the tricky part, once it's taken on water. No, that's beyond me.\" He picks up another damp letter and works more ash into it, rubbing gently. \"This is the best I can do, catch it early enough.\" The letter in his hand begins to dry, the ink remaining legible. \"Rounds run in all weather,\" he repeats, packing the dry letter into his satchel. \"Does it work once the ink's run?\" the player asks. \"No,\" the postman replies, \"has to be caught early.\" He holds out the now-dry letter, a small smile playing at the corners of his mouth. \"Here you go.\" He picks up a",
+    "wc": 109,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player hands over a second damp letter from the bag. The postman takes it, working the ash over the paper \u2014 it flattens, ink preserved. \"Appreciate the help,\" he says, smiling. \"Rain's the postman's biggest foe.\" He tucks the now-dry letter into his satchel. \"Won't do much for dry letters, though. Need to catch 'em early.\" He stands, ready to continue his rounds. \"Thank you kindly,\" he adds, giving the player a nod. \"Safe travels.\" The satchel's contents are now dry and flat, the postman moving on to deliver his mail.",
+    "wc": 92,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player tries the ash on a parcel that's already dry, out of curiosity. The postman watches, then shakes his head. \"No water to take out, no effect. Has to be caught early.\" He closes the satchel, ready to move on.",
+    "wc": 41,
+    "ok": true,
+    "err": null
+  }
+}

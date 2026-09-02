@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The kettle of water burbles gently over the low flame, already dotted with a handful of berries. Mara stands beside it, her hand hovering near the heat, explaining the process as she works. \"The water takes the color fast when the cast draws it, slower otherwise. Either way, it's better than letting the fire do all the work.\"",
+    "wc": 58,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "Mara glances at the player's cup of well water, the faint discoloration visible. \"Not from the well, no,\" she says, shaking her head. \"Needs the draw from the spring first, then it'll take.\"",
+    "wc": 33,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player hands over a fresh skin of spring water and a handful of berries. \"Here, try this.\" Mara takes the offerings with a warm smile, \"Good, another set of hands. Just like that, thank you.\" She pours the water into a second kettle, adds the berries, and sets it over the flame. The color takes in moments, darkening the water almost immediately. Mara nods, satisfied. \"That's the trick to it. The cast draws faster when there's something in the water already.\"",
+    "wc": 82,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player dips a cup straight into the well water instead, out of curiosity \u2014 it only takes a faint, unwanted discoloration from leaf-litter, not a real draw. Mara watches, her hands still, as the player lifts the cup and examines the water. She says nothing, but her eyes narrow slightly, a moment of silent appraisal before she turns back to her own work.",
+    "wc": 64,
+    "ok": true,
+    "err": null
+  }
+}

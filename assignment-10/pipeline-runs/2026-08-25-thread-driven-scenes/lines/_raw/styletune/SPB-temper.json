@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The forge bench holds a billet glowing orange in the fire, gripped steady by tongs while a trough of spring water waits beside the anvil. Ilsa turns the metal once more in the coals to check its color before swinging it to the anvil.",
+    "wc": 44,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player asks, \"Does it matter how hot?\"\n\nIlsa tests the heat against the metal. \"Glowing, not just warm.\"",
+    "wc": 19,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player offers a second river stone that has been warming near the fire. Ilsa takes it and works the metal against the stone. The surface hardens evenly under her hands.",
+    "wc": 31,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player picks up a stick from the ground and holds it toward the quench trough. The wood absorbs the water without change, remaining unchanged and soft.",
+    "wc": 27,
+    "ok": true,
+    "err": null
+  }
+}

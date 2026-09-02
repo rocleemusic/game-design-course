@@ -1,0 +1,4 @@
+# Temp file the scene-editor tool (phaser/tools/scene-editor) writes here before its
+# atomic rename over scene-graph.json. The temp must sit in this dir so the rename stays
+# on one filesystem. Only survives a crash mid-save — never meant to be committed.
+scene-graph.json.tmp-*

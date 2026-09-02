@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The postman halts by a fencepost, shifting his weight and working his shoulder blade against the wood. \"Right between the blades. Never can.\"",
+    "wc": 23,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "\"Can't reach it?\"\n\nThe postman shifts his weight, sighing with a tired grin. \"Right between the blades. Never can.\"",
+    "wc": 19,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The postman accepts the scrap of wool, settling it against the itch until it fades. His shoulders drop and roll once.",
+    "wc": 21,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player presses a scrap of wool against the wooden post. Nothing itches there.",
+    "wc": 14,
+    "ok": true,
+    "err": null
+  }
+}

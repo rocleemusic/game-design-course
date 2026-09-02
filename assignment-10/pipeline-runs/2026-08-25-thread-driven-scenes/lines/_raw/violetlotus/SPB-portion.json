@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Toby eyes the mass of feast dough on the counter, picks up a river stone kept for this exact task, and sets it against the dough without a word wasted on the setup. He rolls it back and forth, watching the dough part cleanly into even measures. \"Stone does that part,\" he says, already reaching for the next tray to be portioned.",
+    "wc": 62,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player: \"How do you get it even?\"\n\nToby: \"Stone does that part.\" Fast, flat, already moving.",
+    "wc": 17,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player hands Toby a second river stone. Toby takes it, sets it against the dough, and parts it clean into matched measures. \"It's not much,\" Toby says. \"But it's fair.\"",
+    "wc": 31,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player picks up a single berry from a nearby bowl and sets it where the stone would go instead. Toby watches for a moment, then: \"That's not enough.\" He takes the berry, puts it back in the bowl, and returns to the dough without another word.",
+    "wc": 47,
+    "ok": true,
+    "err": null
+  }
+}

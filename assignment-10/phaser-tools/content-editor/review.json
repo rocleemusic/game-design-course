@@ -1,0 +1,20 @@
+[
+  {
+    "entryId": "screen:F6",
+    "status": "rejected",
+    "note": "contains clue for getting to heart of the wood",
+    "ts": "2026-08-19T04:36:16.170Z"
+  },
+  {
+    "entryId": "screen:T6",
+    "status": "rejected",
+    "note": "random have 3-4 npcs be in the tavern each evening",
+    "ts": "2026-08-19T04:36:03.382Z"
+  },
+  {
+    "entryId": "screen:T8",
+    "status": "rejected",
+    "note": "contains clue to get to The Old Shrine in Forest",
+    "ts": "2026-08-19T04:36:13.263Z"
+  }
+]

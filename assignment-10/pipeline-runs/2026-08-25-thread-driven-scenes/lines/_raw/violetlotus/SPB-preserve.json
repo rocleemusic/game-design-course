@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The basket of just-cut flowers sits beside a bundle of herbs already gone dry. Mara runs a pinch of salt over the flowers, working it in without ceremony \u2014 cut things need holding fast, before the day turns them. \"This keeps the bloom on,\" she says, \"for a time.\" She sets the basket down and turns to the player. \"You here to learn or to sell?\" she asks, her eyes already moving to the next thing that needs tending.",
+    "wc": 79,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "Mara looks up, hands still working the flowers. \"No. Has to still be fresh.\" She sets the salt aside, picks up a small, dark berry from a basket beside her. \"These, though \u2014 they keep the same, no matter how long they've been on the vine.\" She holds the berry out for the player to take. \"Here, feel for yourself.\" Her eyes meet the player's, a small smile touching her lips. \"Taste it. Tell me if it's any different from when it was first picked.\" Her voice carries a gentle challenge, an invitation to experience the magic she's talking about. The berry, held out in her palm, seems to glow slightly in the stall's soft",
+    "wc": 115,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "Mara looks up as the player hands over the basket of fresh berries. \"Good thinking,\" she says, sprinkling a pinch of salt over them. \"This should keep them from going soft. Thank you for bringing these in.\" She smiles, her eyes crinkling at the corners. \"It's always nice to have a helping hand.\" The berries sit plump and ripe on the counter, unblemished by time. Mara moves them to the shaded end of the stall, out of direct sunlight. \"They'll be perfect for the market tomorrow,\" she says, her voice warm with gratitude. \"You've done well.\" The player feels a sense of accomplishment, knowing they've helped preserve something beautiful. Mara's trust in",
+    "wc": 112,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "Mara shakes her head, taking the salt from the player's hand. \"This won't hold it any longer.\" She brushes the grains into a bowl, saving them for the next cutting. \"The drying's done. Salt can't put that freshness back.\" She sets the bundle in the player's hand, and the player feels its weight, dry and complete. \"But you see how it holds now, with the salt?\" She gives a nod to the flowers, standing green and unbrowned. \"That's how you know the work's done.\" The player looks from the flowers to the herbs, the difference clear. \"I see.\" The player sets the bundle on the counter, understanding the limit of the salt's work.",
+    "wc": 113,
+    "ok": true,
+    "err": null
+  }
+}

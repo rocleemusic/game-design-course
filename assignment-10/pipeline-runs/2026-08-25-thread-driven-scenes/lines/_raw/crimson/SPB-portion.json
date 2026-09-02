@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Toby surveys the mound of dough, picks up a river stone, and places it against the dough's side without a word, letting the stone's weight do the work of dividing the mass.",
+    "wc": 32,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player asks, \"How do you get it even?\" Toby answers, \"Stone does that part,\" fast and flat, already moving to the next task.",
+    "wc": 24,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player hands Toby a second river stone. Toby takes it without pause and works a smaller batch, the stones parting the dough cleanly into matched measures. \"That's right,\" he says, speeding through the words like he's just describing the weather.",
+    "wc": 41,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player picks up a single berry from a nearby bowl and sets it where the stone would go instead. Toby glances at it, then back to the dough, shaking his head slightly. \"Too little there to divide into anything,\" he says flatly.",
+    "wc": 43,
+    "ok": true,
+    "err": null
+  }
+}

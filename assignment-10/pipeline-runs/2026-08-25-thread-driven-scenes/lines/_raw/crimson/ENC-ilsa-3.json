@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Ilsa stands at her bench, the last piece of the centerpiece still in her hands, the socket awaiting its final stone. She turns it under the light, a slow, deliberate inspection, before setting it down with a soft clink. Her gaze lifts, and she sees the player enter the forge. \"You're on time,\" she says, as if it were a fact, not a compliment. She sets a stool near the bench with a gesture of invitation, the place already yours. \"Here,\" she states, warm and matter-of-fact.",
+    "wc": 86,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player takes out the special river stone and sets it into the socket. Ilsa picks it up, checks the fit, then pushes it home with a sure touch. She runs a bead of flux around the join, picks up her torch, and heats the stone until the solder liquefies and flows. When it cools, the fit is perfect. \"That's hands enough,\" she says, and sets her tools down.",
+    "wc": 69,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "Ilsa takes up the tongs again at the player's gesture, and re-heats the join one last time. She works the seam with steady focus until the line is smooth, then sets her tools down. \"That's enough now.\"",
+    "wc": 37,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "Ilsa looks up from the centerpiece. \"It is.\"",
+    "wc": 8,
+    "ok": true,
+    "err": null
+  }
+}

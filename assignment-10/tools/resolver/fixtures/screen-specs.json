@@ -1,0 +1,85 @@
+[
+  {
+    "screen_id": "T1",
+    "location": "town",
+    "name": "Town Square",
+    "status": "start",
+    "vibe": "the festival's home; the Lantern Arch landmark",
+    "gates": [
+      {
+        "gate_id": "G-T1-showask",
+        "archetype": "Signpost",
+        "preview": true,
+        "five_field_ref": "opening Show/Ask intro"
+      }
+    ],
+    "examinables": [
+      { "id": "arch", "clue_tier": "ambient", "region": "r_arch" },
+      { "id": "notice_board", "clue_tier": "soft-signpost", "region": "r_board" }
+    ],
+    "forage": [],
+    "npc_slots": [
+      { "time_block": "morning", "count": 2 },
+      { "time_block": "afternoon", "count": 2 },
+      { "time_block": "evening", "count": 2 }
+    ],
+    "item_slots": [],
+    "time_states": ["morning", "afternoon", "evening"],
+    "connects_to": ["T2", { "screen_id": "F1", "seam": "forest_path" }],
+    "regions": [
+      { "region_id": "r_arch", "shape": { "rect": { "x": 0.4, "y": 0.05, "w": 0.2, "h": 0.35 } } },
+      { "region_id": "r_board", "shape": { "rect": { "x": 0.7, "y": 0.5, "w": 0.15, "h": 0.2 } } }
+    ]
+  },
+  {
+    "screen_id": "T2",
+    "location": "town",
+    "name": "Market Row",
+    "status": "reachable(G-T1-showask)",
+    "vibe": "stalls and morning bread; the Baker's stretch",
+    "gates": [],
+    "examinables": [{ "id": "bread_stall", "clue_tier": "ambient", "region": "r_stall" }],
+    "forage": ["sticks"],
+    "npc_slots": [
+      { "time_block": "morning", "count": 2 },
+      { "time_block": "afternoon", "count": 1 },
+      { "time_block": "evening", "count": 1 }
+    ],
+    "item_slots": [
+      {
+        "slot_id": "SL-T2-01",
+        "region": "r_crates",
+        "bucket": [
+          { "item": "wool", "weight": 3 },
+          { "item": "grass", "weight": 2 },
+          { "item": "lit_lantern", "weight": 1, "min_band": "alive" },
+          { "item": "empty", "weight": 4 }
+        ],
+        "respawn_rule": "day-start",
+        "conditions": []
+      }
+    ],
+    "time_states": ["morning", "afternoon", "evening"],
+    "connects_to": ["T1"],
+    "regions": [
+      { "region_id": "r_stall", "shape": { "rect": { "x": 0.1, "y": 0.4, "w": 0.25, "h": 0.3 } } },
+      { "region_id": "r_crates", "shape": { "rect": { "x": 0.6, "y": 0.6, "w": 0.2, "h": 0.25 } } }
+    ]
+  },
+  {
+    "screen_id": "T7",
+    "location": "town",
+    "name": "Festival Grounds",
+    "status": "reachable",
+    "vibe": "Where the run's build-up pays off",
+    "note": "Minimal fixture stand-in for data/'s T7. emitMain requires FESTIVAL_SCREEN_ID in graph.screens (the final sequence's home_hub_final diverts to it — festival-night work, 2026-08-01), so every fixture graph must carry it. Kept deliberately empty (no slots, no examinables, no connections) so it changes nothing about placement or route enumeration in the fixture set.",
+    "gates": [],
+    "examinables": [],
+    "forage": [],
+    "npc_slots": [],
+    "item_slots": [],
+    "time_states": ["evening", "night"],
+    "connects_to": [],
+    "regions": []
+  }
+]

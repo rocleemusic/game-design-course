@@ -1,0 +1,206 @@
+{
+  "screens": [
+    {
+      "screen_id": "T1",
+      "location": "town",
+      "name": "Town Square",
+      "status": "start",
+      "vibe": "The festival's home; the Lantern Arch landmark.",
+      "gates": [
+        {
+          "gate_id": "G-T1-showask",
+          "archetype": "Signpost",
+          "preview": true,
+          "five_field_ref": "opening Show/Ask intro"
+        }
+      ],
+      "examinables": [
+        { "id": "arch", "clue_tier": "ambient", "region": "r_arch" },
+        { "id": "notice_board", "clue_tier": "soft-signpost", "region": "r_board" }
+      ],
+      "forage": [],
+      "npc_slots": [
+        { "time_block": "morning", "count": 2 },
+        { "time_block": "midday", "count": 2 },
+        { "time_block": "evening", "count": 2 }
+      ],
+      "item_slots": [
+        {
+          "slot_id": "SL-T1-01",
+          "region": "r_bench",
+          "bucket": [
+            { "item": "wool", "weight": 1 },
+            { "item": "empty", "weight": 2 }
+          ],
+          "respawn_rule": "daily",
+          "conditions": []
+        }
+      ],
+      "time_states": ["morning", "midday", "evening"],
+      "connects_to": ["T2", "F1"],
+      "regions": [
+        { "region_id": "r_arch", "shape": { "rect": { "x": 0.4, "y": 0.1, "w": 0.2, "h": 0.3 } } },
+        { "region_id": "r_board", "shape": { "rect": { "x": 0.7, "y": 0.5, "w": 0.15, "h": 0.2 } } },
+        { "region_id": "r_bench", "shape": { "rect": { "x": 0.1, "y": 0.6, "w": 0.15, "h": 0.15 } } }
+      ],
+      "ink_address": "t1"
+    },
+    {
+      "screen_id": "T2",
+      "location": "town",
+      "name": "Bakery Lane",
+      "status": "reachable(G-T2-ovenread)",
+      "vibe": "Flour dust and heat; Toby's counter faces the lane.",
+      "gates": [
+        {
+          "gate_id": "G-T2-ovenread",
+          "archetype": "Landmark",
+          "five_field_ref": "oven state reads the day"
+        }
+      ],
+      "examinables": [
+        { "id": "oven", "clue_tier": "soft-signpost", "region": "r_oven" }
+      ],
+      "forage": ["grass"],
+      "npc_slots": [
+        { "time_block": "morning", "count": 1 },
+        { "time_block": "evening", "count": 1 }
+      ],
+      "item_slots": [],
+      "time_states": ["morning", "midday", "evening"],
+      "connects_to": ["T1"],
+      "regions": [
+        { "region_id": "r_oven", "shape": { "rect": { "x": 0.55, "y": 0.3, "w": 0.25, "h": 0.35 } } }
+      ],
+      "ink_address": "t2"
+    },
+    {
+      "screen_id": "F1",
+      "location": "forest",
+      "name": "Fern Hollow",
+      "status": "locked(G-F1-fernpath)",
+      "vibe": "The first shade past the seam; the path forks under ferns.",
+      "gates": [
+        {
+          "gate_id": "G-F1-fernpath",
+          "archetype": "Knowledge",
+          "five_field_ref": "the fern route is named on the notice board"
+        }
+      ],
+      "examinables": [
+        { "id": "fern_fork", "clue_tier": "hard-key", "region": "r_fork" }
+      ],
+      "forage": ["sticks", "dirt"],
+      "npc_slots": [{ "time_block": "midday", "count": 1 }],
+      "item_slots": [
+        {
+          "slot_id": "SL-F1-01",
+          "region": "r_stump",
+          "bucket": [
+            { "item": "sticks", "weight": 2 },
+            { "item": "empty", "weight": 1 }
+          ],
+          "respawn_rule": "daily",
+          "conditions": []
+        }
+      ],
+      "time_states": ["morning", "midday", "evening", "night"],
+      "connects_to": ["T1"],
+      "regions": [
+        { "region_id": "r_fork", "shape": { "rect": { "x": 0.3, "y": 0.2, "w": 0.3, "h": 0.4 } } },
+        { "region_id": "r_stump", "shape": { "rect": { "x": 0.7, "y": 0.65, "w": 0.15, "h": 0.2 } } }
+      ],
+      "ink_address": "f1"
+    }
+  ],
+  "seams": [{ "from": "T1", "to": "F1", "name": "forest_path" }],
+  "scenes": [
+    {
+      "scene_id": "SC-T2-01",
+      "soul": "toby",
+      "screen_id": "T2",
+      "ink_address": "toby.sc_t2_01",
+      "lines": [
+        {
+          "content_id": "CL-T2-01-01",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Morning! Mind the flour on the step."
+        },
+        {
+          "content_id": "CL-T2-01-02",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "It's nothing. Go on — the square's the place to be."
+        },
+        {
+          "content_id": "CL-T2-01-03",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "Let me carry the trays at least."
+        },
+        {
+          "content_id": "CL-T2-01-04",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "...Fine. The small ones. Mind the edges."
+        },
+        {
+          "content_id": "CL-T2-01-05",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Ha — go on then. I'll save you a sweet roll."
+        }
+      ],
+      "choice_nodes": [
+        {
+          "choice_id": "CH-T2-04",
+          "scene_id": "SC-T2-01",
+          "availability_conditions": ["npc_present(toby)"],
+          "equal_weight_note": "Helping moves the feast and spends the block; declining respects the surface request and the deflection stands.",
+          "no_accrual_note": "No counter keys off either option; Toby's claimed-beat is his own act, gated on the arc thread.",
+          "options": [
+            {
+              "option_id": "CH-T2-04-a",
+              "verb_family": "Converse",
+              "player_verb": "ease",
+              "player_line": "CL-T2-01-03",
+              "response_slots": ["CL-T2-01-04"],
+              "state_actions": ["bond_event(Intimacy)", "thread_move(giver-receive)"],
+              "rejoin": "gather"
+            },
+            {
+              "option_id": "CH-T2-04-b",
+              "verb_family": "Use",
+              "player_verb": "witness",
+              "surface_action": "leave the bread on the rack",
+              "response_slots": ["CL-T2-01-05"],
+              "state_actions": ["thread_move(giver-receive)"],
+              "rejoin": "gather"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variables": [
+    {
+      "name": "thread_giver_receive",
+      "declaration": "VAR thread_giver_receive = 0",
+      "readers": ["G-F1-fernpath"],
+      "writers": ["CH-T2-04-a", "CH-T2-04-b"]
+    },
+    {
+      "name": "bondLevel_toby",
+      "declaration": "VAR bondLevel_toby = 0",
+      "readers": ["CL-T2-01-01"],
+      "writers": ["CH-T2-04-a"]
+    },
+    {
+      "name": "present_toby",
+      "declaration": "VAR present_toby = none",
+      "readers": ["CH-T2-04", "SC-T2-01"],
+      "writers": []
+    }
+  ]
+}

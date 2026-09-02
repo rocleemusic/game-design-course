@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The morning light catches the gray ash of the banked coals. Ilsa arranges a bundle of sticks at the forge mouth and steps back.",
+    "wc": 24,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player asks, \"How do you get it going?\"\n\nIlsa glances at the forge mouth and speaks. \"You clear back first. Always.\"",
+    "wc": 22,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player mimics her movement, clearing the same way on a separate stick. The wood catches with a small crackle, holding a steady glow.",
+    "wc": 24,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player picks up a river stone from the floor and holds it near the coals.",
+    "wc": 16,
+    "ok": true,
+    "err": null
+  }
+}

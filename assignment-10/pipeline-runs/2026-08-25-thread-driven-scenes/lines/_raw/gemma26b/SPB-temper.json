@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The forge bench holds a glowing billet steady between the coals and the anvil. A trough of spring water sits ready. Ilsa turns the piece once more in the fire, checking the color, then swings it toward the anvil.",
+    "wc": 39,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player asks, \"Does it matter how hot?\"\n\nIlsa sets the metal down. \"Glowing, not just warm.\"",
+    "wc": 17,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player hands over a second river stone, already sitting warm near the fire. It hardens evenly under her hands.",
+    "wc": 20,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player picks up a nearby stick and holds it toward the quench trough. The wood takes no temper, and the water merely hisses.",
+    "wc": 24,
+    "ok": true,
+    "err": null
+  }
+}

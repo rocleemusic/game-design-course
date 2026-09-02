@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Frost clings to the wooden counter where Mara sorts the remaining stock into small clusters. \"These half-baskets need to stay dry until the morning thaw, as the moisture will spoil the potency, but we'll manage if we keep them covered and close to the hearth.\"",
+    "wc": 45,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player sets the basket of berries down. Mara inspects each small fruit with quick fingers before tucking them into the working pile. \"These will do nicely for the base, and I'm glad you brought them by, as the clearing always yields the sweetest harvest before the first hard freeze.\"",
+    "wc": 50,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player casts *steep* over the water as the liquid swirls, drinking in the berries and spring water until the vessel deepens to a rich hue. Mara watches the color shift with interest and sets the bottle aside to work.",
+    "wc": 40,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player asks, \"How's it looking?\"\n\nMara continues sorting through the remaining stock, her fingers working quickly. \"Tight, but it keeps. We have what we need to see us through, so long as we tend to it properly.\"",
+    "wc": 38,
+    "ok": true,
+    "err": null
+  }
+}

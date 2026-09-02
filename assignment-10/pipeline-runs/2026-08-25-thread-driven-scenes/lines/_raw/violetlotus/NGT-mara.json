@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Mara's stall is quiet on this festival night, the second stool at her corner still out as always. A cup sits unused across from hers. The drawer of unclaimed things is half-open, the same as it was earlier when she was sorting through it. Now she does a last pass over the shelves, wiping one that's already clean, a small habitual tending. She doesn't stop when the player approaches. \"The lanterns used to hang right there,\" she says, gesturing to an empty bracket, her voice matter-of-fact. \"Mind your step, they'll be up again by evening, same as every year.\" She continues wiping, her hands steady and exact. The stall feels like a space held, not lost",
+    "wc": 116,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "Mara pauses her cleaning, looks at the knife, then back at the player. \"That was Ovin's, before.\" Her hands resume their task, wiping the already clean shelf. \"It keeps,\" she adds, running a cloth over the counter's edge, \"like everything in this cellar. Cold and dark, and somebody keeping an eye on it.\" The past tense slips in, unremarked, as she works. \"You'd be surprised what still holds on when you tend it right.\" She closes the drawer partway, straightening a shelf that was already straight, then picks the cloth back up, her movements precise and exact. \"Mind the third step on your way out,\" she says, not looking up, \"",
+    "wc": 111,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player takes the second cup and sets it where it already sits, filling it without being asked.\n\nMara's hands pause over the shelf for a beat, then keep moving. \"Good, another set of hands \u2014 hold this a second, mind the third step, and tell me your name while you're at it.\" She passes the player a cloth, the kind used for dusting, and bends to show them the tricky part of the shelf that always catches debris. Her words are warm, inviting the player to join in her quiet tending. She straightens a thing that was already straight, as if the act itself matters more than the outcome.",
+    "wc": 110,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player asks, \"Mind if I sit here a while?\" gesturing to the second stool. Mara continues straightening the shelf, her hands never pausing. \"It's usually empty anyway.\" She glances at the player, a small smile touching her lips, then goes back to her task. The second stool is left empty, a silent invitation to sit and stay for a while. The player takes a seat, feeling the warmth of Mara's welcome even as she works quietly around the stall. The second stool, meant for company, now holds the player's presence, if only for a moment. Mara's hands move with purpose, tending to the stall as if it were a living thing that needed care. The player feels a strange comfort",
+    "wc": 121,
+    "ok": true,
+    "err": null
+  }
+}

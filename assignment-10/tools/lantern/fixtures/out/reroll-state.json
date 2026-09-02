@@ -1,0 +1,10 @@
+{
+  "threads": [
+    {
+      "thread_id": "giver-receive",
+      "soul": "toby",
+      "status": "live"
+    }
+  ],
+  "picked_location": "town"
+}

@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The postman smooths a bead of warming beeswax along a crease in the paper. \"A letter that opens in the rain is a letter lost,\" he says, his voice warm and explanatory.",
+    "wc": 32,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player asks, \"Does every letter need it?\"\n\nThe postman smiles and says, \"Just the ones going out today. Rain's coming.\"",
+    "wc": 21,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player hands over a second folded letter. The postman presses the wax across the fold, sealing it shut.",
+    "wc": 19,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player picks up an already-sealed letter and tries to apply the wax, but the letter remains unchanged. \"Already closed, see?\" the postman says, looking pleased.",
+    "wc": 26,
+    "ok": true,
+    "err": null
+  }
+}

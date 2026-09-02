@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lantern — design tokens v2 (proposal for Roc's review)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* surfaces — parchment tuned to the GDD pitch's cream */
+    --night:#232025;          /* graph canvas — warm charcoal, violet undertone */
+    --night-raise:#2D2930;    /* raised panels/chips on night */
+    --cream:#F3EBD7;          /* panels, play stage (pitch --cream) */
+    --paper:#F7F1E2;          /* node cards, a half-step lighter */
+    --cream-edge:#E4D5B4;     /* pitch --cream-edge: dividers, wells */
+    /* text */
+    --ink:#382C1E;            /* pitch --ink · 9.9:1 on cream */
+    --muted:#6E6149;          /* pitch --muted · 4.9:1 on cream */
+    --milk:#EDE6D6;           /* text on night · 12.6:1 */
+    --milk-soft:#B5ACA0;      /* muted on night · 6.3:1 */
+    /* state families (each state = hue + icon + band, not a tick of text) */
+    --gold:#E3B26A;           /* pitch --gold: the lantern glow, visited trace · 8.5:1 on night */
+    --amber:#CE8F45;          /* pitch --amber: seals, accents on paper (decorative on cream) */
+    --forest:#4E6B4F;         /* pitch --forest: approved family */
+    --forest-deep:#33492F;    /* approved text/icon · 8.2:1 on cream */
+    --sage:#90A67C;           /* pitch --sage: approved band tint */
+    --dusk:#6E8794;           /* pitch --dusk: edited band tint */
+    --dusk-deep:#435966;      /* edited text/icon · 6.2:1 on cream */
+    --clay:#A34A34;           /* flagged · 4.9:1 on cream */
+    --teal:#2E4E48;           /* pitch --teal: interactive/link color on paper · 7.9:1 */
+    --blossom:#A8626D;        /* soul/NPC markers — the garden ref's pink, muted (icons only) */
+    /* lines */
+    --hairline-paper:rgba(56,44,30,.16);
+    --hairline-night:rgba(237,230,214,.16);
+    /* type */
+    --display:"Fraunces",Georgia,serif;
+    --body-f:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+    --mono:"IBM Plex Mono",Consolas,monospace;
+    /* scale */
+    --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px; --s7:48px;
+    --r-card:12px; --r-pill:999px; --r-chip:6px;
+  }
+  *{box-sizing:border-box;margin:0}
+  body{font-family:var(--body-f);color:var(--ink);background:var(--cream);font-size:16px;line-height:1.55}
+  header{padding:var(--s7) var(--s6) var(--s5);max-width:980px;margin:0 auto}
+  h1{font-family:var(--display);font-weight:600;font-size:28px}
+  .sub{color:var(--muted);margin-top:var(--s2);max-width:64ch}
+  section{max-width:980px;margin:0 auto;padding:var(--s5) var(--s6)}
+  h2{font-family:var(--display);font-weight:600;font-size:19px;margin-bottom:var(--s4);
+     border-bottom:1px solid var(--cream-edge);padding-bottom:var(--s2)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:var(--s4)}
+  .sw{border:1px solid var(--cream-edge);border-radius:var(--r-chip);overflow:hidden;background:var(--paper)}
+  .sw .chip{height:64px}
+  .sw .meta{padding:var(--s2) var(--s3);font-size:13px}
+  .sw .meta b{font-family:var(--mono);font-weight:400;display:block}
+  .sw .meta span{color:var(--muted)}
+  .rule{color:var(--muted);font-size:14px;margin-top:var(--s3);max-width:70ch}
+  /* node cards on the night canvas */
+  .canvas{background:var(--night);border-radius:var(--r-card);padding:var(--s5);
+          display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:var(--s4)}
+  .node{background:var(--paper);border:1px solid var(--hairline-paper);border-radius:var(--r-card);
+        padding:var(--s3) var(--s4) var(--s3) 56px;position:relative;min-height:104px;
+        box-shadow:0 1px 3px rgba(0,0,0,.25)}
+  /* state band = inset shadow, so it follows the rounded corner and never lets background peek */
+  /* the medallion — circular icon badge, ref-4 style */
+  .med{position:absolute;left:12px;top:12px;width:32px;height:32px;border-radius:50%;
+        display:flex;align-items:center;justify-content:center;background:var(--cream-edge)}
+  .med svg{width:17px;height:17px;stroke-width:2}
+  .kind{font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.4px}
+  .name{font-family:var(--display);font-weight:600;font-size:16px;margin:2px 0 4px}
+  .line{font-size:14px}
+  .state-lbl{position:absolute;bottom:10px;right:12px;font-size:11.5px;font-family:var(--mono)}
+  /* PENDING — untinted, dashed medallion ring */
+  .pending .med{background:transparent;border:1.5px dashed var(--muted);color:var(--muted)}
+  .pending .state-lbl{color:var(--muted)}
+  /* CURRENT — gold lantern glow */
+  .current{box-shadow:inset 4px 0 0 var(--gold),0 0 0 2px var(--gold),0 0 26px rgba(227,178,106,.5)}
+  .current .med{background:var(--gold);color:#3A2C12}
+  .current .state-lbl{color:#8A6B33}
+  /* VISITED — gold thread, quiet */
+  .visited{box-shadow:inset 4px 0 0 rgba(227,178,106,.55),0 1px 3px rgba(0,0,0,.25),0 0 0 1px rgba(227,178,106,.45)}
+  .visited .med{background:rgba(227,178,106,.28);color:#8A6B33}
+  .visited .state-lbl{color:#8A6B33}
+  /* UNVISITED — dim = a darker warm paper, opaque (no transparency: whole-card opacity let the
+     night canvas bleed through and read as a grey overlay) */
+  .dim{background:#BEB4A0;border-color:rgba(56,44,30,.12);box-shadow:none}
+  .dim .kind,.dim .name,.dim .line{color:#6B6252}
+  .dim .med{background:transparent;border:1.5px solid rgba(56,44,30,.25);color:#6B6252}
+  .dim .state-lbl{color:#6B6252}
+  /* APPROVED — forest/sage family, wax-seal medallion */
+  .approved{border-color:rgba(78,107,79,.5);
+        box-shadow:inset 4px 0 0 var(--forest),0 1px 3px rgba(0,0,0,.25)}
+  .approved .med{background:var(--forest);color:var(--paper)}
+  .approved .state-lbl{color:var(--forest-deep)}
+  .approved .name{color:var(--forest-deep)}
+  /* EDITED — dusk family + corner fold */
+  .edited{border-color:rgba(110,135,148,.5);
+        box-shadow:inset 4px 0 0 var(--dusk),0 1px 3px rgba(0,0,0,.25)}
+  .edited .med{background:var(--dusk-deep);color:var(--paper)}
+  .edited .state-lbl{color:var(--dusk-deep)}
+  .edited::after{content:"";position:absolute;top:0;right:0;border-style:solid;
+        border-width:0 18px 18px 0;border-color:transparent var(--night) transparent transparent}
+  /* FLAGGED — clay family, full border */
+  .flagged{border:1.5px solid var(--clay);
+        box-shadow:inset 4px 0 0 var(--clay),0 1px 3px rgba(0,0,0,.25)}
+  .flagged .med{background:var(--clay);color:var(--paper)}
+  .flagged .state-lbl{color:var(--clay)}
+  /* SOUL marker */
+  .soul .med{background:var(--blossom);color:var(--paper)}
+  .soul{box-shadow:inset 4px 0 0 var(--blossom),0 1px 3px rgba(0,0,0,.25)}
+  /* chips + pills */
+  .edge-chip{display:inline-block;font-family:var(--mono);font-size:12px;background:var(--night-raise);
+        color:var(--milk-soft);border:1px solid var(--hairline-night);border-radius:var(--r-chip);
+        padding:1px 8px;margin:var(--s2) var(--s1) 0 0}
+  .edge-chip.sat{color:var(--gold);border-color:rgba(227,178,106,.45)}
+  .btnrow{display:flex;gap:var(--s3);margin-top:var(--s4);flex-wrap:wrap}
+  .pill{font-family:var(--body-f);font-weight:600;font-size:14px;border-radius:var(--r-pill);
+        padding:8px 22px;cursor:pointer;transition:background .2s,color .2s}
+  .pill.primary{background:var(--forest);color:var(--paper);border:1px solid var(--forest-deep)}
+  .pill.primary:hover{background:var(--forest-deep)}
+  .pill.ghost{background:transparent;color:var(--teal);border:1.5px solid var(--teal)}
+  .pill.ghost:hover{background:rgba(46,78,72,.08)}
+  .pill.flag{background:transparent;color:var(--clay);border:1.5px solid var(--clay)}
+  .pill.flag:hover{background:rgba(163,74,52,.08)}
+  .pill.quiet{background:transparent;color:var(--muted);border:1.5px solid var(--cream-edge)}
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:var(--s4)}
+  @media (max-width:700px){.duo{grid-template-columns:1fr}}
+  .pane{border-radius:var(--r-card);padding:var(--s5);border:1px solid var(--cream-edge);background:var(--paper)}
+  .pane.nightp{background:var(--night);color:var(--milk);border-color:transparent}
+  .pane h3{font-family:var(--display);font-size:17px;font-weight:600;margin-bottom:var(--s3)}
+  .type-spec div{padding:var(--s2) 0;border-bottom:1px solid var(--cream-edge)}
+  .type-spec .lbl{font-family:var(--mono);font-size:12px;color:var(--muted);display:block;margin-bottom:2px}
+  .contrast{font-size:13.5px;border-collapse:collapse}
+  .contrast td{padding:6px 14px 6px 0;border-bottom:1px solid var(--cream-edge)}
+  .contrast .ok{color:var(--forest-deep);font-family:var(--mono)}
+  .contrast .note{color:var(--muted)}
+</style>
+</head>
+<body>
+<button id="settingsBtn" style="position:fixed;top:16px;right:16px;z-index:10;font-family:var(--body-f);
+  font-weight:600;font-size:13px;border-radius:999px;padding:7px 16px;cursor:pointer;
+  background:var(--paper);color:var(--ink);border:1.5px solid var(--cream-edge)">Tweak tokens</button>
+<div id="settings" hidden style="position:fixed;top:56px;right:16px;z-index:10;width:270px;max-height:80vh;overflow:auto;
+  background:var(--paper);border:1px solid var(--cream-edge);border-radius:12px;padding:16px;
+  box-shadow:0 6px 24px rgba(0,0,0,.18);font-size:13px">
+  <strong style="font-family:var(--display)">Tweakable tokens</strong>
+  <p style="color:var(--muted);margin:4px 0 10px">Live on this page, saved in your browser. Copy CSS to hand the values back.</p>
+  <div id="settingsRows"></div>
+  <label style="display:flex;justify-content:space-between;align-items:center;margin:8px 0">Base text size
+    <input id="fontSize" type="range" min="14" max="19" step="0.5" style="width:110px"></label>
+  <label style="display:flex;justify-content:space-between;align-items:center;margin:8px 0">Card corner radius
+    <input id="radius" type="range" min="4" max="20" step="1" style="width:110px"></label>
+  <div style="display:flex;gap:8px;margin-top:10px">
+    <button id="copyCss" style="cursor:pointer;border-radius:999px;padding:6px 14px;border:1.5px solid var(--teal);background:transparent;color:var(--teal);font-weight:600">Copy CSS</button>
+    <button id="resetTokens" style="cursor:pointer;border-radius:999px;padding:6px 14px;border:1.5px solid var(--cream-edge);background:transparent;color:var(--muted);font-weight:600">Reset</button>
+  </div>
+</div>
+<script>
+(function(){
+  const VARS = ["night","night-raise","cream","paper","cream-edge","ink","muted","milk",
+                "gold","amber","forest","forest-deep","sage","dusk","dusk-deep","clay","teal","blossom"];
+  const KEY = "lantern-tokens-v2";
+  const root = document.documentElement;
+  const defaults = {};
+  VARS.forEach(v => defaults[v] = getComputedStyle(root).getPropertyValue("--"+v).trim());
+  defaults["font-size"] = "16"; defaults["r-card"] = "12";
+  const saved = JSON.parse(localStorage.getItem(KEY) || "{}");
+  function apply(k, val){
+    if(k === "font-size"){ document.body.style.fontSize = val+"px"; }
+    else if(k === "r-card"){ root.style.setProperty("--r-card", val+"px"); }
+    else root.style.setProperty("--"+k, val);
+  }
+  Object.entries(saved).forEach(([k,v]) => apply(k,v));
+  const rows = document.getElementById("settingsRows");
+  VARS.forEach(v => {
+    const row = document.createElement("label");
+    row.style.cssText = "display:flex;justify-content:space-between;align-items:center;margin:5px 0";
+    const val = saved[v] || defaults[v];
+    row.innerHTML = "<span style='font-family:var(--mono);font-size:12px'>--"+v+"</span>";
+    const inp = document.createElement("input");
+    inp.type = "color"; inp.value = val; inp.style.cssText="width:44px;height:26px;border:none;background:none;cursor:pointer";
+    inp.addEventListener("input", () => { apply(v, inp.value); saved[v]=inp.value; localStorage.setItem(KEY, JSON.stringify(saved)); });
+    row.appendChild(inp); rows.appendChild(row);
+  });
+  const fs = document.getElementById("fontSize"); fs.value = saved["font-size"] || 16;
+  fs.addEventListener("input", () => { apply("font-size", fs.value); saved["font-size"]=fs.value; localStorage.setItem(KEY, JSON.stringify(saved)); });
+  const rad = document.getElementById("radius"); rad.value = saved["r-card"] || 12;
+  rad.addEventListener("input", () => { apply("r-card", rad.value); saved["r-card"]=rad.value; localStorage.setItem(KEY, JSON.stringify(saved)); });
+  document.getElementById("settingsBtn").addEventListener("click", () => {
+    const p = document.getElementById("settings"); p.hidden = !p.hidden;
+  });
+  document.getElementById("copyCss").addEventListener("click", () => {
+    const lines = VARS.map(v => "  --"+v+": "+(saved[v]||defaults[v])+";");
+    lines.push("  --r-card: "+(saved["r-card"]||12)+"px;", "  /* base font-size: "+(saved["font-size"]||16)+"px */");
+    navigator.clipboard.writeText(":root{\n"+lines.join("\n")+"\n}");
+  });
+  document.getElementById("resetTokens").addEventListener("click", () => {
+    localStorage.removeItem(KEY); location.reload();
+  });
+})();
+</script>
+<header>
+  <h1>Lantern — design tokens, v2</h1>
+  <p class="sub">Revision after Roc's notes, 2026-07-29. Palette now draws from the Festival of Souls GDD pitch (cream · forest · sage · dusk · amber · gold), which carries the garden ref's coloring natively. Each node state is a full family — hue + circular icon medallion + left band — not a text tick. Medallions, pill buttons, and 12px corners take the component stylization from the blue garden ref. Icons are inline Lucide-style SVG (MIT), no downloads needed.</p>
+</header>
+
+<section>
+  <h2>Palette (pitch-derived + the two working darks)</h2>
+  <div class="grid">
+    <div class="sw"><div class="chip" style="background:#232025"></div><div class="meta"><b>--night #232025</b><span>graph canvas</span></div></div>
+    <div class="sw"><div class="chip" style="background:#F3EBD7"></div><div class="meta"><b>--cream #F3EBD7</b><span>panels · pitch cream</span></div></div>
+    <div class="sw"><div class="chip" style="background:#F7F1E2"></div><div class="meta"><b>--paper #F7F1E2</b><span>node cards</span></div></div>
+    <div class="sw"><div class="chip" style="background:#382C1E"></div><div class="meta"><b>--ink #382C1E</b><span>text · pitch ink</span></div></div>
+    <div class="sw"><div class="chip" style="background:#E3B26A"></div><div class="meta"><b>--gold #E3B26A</b><span>lantern glow, visited · pitch gold</span></div></div>
+    <div class="sw"><div class="chip" style="background:#CE8F45"></div><div class="meta"><b>--amber #CE8F45</b><span>seals, warm accents · pitch amber</span></div></div>
+    <div class="sw"><div class="chip" style="background:#4E6B4F"></div><div class="meta"><b>--forest #4E6B4F</b><span>approved family · pitch forest</span></div></div>
+    <div class="sw"><div class="chip" style="background:#90A67C"></div><div class="meta"><b>--sage #90A67C</b><span>approved tint · pitch sage</span></div></div>
+    <div class="sw"><div class="chip" style="background:#6E8794"></div><div class="meta"><b>--dusk #6E8794</b><span>edited family · pitch dusk</span></div></div>
+    <div class="sw"><div class="chip" style="background:#A34A34"></div><div class="meta"><b>--clay #A34A34</b><span>flagged</span></div></div>
+    <div class="sw"><div class="chip" style="background:#2E4E48"></div><div class="meta"><b>--teal #2E4E48</b><span>interactive/links on paper · pitch teal</span></div></div>
+    <div class="sw"><div class="chip" style="background:#A8626D"></div><div class="meta"><b>--blossom #A8626D</b><span>soul/NPC markers — the garden ref's pink, muted (icons only)</span></div></div>
+  </div>
+  <p class="rule">The garden ref's coloring arrives through the pitch's own family — sage and forest greens, dusk blue, warm gold light, cream — plus one muted blossom for soul markers. Pinks and lavenders stay at marker strength so they never fight the amber.</p>
+</section>
+
+<section>
+  <h2>Node states — each a family, at a glance</h2>
+  <div class="canvas">
+    <div class="node pending">
+      <span class="med"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9" stroke-dasharray="3 3"/></svg></span>
+      <span class="kind">choice · CH-T2-04</span><div class="name">The receive-beat</div>
+      <div class="line">"It's nothing. Go on."</div><span class="state-lbl">pending</span>
+    </div>
+    <div class="node current">
+      <span class="med"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M8 2h8l1 7c0 3-2 5-5 5s-5-2-5-5l1-7z"/><path d="M12 14v6M9 22h6"/></svg></span>
+      <span class="kind">option · CH-T2-04-a</span><div class="name">ease</div>
+      <div class="line">"Let me carry the trays at least."</div><span class="state-lbl">current</span>
+    </div>
+    <div class="node visited">
+      <span class="med"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.5"/></svg></span>
+      <span class="kind">line · L-T2-03</span><div class="name">Toby</div>
+      <div class="line">Flour to the wrist, first to offer.</div><span class="state-lbl">visited</span>
+    </div>
+    <div class="node dim">
+      <span class="med"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/></svg></span>
+      <span class="kind">option · CH-T2-04-b</span><div class="name">witness</div>
+      <div class="line">"Alright. Save me a sweet roll."</div><span class="state-lbl">unvisited</span>
+    </div>
+    <div class="node approved">
+      <span class="med"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span>
+      <span class="kind">scene · SC-T2-04</span><div class="name">Market, midday</div>
+      <div class="line">Both branches read clean.</div><span class="state-lbl">approved</span>
+    </div>
+    <div class="node edited">
+      <span class="med"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 3l4 4L8 20l-5 1 1-5L17 3z"/></svg></span>
+      <span class="kind">line · L-T2-05</span><div class="name">Toby</div>
+      <div class="line">"Save that for the oven."</div><span class="state-lbl">edited</span>
+    </div>
+    <div class="node flagged">
+      <span class="med"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 21V4h13l-2.5 5L18 14H5"/></svg></span>
+      <span class="kind">line · L-T2-06</span><div class="name">Toby</div>
+      <div class="line">Reads brusque — card licenses no cool.</div><span class="state-lbl">flagged</span>
+    </div>
+    <div class="node soul pending">
+      <span class="med"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3c2 3 6 4 6 8a6 6 0 1 1-12 0c0-4 4-5 6-8z"/></svg></span>
+      <span class="kind">soul · toby</span><div class="name">Toby — Baker</div>
+      <div class="line">Market Row, morning slot.</div><span class="state-lbl">soul marker</span>
+    </div>
+  </div>
+  <p class="rule">Every state differs on three channels at once — medallion (icon + fill), left band, and border/glow — so no two states rely on reading a small label. Current = gold lantern glow. Approved = forest seal. Edited = dusk pencil + corner fold. Flagged = clay flag + full border. Visited = gold thread. Pending = dashed ring. Soul markers wear the blossom.</p>
+</section>
+
+<section>
+  <h2>Buttons & chips (pill grammar from the blue garden ref)</h2>
+  <div class="duo">
+    <div class="pane">
+      <h3>On parchment</h3>
+      <div class="btnrow">
+        <button class="pill primary">Approve</button>
+        <button class="pill flag">Flag with note</button>
+        <button class="pill ghost">Jump here</button>
+        <button class="pill quiet">Re-roll day</button>
+      </div>
+      <p class="rule">Filled pill = the one primary act. Clay outline = flag (Roc, 2026-07-30). Teal outline = navigation/secondary. Quiet pill = utilities. Corners 12px on cards, full-round on pills, 6px on chips.</p>
+    </div>
+    <div class="pane nightp">
+      <h3>On night</h3>
+      <span class="edge-chip">time_of_day = evening</span>
+      <span class="edge-chip">day &gt;= 4</span>
+      <span class="edge-chip sat">knows(still_the_water)</span>
+      <p class="rule" style="color:var(--milk-soft)">Condition chips; gold = satisfied in the current playthrough.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Type</h2>
+  <div class="type-spec">
+    <div><span class="lbl">display · Fraunces 600 · 28px — page title only</span>
+      <span style="font-family:var(--display);font-weight:600;font-size:28px">The Lantern Arch</span></div>
+    <div><span class="lbl">display · Fraunces 600 · 19px — screen &amp; soul names</span>
+      <span style="font-family:var(--display);font-weight:600;font-size:19px">Toby — Market Row, morning</span></div>
+    <div><span class="lbl">body · Source Sans 3 · 16px — UI text</span>
+      <span>He waves you off, flour to the wrist. "It's nothing. Go on."</span></div>
+    <div><span class="lbl">mono · IBM Plex Mono · 13px — IDs, predicates, state labels</span>
+      <span style="font-family:var(--mono);font-size:13px">CH-T2-04 · thread_move(giver-receive) · threads_moved(3)</span></div>
+  </div>
+  <p class="rule">Same faces as v1 (they match the pitch, which also sets Fraunces + Plex Mono). Spacing scale 4/8/12/16/24/32/48.</p>
+</section>
+
+<section>
+  <h2>Contrast (floor: 4.5:1 body text)</h2>
+  <table class="contrast">
+    <tr><td>ink on cream</td><td class="ok">9.9:1</td><td class="note">body text, paper side</td></tr>
+    <tr><td>milk on night</td><td class="ok">12.6:1</td><td class="note">body text, night side</td></tr>
+    <tr><td>muted on cream</td><td class="ok">4.9:1</td><td class="note">labels</td></tr>
+    <tr><td>gold on night</td><td class="ok">8.5:1</td><td class="note">glow + satisfied chips</td></tr>
+    <tr><td>forest-deep on cream</td><td class="ok">8.2:1</td><td class="note">approved text</td></tr>
+    <tr><td>dusk-deep on cream</td><td class="ok">6.2:1</td><td class="note">edited text</td></tr>
+    <tr><td>teal on cream</td><td class="ok">7.9:1</td><td class="note">interactive text</td></tr>
+    <tr><td>clay on cream</td><td class="ok">4.9:1</td><td class="note">flag labels</td></tr>
+    <tr><td>amber on cream</td><td class="note">2.3:1 — decorative/medallion only</td><td class="note">never body text on paper</td></tr>
+    <tr><td>blossom on cream</td><td class="note">3.8:1 — icons/large only</td><td class="note">soul markers, never body text</td></tr>
+  </table>
+</section>
+</body>
+</html>

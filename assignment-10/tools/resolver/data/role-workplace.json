@@ -1,0 +1,112 @@
+{
+  "provisional": true,
+  "generated": "layout-pass 2026-07-29",
+  "status": "RATIFIED and WIRED — day.ts's soulWeight() reads workplace_screens/time_blocks as a placement weight bonus for every role. Blacksmith and Baker's rows were additionally hardened into an unconditional placement for the souls dealt those roles this slice (Soul.fixed_placement, 2026-08-31) — see each row's own note.",
+  "note": "Architect proposal: plausible workplace fits grounded in the layout draft's screens. Screen names are placeholder flavor, so every fit is provisional by construction; rows with 'uncertain: true' have a structural doubt beyond flavor. Capacity and who actually stands where remain the permutation resolver's output — this table only proposes each role's home base. `goal` (D7, gdd/07-cast.md's role pool table) and `goal_threads` (D7, src/roleGoals.ts) added 2026-08-01: goal_threads lists only the thread_id(s) a real authored scene's state_actions actually moves for a soul dealt that role — an empty list is a real content gap, never a guess.",
+  "roles": [
+    {
+      "role_tag": "Mage",
+      "workplace_screens": [],
+      "time_blocks": [],
+      "rationale": "Personal goal (collect magic), not civic — no fixed workplace; the newcomer roams both locations.",
+      "uncertain": true,
+      "goal": "Personal, not civic: collect magic from around the world",
+      "goal_threads": []
+    },
+    {
+      "role_tag": "Blacksmith",
+      "workplace_screens": [
+        "T4"
+      ],
+      "time_blocks": [
+        "afternoon",
+        "evening"
+      ],
+      "rationale": "The Workshop is the slice's only craft interior; the Lantern Arch centerpiece is forged here. Ratified by Roc, 2026-08-31: Ilsa (dealt Blacksmith) is now fixed here afternoons AND evenings (Soul.fixed_placement, day.ts) — this row's own time_blocks widened to match, so the weight-bonus table this file otherwise offers to non-fixed souls dealt this role someday does not silently contradict the hard placement.",
+      "uncertain": true,
+      "note": "T4's placeholder flavor is a general workshop, not explicitly a smithy — confirm at flavor pass.",
+      "goal": "Forges the new Lantern Arch centerpiece",
+      "goal_threads": [
+        "ilsa-forge-short"
+      ],
+      "goal_threads_note": "Filled 2026-08-24 (T9, festival scoring). `ilsa-forge-short` is v01's licensed want × role-goal tension row for the soul dealt Blacksmith this life — its own thread doc states it in the `toby-feast-short` form (\"role-goal: forge the Lantern Arch centerpiece\"), and v01's authored ink really does call `recordThreadMove(\"ilsa-forge-short\")`. Was empty because the row predates the thread; that emptiness made the Blacksmith goal permanently uncompletable, which capped the festival tier at Warm by construction. Soul-specific by the same rule as the Baker row above: this file asserts which thread a role's goal moves FOR THE SOUL DEALT THAT ROLE, and does not survive a reshuffle."
+    },
+    {
+      "role_tag": "Baker",
+      "workplace_screens": [
+        "T1"
+      ],
+      "time_blocks": [
+        "morning",
+        "afternoon"
+      ],
+      "rationale": "Ratified by Roc, 2026-08-31: Toby (dealt Baker) is now fixed at Town Square mornings and afternoons (Soul.fixed_placement, day.ts), and his whole scene set moved from Market Row (T2) to T1 the same day. Superseded the original 'Market Row stalls' fit — SC-T2-04's giver-receive thread now plays out at T1, not T2.",
+      "goal": "Prepares the communal feast",
+      "goal_threads": [
+        "toby-feast-short"
+      ],
+      "goal_threads_note": "SC-T2-04's CH-T2-04 (both options) moves the Baker's feast-can't-be-finished-alone thread, gdd/03-core-loop.md:35's worked example (the Giver dealt the Baker). Id changed from `giver-receive` to `toby-feast-short` on 2026-08-04, when Roc ratified Toby's thread registry and retired `giver-receive` — see arc-festival-slice.md's Threads to Not Drop table, whose id column is now the join. NOTE: v01's authored content still emits `giver-receive`, so this row and the content disagree until v01 is re-authored. That is deliberate: this file is where the system asserts which thread a role's goal moves, and it should name the ratified id."
+    },
+    {
+      "role_tag": "Postman",
+      "workplace_screens": [
+        "T1",
+        "T3"
+      ],
+      "time_blocks": [
+        "morning",
+        "afternoon"
+      ],
+      "rationale": "Delivery rounds: the Square's notice-board (T1) and the Commons' doorsteps (T3).",
+      "goal": "Delivers the festival letters",
+      "goal_threads": []
+    },
+    {
+      "role_tag": "Herbalist",
+      "workplace_screens": [
+        "T2",
+        "F1"
+      ],
+      "time_blocks": [
+        "morning",
+        "afternoon"
+      ],
+      "rationale": "Herbs forage at both Market Row and the Forager's Clearing — stall by morning, gathering by afternoon. Ratified by Roc, 2026-08-31: Mara (dealt Herbalist) is now fixed at T2 mornings and afternoons (Soul.fixed_placement, day.ts), which is exactly this row's original T2 fit made a guarantee instead of a weight bonus — the bonus itself is moot for those two blocks now (she is already placed before the draw runs) but stays true. REVISED the same day: her whole scene set, including her three GRT-* greetings, moved to T2 — an evening-forest-only greeting left her encounter chain's own prerequisite gated behind F1's unweighted evening draw, with nothing guaranteeing it the way her real content now is. F1 keeps its bonus for evening's ordinary draw, but nothing of hers is authored there any more; a soul standing there is now a plain, scene-less presence.",
+      "goal": "Brews the festival tonic that wards off the first frost",
+      "goal_threads": [
+        "mara-tonic-frost"
+      ],
+      "goal_threads_note": "Filled 2026-08-24 (T9, festival scoring), same reasoning as the Blacksmith row. `mara-tonic-frost` is Mara's one licensed want × role-goal tension row for the Herbalist she is dealt this life (\"role-goal: brew the festival tonic that wards off the first frost\"), and v01's ink calls `recordThreadMove(\"mara-tonic-frost\")`. Soul-specific; does not survive a reshuffle."
+    },
+    {
+      "role_tag": "Priest",
+      "workplace_screens": [
+        "T1",
+        "T8"
+      ],
+      "time_blocks": [
+        "evening",
+        "night"
+      ],
+      "rationale": "The rite lights the Lantern Arch (T1, evenings); the Old Shrine (T8) is the town's relic site.",
+      "uncertain": true,
+      "note": "T8 is the stretch 8th screen — if cut, fallback is T1 only.",
+      "goal": "Leads the rite that lights the Lantern Arch and calls the souls home",
+      "goal_threads": []
+    },
+    {
+      "role_tag": "Farmer",
+      "workplace_screens": [
+        "T2"
+      ],
+      "time_blocks": [
+        "afternoon"
+      ],
+      "rationale": "No farm screens exist in the two-location slice; selling produce at Market Row is the nearest fit.",
+      "uncertain": true,
+      "note": "Proper workplace awaits the Farm stretch location (draft §10 slot).",
+      "goal": "Brings in the harvest that feeds the festival week, not just feast night",
+      "goal_threads": []
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The postman rubs a pinch of ash over the topmost letter, turning it carefully in his hands. \"Rounds run in all weather,\" he says, plain and unhurried.",
+    "wc": 27,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player asks, \"Does it work once the ink's run?\"\n\nThe postman turns a letter between his hands. \"No. Has to be caught early.\"",
+    "wc": 24,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player hands over a second damp letter from the satchel. The postman takes it, turning the paper slowly between his fingers, and it emerges flat and dry.",
+    "wc": 28,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player tries the ash on a parcel that has already dried. \"Does it work on things already dry?\" The postman shrugs. \"Not really. Needs some moisture to pull it out.\"",
+    "wc": 31,
+    "ok": true,
+    "err": null
+  }
+}

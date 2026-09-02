@@ -1,0 +1,440 @@
+{
+  "screens": [
+    {
+      "screen_id": "T1",
+      "location": "town",
+      "name": "Town Square",
+      "status": "start",
+      "vibe": "the festival's home; the Lantern Arch landmark",
+      "gates": [
+        {
+          "gate_id": "G-T1-showask",
+          "archetype": "Signpost",
+          "preview": true,
+          "five_field_ref": "opening Show/Ask intro"
+        }
+      ],
+      "examinables": [
+        {
+          "id": "arch",
+          "clue_tier": "ambient",
+          "region": "r_arch"
+        },
+        {
+          "id": "notice_board",
+          "clue_tier": "soft-signpost",
+          "region": "r_board"
+        }
+      ],
+      "forage": [],
+      "npc_slots": [
+        {
+          "time_block": "morning",
+          "count": 2
+        },
+        {
+          "time_block": "afternoon",
+          "count": 2
+        },
+        {
+          "time_block": "evening",
+          "count": 2
+        }
+      ],
+      "item_slots": [],
+      "time_states": [
+        "morning",
+        "afternoon",
+        "evening"
+      ],
+      "connects_to": [
+        "T2",
+        {
+          "screen_id": "F1",
+          "seam": "forest_path"
+        }
+      ],
+      "regions": [
+        {
+          "region_id": "r_arch",
+          "shape": {
+            "rect": {
+              "x": 0.4,
+              "y": 0.05,
+              "w": 0.2,
+              "h": 0.35
+            }
+          }
+        },
+        {
+          "region_id": "r_board",
+          "shape": {
+            "rect": {
+              "x": 0.7,
+              "y": 0.5,
+              "w": 0.15,
+              "h": 0.2
+            }
+          }
+        }
+      ],
+      "ink_address": "t1"
+    },
+    {
+      "screen_id": "T2",
+      "location": "town",
+      "name": "Market Row",
+      "status": "reachable(G-T1-showask)",
+      "vibe": "stalls and morning bread; the Baker's stretch",
+      "gates": [],
+      "examinables": [
+        {
+          "id": "bread_stall",
+          "clue_tier": "ambient",
+          "region": "r_stall"
+        }
+      ],
+      "forage": [
+        "sticks"
+      ],
+      "npc_slots": [
+        {
+          "time_block": "morning",
+          "count": 2
+        },
+        {
+          "time_block": "afternoon",
+          "count": 1
+        },
+        {
+          "time_block": "evening",
+          "count": 1
+        }
+      ],
+      "item_slots": [
+        {
+          "slot_id": "SL-T2-01",
+          "region": "r_crates",
+          "bucket": [
+            {
+              "item": "wool",
+              "weight": 3
+            },
+            {
+              "item": "grass",
+              "weight": 2
+            },
+            {
+              "item": "lit_lantern",
+              "weight": 1,
+              "min_band": "alive"
+            },
+            {
+              "item": "empty",
+              "weight": 4
+            }
+          ],
+          "respawn_rule": "day-start",
+          "conditions": []
+        }
+      ],
+      "time_states": [
+        "morning",
+        "afternoon",
+        "evening"
+      ],
+      "connects_to": [
+        "T1"
+      ],
+      "regions": [
+        {
+          "region_id": "r_stall",
+          "shape": {
+            "rect": {
+              "x": 0.1,
+              "y": 0.4,
+              "w": 0.25,
+              "h": 0.3
+            }
+          }
+        },
+        {
+          "region_id": "r_crates",
+          "shape": {
+            "rect": {
+              "x": 0.6,
+              "y": 0.6,
+              "w": 0.2,
+              "h": 0.25
+            }
+          }
+        }
+      ],
+      "ink_address": "t2"
+    }
+  ],
+  "seams": [
+    {
+      "from": "T1",
+      "to": "F1",
+      "name": "forest_path"
+    }
+  ],
+  "scenes": [
+    {
+      "scene_id": "SC-T2-01",
+      "soul": "toby",
+      "screen_id": "T2",
+      "ink_address": "toby.sc_t2_01",
+      "lines": [
+        {
+          "content_id": "L-SC-T2-01-01",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder: Toby is behind on the feast trays."
+        },
+        {
+          "content_id": "L-SC-T2-01-02",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder set-up: he waves the player off.",
+          "choice_id": "CH-T2-01"
+        },
+        {
+          "content_id": "L-CH-T2-01-a-p",
+          "slot_type": "player_line",
+          "speaker_id": "player",
+          "text": "Placeholder player line: offer to carry the trays.",
+          "choice_id": "CH-T2-01",
+          "option_id": "CH-T2-01-a"
+        },
+        {
+          "content_id": "L-CH-T2-01-a-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder response: Toby goes flat and short, receiving.",
+          "choice_id": "CH-T2-01",
+          "option_id": "CH-T2-01-a"
+        },
+        {
+          "content_id": "L-CH-T2-01-b-r1",
+          "slot_type": "dialogue",
+          "speaker_id": "toby",
+          "text": "Placeholder response: Toby quickens, attention pointed back out.",
+          "choice_id": "CH-T2-01",
+          "option_id": "CH-T2-01-b"
+        }
+      ],
+      "choice_nodes": [
+        {
+          "choice_id": "CH-T2-01",
+          "scene_id": "SC-T2-01",
+          "availability_conditions": [
+            "npc_present(toby)",
+            "time_of_day = morning"
+          ],
+          "equal_weight_note": "Helping moves the feast and spends the block; declining respects the surface request and the deflection stands.",
+          "no_accrual_note": "No counter keys off either option; the claimed-beat is Toby's own act, gated on the arc thread.",
+          "options": [
+            {
+              "option_id": "CH-T2-01-a",
+              "verb_family": "Converse",
+              "player_verb": "ease",
+              "player_line": "L-CH-T2-01-a-p",
+              "response_slots": [
+                "L-CH-T2-01-a-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "bond_event",
+                  "arg": "Intimacy"
+                },
+                {
+                  "type": "thread_move",
+                  "arg": "giver-receive"
+                }
+              ],
+              "rejoin": "gather"
+            },
+            {
+              "option_id": "CH-T2-01-b",
+              "verb_family": "Converse",
+              "player_verb": "witness",
+              "surface_action": "leave the bread",
+              "response_slots": [
+                "L-CH-T2-01-b-r1"
+              ],
+              "state_actions": [
+                {
+                  "type": "thread_move",
+                  "arg": "giver-receive"
+                }
+              ],
+              "rejoin": "gather"
+            }
+          ],
+          "ink_address": "ch_t2_01",
+          "gather_address": "g_ch_t2_01"
+        }
+      ]
+    }
+  ],
+  "variables": [
+    {
+      "name": "TimeOfDay",
+      "declaration": "LIST TimeOfDay = morning, afternoon, evening, night",
+      "readers": [
+        "CH-T2-01"
+      ],
+      "writers": []
+    },
+    {
+      "name": "day",
+      "declaration": "VAR day = 1",
+      "readers": [],
+      "writers": []
+    },
+    {
+      "name": "movesLeft",
+      "declaration": "VAR movesLeft = 3",
+      "readers": [],
+      "writers": []
+    },
+    {
+      "name": "pickedLocation",
+      "declaration": "VAR pickedLocation = \"none\"",
+      "readers": [],
+      "writers": [
+        "home-hub"
+      ]
+    },
+    {
+      "name": "pickedStartScreen",
+      "declaration": "VAR pickedStartScreen = \"none\"",
+      "readers": [],
+      "writers": [
+        "home-hub"
+      ]
+    },
+    {
+      "name": "KnownPhrases",
+      "declaration": "LIST KnownPhrases = placeholder_phrase",
+      "readers": [],
+      "writers": []
+    },
+    {
+      "name": "Satchel",
+      "declaration": "LIST Satchel = grass, lit_lantern, sticks, wool",
+      "readers": [],
+      "writers": []
+    },
+    {
+      "name": "present_toby",
+      "declaration": "VAR present_toby = \"none\"",
+      "readers": [
+        "CH-T2-01"
+      ],
+      "writers": [
+        "day-start-resolver"
+      ]
+    },
+    {
+      "name": "bondLevel_toby",
+      "declaration": "VAR bondLevel_toby = 0",
+      "readers": [],
+      "writers": [
+        "CH-T2-01-a",
+        "host-mirror"
+      ]
+    },
+    {
+      "name": "present_mara",
+      "declaration": "VAR present_mara = \"none\"",
+      "readers": [],
+      "writers": [
+        "day-start-resolver"
+      ]
+    },
+    {
+      "name": "bondLevel_mara",
+      "declaration": "VAR bondLevel_mara = 0",
+      "readers": [],
+      "writers": [
+        "host-mirror"
+      ]
+    },
+    {
+      "name": "present_finch",
+      "declaration": "VAR present_finch = \"none\"",
+      "readers": [],
+      "writers": [
+        "day-start-resolver"
+      ]
+    },
+    {
+      "name": "bondLevel_finch",
+      "declaration": "VAR bondLevel_finch = 0",
+      "readers": [],
+      "writers": [
+        "host-mirror"
+      ]
+    },
+    {
+      "name": "slot_sl_t2_01",
+      "declaration": "VAR slot_sl_t2_01 = \"empty\"",
+      "readers": [],
+      "writers": [
+        "day-start-resolver"
+      ]
+    }
+  ],
+  "souls": [
+    {
+      "soul_id": "toby",
+      "name": "Toby",
+      "role_tag": "baker",
+      "home_screen": "T1",
+      "deep": true
+    },
+    {
+      "soul_id": "ilsa",
+      "name": "Ilsa",
+      "role_tag": "blacksmith",
+      "home_screen": "T4",
+      "deep": true
+    },
+    {
+      "soul_id": "mara",
+      "name": "Mara",
+      "role_tag": "keeper",
+      "home_screen": "T2",
+      "deep": true
+    },
+    {
+      "soul_id": "finch",
+      "name": "Finch",
+      "home_screen": "T1",
+      "deep": false
+    }
+  ],
+  "bond": {
+    "category_weights": {
+      "Trust": 2,
+      "Intimacy": 2,
+      "Recognition": 3,
+      "Respect": 2
+    },
+    "trait_coefficients": {
+      "_default": 1
+    },
+    "band_thresholds": {
+      "mid_min": 12,
+      "high_min": 36
+    },
+    "demo_multiplier": 1
+  },
+  "day_loop": {
+    "moves_per_day": 3,
+    "days_per_life": 5
+  }
+}

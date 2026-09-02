@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Toby angles the borrowed crock toward the window's light, peers into the starter, then sniffs the contents. He sets it back down without comment and turns to his own flour. The tally slate now carries two rows of marks, the new one starting with a number that matches the crock's lid. Toby glances at the slate when the player looks, but only says, \"Some of it.\"",
+    "wc": 66,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player hands over a packet of salt. Toby tucks it in with the borrowed starter and says, \"Bakery weight.\"",
+    "wc": 20,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player casts *portion* over the rising dough. Toby watches the mass settle into even lumps. \"That's better,\" he says, resetting his count against it. \"Now it's a fair split.\"",
+    "wc": 30,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player asks, \"That'll hold?\"\n\nToby says, \"Some of it.\"",
+    "wc": 10,
+    "ok": true,
+    "err": null
+  }
+}

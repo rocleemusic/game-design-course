@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The Festival Grounds glow as the rite-fire burns bright, casting shadows across lanterns lined along the Arch. The priest dips a taper into the flames and sends the fire across in one motion.",
+    "wc": 33,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player asks, \"Does the flame run out?\" The priest glances up from the lantern, his lined face softening. \"Depends how far it's asked to go. One flame, one send.\"",
+    "wc": 30,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player dips a second taper into the fire and sends it to the next lantern along the row. The wick catches the flame instantly and holds steady.",
+    "wc": 28,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The flame touches the water and dies instantly, leaving only a wisp of smoke.",
+    "wc": 14,
+    "ok": true,
+    "err": null
+  }
+}

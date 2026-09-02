@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The player steps into Toby's workshop, a small space filled with the warm scent of baking bread. Toby stands at his worktable, carefully examining a crock that doesn't seem to be his. The lid is balanced precariously on top, and next to it sits a familiar bag of flour. Toby glances at the player, his gaze quickly returning to the crock. \"Some of it,\" he says, almost to himself, as he sets the crock back down. The tally slate on the table now carries a second row of marks, hinting at a growing tally. The player watches as Toby angles the crock towards the light, checking it with a quick, practiced sniff before setting it back down. He seems to be speaking",
+    "wc": 122,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player hands over a small packet of salt. Toby tucks it in with the borrowed starter. \"Bakery weight,\" he says, same move that forecloses a debt. He resets a cloth over the crock, turning to the next tray. The starter's holding \"some of it\" when the player glances at the slate. Flat, honest, no arithmetic offered unprompted this time. Toby angles the crock toward the light, checks it by smell without comment, sets it back down. He says the starter's holding \"some of it\" when the player glances at the slate \u2014 flat, honest, no arithmetic offered unprompted this time. Toby angles the crock toward the light, checks it by smell without",
+    "wc": 113,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player casts portion over the rising dough. Toby watches the mass settle into even lumps, resets his count against it. \"Bakery weight,\" he says, tucking in the borrowed salt. \"Some of it'll hold.\" He covers the crock with a cloth, a wordless gesture of trust.",
+    "wc": 46,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player asks, \"That'll hold?\" Toby glances at the slate, then back to the player. \"Some of it.\" He doesn't elaborate, but resumes measuring out flour for his own loaves. The starter sits between them, a silent presence in the room. Toby's focus shifts, and the moment of shared attention passes without a debt incurred or a favor extended. The bread making continues, the starter's fate left hanging in the air like an unanswered question. Toby doesn't wait for the player's next move, already lost in the rhythm of his work. The starter is a shared secret now, its future uncertain but for the brief acknowledgment that it might, just might, be enough to hold them both through another day",
+    "wc": 120,
+    "ok": true,
+    "err": null
+  }
+}

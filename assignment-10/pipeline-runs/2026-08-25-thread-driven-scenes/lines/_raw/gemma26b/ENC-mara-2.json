@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Jars line the cleared shelf, their contents barely filling the glass. Mara holds one up to the light and sets it back down with a frown. \"This one won't keep past the week without help.\"",
+    "wc": 35,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player hands over a measure of salt. Mara works it into the jar's seal, checking it again under the light \u2014 \"There, that should hold.\"",
+    "wc": 26,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player casts preserve on the freshly cut herbs beside the jars. The wilting herbs stop mid-drop as the spell takes hold. Mara notices the change but does not look up.",
+    "wc": 31,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "\"Which ones are close?\"\n\nMara points to two jars, then returns her attention to the shelf.",
+    "wc": 16,
+    "ok": true,
+    "err": null
+  }
+}

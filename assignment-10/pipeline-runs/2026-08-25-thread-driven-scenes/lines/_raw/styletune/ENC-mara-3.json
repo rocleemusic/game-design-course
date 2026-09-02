@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Mara works fast without hurrying, her hands moving in practiced motions to fill the remaining jars while frost threatens the night ahead. \"Tonight or not at all,\" she says, her voice flat.",
+    "wc": 32,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player places the skin of spring water on the counter. Mara accepts it and pours the liquid steadily into the final vessel. \"This will do perfectly\u2014the water has the right clarity for this batch, and it saves us the trip to the well.\"",
+    "wc": 44,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player casts *steep* on the last of the uncast herbs, watching as the color deepens rapidly. Mara sets the finished vessel with the others and nods.",
+    "wc": 27,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player offers a steady hand to assist with the work. \"Need another set of hands?\" Mara doesn't look up from the glass, her fingers moving in a practiced arc as she seals the cork. \"Not tonight.\"",
+    "wc": 37,
+    "ok": true,
+    "err": null
+  }
+}

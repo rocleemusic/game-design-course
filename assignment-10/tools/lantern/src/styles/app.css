@@ -1,0 +1,3338 @@
+/* Lantern app styles. Values come only from tokens.css custom properties.
+   Identity per design/tokens.html (approved 2026-07-30): night graph canvas,
+   paper node cards with icon medallions + inset-shadow left bands, cream
+   panels, pill buttons, 12px card corners, hairlines.
+
+   L6 — DEPTH. The tool read flat because every surface was the same cream at
+   the same height with the same 1px border. The fix is a stated elevation
+   order, not more colour:
+
+     floor      the night canvas and the seams between plates — recessed
+     plate      a column: navigator, a view host — sits on the floor
+     chrome     a header or tab strip — raised on its plate, casts down
+     chip       a row, card, input, button — resting on the plate
+
+   Every step is carried by shadow, border, a 1px lit top edge and an OPAQUE
+   fill. No translucency anywhere: a see-through surface over the night canvas
+   silently blends the real background, and test/contrast.ts — which reads
+   opaque hex out of tokens.css — cannot detect that the shipped contrast has
+   dropped. Opaque fills keep the test honest. */
+
+* {
+  box-sizing: border-box;
+}
+
+/* Declare the scheme. Two things go wrong without this, and I only found them
+   by screenshotting the running tool:
+   · Chromium's auto-dark-mode decides a cream page is an un-themed light page
+     and INVERTS the whole thing for anyone whose OS is set to dark. The frozen
+     palette, every contrast figure and both contrast tests describe a UI that
+     user never sees.
+   · UA-rendered controls — the Recent <select>, the colour swatches in the
+     settings drawer, native scrollbars — follow the OS preference instead of
+     the app, so they render dark-on-dark inside cream chrome.
+   Lantern is a light-palette tool by design, so it says so.
+
+   `only light`, not `light`. Plain `light` states a preference and Chromium's
+   forced-dark walks straight past it — I confirmed that against a real render:
+   --ink came back as rgb(210,193,172) and the cream body as rgb(102,75,0), a
+   palette nobody approved and no test measures. `only` is the opt-out the
+   browser is obliged to honour. */
+:root {
+  color-scheme: only light;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-ui);
+  font-size: var(--text-body);
+  line-height: var(--leading);
+  color: var(--ink);
+  /* the floor the plates sit on — the seam colour, never a text surface */
+  background: var(--cream-edge);
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+/* ---------- depth grammar (the four utilities the whole file leans on) ----- */
+
+/* a raised chrome bar: gradient toward the light, lit lip, cast onto the body */
+.u-chrome {
+  background: linear-gradient(180deg, var(--paper) 0%, var(--surface-panel) 100%);
+  box-shadow: var(--edge-lip), var(--cast-down);
+}
+
+/* pill grammar is the default button voice: quiet utility pill */
+button {
+  cursor: pointer;
+  min-height: var(--touch-target);
+  min-width: var(--touch-target);
+  background: linear-gradient(180deg, var(--paper) 0%, var(--surface-panel) 100%);
+  border: var(--hairline) solid var(--border);
+  border-radius: var(--r-pill);
+  padding: var(--space-1) var(--space-3);
+  font-weight: 600;
+  font-size: var(--text-small);
+  box-shadow: var(--elev-1), var(--edge-lip);
+  transition: background 0.18s, color 0.18s, border-color 0.18s,
+    box-shadow 0.18s, transform 0.08s;
+}
+button:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--elev-2), var(--edge-lip);
+}
+/* press is the one place the surface goes DOWN — the well, and a 1px drop */
+button:active:not(:disabled) {
+  box-shadow: var(--well);
+  transform: translateY(1px);
+}
+
+/* the one primary act: filled forest, lit along its top edge */
+button.pill-primary {
+  background: linear-gradient(180deg, var(--forest) 0%, var(--forest-deep) 100%);
+  color: var(--paper);
+  border: var(--hairline) solid var(--forest-deep);
+  box-shadow: var(--elev-2), inset 0 1px 0 var(--sage);
+}
+button.pill-primary:hover {
+  background: var(--forest-deep);
+  box-shadow: var(--elev-3), inset 0 1px 0 var(--sage);
+}
+
+/* outline voices stay FLAT at rest — that is what makes them read as secondary
+   next to the raised utility pill. They earn their lift on hover only. */
+button.pill-ghost {
+  background: transparent;
+  color: var(--teal);
+  border: 1.5px solid var(--teal);
+  box-shadow: none;
+}
+button.pill-ghost:hover {
+  background: var(--teal-tint);
+  border-color: var(--teal);
+  box-shadow: var(--elev-1);
+}
+
+/* flag: clay outline (Roc, 2026-07-30) */
+button.pill-flag {
+  background: transparent;
+  color: var(--clay);
+  border: 1.5px solid var(--clay);
+  box-shadow: none;
+}
+button.pill-flag:hover {
+  background: var(--clay-tint);
+  border-color: var(--clay);
+  box-shadow: var(--elev-1);
+}
+
+/* utilities: quiet */
+button.pill-quiet {
+  background: transparent;
+  color: var(--ink-muted);
+  border: 1.5px solid var(--border);
+  box-shadow: none;
+}
+button.pill-quiet:hover {
+  color: var(--ink);
+  border-color: var(--border-strong);
+  background: var(--surface-card);
+  box-shadow: var(--elev-1), var(--edge-lip);
+}
+
+/* Focus rings: always visible, and never swallowed by an elevated neighbour.
+   The ring is drawn OUTSIDE the box (outline), so it survives every gradient
+   and shadow above; the offset is paid for in the padding of every strip that
+   scrolls, so the ring is not clipped. */
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+.on-canvas :focus-visible {
+  outline-color: var(--focus-ring-on-canvas);
+}
+
+/* Scrollbars belong to the chrome, not to the OS. Opaque track and thumb, so
+   a scrolling column keeps its plate reading. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) var(--surface-panel);
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--surface-panel);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border: 2px solid var(--surface-panel);
+  border-radius: var(--r-pill);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-strong);
+}
+.on-canvas ::-webkit-scrollbar-track,
+.flow-wrap ::-webkit-scrollbar-track {
+  background: var(--surface-canvas);
+}
+.on-canvas ::-webkit-scrollbar-thumb,
+.flow-wrap ::-webkit-scrollbar-thumb {
+  background: var(--edge);
+  border-color: var(--surface-canvas);
+}
+
+/* ---------- layout ---------- */
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+/* The masthead is the highest plate in the tool — everything else is beneath
+   it. It says so with the strongest cast-down in the file, so the shell reads
+   as sliding under the header rather than butting against it. */
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border-bottom: var(--hairline) solid var(--border);
+  background: linear-gradient(180deg, var(--paper) 0%, var(--surface-panel) 100%);
+  box-shadow: var(--edge-lip), 0 1px 0 var(--border),
+    0 10px 18px -12px var(--sh-5);
+  position: relative;
+  z-index: 5;
+  flex-wrap: wrap;
+  flex: none;
+}
+
+.app-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-display);
+  letter-spacing: -0.01em;
+  margin: 0 var(--space-2) 0 0;
+  padding-right: var(--space-3);
+  /* a hairline seam, so the mark reads as its own field rather than the first
+     word of the toolbar */
+  border-right: var(--hairline) solid var(--border);
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* the lantern itself: a small gold medallion beside the wordmark */
+.app-title::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex: none;
+  background: radial-gradient(circle at 35% 30%, var(--gold), var(--amber) 70%);
+  box-shadow: 0 0 0 3px var(--gold-wash), var(--elev-1);
+}
+
+.app-header label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-small);
+  color: var(--ink-muted);
+  min-height: var(--touch-target);
+  cursor: pointer;
+}
+
+/* Inputs are the one thing that goes DOWN into the plate. Paper fill (lighter
+   than the chrome around it) plus the well shadow: the reading is "a slot cut
+   into the bar", which is what a text field is. */
+.run-dir-input,
+.run-dir-recent {
+  padding: var(--space-1) var(--space-2);
+  /* 1.4.11 — a 3:1 boundary; see the field grammar below */
+  border: var(--hairline) solid var(--border-strong);
+  border-radius: var(--r-chip);
+  background: var(--surface-card);
+  box-shadow: var(--well);
+  min-height: 34px;
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  transition: border-color 0.18s, box-shadow 0.18s;
+}
+.run-dir-input {
+  width: 16em;
+}
+/* recent run folders — same slot as the input, sized to its longest entry */
+.run-dir-recent {
+  max-width: 16em;
+}
+.run-dir-input:hover,
+.run-dir-recent:hover {
+  border-color: var(--border-strong);
+}
+.run-dir-input:focus,
+.run-dir-recent:focus {
+  border-color: var(--teal);
+}
+
+/* the status line rides the far end of the bar, quiet and right-aligned */
+.header-note {
+  font-size: var(--text-small);
+  color: var(--ink-muted);
+  line-height: 1.35;
+}
+.app-header > .header-note {
+  margin-left: auto;
+  text-align: right;
+  max-width: 34em;
+}
+
+/* The line-edited mark rides beside the status badge, quieter than it — the
+   option's own review is the primary fact, the line's edit the secondary one. */
+.line-edited-badge {
+  font-size: var(--text-small);
+  color: var(--ink-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--r-pill);
+  background: var(--surface-card);
+  box-shadow: var(--edge-lip);
+  padding: 0 var(--space-2);
+  white-space: nowrap;
+}
+
+/* Undo/redo sit together so they read as one control, not two pills: one
+   raised slab, a hairline where they meet, square ends welded shut. */
+.undo-group {
+  display: inline-flex;
+  gap: 0;
+  border-radius: var(--r-pill);
+  box-shadow: var(--elev-1);
+}
+
+.undo-group button {
+  border-radius: 0;
+  box-shadow: none;
+  background: linear-gradient(180deg, var(--paper) 0%, var(--surface-panel) 100%);
+  border-color: var(--border);
+}
+.undo-group button:first-child {
+  border-radius: var(--r-pill) 0 0 var(--r-pill);
+}
+.undo-group button:last-child {
+  border-radius: 0 var(--r-pill) var(--r-pill) 0;
+  margin-left: -1px;
+}
+.undo-group button:hover:not([disabled]) {
+  box-shadow: var(--edge-lip);
+  z-index: 1;
+  position: relative;
+}
+
+.undo-group button[disabled] {
+  color: var(--ink-muted);
+  opacity: 0.45;
+  cursor: default;
+  box-shadow: none;
+}
+
+/* ---------- the shell: one grid, a fixed navigator and two view hosts ----------
+   col-nav | A | centre host (1fr, elastic) | B | right host.
+   The 8px tracks are permanent gutters — the Splitters drive --rail-w and
+   --side-w; hover changes colour, never layout. Hiding the right pane drops
+   its gutter and its track together. */
+
+/* ---------- view host: one pane, its own tab strip ----------
+   Centre and right are the same component; each strip speaks only for its own
+   pane. The body grows — a .pane with nothing to grow into collapses to 0px,
+   which is what made the dialogue graph invisible. */
+
+.view-host {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  background: var(--surface-panel);
+  /* a plate: it holds its own edges rather than borrowing the gutter's */
+  box-shadow: inset 1px 0 0 var(--sheen), inset -1px 0 0 var(--hairline-paper);
+}
+
+/* The tab strip is chrome: it sits ON the plate and casts down onto whatever
+   the pane is showing — including the night canvas, which is why the cast is
+   a shadow and not a border. That downward cast is the single cue that turns
+   "two rectangles" into "a lid over a well". */
+.view-tabs {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-2);
+  background: linear-gradient(180deg, var(--paper) 0%, var(--surface-panel) 100%);
+  box-shadow: var(--edge-lip), var(--cast-down);
+  position: relative;
+  z-index: 3;
+  flex: none;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+/* flex: none is load-bearing. The base button rule sets min-width to the touch
+   target, but a tab may not shrink below its label: nine tabs in a 340px right
+   pane squeezed each other until the words overlapped and the whole strip lost
+   height. They keep their size; the STRIP scrolls (overflow-x above). */
+.view-tab {
+  background: transparent;
+  border: var(--hairline) solid transparent;
+  border-radius: var(--r-pill);
+  color: var(--ink-muted);
+  padding: var(--space-1) var(--space-3);
+  flex: none;
+  min-width: 0;
+  min-height: 30px;
+  white-space: nowrap;
+  font-size: var(--text-small);
+  box-shadow: none;
+}
+.view-tab:hover {
+  color: var(--ink);
+  background: var(--surface-card);
+  border-color: var(--border);
+  box-shadow: var(--elev-1), var(--edge-lip);
+}
+
+/* The selected view is the loudest thing in the chrome — one filled amber
+   seal per pane, the reference's own "you are here". --night on --amber is
+   5.9:1, so the label clears AA at 13px; both are approved tokens. */
+.view-tab-active,
+.view-tab-active:hover {
+  background: linear-gradient(180deg, var(--gold) 0%, var(--amber) 100%);
+  border-color: var(--amber);
+  color: var(--night);
+  font-weight: 600;
+  box-shadow: var(--elev-2), inset 0 1px 0 var(--gold-wash);
+}
+
+/* the hide control sits at the far end of the strip */
+.view-hide {
+  margin-left: auto;
+  flex: none;
+}
+
+/* The body is the recessed half of the pane. Panel-side views paint their own
+   cream; the night canvas paints itself. */
+.view-body {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  background: var(--surface-panel);
+}
+
+/* ---------- the shell ----------
+   The grid's own background is the seam colour — the floor plates sit on. */
+
+.shell {
+  display: grid;
+  grid-template-columns:
+    var(--rail-w, 340px) 8px 1fr 8px var(--side-w, 340px);
+  flex: 1;
+  min-height: 0;
+  background: var(--border);
+}
+
+/* right pane hidden: the centre takes the width its gutter and track leave */
+.shell-solo {
+  grid-template-columns: var(--rail-w, 340px) 8px 1fr;
+}
+
+/* col-nav: the fixed navigator — scene rail scrolling over the health readout.
+   It is the quietest plate: a hair recessed from the hosts beside it, so the
+   eye lands on content first and the navigator second. */
+.col-nav {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+  background: var(--surface-panel);
+  box-shadow: inset -1px 0 0 var(--hairline-paper),
+    inset -6px 0 8px -8px var(--sh-2);
+  /* WCAG 2.4.11. This column has a sticky section label at its top edge, and a
+     row Tabbed into from below would otherwise be scrolled to y=0 — straight
+     under it, entirely hidden. scroll-padding is what the browser's own
+     focus-scroll honours, so the row stops below the label instead. */
+  scroll-padding-top: 44px;
+}
+
+/* the rail and the health readout keep their natural height; the column scrolls */
+.col-nav > * {
+  flex: none;
+}
+
+/* A section label, not a heading: the reference's small-caps rail labels
+   (ARCS · HEALTH). Quiet, letterspaced, sitting on its own sunken band so the
+   groups beneath it read as belonging to it. */
+.rail-head {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  padding: var(--space-3) var(--space-3) var(--space-2);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--cream-edge) 26%, var(--cream)) 0%,
+    var(--surface-panel) 100%
+  );
+  box-shadow: inset 0 -1px 0 var(--hairline-paper);
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+/* A pane fills the body it is dropped into. Without the grow it collapsed to
+   0px inside the flex column and its graph rendered invisibly. */
+.pane {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  background: var(--surface-panel);
+}
+
+/* Second-order chrome: below the tab strip, above the content. Lighter cast
+   than the strip above it, so the two do not compete. */
+.pane-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-body);
+  margin: 0;
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface-panel);
+  box-shadow: 0 1px 0 var(--border), 0 4px 6px -6px var(--sh-4);
+  position: relative;
+  z-index: 2;
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 40px;
+}
+
+/* The hint is the first thing to go when a pane is narrow. Truncated, not
+   wrapped: in a 340px pane it wrapped to four lines, which tripled the header's
+   height and shoved the title and the segmented control to opposite corners.
+   The full text is still there for a pointer via the title attribute. */
+.pane-title .hint {
+  font-family: var(--font-ui);
+  font-size: var(--text-small);
+  color: var(--ink-muted);
+  font-weight: normal;
+  letter-spacing: 0;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---------- segmented control (level layout switch) ----------
+   Sits at the far end of a pane title. Same chip grammar as the view tabs,
+   pushed together so the three read as one control. */
+
+/* One sunken trough with raised chips inside it — the physical read of a
+   segmented control, and the reason it never gets mistaken for three buttons.
+   Quieter than the amber view tabs on purpose: this is a setting, not a view. */
+.seg {
+  display: flex;
+  margin-left: auto;
+  gap: 0;
+  flex: none;
+  padding: 2px;
+  border-radius: var(--r-chip);
+  /* the trough stays light enough that --muted on it still clears 4.5:1
+     (4.8:1 measured) — a deeper well would fail the inactive labels */
+  background: color-mix(in srgb, var(--cream-edge) 32%, var(--cream));
+  box-shadow: var(--well);
+}
+
+.seg-btn {
+  background: transparent;
+  border: var(--hairline) solid transparent;
+  border-radius: calc(var(--r-chip) - 2px);
+  color: var(--ink-muted);
+  padding: 2px var(--space-2);
+  min-height: 24px;
+  min-width: 0;
+  font-size: var(--text-small);
+  font-weight: normal;
+  white-space: nowrap;
+  box-shadow: none;
+}
+.seg-btn:hover {
+  color: var(--ink);
+  box-shadow: none;
+}
+.seg-btn-active,
+.seg-btn-active:hover {
+  background: linear-gradient(180deg, var(--paper) 0%, var(--surface-panel) 100%);
+  border-color: var(--border);
+  color: var(--ink);
+  font-weight: 600;
+  box-shadow: var(--elev-1), var(--edge-lip);
+}
+
+/* ---------- level list mode ---------- */
+
+.level-list {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  background: var(--surface-panel);
+  box-shadow: var(--well);
+  /* 2.4.11 — clears the sticky table head, same reason as the navigator */
+  scroll-padding-top: 48px;
+}
+
+.level-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: var(--text-small);
+}
+
+/* the sticky head is chrome and behaves like it: opaque, lit, casting onto
+   the rows that scroll under it */
+.level-table th {
+  text-align: left;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  font-weight: 700;
+  padding: var(--space-2) var(--space-3);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, var(--paper) 0%, var(--surface-panel) 100%);
+  box-shadow: var(--edge-lip), var(--cast-down);
+}
+
+.level-table td {
+  padding: var(--space-2) var(--space-3);
+  border-bottom: var(--hairline) solid var(--hairline-paper);
+  vertical-align: middle;
+}
+
+.level-table tbody tr:hover td {
+  background: var(--surface-card);
+}
+
+/* cast card key/value table — quiet uppercase labels against readable prose,
+   same label voice as the level-table head */
+.cast-kv {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-small);
+  margin: var(--space-2) 0;
+}
+
+.cast-kv th {
+  text-align: left;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  font-weight: 700;
+  padding: var(--space-1) var(--space-3) var(--space-1) 0;
+  vertical-align: top;
+  white-space: nowrap;
+  width: 1%;
+}
+
+.cast-kv td {
+  padding: var(--space-1) 0;
+  vertical-align: top;
+}
+
+.cast-kv tr + tr th,
+.cast-kv tr + tr td {
+  border-top: var(--hairline) solid var(--hairline-paper);
+}
+
+.level-cell-quiet {
+  color: var(--ink-muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.level-row-locked td {
+  background: color-mix(in srgb, var(--amber) 8%, var(--cream));
+  box-shadow: inset 3px 0 0 var(--amber);
+}
+.level-row-locked td:not(:first-child) {
+  box-shadow: none;
+}
+
+.level-row-open {
+  background: transparent;
+  border: var(--hairline) solid transparent;
+  border-radius: var(--r-chip);
+  font-family: var(--font-mono);
+  font-weight: 600;
+  padding: 2px var(--space-2);
+  min-height: 24px; /* 2.5.8 target-size floor */
+  min-width: 24px;
+  box-shadow: none;
+}
+.level-row-open:hover,
+.level-row-open:focus-visible {
+  border-color: var(--border-strong);
+  background: var(--surface-card);
+  box-shadow: var(--elev-1), var(--edge-lip);
+}
+
+/* ---------- the night side ----------
+   The canvas is the FLOOR of the tool: everything cream is above it. It reads
+   that way because it is sunk — an inner shadow all round, deepest at the top
+   where the chrome overhangs it — and because a faint warm vignette pulls the
+   eye to the middle where the graph lives. Both are opaque-on-opaque; the
+   canvas fill itself never goes translucent. */
+.flow-wrap {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  /* The vignette is a BACKGROUND LAYER, never an overlay. An absolutely
+     positioned scrim would sit over the node cards and quietly blend their
+     real background — the exact failure the opaque-fills rule exists to stop,
+     and one the hex-parsing contrast test cannot see. As a background it is
+     painted under every child, so nothing on the canvas is dimmed. The inset
+     well below is likewise painted under descendants. */
+  background: radial-gradient(
+      118% 96% at 50% 34%,
+      transparent 40%,
+      var(--sh-deep-1) 100%
+    ),
+    var(--surface-canvas);
+  box-shadow: var(--well-night);
+}
+
+/* React Flow's own pane must not paint over the floor we just built */
+.flow-wrap .react-flow,
+.flow-wrap .react-flow__pane,
+.flow-wrap .react-flow__renderer {
+  background: transparent;
+}
+
+.error-banner {
+  padding: var(--space-3);
+  border: var(--hairline) solid var(--clay);
+  margin: var(--space-3);
+  border-radius: var(--r-card);
+  background: var(--surface-card);
+  box-shadow: inset 4px 0 0 var(--clay), var(--elev-3), var(--edge-lip);
+  padding-left: var(--space-4);
+}
+.error-banner strong {
+  color: var(--clay);
+}
+
+/* ---------- splitters (resize gutters) ----------
+   Permanent 8px gutters between shell tracks. Hover/focus changes colour, never
+   layout (sign-off 3: an 8px target on a mouse-driven desk tool, keyboard-
+   reachable). The sized track is a CSS var the Splitter writes during a drag. */
+
+/* The gutter is the SEAM between two plates, so it is the deepest thing in the
+   shell: a dark strip with the plates' shadows falling into it from both
+   sides. The grip is a raised pill in the middle of that trough. */
+.splitter {
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: var(--border);
+  align-self: stretch;
+  justify-self: stretch;
+  position: relative;
+  z-index: 1;
+  box-shadow: inset 2px 0 3px -2px var(--sh-3),
+    inset -2px 0 3px -2px var(--sh-3);
+  transition: background 0.15s, box-shadow 0.15s;
+}
+
+.splitter-vertical {
+  cursor: col-resize;
+  width: 8px;
+  height: 100%;
+}
+.splitter-horizontal {
+  cursor: row-resize;
+  height: 8px;
+  width: 100%;
+  box-shadow: inset 0 2px 3px -2px var(--sh-3),
+    inset 0 -2px 3px -2px var(--sh-3);
+}
+
+/* Hover/focus: the handle DARKENS to teal and lights a gold grip — the seam
+   inverts. Not --amber, which the old rule used: amber against this gutter is
+   1.9:1, so the one affordance telling you the seam is draggable was, measured,
+   invisible (WCAG 1.4.11 wants 3:1 for a UI component). Teal is the tool's
+   existing interactive colour and lands at 6.3:1 here; gold on teal is 4.7:1. */
+.splitter:hover,
+.splitter:focus-visible {
+  background: var(--teal);
+  box-shadow: none;
+}
+
+/* The grip: a pill in the trough, so the gutter reads as a handle rather than a
+   gap. Opaque and full-strength — it was --border-strong at 0.55 opacity, which
+   blended to 1.8:1 against the gutter and read as a smudge. */
+.splitter::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  border-radius: var(--r-pill);
+  background: var(--teal);
+  transition: background 0.15s;
+}
+.splitter:hover::after,
+.splitter:focus-visible::after {
+  background: var(--gold);
+}
+.splitter-vertical::after {
+  width: 3px;
+  height: 34px;
+}
+.splitter-horizontal::after {
+  height: 3px;
+  width: 34px;
+}
+
+/* ---------- node cards (paper on night) ---------- */
+
+.node-card {
+  background: var(--surface-card);
+  border: var(--hairline) solid var(--status-pending);
+  border-radius: var(--r-card);
+  padding: var(--space-2) var(--space-3) var(--space-2) 52px;
+  width: 260px;
+  min-height: 56px;
+  font-size: var(--text-small);
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+.node-card.kind-gather {
+  width: 140px;
+  padding: var(--space-2);
+  text-align: center;
+  color: var(--ink-muted);
+}
+
+/* hover: border/shadow only — no layout shift */
+.node-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* the medallion — circular icon badge, one per card */
+.node-card .med {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1.5px dashed var(--ink-muted); /* pending default: dashed ring */
+  color: var(--ink-muted);
+  pointer-events: none;
+}
+.node-card .med svg {
+  width: 17px;
+  height: 17px;
+}
+
+.node-card .card-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  justify-content: space-between;
+}
+
+.node-card .card-id {
+  font-family: var(--font-mono);
+  color: var(--ink-muted);
+  font-size: var(--text-small);
+}
+
+.node-card .card-kind {
+  font-family: var(--font-mono);
+  color: var(--ink-muted);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+
+.node-card .card-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  margin: var(--space-1) 0;
+}
+
+/* Clamp body text in CSS, not JS.
+   `white-space: pre-wrap` alone let a long line grow the card without bound,
+   so measured heights varied wildly and the graph read as noise. Three lines
+   is the plan's figure; the full text stays available through the title
+   attribute and the editor. Clamping here also keeps the measured relayout
+   stable, because card height stops tracking content length. */
+:is(.node-card, .bp-node) .card-text {
+  margin: var(--space-1) 0;
+  white-space: pre-wrap;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-text.editable {
+  cursor: text;
+  border-bottom: 1px dashed var(--border);
+}
+
+/* A toolbar over a canvas: floats, never steals the canvas's own space. It
+   needs its own plate to read against the night — an opaque tray with the
+   floating elevation and a dark ring, the reference's own overlay treatment. */
+.graph-toolbar {
+  display: flex;
+  gap: var(--space-1);
+  margin: var(--space-2);
+  padding: var(--space-1);
+  width: fit-content;
+  border-radius: var(--r-pill);
+  background: var(--surface-panel);
+  box-shadow: var(--elev-3), 0 0 0 1px var(--sh-deep-2), var(--edge-lip);
+}
+
+/* ---------- Assets: one row per screen ---------- */
+
+.assets-panel {
+  overflow: auto;
+}
+
+.asset-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.asset-rows {
+  gap: var(--space-2);
+}
+
+.asset-row {
+  display: grid;
+  grid-template-columns: 72px 1fr auto;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
+  background: var(--surface-card);
+  box-shadow: var(--elev-1), var(--edge-lip);
+  transition: border-color 150ms ease, background 150ms ease, box-shadow 300ms ease;
+}
+.asset-row:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--elev-2), var(--edge-lip);
+}
+
+/* Drop-target feedback: dashed teal is this app's existing drag/drop
+   language (see .marker-layer .marker) — reused here rather than inventing
+   a second one. */
+.asset-row.is-drag-over {
+  border: 1.5px dashed var(--teal);
+  background: var(--teal-tint);
+}
+
+.asset-row.is-busy {
+  opacity: 0.7;
+}
+
+/* A brief confirmation ring once an upload lands, fading via the base
+   row's own box-shadow transition above rather than a keyframe. */
+.asset-row.is-updated {
+  border-color: var(--teal);
+  box-shadow: var(--elev-1), var(--edge-lip), 0 0 0 2px var(--teal);
+}
+
+/* an image well: the thumbnail sits IN the row, not on it */
+.asset-thumb {
+  width: 72px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: calc(var(--r-card) / 2);
+  background: color-mix(in srgb, var(--surface-card) 80%, var(--border));
+  box-shadow: var(--well);
+}
+
+.asset-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.asset-busy {
+  font-size: var(--text-small);
+  color: var(--ink-muted);
+  animation: asset-busy-pulse 1.1s ease-in-out infinite;
+}
+
+@keyframes asset-busy-pulse {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.asset-empty {
+  font-size: var(--text-small);
+  color: var(--ink-muted);
+}
+
+.asset-id {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.asset-name {
+  font-size: var(--text-small);
+}
+
+.asset-path {
+  font-size: var(--text-small);
+  color: var(--ink-muted);
+  overflow-wrap: anywhere;
+}
+
+/* The file input is the label; the label is the button. */
+.asset-pick input[type="file"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.asset-pick {
+  position: relative;
+  cursor: pointer;
+}
+
+.asset-error {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-small);
+  color: var(--status-flagged);
+}
+
+.asset-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  align-items: center;
+}
+
+.asset-shared {
+  font-size: var(--text-small);
+  color: var(--ink-muted);
+  font-style: italic;
+}
+
+/* Uploaded but on no screen — the state that used to be invisible. */
+.asset-unused {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1);
+  margin-bottom: var(--space-2);
+  padding: var(--space-1);
+  border: 1px dashed var(--border);
+  border-radius: var(--r-card);
+}
+
+.asset-unused-label {
+  font-size: var(--text-small);
+  color: var(--ink-muted);
+}
+
+/* The picker: assignment, never an upload. */
+.asset-library {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin-top: var(--space-1);
+  padding-top: var(--space-1);
+  border-top: 1px solid var(--border);
+}
+
+.asset-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 2px var(--space-1);
+  font-size: var(--text-small);
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
+  background: var(--surface-card);
+  color: inherit;
+  cursor: pointer;
+}
+
+.asset-chip img {
+  width: 32px;
+  height: 22px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.asset-chip.is-current {
+  border-color: var(--amber);
+}
+
+/* Honest empty state: says why a pane has nothing rather than showing
+   controls that look live and do nothing. */
+.empty-note {
+  margin: 0 0 var(--space-2);
+  color: var(--ink-muted);
+  font-size: var(--text-small);
+  max-width: 52ch;
+}
+
+/* The review note (bug 1). Reads as an annotation, not as the node's own
+   text — indented behind a flag-coloured rule, no new colour of its own. */
+:is(.node-card, .bp-node) .card-note {
+  margin: var(--space-1) 0 0;
+  padding-left: var(--space-2);
+  border-left: 2px solid color-mix(in srgb, var(--status-flagged) 60%, transparent);
+  color: var(--ink-muted);
+  font-size: var(--text-small);
+  white-space: pre-wrap;
+}
+
+/* state label, mono and quiet — the medallion + band carry the state */
+.node-card .status-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-muted);
+  border: none;
+  padding: 0;
+}
+
+/* ----- soul marker: scene cards wear the blossom (overridden by states) ----- */
+
+.node-card.kind-scene {
+  box-shadow: inset 4px 0 0 var(--blossom), 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+.node-card.kind-scene .med {
+  background: var(--blossom);
+  border: none;
+  color: var(--paper);
+}
+
+/* ----- review status states: hue + medallion + inset-shadow left band.
+   The band is an inset shadow so it follows the rounded corner and never
+   lets the background peek (a pseudo-element stripe did). ----- */
+
+.node-card.status-approved {
+  border-color: var(--forest-line);
+  box-shadow: inset 4px 0 0 var(--forest), 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+.node-card.status-approved .card-title {
+  color: var(--forest-deep);
+}
+.node-card.status-approved .status-badge {
+  color: var(--forest-deep);
+}
+
+.node-card.status-edited {
+  border-color: var(--dusk-line);
+  box-shadow: inset 4px 0 0 var(--dusk), 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+.node-card.status-edited .status-badge {
+  color: var(--dusk-deep);
+}
+/* corner fold: the triangle matches the surface behind the card */
+.node-card.status-edited::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-style: solid;
+  border-width: 0 16px 16px 0;
+  border-color: transparent var(--fold-bg, var(--night)) transparent transparent;
+}
+.scene-list .node-card.status-edited::after {
+  --fold-bg: var(--surface-panel);
+}
+
+.node-card.status-flagged {
+  border: 1.5px solid var(--clay);
+  box-shadow: inset 4px 0 0 var(--clay), 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+.node-card.status-flagged .status-badge {
+  color: var(--clay);
+}
+
+/* ----- play states ----- */
+
+/* UNVISITED — dim = a darker warm paper, OPAQUE. Whole-card opacity would
+   let the night canvas bleed through and read as a grey overlay. */
+.node-card.play-dim {
+  background: var(--dim-bg);
+  border-color: color-mix(in srgb, var(--ink) 12%, transparent);
+  box-shadow: none;
+  color: var(--dim-ink);
+}
+.node-card.play-dim :is(.card-id, .card-kind, .card-title, .card-text, .status-badge) {
+  color: inherit;
+}
+.node-card.play-dim .med {
+  background: transparent;
+  border: 1.5px solid color-mix(in srgb, var(--ink) 25%, transparent);
+  color: var(--dim-ink);
+}
+.node-card.play-dim:hover {
+  background: var(--surface-card);
+  color: var(--ink);
+}
+
+/* VISITED — gold thread, quiet */
+.node-card.play-visited {
+  box-shadow: inset 4px 0 0 var(--gold-thread), 0 1px 3px rgba(0, 0, 0, 0.25),
+    0 0 0 1px var(--gold-thread);
+}
+.node-card.play-visited .med {
+  background: var(--gold-wash);
+  border: none;
+  color: var(--gold-ink);
+}
+.node-card.play-visited .status-badge {
+  color: var(--gold-ink);
+}
+
+/* CURRENT — the gold lantern glow, breathing */
+.node-card.play-current {
+  box-shadow: inset 4px 0 0 var(--gold), 0 0 0 2px var(--gold),
+    0 0 26px var(--gold-glow);
+  animation: lantern-breathe 2.8s ease-in-out infinite;
+}
+.node-card.play-current .med {
+  background: var(--gold);
+  border: none;
+  color: var(--gold-med-ink);
+}
+.node-card.play-current .status-badge {
+  color: var(--gold-ink);
+}
+
+@keyframes lantern-breathe {
+  0%,
+  100% {
+    box-shadow: inset 4px 0 0 var(--gold), 0 0 0 2px var(--gold),
+      0 0 16px var(--gold-glow);
+  }
+  50% {
+    box-shadow: inset 4px 0 0 var(--gold), 0 0 0 2px var(--gold),
+      0 0 30px var(--gold-glow);
+  }
+}
+
+/* review-status medallions win over play medallions (the glow already says
+   "you are here"; the medallion keeps the review mark visible) */
+.node-card.status-approved .med {
+  background: var(--forest);
+  border: none;
+  color: var(--paper);
+}
+.node-card.status-edited .med {
+  background: var(--dusk-deep);
+  border: none;
+  color: var(--paper);
+}
+.node-card.status-flagged .med {
+  background: var(--clay);
+  border: none;
+  color: var(--paper);
+}
+
+/* sweep filter dims reviewed (approved/edited) nodes — opaque, never
+   whole-card transparency over the night canvas */
+.node-card.sweep-dim {
+  background: var(--dim-bg);
+  box-shadow: none;
+}
+.node-card.sweep-dim > * {
+  opacity: 0.55;
+}
+
+/* variable inspector highlight */
+.node-card.var-hit {
+  box-shadow: 0 0 0 3px var(--accent);
+}
+
+/* ---------- chips ---------- */
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin-top: var(--space-1);
+}
+
+.chip {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  border: var(--hairline) solid var(--border);
+  border-radius: var(--r-chip);
+  padding: 0 var(--space-1);
+  color: var(--ink-muted);
+  background: var(--surface-card-raised);
+  box-shadow: var(--edge-lip);
+}
+
+/* A gate chip carries an availability_condition — the branch opens only when it
+   holds. Amber, so a gated beat reads as gated at a glance on the graph.
+   TWO fixes here, both from the opaque-fills rule:
+     · the wash mixes into --paper instead of `transparent`, so the label's real
+       background is this colour and not "whatever card is underneath";
+     · the label is --ink, not --gold-ink. Once the blend is written down it is
+       measurable: gold-ink on this wash is 4.2:1, under the floor, and the
+       translucent version had exactly the same real contrast while looking
+       compliant. --ink on it is 10.4:1. */
+.chip-gate {
+  border-color: var(--amber);
+  color: var(--ink);
+  background: color-mix(in srgb, var(--gold) 28%, var(--paper));
+}
+
+/* a gated node's whole beat is conditional — ring it in amber so it is legible
+   even zoomed out, where the gate chip is too small to read. Outline sits
+   outside the box model, so it never disturbs the status band (a box-shadow). */
+:is(.node-card, .bp-node).gated {
+  outline: 2px dashed var(--amber);
+  outline-offset: 2px;
+}
+
+.dir-toggle {
+  margin-left: auto;
+}
+
+.gate-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--gold-ink);
+  border: var(--hairline) solid var(--amber);
+  border-radius: var(--r-chip);
+  padding: 0 var(--space-1);
+}
+
+/* Day slot-fill tooltip: absolute — no layout shift. It floats over the night
+   canvas, so it carries the overlay elevation and an opaque paper fill.
+   NO top margin. WCAG 1.4.13 requires hover content to be *hoverable*: the
+   pointer must be able to reach it without it vanishing. `:hover` on the card
+   stays true while the pointer is over this descendant even though it sits
+   outside the card's box — but only if there is no dead gap to cross. A 4px or
+   8px margin here is a gap, and the tip dies mid-transit. */
+.day-tip {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  margin-top: 0;
+  z-index: 10;
+  background: var(--surface-card);
+  border: var(--hairline) solid var(--border);
+  border-radius: var(--r-card);
+  padding: var(--space-2);
+  width: 240px;
+  box-shadow: var(--elev-4), 0 0 0 1px var(--sh-deep-2), var(--edge-lip);
+}
+.node-card:hover .day-tip,
+.node-card:focus-within .day-tip,
+.node-card:focus .day-tip {
+  display: block;
+}
+
+/* ---------- card actions ---------- */
+
+/* Wraps because the row grew: Jump · Approve · Flag · Clear · Edit is five
+   controls on a 260px card, and an un-wrapped row pushed Edit off the edge
+   once Clear arrived. A second row is better than an unreachable button.
+   (L5 moves these into the inspector, which retires the problem.) */
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin-top: var(--space-2);
+}
+
+.card-actions button {
+  min-height: var(--touch-target);
+  font-size: var(--text-small);
+  /* grow to share a row, but never squeeze below a readable label */
+  flex: 1 1 auto;
+  min-width: 5.5em;
+  padding: var(--space-1) var(--space-2);
+}
+
+/* ---------- fields ----------
+   Every field in the tool is a slot cut into its plate: paper fill, well
+   shadow, and a teal edge when it has the cursor. One grammar, so an input in
+   the header and a textarea in a card read as the same kind of thing. */
+
+.edit-area,
+.notes-form textarea,
+.notes-form select,
+.notes-form input[type="text"],
+.var-set input,
+.seed-control input {
+  width: 100%;
+  font: inherit;
+  font-size: var(--text-small);
+  background: var(--surface-card);
+  color: var(--ink);
+  /* --border-strong, not --border: WCAG 1.4.11 wants a field's boundary at 3:1
+     against what surrounds it. --border on cream is 1.2:1 — the field edge was
+     effectively invisible. --border-strong is 3.5:1 and is already the token
+     every hover state reaches for. */
+  border: var(--hairline) solid var(--border-strong);
+  border-radius: var(--r-chip);
+  padding: var(--space-2);
+  box-shadow: var(--well);
+  transition: border-color 0.18s, box-shadow 0.18s;
+}
+.edit-area:hover,
+.notes-form textarea:hover,
+.notes-form select:hover,
+.notes-form input[type="text"]:hover,
+.var-set input:hover,
+.seed-control input:hover {
+  border-color: var(--border-strong);
+}
+.edit-area:focus,
+.notes-form textarea:focus,
+.notes-form select:focus,
+.notes-form input[type="text"]:focus,
+.var-set input:focus,
+.seed-control input:focus {
+  border-color: var(--teal);
+  box-shadow: var(--well), 0 0 0 3px var(--teal-tint);
+}
+
+.edit-area {
+  min-height: 72px;
+  font-family: inherit;
+  resize: vertical;
+}
+
+/* ---------- side panels ---------- */
+
+/* A panel fills its host and scrolls itself, so the tab strip above it stays
+   put while the content moves under it — that is what makes the strip's cast
+   read as a lid rather than a border. */
+.panel {
+  padding: var(--space-3);
+  background: var(--surface-panel);
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+/* A panel heading is a section label, not a title — the pane already told you
+   where you are. Small caps, letterspaced, sitting over its own hairline.
+   `:not(.pane-title)` matters: AssetsPanel's header asks for .pane-title, and
+   `.panel h2` outweighs a bare class, so without this it silently hijacked that
+   element — uppercasing its inline hint and stripping the header chrome. */
+.panel h2:not(.pane-title) {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin: 0 0 var(--space-3);
+  padding-bottom: var(--space-2);
+  border-bottom: var(--hairline) solid var(--border);
+}
+
+/* a section label may still carry a sentence beside it; the sentence stays a
+   sentence */
+.panel h2 .hint,
+.notes-head h3 .hint,
+.week-day-head .hint {
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: normal;
+}
+
+.var-row {
+  width: 100%;
+  text-align: left;
+  background: var(--surface-card);
+  border: var(--hairline) solid var(--border);
+  border-radius: var(--r-chip);
+  padding: var(--space-2);
+  margin-bottom: var(--space-2);
+  display: block;
+  font-weight: normal;
+  box-shadow: var(--elev-1), var(--edge-lip);
+}
+/* :not(.active) so hovering the selected row never strips its teal band —
+   both selectors weigh the same, and the later one would otherwise win */
+.var-row:not(.active):hover {
+  box-shadow: var(--elev-2), var(--edge-lip);
+}
+
+.var-name {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  display: block;
+}
+
+.var-decl {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-muted);
+  display: block;
+  margin: var(--space-1) 0;
+}
+
+.var-io {
+  font-size: var(--text-small);
+  color: var(--ink-muted);
+}
+
+/* --- live values + override (L5a) --- */
+
+.var-block {
+  margin-bottom: var(--space-2);
+}
+
+.var-block .var-row {
+  margin-bottom: 0;
+}
+
+/* The live value is the thing you scan for, so it reads louder than the
+   declaration above it. --gold-ink, not --amber: raw amber on cream is 2.3:1,
+   and the token sheet marks it decorative-only for exactly that reason.
+   --gold-ink IS the amber family's text weight — the health readout's warning
+   rows already use it — and it clears the floor at 4.7:1 on cream. */
+.var-value {
+  font-family: var(--font-mono);
+  font-size: var(--text-body);
+  font-weight: 600;
+  color: var(--gold-ink);
+  display: block;
+  margin: var(--space-1) 0;
+}
+
+.var-set {
+  display: flex;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-2) 0;
+}
+
+.var-set input {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  background: var(--surface-sunken, var(--surface-card));
+  color: var(--ink);
+  border: var(--hairline) solid var(--border);
+  border-radius: var(--r-chip);
+  padding: var(--space-1);
+}
+
+.var-set button {
+  font-size: var(--text-small);
+  padding: var(--space-1) var(--space-2);
+}
+
+/* D8 #6: +/- steppers for a numeric or enumerable (LIST) variable. Sits
+   above the free-text override, which still exists for everything else. */
+.var-stepper {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-2) 0;
+}
+
+.var-stepper button {
+  min-width: var(--touch-target);
+  min-height: 30px;
+  font-family: var(--font-mono);
+  font-size: var(--text-body);
+  font-weight: 600;
+  padding: 0 var(--space-2);
+}
+
+.var-stepper-value {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--ink-muted);
+  min-width: 3em;
+  text-align: center;
+}
+
+/* A steered run must never be mistaken for an earned one. Amber stays the
+   BORDER (decorative is what a border is); the words are --gold-ink. */
+.var-forced {
+  font-size: var(--text-small);
+  color: var(--gold-ink);
+  border: var(--hairline) solid var(--amber);
+  border-left-width: 3px;
+  border-radius: var(--r-chip);
+  background: var(--surface-card);
+  box-shadow: var(--elev-1), var(--edge-lip);
+  padding: var(--space-1) var(--space-2);
+  margin: 0 0 var(--space-2);
+}
+
+.var-hint {
+  font-size: var(--text-small);
+  color: var(--ink-muted);
+  margin: 0 0 var(--space-2);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* the shared row chip: rail scenes, sweep findings. Resting elevation 1, so a
+   list reads as a stack of cards on the plate rather than ruled text. */
+.sweep-item {
+  width: 100%;
+  text-align: left;
+  background: var(--surface-card);
+  border: var(--hairline) solid var(--border);
+  border-radius: var(--r-chip);
+  padding: var(--space-2);
+  margin-bottom: var(--space-1);
+  display: flex;
+  gap: var(--space-2);
+  align-items: baseline;
+  font-weight: normal;
+  box-shadow: var(--elev-1), var(--edge-lip);
+}
+.sweep-item:not(.active):hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--elev-2), var(--edge-lip);
+}
+
+.sweep-item .card-id {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-muted);
+}
+
+.sweep-item .sweep-label {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---------- scene rail (the primary navigator) ---------- */
+
+.scene-rail {
+  padding: 0 0 var(--space-3);
+}
+
+/* the twisty sits left of the screen row and shares its baseline */
+.rail-screen-row {
+  display: flex;
+  align-items: stretch;
+}
+
+/* 24px square is the WCAG 2.2 target-size floor (2.5.8), and this control sits
+   flush against the screen row, so it cannot lean on the spacing exception. */
+.rail-twisty {
+  background: transparent;
+  border: none;
+  border-radius: var(--r-chip);
+  box-shadow: none;
+  color: var(--ink-muted);
+  min-width: 24px;
+  min-height: 24px;
+  width: 24px;
+  padding: 0;
+  font-size: var(--text-small);
+  flex: none;
+  align-self: center;
+  height: 28px;
+  margin-top: var(--space-2);
+}
+.rail-twisty:hover,
+.rail-twisty:focus-visible {
+  color: var(--ink);
+  background: var(--surface-card);
+  box-shadow: none;
+}
+
+.rail-screen-row .rail-screen {
+  flex: 1;
+  min-width: 0;
+}
+
+.rail-group {
+  padding: 0 var(--space-2);
+}
+
+/* screen header row: the group's anchor. Flat at rest so a long rail is calm;
+   it lifts under the pointer and locks raised when it is the one you are in. */
+.rail-screen {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  background: transparent;
+  border: var(--hairline) solid transparent;
+  border-radius: var(--r-chip);
+  padding: var(--space-1) var(--space-2);
+  margin-top: var(--space-2);
+  font-weight: 600;
+  min-height: 30px;
+  box-shadow: none;
+}
+.rail-screen:hover {
+  border-color: var(--border);
+  background: var(--surface-card);
+  box-shadow: var(--elev-1), var(--edge-lip);
+}
+.rail-screen .rail-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.rail-screen .card-id {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-muted);
+}
+
+/* the scene count on the screen header — opaque, so it keeps its reading on
+   the hover fill and on the active chip alike */
+.scene-count {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--blossom) 16%, var(--cream));
+  border: var(--hairline) solid color-mix(in srgb, var(--blossom) 45%, var(--cream));
+  border-radius: var(--r-pill);
+  box-shadow: var(--edge-lip);
+  padding: 0 var(--space-2);
+  min-width: 1.6em;
+  text-align: center;
+  flex: none;
+}
+
+/* scene rows sit under their screen, reusing .sweep-item, slightly indented
+   and hung off a spine so the nesting is structural, not just an indent */
+/* Indented by one step only. A wider indent is prettier and costs the row's
+   right-hand status label, which then clips against the rail's edge — the spine
+   does the nesting work, so the indent does not need to. */
+.rail-scene {
+  margin-left: var(--space-2);
+  position: relative;
+}
+.rail-group .rail-scene::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--space-1) * -1);
+  top: -2px;
+  bottom: -2px;
+  width: 1px;
+  background: var(--border);
+}
+
+/* selected: raised, ringed in teal, and lit — not merely outlined */
+.rail-screen.active,
+.rail-scene.active,
+.week-scene.active,
+.var-row.active {
+  border: 1.5px solid var(--teal);
+  background: var(--surface-card);
+  box-shadow: var(--elev-2), var(--edge-lip),
+    inset 3px 0 0 var(--teal);
+}
+
+/* Map badge: the blossom-tinted scene count on a level-map node. Mixed into
+   --paper, not into `transparent`: this chip rides a node card, and a
+   translucent fill would make its real background whatever that card happens to
+   be — which is unknowable from the stylesheet and invisible to the contrast
+   tests. Opaque, so --ink on it is a measurable 9.4:1. */
+.scene-count-chip {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--blossom) 16%, var(--paper));
+  border: var(--hairline) solid color-mix(in srgb, var(--blossom) 45%, var(--paper));
+  border-radius: var(--r-pill);
+  box-shadow: var(--edge-lip);
+  padding: 0 var(--space-2);
+  margin-top: var(--space-1);
+  margin-right: var(--space-1);
+}
+
+/* ---------- health readout (in the rail) ---------- */
+
+/* The health block is the rail's FOOTING: sunk a step below the tree above it,
+   so a long rail scrolling past it still reads as one column with a base. */
+.health {
+  padding: 0 0 var(--space-3);
+  margin-top: var(--space-3);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--cream-edge) 22%, var(--cream)) 0%,
+    var(--surface-panel) 64px
+  );
+  box-shadow: inset 0 1px 0 var(--border), inset 0 4px 6px -6px var(--sh-3);
+}
+
+/* the sticky section label is full-bleed inside the footing */
+.health .rail-head {
+  background: none;
+  box-shadow: none;
+  position: static;
+  padding-top: var(--space-2);
+}
+
+.health-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0 var(--space-2);
+  margin: 0 var(--space-3);
+  font-size: var(--text-small);
+}
+.health-grid dt {
+  color: var(--ink-muted);
+  padding: 3px 0;
+  border-bottom: var(--hairline) solid var(--hairline-paper);
+}
+.health-grid dd {
+  margin: 0;
+  padding: 3px 0;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  border-bottom: var(--hairline) solid var(--hairline-paper);
+}
+/* the last pair closes the block rather than trailing a rule into the padding */
+.health-grid dt:last-of-type,
+.health-grid dd:last-of-type {
+  border-bottom: none;
+}
+.health-grid dd.health-bad,
+.health-grid dd.health-err {
+  color: var(--clay);
+  font-weight: 600;
+}
+.health-grid dd.health-warn {
+  color: var(--gold-ink);
+  font-weight: 600;
+}
+
+.health-list {
+  list-style: none;
+  margin: var(--space-2) var(--space-3) 0;
+  padding: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  background: var(--surface-card);
+  border-radius: var(--r-chip);
+  box-shadow: var(--well);
+}
+.health-list li {
+  margin: var(--space-1) 0;
+  line-height: 1.4;
+}
+.health-list.health-err li {
+  color: var(--clay);
+}
+.health-list.health-warn li {
+  color: var(--gold-ink);
+}
+
+/* The scene strip is chrome over the graph: a shallow tray the cards sit in,
+   casting onto the canvas below. Its fill stays --surface-panel on purpose —
+   the edited-card corner fold is a triangle painted in the colour BEHIND the
+   card (--fold-bg), and changing this surface would leave that triangle
+   showing the wrong colour. */
+.scene-list {
+  display: flex;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: var(--surface-panel);
+  box-shadow: var(--edge-lip), var(--cast-down);
+  position: relative;
+  z-index: 2;
+  overflow-x: auto;
+  flex: none;
+  align-items: flex-start;
+}
+
+/* folded: one line, so the dialogue tree gets the card strip's height back */
+.scene-list-folded {
+  align-items: center;
+  overflow-x: hidden;
+  padding: var(--space-1) var(--space-3);
+}
+.scene-list-folded .hint {
+  font-family: var(--font-mono);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.scene-list .node-card {
+  width: 220px;
+  flex: none;
+}
+
+/* Two surfaces, two inks. This class is used on the night canvas (SceneView's
+   four empty states) AND on the cream rail (SceneRail's). It was pinned to
+   --milk-soft, which is 6.3:1 on night and 1.9:1 on cream — invisible in the
+   navigator. The muted cream ink is the default; the night value applies only
+   inside .on-canvas, which is exactly where it belongs. */
+.empty-hint {
+  color: var(--ink-muted);
+  padding: var(--space-4);
+  font-size: var(--text-small);
+  max-width: 46ch;
+}
+.on-canvas .empty-hint {
+  color: var(--milk-soft);
+}
+
+/* the asset chips: opaque, resting, and the current one seals in amber */
+.asset-chip {
+  box-shadow: var(--elev-1), var(--edge-lip);
+  border-radius: var(--r-pill);
+  padding: 2px var(--space-2);
+}
+.asset-chip.is-current {
+  border-color: var(--amber);
+  background: color-mix(in srgb, var(--gold) 26%, var(--paper));
+}
+
+/* uploaded but placed nowhere: the dashed border stays — it is the signal —
+   and the sunken tint says "waiting", not "live" */
+.asset-unused {
+  padding: var(--space-2);
+  gap: var(--space-2);
+  background: color-mix(in srgb, var(--cream-edge) 24%, var(--cream));
+  box-shadow: inset 0 1px 2px var(--sh-2);
+  border-radius: var(--r-chip);
+}
+
+/* React Flow handles: nodes must render them for edges to attach (#008),
+   but they carry no meaning here — keep them invisible and inert. */
+.flow-handle {
+  opacity: 0;
+  pointer-events: none;
+  width: 1px;
+  height: 1px;
+  min-width: 0;
+  min-height: 0;
+  border: none;
+  background: transparent;
+}
+
+/* React Flow edge labels */
+.react-flow__edge-text {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  fill: var(--milk-soft);
+}
+.react-flow__edge-textbg {
+  fill: var(--surface-canvas);
+}
+
+/* The minimap shipped with React Flow's own default styling: a stark white
+   panel with no frame, floating on the night canvas. It was the flattest object
+   in the tool. It belongs to the canvas, so it gets the night treatment — a
+   raised charcoal plate, a lit top edge, a dark ring to hold it off the floor. */
+.react-flow__minimap {
+  background: var(--night-raise);
+  border-radius: var(--r-card);
+  box-shadow: var(--elev-4), 0 0 0 1px var(--sh-deep-3), var(--edge-lip-night);
+  overflow: hidden;
+  margin: var(--space-3);
+}
+.react-flow__minimap-mask {
+  fill: var(--sh-deep-2);
+  stroke: var(--gold);
+  stroke-width: 2px;
+}
+.react-flow__minimap-node {
+  stroke: var(--night);
+}
+
+/* the pan/zoom controls, same treatment: a stacked plate, not loose buttons */
+.react-flow__controls {
+  border-radius: var(--r-chip);
+  overflow: hidden;
+  box-shadow: var(--elev-3), 0 0 0 1px var(--sh-deep-3);
+  margin: var(--space-3);
+}
+.react-flow__controls-button {
+  background: var(--night-raise);
+  border-bottom: var(--hairline) solid var(--hairline-night);
+  fill: var(--milk);
+  box-shadow: none;
+  min-height: 24px;
+  min-width: 24px;
+}
+.react-flow__controls-button:hover {
+  background: var(--night);
+  fill: var(--gold);
+}
+/* React Flow's own attribution link, dropped onto the night canvas */
+.react-flow__attribution {
+  background: var(--night-raise);
+  border-radius: var(--r-chip) 0 0 0;
+}
+.react-flow__attribution a {
+  color: var(--milk-soft);
+}
+
+/* ---------- settings drawer (live token editing) ---------- */
+
+/* No `margin-left: auto` here: .header-note already claims the slack, and two
+   auto margins split it, which parked the status line in the middle of the bar. */
+.settings-btn {
+  margin-left: var(--space-2);
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+.settings-btn svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* the one true overlay in the tool: highest elevation, a hairline ring so it
+   holds its edge over the night canvas, and an opaque paper fill */
+.settings-drawer {
+  position: fixed;
+  top: 62px;
+  right: var(--space-3);
+  z-index: 40;
+  width: 280px;
+  max-height: 80vh;
+  overflow: auto;
+  background: var(--surface-card);
+  border: var(--hairline) solid var(--border);
+  border-radius: var(--r-card);
+  padding: var(--space-3);
+  box-shadow: var(--elev-4), 0 0 0 1px var(--sh-deep-2), var(--edge-lip);
+  font-size: var(--text-small);
+}
+
+.settings-drawer h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-body);
+  margin: 0;
+  border: none;
+  padding: 0;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink);
+}
+
+.settings-row + .settings-row {
+  border-top: var(--hairline) solid var(--hairline-paper);
+  padding-top: var(--space-1);
+}
+
+.settings-row input[type="color"] {
+  box-shadow: var(--well);
+}
+
+.settings-note {
+  color: var(--ink-muted);
+  margin: var(--space-1) 0 var(--space-2);
+}
+
+.settings-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: var(--space-1) 0;
+  min-height: 28px;
+}
+
+.settings-row .token-name {
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.settings-row input[type="color"] {
+  width: 44px;
+  height: 26px;
+  padding: 0;
+  border: var(--hairline) solid var(--border);
+  border-radius: var(--r-chip);
+  background: none;
+  cursor: pointer;
+}
+
+.settings-row input[type="range"] {
+  width: 110px;
+  accent-color: var(--teal);
+}
+
+.settings-actions {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+.settings-actions button {
+  min-height: 36px;
+  min-width: 0;
+  padding: var(--space-1) var(--space-3);
+}
+
+/* ---------- play pane (Mode B) ---------- */
+
+.play-pane {
+  flex: 1;
+  min-height: 0;
+  border-bottom: none;
+}
+
+/* The transcript is the page you are reading: paper, a hair lighter than the
+   chrome around it, sunk into the pane so the controls beneath sit on top of
+   it. Generous measure — this is prose, not a data grid. */
+.play-log {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: var(--space-4) var(--space-3);
+  background: var(--surface-card);
+  box-shadow: var(--well);
+}
+
+.play-line {
+  margin: 0 0 var(--space-3);
+  max-width: 62ch;
+}
+
+.play-line .play-speaker {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--ink-muted);
+  display: block;
+}
+
+.play-line.player {
+  font-style: italic;
+  border-left: 2px solid var(--accent);
+  padding-left: var(--space-2);
+}
+
+.play-line.marker {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--ink-muted);
+}
+
+.play-errors {
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--clay);
+  background: var(--surface-card-raised);
+  box-shadow: inset 4px 0 0 var(--clay), var(--edge-lip), var(--cast-down);
+  position: relative;
+  z-index: 1;
+}
+
+/* Everything below the transcript is one raised console: the choices, the
+   controls, the timeline and the seed. It reads as a single tray by sharing
+   one lit top edge instead of stacking four hairlines. */
+.play-controls {
+  display: flex;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: linear-gradient(180deg, var(--paper) 0%, var(--surface-panel) 100%);
+  box-shadow: var(--edge-lip), 0 -1px 0 var(--border),
+    0 -8px 14px -12px var(--sh-4);
+  position: relative;
+  z-index: 1;
+}
+
+.choice-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-3) var(--space-2);
+  background: var(--surface-panel);
+  box-shadow: var(--edge-lip), 0 -1px 0 var(--border),
+    0 -8px 14px -12px var(--sh-4);
+  position: relative;
+  z-index: 1;
+}
+
+/* choices are navigation: teal outline voice, lifting as you reach for one */
+.choice-btn {
+  text-align: left;
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface-card);
+  color: var(--teal);
+  border: 1.5px solid var(--teal);
+  border-radius: var(--r-card);
+  font-weight: 600;
+  box-shadow: var(--elev-1), var(--edge-lip);
+}
+.choice-btn:hover {
+  background: var(--teal-tint);
+  box-shadow: var(--elev-3), var(--edge-lip);
+}
+
+/* spoken option: the quoted player_line */
+.choice-btn.choice-spoken {
+  font-style: italic;
+}
+
+/* unspoken option: the bracketed deed */
+.choice-btn.choice-deed {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+}
+
+/* location/day-end choices (D3): their own row above play-controls, not the
+   dialogue list below it — a move is navigation, not a conversation pick. */
+.move-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface-panel);
+  box-shadow: var(--edge-lip), 0 -1px 0 var(--border);
+  position: relative;
+  z-index: 1;
+}
+
+.choice-btn.choice-move {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--gold-ink);
+  border-color: var(--gold-ink);
+}
+
+/* advisory only — ink.ts emits #lock: but enforces nothing (comment at
+   ink.ts's emitScreen exits); this badge (.gate-badge, shared with LevelView)
+   is the only place a player learns about it before walking through anyway */
+.choice-lock {
+  display: block;
+  width: fit-content;
+  margin-top: var(--space-1);
+}
+
+/* the history strip is a trough with chips in it — the same physical read as
+   the segmented control, one level down the tool */
+.timeline {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-3);
+  background: color-mix(in srgb, var(--cream-edge) 24%, var(--cream));
+  box-shadow: inset 0 1px 0 var(--border), inset 0 3px 5px -5px var(--sh-4);
+  overflow-x: auto;
+  flex-wrap: wrap;
+}
+
+.timeline-chip {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  font-weight: normal;
+  min-width: 0;
+  white-space: nowrap;
+  border-radius: var(--r-pill);
+}
+
+.seed-control {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface-panel);
+  box-shadow: inset 0 1px 0 var(--border);
+  flex-wrap: wrap;
+}
+
+.seed-control label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-small);
+  color: var(--ink-muted);
+}
+
+.seed-control input {
+  width: 4.5em;
+  min-height: 34px;
+  padding: var(--space-1) var(--space-2);
+  font-family: var(--font-mono);
+}
+
+.play-note {
+  font-size: var(--text-small);
+  color: var(--ink-muted);
+  padding: var(--space-2) var(--space-3);
+  margin: 0;
+}
+
+/* ---------- stage (Mode B greybox, milestone 4) ---------- */
+
+/* The stage is its own view tab now, so it fills its pane and scrolls. The old
+   55% cap belonged to the days it shared a column with the transcript — it cut
+   the play options off the bottom. */
+.stage-pane {
+  overflow-y: auto;
+}
+
+.stage-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-3);
+}
+
+/* The stage image is the deepest thing on the paper side — a window cut into
+   the panel. It gets the frame treatment: a hairline, a ring of shadow inside
+   the frame, and real elevation so it is plainly an artefact on a desk and not
+   a coloured rectangle.
+   `width: fit-content` (D8 #3), not `width: 100%` — the wrapper must hug the
+   IMAGE's own rendered box exactly, because every hotspot/marker overlay
+   inside it (StagePane's rect-backed buttons, MarkerLayer's regions) is
+   positioned as a percentage of this box. If the wrapper stayed pinned to
+   100% of the pane while .stage-img below is capped narrower by max-height,
+   the two boxes would disagree and every overlay would drift off the
+   picture. `max-width: 100%` keeps it from overflowing the pane on a wide
+   image, same as before. */
+.stage-imgwrap {
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+  border-radius: var(--r-card);
+  box-shadow: var(--elev-3);
+}
+
+/* A tall greybox at full pane width used to be able to run to any height —
+   nothing capped it once the 55% ceiling moved off .stage-pane (that cap
+   belonged to a column shared with the transcript, not to the image, and
+   stayed removed once the stage got its own tab). max-height here restores a
+   ceiling on the IMAGE itself: width/height both scale down together to fit
+   inside it, via the ordinary "responsive image" pair (max-width + height
+   auto) plus this cap, so .stage-imgwrap (which hugs the image, above) and
+   the image's own rendered box never disagree. */
+.stage-img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  max-height: 60vh;
+  border: var(--hairline) solid var(--border-strong);
+  border-radius: var(--r-card);
+}
+
+/* the inner ring, drawn over the image edge only — pointer-inert, and it never
+   covers the picture's middle, so nothing on the stage is dimmed */
+.stage-imgwrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: var(--r-card);
+  box-shadow: inset 0 0 0 1px var(--sh-deep-1),
+    inset 0 2px 6px -3px var(--sh-deep-2);
+}
+
+/* region hotspot: soft dashed outline idle, solid + pointer on hover/focus */
+.hotspot {
+  position: absolute;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  background: transparent;
+  border: 2px dashed var(--border-strong);
+  border-radius: var(--r-chip);
+  box-shadow: none;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.hotspot:hover:not(:disabled),
+.hotspot:focus-visible {
+  border-style: solid;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--sh-deep-2), 0 0 14px -2px var(--gold-glow);
+}
+
+.hotspot:disabled {
+  cursor: default;
+  border-color: var(--border);
+}
+
+/* picked: the outline empties (resolved state from the visual-states table) */
+.hotspot-item.picked {
+  border-style: dotted;
+  border-color: var(--border);
+  background: transparent;
+}
+
+/* a label over a photograph: opaque paper plus a shadow, so it is legible on
+   any image without a translucent scrim to muddy the pairing */
+.hotspot-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink);
+  background: var(--surface-card);
+  border-radius: var(--r-chip);
+  padding: 0 var(--space-1);
+  box-shadow: var(--elev-2), 0 0 0 1px var(--sh-deep-1);
+}
+
+.stage-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.stage-list button,
+.stage-item {
+  text-align: left;
+  border-radius: var(--r-chip);
+  font-weight: normal;
+}
+
+.stage-item.picked,
+.stage-item:disabled {
+  color: var(--ink-muted);
+}
+
+.npc-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.npc-marker {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  border: var(--hairline) solid var(--border);
+  border-radius: var(--r-pill);
+  padding: var(--space-1) var(--space-2);
+  background: var(--surface-card);
+  box-shadow: var(--elev-1), var(--edge-lip);
+}
+
+/* soul silhouette wears the blossom (soul markers per the token sheet) */
+.npc-silhouette {
+  width: 12px;
+  height: 12px;
+  border-radius: 50% 50% 2px 2px;
+  background: var(--blossom);
+  display: inline-block;
+}
+
+.npc-name {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+}
+
+.npc-check {
+  color: var(--forest-deep);
+}
+
+.exit-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+.stage-time {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* what you are carrying: a shallow trough at the foot of the stage */
+.satchel-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2);
+  border-radius: var(--r-chip);
+  background: color-mix(in srgb, var(--cream-edge) 24%, var(--cream));
+  box-shadow: var(--well);
+}
+
+.satchel-chip {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  border: var(--hairline) solid var(--border-strong);
+  border-radius: var(--r-pill);
+  padding: 0 var(--space-2);
+  background: var(--surface-card-raised);
+  box-shadow: var(--elev-1), var(--edge-lip);
+}
+
+/* D6: arms-carry — the satchel is full, this is only kept home via pack-triage */
+.satchel-chip.arms-chip {
+  border-style: dashed;
+  background: color-mix(in srgb, var(--accent, var(--border-strong)) 12%, var(--surface-card-raised));
+}
+
+.stage-note {
+  font-size: var(--text-small);
+  color: var(--ink-muted);
+  margin: 0;
+}
+
+/* ---------- reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+  /* the lantern glow's static-ring fallback: no breathing, a steady ring */
+  .node-card.play-current {
+    box-shadow: inset 4px 0 0 var(--gold), 0 0 0 2px var(--gold),
+      0 0 0 6px var(--gold-wash);
+  }
+}
+
+/* --- week view (W3): the whole life, by day, threads between --- */
+
+.week-view {
+  overflow-y: auto;
+}
+
+.week-days {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* Each day hangs off a spine, and the day's label sits ON the spine — the
+   reference calendar's own structure: a column with a rule, not a heap of
+   cards with a gap between them. */
+.week-day {
+  border-left: 2px solid var(--border);
+  padding-left: var(--space-3);
+  position: relative;
+}
+.week-day::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: 6px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--surface-panel);
+  border: 2px solid var(--border-strong);
+  box-shadow: var(--edge-lip);
+}
+
+.week-day-head {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  margin: 0 0 var(--space-2);
+  color: var(--ink-muted);
+}
+
+/* An empty day is a finding a structural review wants to see, so it is stated
+   rather than left as blank space that reads like a rendering gap. */
+.week-day-empty {
+  font-size: var(--text-small);
+  color: var(--ink-muted);
+  font-style: italic;
+  margin: 0 0 var(--space-2);
+}
+
+/* D4: the card used to BE the button; a Jump control needed a sibling
+   affordance, so the button is now wrapped rather than being the whole row. */
+.week-scene-wrap {
+  position: relative;
+  margin-bottom: var(--space-2);
+}
+
+.week-scene {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: var(--surface-card);
+  border: var(--hairline) solid var(--border);
+  border-radius: var(--r-chip);
+  padding: var(--space-2);
+  margin-bottom: 0;
+  font-weight: normal;
+  box-shadow: var(--elev-1), var(--edge-lip);
+}
+.week-scene:not(.active):hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--elev-2), var(--edge-lip);
+}
+
+.week-scene-jump {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+}
+
+.week-scene-soul {
+  display: block;
+  font-weight: 600;
+}
+
+.week-scene-id {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-muted);
+  display: block;
+}
+
+.week-scene-meta {
+  font-size: var(--text-small);
+  color: var(--ink-muted);
+  display: block;
+  margin-top: var(--space-1);
+}
+
+.week-badge {
+  display: inline-block;
+  font-size: 11px;
+  color: var(--ink-muted);
+  border: var(--hairline) solid var(--border);
+  border-radius: var(--r-chip);
+  padding: 0 var(--space-1);
+  margin-top: var(--space-1);
+  margin-right: var(--space-1);
+}
+
+/* Amber is the established "a gate lives here" signal; an arc turn is the same
+   idea one level up, so it reuses the token rather than adding a colour. The
+   ring carries the amber; the label is --gold-ink, which is what amber reads as
+   when it has to be words (2.3:1 raw, 4.7:1 as gold-ink). */
+.week-badge-turn {
+  color: var(--gold-ink);
+  border-color: var(--amber);
+  font-weight: 600;
+}
+
+/* Same rule for the blossom: it is a marker colour, not a text colour (3.8:1
+   on cream). It rings the chip; --ink says the words. */
+.week-thread-chip {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink);
+  border: var(--hairline) solid var(--blossom);
+  border-radius: var(--r-pill);
+  background: color-mix(in srgb, var(--blossom) 14%, var(--cream));
+  box-shadow: var(--edge-lip);
+  padding: 0 var(--space-2);
+  margin-top: var(--space-1);
+  margin-right: var(--space-1);
+}
+
+.week-threads-head {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  margin: var(--space-4) 0 var(--space-2);
+  padding-bottom: var(--space-2);
+  border-bottom: var(--hairline) solid var(--border);
+  color: var(--ink-muted);
+}
+
+.week-threads {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.week-threads li {
+  margin-bottom: var(--space-1);
+}
+
+.week-thread-run {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--ink-muted);
+}
+
+.week-unreachable {
+  font-size: var(--text-small);
+  color: var(--gold-ink);
+  border: var(--hairline) solid var(--amber);
+  border-left-width: 3px;
+  border-radius: var(--r-chip);
+  background: var(--surface-card);
+  box-shadow: var(--elev-1), var(--edge-lip);
+  padding: var(--space-2);
+  margin: 0 0 var(--space-3);
+}
+
+/* --- live reload + notes (L7) --- */
+
+/* Offered, never applied under a cursor: auto-reloading while someone is
+   typing eats what they are typing. */
+.stale-banner {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-small);
+  color: var(--gold-ink);
+  border: var(--hairline) solid var(--amber);
+  border-radius: var(--r-pill);
+  background: var(--surface-card);
+  box-shadow: var(--elev-2), var(--edge-lip);
+  padding: var(--space-1) var(--space-2);
+}
+
+.notes-panel {
+  overflow-y: auto;
+}
+
+.notes-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-bottom: var(--space-3);
+}
+
+.notes-form {
+  padding: var(--space-3);
+  border-radius: var(--r-card);
+  background: var(--surface-panel);
+  box-shadow: var(--elev-1), var(--edge-lip),
+    0 0 0 1px var(--hairline-paper);
+}
+
+.notes-target,
+.notes-target-hint,
+.notes-kind-hint,
+.notes-hint {
+  font-size: var(--text-small);
+  color: var(--ink-muted);
+  margin: 0;
+}
+
+.notes-target-hint {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.notes-use-selection {
+  font-size: 11px;
+  padding: 0 var(--space-1);
+}
+
+/* A resolved note stays legible but visibly done, so the list still reads at
+   a glance as "what's still open" without the resolved ones disappearing. */
+.notes-item-resolved {
+  opacity: 0.6;
+}
+
+.notes-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin: var(--space-4) 0 var(--space-2);
+  padding-bottom: var(--space-2);
+  border-bottom: var(--hairline) solid var(--border);
+}
+
+.notes-head h3 {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  margin: 0;
+  color: var(--ink-muted);
+}
+
+.notes-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.notes-item {
+  background: var(--surface-card);
+  border: var(--hairline) solid var(--border);
+  border-radius: var(--r-chip);
+  padding: var(--space-2);
+  margin-bottom: var(--space-2);
+  box-shadow: var(--elev-1), var(--edge-lip);
+}
+
+.notes-kind {
+  display: inline-block;
+  font-size: 11px;
+  border-radius: var(--r-pill);
+  padding: 0 var(--space-2);
+  margin-right: var(--space-1);
+  border: var(--hairline) solid var(--border);
+  background: var(--surface-panel);
+  box-shadow: var(--edge-lip);
+  color: var(--ink-muted);
+}
+
+/* A structural note is the one that becomes work, so it carries the amber
+   "something is asked of you here" signal the gates already use — as a ring,
+   with --gold-ink for the label (raw amber on cream is 2.3:1). */
+.notes-kind-structure {
+  color: var(--gold-ink);
+  border-color: var(--amber);
+  font-weight: 600;
+}
+
+.notes-item-target {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-muted);
+}
+
+/* Newlines in a note body are meaningful, not incidental. A placement note
+   (lib/placeNote.ts) is a line-per-key block — `@place`, `id:`, `rect:`, then
+   prose — and a plain <p> collapses all of it into one run-on line, which is
+   exactly the note you most need to read at a glance. pre-wrap keeps the
+   authored line breaks while still wrapping long prose. */
+.notes-item-body {
+  margin: var(--space-1) 0 0;
+  font-size: var(--text-small);
+  white-space: pre-wrap;
+}
+
+/* --- marker layer (L8): region authoring over the stage image --- */
+
+/* The marker stack sits above the frame ring drawn by .stage-imgwrap::after,
+   so authoring outlines are never dimmed by the frame. */
+.marker-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+/* An outline over a photograph needs a dark companion line, or it vanishes
+   against a light part of the image. Two rings, no fill.
+   Scoped to `.marker-layer .marker` (D8 #2) — the bare `.marker` selector
+   used to also match the transcript's `<p class="play-line marker">`
+   (PlayPane.tsx), a plain flow paragraph with no positioned ancestor. That
+   made the "flow ended" line resolve `position:absolute` against the
+   initial containing block instead: it floated at the page's top-left
+   rather than scrolling with the transcript, and was never reachable by
+   click. Scoping under the region layer's own wrapper class is the one-line
+   fix; PlayPane's `.marker` class is untouched. */
+.marker-layer .marker {
+  position: absolute;
+  border: 1.5px dashed var(--teal);
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px var(--sh-deep-2);
+  pointer-events: none;
+}
+
+.marker-layer .marker-active {
+  border-color: var(--amber);
+  border-style: solid;
+  box-shadow: 0 0 0 1px var(--sh-deep-2), 0 0 12px -2px var(--gold-glow);
+}
+
+/* A PROPOSED placement, not an authored region — the third treatment in this
+   layer, and it has to be readable as a different KIND of thing, not a variant
+   of the same one (sign-off #5). So: dotted rather than dashed or solid, gold
+   rather than teal or amber, and no companion ring — the ring is what makes a
+   declared region look pinned to the picture, and this one is not pinned to
+   anything yet. --gold-ink, not --amber: this is the same family as the
+   ＋ new placement chip that produced it. */
+/* A placement request drawn on the stage image itself, so it outlives the
+   Place-markers mode that authored it. It sits OUTSIDE .marker-layer, so it
+   carries its own positioning rather than inheriting the layer's.
+
+   Dotted where a real hotspot is dashed, and one z-index below them: a
+   proposal must never look like something you can click, because there is
+   nothing behind it to click — no region_id, no stitch. `pointer-events: none`
+   makes that true rather than merely implied, so a ghost can never swallow a
+   click meant for the hotspot or the drag surface underneath it. */
+.place-ghost {
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  border: 1.5px dotted var(--gold-ink);
+  border-radius: var(--r-chip);
+  background: transparent;
+  pointer-events: none;
+}
+
+/* Quieter than a hotspot's label — this names a proposal, not a thing that is
+   there. Gold-ink on the card surface, the same family as the ＋ new placement
+   chip that produced it; --amber is decorative-only per the token sheet. */
+.place-ghost .hotspot-label {
+  color: var(--gold-ink);
+  box-shadow: var(--elev-1), 0 0 0 1px var(--sh-deep-1);
+}
+
+/* the only translucent fill in the file, and it is deliberate: a drag preview
+   must show the picture it is measuring. Nothing reads text through it. */
+.marker-layer .marker-preview {
+  border-color: var(--amber);
+  background: color-mix(in srgb, var(--amber) 18%, transparent);
+}
+
+/* The drag surface sits above the outlines so a drag is never intercepted by
+   an existing marker, and only exists while Place-markers mode is on. */
+.marker-surface {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  cursor: crosshair;
+}
+
+/* D8 #4: the visible feedback for the two silent gates — no region selected,
+   or a click landed under MIN_SIDE. Sits at the top of the frame so it never
+   overlaps the picker tray at the bottom; an opaque raised strip, same
+   chrome language as .marker-picker below. */
+.marker-hint {
+  position: absolute;
+  left: var(--space-2);
+  top: var(--space-2);
+  right: var(--space-2);
+  z-index: 4;
+  margin: 0;
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--text-small);
+  color: var(--ink);
+  border-radius: var(--r-chip);
+  background: color-mix(in srgb, var(--amber) 18%, var(--surface-panel));
+  box-shadow: var(--elev-3), 0 0 0 1px var(--sh-deep-2), var(--edge-lip);
+}
+
+/* the region palette floats over the image: an opaque raised tray */
+.marker-picker {
+  position: absolute;
+  left: var(--space-2);
+  bottom: var(--space-2);
+  right: var(--space-2);
+  z-index: 4;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  padding: var(--space-1);
+  border-radius: var(--r-chip);
+  background: var(--surface-panel);
+  box-shadow: var(--elev-3), 0 0 0 1px var(--sh-deep-2), var(--edge-lip);
+}
+
+.marker-chip {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  /* 2.5.8: these sit in a wrapped row with a 4px gap, so the spacing exception
+     does not cover them — they carry the 24px floor themselves */
+  min-height: 24px;
+  min-width: 24px;
+  padding: 2px var(--space-2);
+  background: var(--surface-card);
+  border: var(--hairline) solid var(--border);
+  border-radius: var(--r-pill);
+  box-shadow: var(--elev-1), var(--edge-lip);
+}
+
+/* --amber is not a text colour on cream (the token sheet marks it decorative,
+   and test/contrast pins it below the floor). The active chip therefore says
+   so with an amber ring and an amber-washed fill, keeping --ink as the label. */
+.marker-chip.active {
+  border-color: var(--amber);
+  color: var(--ink);
+  background: color-mix(in srgb, var(--gold) 30%, var(--paper));
+  box-shadow: var(--elev-2), var(--edge-lip);
+}
+
+/* The tray half of the same idea. It is a <span>, never a <button> — a pending
+   placement is not selectable and must not look clickable — so it gets no card
+   fill and no lip, only a dotted gold outline matching its marker. --gold-ink
+   IS a text weight on paper (4.5:1+), unlike --amber, so the label may carry
+   it. Keeps the 24px target floor the neighbouring chips carry so the tray row
+   does not go ragged. */
+.marker-chip.pending-chip {
+  font-family: var(--font-ui);
+  color: var(--gold-ink);
+  background: transparent;
+  border: 1.5px dotted var(--gold-ink);
+  box-shadow: none;
+  display: inline-flex;
+  align-items: center;
+  cursor: default;
+}
+
+.marker-empty {
+  font-size: var(--text-small);
+  color: var(--ink-muted);
+}
+
+/* --- the masthead: three deliberate zones ---------------------------------
+   Identity + what you are looking at | workspace controls | utilities.
+   Before this the header was a wrapping toolbar of eight controls with the
+   run-folder PATH in the first position — dev plumbing where the eye lands
+   first. The path is now a utility, and the left zone answers the question a
+   masthead should: which run is open, and how big is it. */
+
+.app-header {
+  flex-wrap: nowrap;
+  gap: var(--space-3);
+}
+
+.masthead-mark,
+.masthead-centre,
+.masthead-utils {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.masthead-mark {
+  flex: none;
+}
+
+/* The centre takes the slack, so the two flanks stay put as it fills. */
+.masthead-centre {
+  flex: 1;
+  min-width: 0;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.masthead-utils {
+  flex: none;
+  justify-content: flex-end;
+}
+
+/* A run's size, not its path — the count is the useful fact at a glance.
+   GP-54: promoted to the header centre with the move-budget clock, so it
+   reads at body size in full ink instead of small muted flank text. */
+.masthead-count {
+  font-size: var(--text-body);
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.masthead-count .clock-readout {
+  font-weight: 600;
+}
+
+/* The keyboard path has to be advertised, but not as four lines of masthead:
+   the glyph carries it and the tooltip spells it out. */
+.kbd-hint {
+  font-size: var(--text-body);
+  color: var(--ink-muted);
+  cursor: help;
+  /* 2.5.8: a hoverable affordance still needs a real target */
+  min-width: 24px;
+  min-height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Demoted to a utility: narrow, and it truncates rather than pushing the
+   workspace controls off the row. */
+.masthead-utils .run-dir-input {
+  width: 10em;
+}
+
+.masthead-utils .header-note {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 12em;
+}
+
+/* Under 1100px the utilities keep only what cannot be reached another way:
+   the run picker and settings. The note and the hint have tooltips and
+   keyboard paths, so losing them costs nothing. */
+@media (max-width: 1100px) {
+  .masthead-utils .header-note,
+  .kbd-hint {
+    display: none;
+  }
+  .masthead-count {
+    display: none;
+  }
+}
+
+/* D8 #5: below 860px (App.tsx's headerNarrow) the zone-B toggles and zone C
+   utilities move out of the header row entirely and into this dropdown,
+   toggled by the "☰ Menu" disclosure button. A plain block under the header,
+   not a floating popover — the goal is a working narrow layout, not a
+   polished menu. */
+.masthead-menu {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface-panel);
+  box-shadow: inset 0 1px 0 var(--border), var(--cast-down);
+}
+
+/* Mode is derived from which panes are visible — deliberate, but subtle enough
+   that it deserves saying out loud. Reviewing is quiet; playing is the state
+   worth noticing, so it takes the amber the play surfaces already use. */
+.mode-pip {
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 10px;
+  border-radius: var(--r-chip);
+  padding: 1px var(--space-1);
+  border: var(--hairline) solid var(--border);
+  color: var(--ink-muted);
+}
+
+.mode-pip.mode-play {
+  color: var(--gold-ink);
+  border-color: var(--gold-ink);
+}
+
+/* the play pip doubles as the exit-play button (D3) — strip button chrome so
+   it reads exactly like the plain reviewing span at rest; the global
+   `button:hover` rule (border + lift) is what signals it is clickable. */
+button.mode-pip {
+  font-family: inherit;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* --- D8: new placement ---------------------------------------------------
+   The escape hatch sign-off #5 pointed at. The toggle lives in the same
+   .marker-picker tray as the region chips and borrows their chrome, because
+   it is the same kind of choice — what does the next click mean. It is set
+   apart by a gold rule rather than a different shape: it is the ONE chip in
+   that tray that does not name a declared region. */
+
+.marker-chip.place-chip {
+  font-family: var(--font-ui);
+  border-color: var(--gold-ink);
+  color: var(--gold-ink);
+  margin-right: var(--space-1);
+}
+
+.marker-chip.place-chip.active {
+  color: var(--ink);
+  background: color-mix(in srgb, var(--gold) 30%, var(--paper));
+  border-color: var(--amber);
+  box-shadow: var(--elev-2), var(--edge-lip);
+}
+
+/* The dialog floats over the image, above both the tray and the hint strip,
+   in the same raised-panel language. Capped and scrollable so a long content
+   list cannot push the confirm button off the stage. */
+.place-dialog {
+  position: absolute;
+  left: 50%;
+  top: var(--space-3);
+  transform: translateX(-50%);
+  z-index: 6;
+  width: min(28rem, calc(100% - var(--space-4)));
+  max-height: calc(100% - var(--space-4) * 2);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-3) var(--space-3);
+  border-radius: var(--r-card);
+  background: var(--surface-panel);
+  box-shadow: var(--elev-4), 0 0 0 1px var(--sh-deep-2), var(--edge-lip);
+}
+
+.place-dialog-title {
+  margin: 0;
+  font-size: var(--text-body);
+}
+
+.place-dialog-note,
+.place-dialog-hint {
+  margin: 0;
+  font-size: var(--text-small);
+  color: var(--ink-muted);
+}
+
+.place-dialog-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: var(--space-1);
+}
+
+.place-dialog-label {
+  font-size: var(--text-small);
+  color: var(--ink-muted);
+}
+
+.place-dialog-pick {
+  gap: var(--space-1);
+}
+
+/* Flat and searchable on purpose: an item legitimately appears on several
+   screens, so this list is NOT filtered by screen — filtering would hide the
+   valid placements rather than tidy the list. */
+.place-dialog-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 11rem;
+  overflow-y: auto;
+  border: var(--hairline) solid var(--border);
+  border-radius: var(--r-chip);
+  background: var(--surface-card);
+}
+
+.place-dialog-option {
+  display: flex;
+  gap: var(--space-2);
+  align-items: baseline;
+  width: 100%;
+  /* 2.5.8: a full-width row still carries the target floor itself */
+  min-height: 24px;
+  padding: 2px var(--space-2);
+  text-align: left;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.place-dialog-option.active {
+  background: color-mix(in srgb, var(--gold) 30%, var(--paper));
+  color: var(--ink);
+}
+
+.place-dialog-optlabel {
+  font-size: var(--text-small);
+  color: var(--ink-muted);
+}
+
+.place-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+/* --- resize handles (gesture machine pass): the SELECTED region's four
+   corners only. Sits above the drag surface so a handle always wins the
+   thin overlap against the region body, matching the hit-test priority in
+   MarkerLayer's onPointerDown. Same chrome family as .marker-active — a
+   solid amber ring — because a handle is a control surface on THAT region,
+   not a new kind of thing. --amber is decorative-only per the token sheet,
+   so nothing here carries text. */
+.marker-handle {
+  position: absolute;
+  z-index: 4;
+  width: 9px;
+  height: 9px;
+  transform: translate(-50%, -50%);
+  background: var(--surface-card);
+  border: 1.5px solid var(--amber);
+  border-radius: 2px;
+  box-shadow: var(--elev-1), 0 0 0 1px var(--sh-deep-2);
+  pointer-events: none;
+}
+
+.marker-handle-nw {
+  cursor: nwse-resize;
+}
+
+.marker-handle-se {
+  cursor: nwse-resize;
+}
+
+.marker-handle-ne {
+  cursor: nesw-resize;
+}
+
+.marker-handle-sw {
+  cursor: nesw-resize;
+}

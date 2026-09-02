@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Save / Load — design mockup</title>
+<style>
+  :root{
+    --forest:#14110c; --forest3:#0c0a07;
+    --leather:#4a3520; --leather-dark:#2c1f12; --leather-light:#6f5030;
+    --canvas:#e7daba; --canvas2:#dbcaa2; --canvas-edge:#c3b083; --stitch:#b79a63;
+    --ink:#2f2413; --ink-soft:#6b5836;
+    --cream:#ece3d2; --dim:#b0a184;
+    --gold:#c9a15a; --gold-bright:#e6c583; --green:#7f9a5a;
+  }
+  *{ box-sizing:border-box; }
+  body{ margin:0; min-height:100vh; color:var(--cream);
+    font:16px/1.55 "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    background:radial-gradient(120% 80% at 50% -10%, #2c3326 0%, #171b13 45%, var(--forest3) 100%), var(--forest);
+    -webkit-font-smoothing:antialiased;
+    display:flex; align-items:center; justify-content:center; padding:34px 20px; }
+  body::before{ content:""; position:fixed; inset:0; pointer-events:none;
+    background:radial-gradient(75% 60% at 50% 42%, transparent 40%, rgba(6,5,3,.55) 100%); }
+  .mono{ font-family:ui-monospace,"DejaVu Sans Mono",Menlo,monospace; }
+
+  /* framed board */
+  .board{ position:relative; width:100%; max-width:1000px; border-radius:16px; padding:30px 30px 22px;
+    background:linear-gradient(180deg,#241a10,#191108);
+    border:2px solid var(--leather-dark);
+    box-shadow:0 24px 60px rgba(0,0,0,.55), inset 0 0 0 1px rgba(201,161,90,.12),
+      inset 0 1px 0 rgba(255,236,200,.06); }
+  /* gold corner filigree — the menu-frame language from the asset set, in warm gold */
+  .corner{ position:absolute; width:56px; height:56px; color:var(--gold-bright); opacity:.9;
+    pointer-events:none; }
+  .corner.tl{ top:6px; left:6px; }
+  .corner.tr{ top:6px; right:6px; transform:scaleX(-1); }
+  .corner.bl{ bottom:6px; left:6px; transform:scaleY(-1); }
+  .corner.br{ bottom:6px; right:6px; transform:scale(-1,-1); }
+  .board-head{ text-align:center; margin-bottom:22px; }
+  .board-head h1{ margin:0; font-size:36px; font-weight:600; letter-spacing:6px;
+    color:var(--gold-bright); text-transform:uppercase; }
+  .board-head p{ margin:4px 0 0; color:var(--dim); font-size:13px; letter-spacing:2px;
+    text-transform:uppercase; }
+
+  .slots{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+
+  .slot{ position:relative; min-height:320px; border-radius:12px; text-align:left;
+    padding:20px; cursor:pointer; color:var(--ink); font-family:inherit;
+    background:linear-gradient(180deg,var(--canvas),var(--canvas2));
+    border:2px solid var(--canvas-edge);
+    box-shadow:0 8px 20px rgba(0,0,0,.4);
+    transition:transform .16s ease, border-color .16s ease, box-shadow .16s ease; }
+  .slot:hover{ transform:translateY(-3px); border-color:var(--gold); }
+  .slot:focus-visible{ outline:3px solid var(--gold-bright); outline-offset:2px; }
+  .slot.active{ border-color:var(--gold-bright); box-shadow:0 0 0 2px var(--gold-bright), 0 12px 28px rgba(0,0,0,.5); }
+
+  .crest{ width:52px; height:52px; margin-bottom:14px; }
+  .field{ margin-bottom:12px; }
+  .field .k{ font-size:10.5px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); }
+  .field .v{ font-size:17px; color:#3a2a15; margin-top:1px; }
+  .field .v small{ color:var(--ink-soft); font-size:13px; }
+
+  .slot-actions{ position:absolute; left:20px; right:20px; bottom:18px; display:flex; gap:10px; }
+  .act{ flex:1; font-family:inherit; font-size:14px; padding:9px 0; border-radius:8px; cursor:pointer;
+    border:1px solid var(--stitch); background:rgba(201,161,90,.18); color:#3a2a15;
+    transition:background .16s, border-color .16s; }
+  .act:hover{ background:rgba(201,161,90,.34); border-color:var(--gold); }
+  .act.warn{ background:transparent; color:#7a4a2a; }
+  .act.warn:hover{ background:rgba(150,70,40,.14); border-color:#9c5a34; }
+
+  /* empty slot: stitched cloth placeholder */
+  .slot.empty{ background:repeating-linear-gradient(45deg,#241a10,#241a10 10px,#1e150c 10px,#1e150c 20px);
+    border:2px dashed #4c3f28; color:var(--dim); display:flex; align-items:center; justify-content:center;
+    text-align:center; box-shadow:none; }
+  .slot.empty:hover{ transform:none; border-color:#6b5836; }
+  .slot.empty span{ font-style:italic; letter-spacing:.5px; }
+
+  .board-foot{ display:flex; align-items:center; margin-top:20px; padding-top:16px;
+    border-top:1px solid rgba(201,161,90,.18); }
+  .autosave{ color:var(--dim); font-size:13px; letter-spacing:.3px; }
+  .autosave b{ color:var(--gold-bright); font-weight:600; }
+  .back{ margin-left:auto; display:inline-flex; align-items:center; gap:8px;
+    font-family:ui-monospace,monospace; font-size:13px; color:var(--gold-bright);
+    background:transparent; border:1px solid var(--leather-light); border-radius:8px; padding:8px 14px; cursor:pointer; }
+  .back:hover{ border-color:var(--gold-bright); }
+  .back svg{ width:16px; height:16px; }
+
+  @media (max-width:760px){ .slots{ grid-template-columns:1fr; } .slot{ min-height:auto; padding-bottom:70px; } }
+  @media (prefers-reduced-motion:reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+  <div class="board" role="group" aria-label="Save slots">
+    <!-- corner filigree, one symbol rotated into each corner -->
+    <svg width="0" height="0" aria-hidden="true"><symbol id="fil" viewBox="0 0 56 56">
+      <path d="M6 6h20M6 6v20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M12 12c10 0 16 2 20 8M12 12c0 10 2 16 8 20" fill="none" stroke="currentColor" stroke-width="1.6" opacity=".8"/>
+      <path d="M12 12c8-1 12 3 12 9 0 4-3 6-6 5-2-1-2-4 0-5 1 0 2 1 1 2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="7" cy="7" r="2.2" fill="currentColor"/>
+    </symbol></svg>
+    <svg class="corner tl"><use href="#fil"/></svg>
+    <svg class="corner tr"><use href="#fil"/></svg>
+    <svg class="corner bl"><use href="#fil"/></svg>
+    <svg class="corner br"><use href="#fil"/></svg>
+
+    <div class="board-head">
+      <h1>Continue</h1>
+      <p>Choose where to pick up</p>
+    </div>
+
+    <div class="slots">
+      <!-- active save -->
+      <div class="slot active" tabindex="0" aria-label="Save slot 1, in progress">
+        <svg class="crest" viewBox="0 0 52 52" aria-hidden="true">
+          <circle cx="26" cy="26" r="24" fill="#2c1f12" stroke="#e6c583" stroke-width="2"/>
+          <path d="M26 12c5 6 5 10 0 14-5-4-5-8 0-14z" fill="#e6c583"/>
+          <circle cx="26" cy="34" r="4" fill="#c9a15a"/>
+        </svg>
+        <div class="field"><div class="k">Place</div><div class="v">Old-Growth Hollow <small>· F3</small></div></div>
+        <div class="field"><div class="k">Day</div><div class="v">Day 1 · <small>morning</small></div></div>
+        <div class="field"><div class="k">Spells learned</div><div class="v">3 <small>of 16</small></div></div>
+        <div class="field"><div class="k">Souls met</div><div class="v">1 <small>· Toby</small></div></div>
+        <div class="field"><div class="k">Last played</div><div class="v mono" style="font-size:14px">just now</div></div>
+        <div class="slot-actions">
+          <button class="act">Resume</button>
+          <button class="act warn">Start over</button>
+        </div>
+      </div>
+
+      <div class="slot empty" tabindex="0" aria-label="Empty save slot 2"><span>Empty slot</span></div>
+      <div class="slot empty" tabindex="0" aria-label="Empty save slot 3"><span>Empty slot</span></div>
+    </div>
+
+    <div class="board-foot">
+      <div class="autosave">Progress saves on its own each time the <b>day or place</b> changes.</div>
+      <button class="back mono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5l-7 7 7 7M4 12h15"/></svg> back · Esc</button>
+    </div>
+  </div>
+</body>
+</html>

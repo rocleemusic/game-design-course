@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Ilsa stands in the forge yard, the frame of the centerpiece complete. She picks up a river stone from her tools and sets it on the anvil, testing it against the socket meant for the special ore that hasn't arrived. \"This will do, for now.\" She starts to work the stone, her hands sure and steady. The sun climbs, and the anvil glows with the heat of her hammer. No mention of who was supposed to bring the ore, or when it might come. Just the work at hand, and Ilsa's quiet resolve.",
+    "wc": 93,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "Ilsa turns the river stone over in her hands, studying its edges. \"This'll do,\" she says, setting it on the anvil. \"We'll make it work.\" She picks up her hammer and begins shaping the stone, the strikes echoing through the forge yard. The player sets another river stone beside the first, its surface already smooth from the forest floor. \"There's more,\" they say, and Ilsa nods, her eyes on her work. \"Good,\" she replies, \"we'll need them.\" The hammer rings again, and the stone begins to take shape, a piece of the missing puzzle sliding into place. Ilsa doesn't look up, but the rhythm of her work seems to ease, a small smile",
+    "wc": 113,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "Ilsa casts *temper* on the heated stone already on the anvil, evening its hardening as it cools. The stone sets true on the first pass. She checks the edge with her thumb, says nothing. \"The stone's set, Ilsa,\" the player says. Ilsa nods. \"It'll do for now. Thanks for the help.\" She sets the worked stone into the socket, checking the fit. It sits, the substitute in place.",
+    "wc": 68,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player: \"Waiting on something?\"\n\nIlsa: \"It'll turn up.\" She doesn't say what. The anvil stands between them, the stone on it waiting. Ilsa's hands hover, not starting yet. She meets the player's eyes, silent, then looks back at the stone, hands still. A moment passes, neither speaking, then Ilsa turns back to her work, picking up a hammer, the question left unanswered. The stone awaits, whatever its future. The player watches, standing close, as Ilsa begins to shape it. No more words pass between them, just the rhythm of metal on stone, the clink and spark. The player understands, without a single extra word, that this is",
+    "wc": 108,
+    "ok": true,
+    "err": null
+  }
+}

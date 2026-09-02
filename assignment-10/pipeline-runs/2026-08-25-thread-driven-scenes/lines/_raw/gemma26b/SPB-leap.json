@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Lanterns hang in a row along the Arch, their wicks freshly dressed for the night. The priest dips a taper into the rite-fire, sending the flame to the nearest lantern in one smooth motion. The wick catches and holds steady.",
+    "wc": 40,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player asks, \"Does the flame run out?\"\n\nThe priest answers, \"Depends how far it's asked to go. One flame, one send.\"",
+    "wc": 22,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player dips a second taper into the rite-fire and sends the flame to the next lantern along the row, which catches and holds steady.",
+    "wc": 25,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player sends the flame toward the rain barrel at the edge of the grounds. It lands on the water and goes out, the flame spent for nothing.",
+    "wc": 28,
+    "ok": true,
+    "err": null
+  }
+}

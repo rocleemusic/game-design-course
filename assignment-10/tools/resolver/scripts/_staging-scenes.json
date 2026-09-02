@@ -1,0 +1,4170 @@
+[
+  {
+    "scene_id": "ENC-ilsa-1",
+    "soul": "ilsa",
+    "screen_id": "T4",
+    "entry_gate": [],
+    "lines": [
+      {
+        "content_id": "O-ENC-I1-1",
+        "slot_type": "object",
+        "speaker_id": "ilsa",
+        "text": "You step into the Workshop, and the smoke curls thick to meet you — a gray snake twisting off the forge. Ilsa's at the bellows, steady, the leather creaking with each pull. The coals glow sullen, not the bright cherry of heat, and a cold damp hangs in the air. At the far end of the bench a place is set — an apron folded over the stool, a pair of tongs squared beside it, waiting. She looks up as you come. \"Damp's in the wood,\" she says. \"The whole stack, clear through. It lights, then it gives out on you.\" Her hands go back to the bellows."
+      },
+      {
+        "content_id": "A-ENC-I1-1-greet",
+        "slot_type": "dialogue",
+        "speaker_id": "ilsa",
+        "text": "She tips her head as you come, not breaking the bellows' rhythm. \"Frost came early this year. The cut wood sat out a wet night before we got it under cover, and it took the damp all through.\" She watches the coals gutter. \"We'll dry it by the fire. A bundle at a time. The slow way.\""
+      },
+      {
+        "content_id": "A-ENC-I1-1-ignite",
+        "slot_type": "dialogue",
+        "speaker_id": "ilsa",
+        "text": "She banks the coals, lays sticks across the embers. \"Ignite.\" A flash runs through the sticks and the coals take — a flicker of orange — but the damp wins it back, the heat guttering low again. Her hands never stop. \"Every year the Arch wears a new crown, forged fresh. My grandmother's hands on it before mine, and hers before that. This year's mine to raise.\" She sets the tongs down a moment. \"There's a place by the bench, if you want to see the crown take its form.\""
+      },
+      {
+        "content_id": "A-ENC-I1-1-shortfall",
+        "slot_type": "dialogue",
+        "speaker_id": "ilsa",
+        "text": "She works a split log free and turns it to the light — the core still dark with wet. \"Whole stack took it up. It'll dry by the fire, a bundle at a time.\" She sets it close to the coals. \"The slow way. Be a while yet before there's heat enough for the crown.\" The bellows huff; the coals brighten, then sink again.",
+        "choice_id": "CH-ENC-I1-1"
+      },
+      {
+        "content_id": "L-CH-ENC-I1-1-a-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "ilsa",
+        "text": "She takes them, feeds them in one by one. Dry wood — no smoke, no gutter. The sticks catch clean and the fire climbs until real heat rolls off the coals at last. She sets the centerpiece stock in and it warms to cherry. \"That'll get us going.\" She glances at the wet stack still by the wall. \"Rest of it's still damp, mind. But this'll serve.\" She takes up the hammer.",
+        "choice_id": "CH-ENC-I1-1",
+        "option_id": "CH-ENC-I1-1-a"
+      },
+      {
+        "content_id": "L-CH-ENC-I1-1-b-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "ilsa",
+        "text": "Your cast takes where hers gave out — the sticks flare with a heat she rarely draws, and the damp goes off in a plume of smoke and steam before the fire settles to a roaring, steady blaze. She steps back and lets it take. \"That's more fire than I'd have raised.\" She sets the stock to the heat. \"Burned the wet clean out of it. It'll do the work, and then some.\" The hammer comes up.",
+        "choice_id": "CH-ENC-I1-1",
+        "option_id": "CH-ENC-I1-1-b"
+      },
+      {
+        "content_id": "L-CH-ENC-I1-1-c-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "ilsa",
+        "text": "\"It'll come round.\" She doesn't slow the bellows. \"Frost came early, the wood sat out — that's all. It always comes round, given time.\" The coals pulse under her pulls, a little brighter with each, then sullen again. She works on, easy, in no hurry the fire can't answer to.",
+        "choice_id": "CH-ENC-I1-1",
+        "option_id": "CH-ENC-I1-1-c"
+      },
+      {
+        "content_id": "CL-ENC-I1-1",
+        "slot_type": "dialogue",
+        "speaker_id": "ilsa",
+        "text": "The fire holds now, real heat rolling off the coals, the centerpiece stock deep cherry on the anvil. Ilsa turns the first strike — the hammer rings clean, sparks scattering, the iron giving under it. \"Heat held. Good.\" She works a moment, easy in it. Then, as though it were long settled: \"The near end of the bench is yours.\" She's already turned back to the anvil, the hammer finding its rhythm — ring after steady ring, the crown coming up under her hands."
+      }
+    ],
+    "choice_nodes": [
+      {
+        "choice_id": "CH-ENC-I1-1",
+        "scene_id": "ENC-ilsa-1",
+        "availability_conditions": [],
+        "equal_weight_note": "Not an equal-weight choice: the options are graded — a full fix, a partial hand-fix, and a no-help ending do not weigh the same.",
+        "no_accrual_note": "No counter keys off any option; the grade records once for this encounter, not cumulatively.",
+        "options": [
+          {
+            "option_id": "CH-ENC-I1-1-a",
+            "surface_action": "Give Ilsa a bundle of dry sticks",
+            "response_slots": [
+              "L-CH-ENC-I1-1-a-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "ilsa_enc1_helped"
+              },
+              {
+                "type": "bond_event",
+                "arg": "Trust"
+              },
+              {
+                "type": "thread_move",
+                "arg": "ilsa-forge-short"
+              },
+              {
+                "type": "score",
+                "arg": "0.5"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-ENC-I1-1-b",
+            "surface_action": "Cast ignite — sticks — with the mage's deeper mana pool",
+            "response_slots": [
+              "L-CH-ENC-I1-1-b-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "ilsa_enc1_helped"
+              },
+              {
+                "type": "bond_event",
+                "arg": "Trust"
+              },
+              {
+                "type": "thread_move",
+                "arg": "ilsa-forge-short"
+              },
+              {
+                "type": "score",
+                "arg": "1.0"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-ENC-I1-1-c",
+            "surface_action": "Remark on the rough morning",
+            "response_slots": [
+              "L-CH-ENC-I1-1-c-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "bond_event",
+                "arg": "Recognition"
+              },
+              {
+                "type": "score",
+                "arg": "0"
+              }
+            ],
+            "rejoin": "gather"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scene_id": "ENC-ilsa-2",
+    "soul": "ilsa",
+    "screen_id": "T4",
+    "entry_gate": [],
+    "lines": [
+      {
+        "content_id": "O-ENC-I2-1",
+        "slot_type": "object",
+        "speaker_id": "ilsa",
+        "text": "You come into the Workshop in the {time_of_day} and catch Ilsa bent over the long iron span on the anvil. The hammer rings as she works it, steady — the span cherry under her blows, dulling as she turns it. A slow bow rides its length, and it fights her, but she doesn't pause. The far end of the bench sits as before — the apron still folded where she left it, the tongs unmoved."
+      },
+      {
+        "content_id": "A-ENC-I2-1-greet",
+        "slot_type": "dialogue",
+        "speaker_id": "ilsa",
+        "text": "She glances up as you come, doesn't stop the hammer. \"Span won't set true. It keeps bowing. It's long, and thick, and it cools uneven — the thin ends set before the middle and pull it out of true.\" She turns the span, sets another blow. \"My tempering holds a stretch. Not the whole length.\""
+      },
+      {
+        "content_id": "A-ENC-I2-1-temper",
+        "slot_type": "dialogue",
+        "speaker_id": "ilsa",
+        "text": "She sets a river stone under a heated stretch of the span. \"Temper.\" The stone flashes white; that stretch cools fast and sets true. But as the rest cools, the span bows back — one cast can't hold the whole length. She sets it back in the coals to come up to heat again, then draws it out glowing and lays it to the anvil. \"A stretch at a time,\" she says. \"It cools before I can take all of it.\""
+      },
+      {
+        "content_id": "A-ENC-I2-1-shortfall",
+        "slot_type": "dialogue",
+        "speaker_id": "ilsa",
+        "text": "\"The bow's back. Every time it cools, it wants to curve.\" She works it a pass, then sets it to the fire to heat again. \"Pass by pass, I'll get it to hold. But the crown has to stand true before the eve. That's the rule of the Arch.\"",
+        "choice_id": "CH-ENC-I2-1"
+      },
+      {
+        "content_id": "L-CH-ENC-I2-1-a-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "ilsa",
+        "text": "Together you hold and true the warp as it cools, the iron going cherry then dull under your hammers. It comes near enough — better than it was, holding. She marks the line with a calloused thumb. \"Near enough. For this time.\"",
+        "choice_id": "CH-ENC-I2-1",
+        "option_id": "CH-ENC-I2-1-a"
+      },
+      {
+        "content_id": "L-CH-ENC-I2-1-b-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "ilsa",
+        "text": "The word lands and the cast runs the whole length at once — a long white shimmer down the span, the heat drawing out even from end to end. The iron sets hard and true as it cools, the bow gone, dead straight against the straightedge. Ilsa lays the straightedge along it twice, finds no daylight under it. \"Whole of it, all at once. More than I could hold.\"",
+        "choice_id": "CH-ENC-I2-1",
+        "option_id": "CH-ENC-I2-1-b"
+      },
+      {
+        "content_id": "L-CH-ENC-I2-1-c-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "ilsa",
+        "text": "\"Long piece, this.\" She doesn't look up. \"The ends set before the middle, every time. It bows, but it'll come true. It always does, given the passes.\" She runs the straightedge along the span, sets it back to the coals to heat, and takes up the hammer for another pass. The first blow lands, sparks scattering off the cherry iron, and she settles into the rhythm of it. The ring of it follows you out.",
+        "choice_id": "CH-ENC-I2-1",
+        "option_id": "CH-ENC-I2-1-c"
+      },
+      {
+        "content_id": "CL-ENC-I2-1",
+        "slot_type": "dialogue",
+        "speaker_id": "ilsa",
+        "text": "The span lies true against the straightedge, the bow worked out — the crown's shape holding at last. Ilsa runs her thumb down the line of it, then sets it aside to cool. \"That's the worst of it behind us.\" She's already reaching for the next length of stock, and lays it where your hands can reach. \"This one next.\""
+      }
+    ],
+    "choice_nodes": [
+      {
+        "choice_id": "CH-ENC-I2-1",
+        "scene_id": "ENC-ilsa-2",
+        "availability_conditions": [],
+        "equal_weight_note": "Not an equal-weight choice: the options are graded — a full fix, a partial hand-fix, and a no-help ending do not weigh the same.",
+        "no_accrual_note": "No counter keys off any option; the grade records once for this encounter, not cumulatively.",
+        "options": [
+          {
+            "option_id": "CH-ENC-I2-1-a",
+            "surface_action": "Take up a second hammer and help true the warp by hand",
+            "response_slots": [
+              "L-CH-ENC-I2-1-a-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "ilsa_enc2_helped"
+              },
+              {
+                "type": "bond_event",
+                "arg": "Trust"
+              },
+              {
+                "type": "thread_move",
+                "arg": "ilsa-forge-short"
+              },
+              {
+                "type": "score",
+                "arg": "0.5"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-ENC-I2-1-b",
+            "surface_action": "Cast temper — a river stone + spring water — with the mage's deeper mana pool",
+            "response_slots": [
+              "L-CH-ENC-I2-1-b-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "ilsa_enc2_helped"
+              },
+              {
+                "type": "bond_event",
+                "arg": "Trust"
+              },
+              {
+                "type": "thread_move",
+                "arg": "ilsa-forge-short"
+              },
+              {
+                "type": "score",
+                "arg": "1.0"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-ENC-I2-1-c",
+            "surface_action": "Remark on the stubborn work",
+            "response_slots": [
+              "L-CH-ENC-I2-1-c-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "bond_event",
+                "arg": "Recognition"
+              },
+              {
+                "type": "score",
+                "arg": "0"
+              }
+            ],
+            "rejoin": "gather"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scene_id": "ENC-ilsa-3",
+    "soul": "ilsa",
+    "screen_id": "T4",
+    "entry_gate": [],
+    "lines": [
+      {
+        "content_id": "O-ENC-I3-1",
+        "slot_type": "object",
+        "speaker_id": "ilsa",
+        "text": "You come by the Workshop, and the crown is all but finished — it stands on the bench in the lamplight, the lack in it plain: the socket at its peak sits empty, waiting on its stone. Ilsa works the rest, fitting and checking, the bellows breathing beside her. At the far end of the bench the set place has gone gray with ash, the apron unmoved all week, no hand having reached for it. She leaves the bare socket for last."
+      },
+      {
+        "content_id": "A-ENC-I3-1-situation",
+        "slot_type": "dialogue",
+        "speaker_id": "ilsa",
+        "text": "\"The socket stands empty. The crown waits for its stone. I'll leave it until it comes.\" She fits and checks the rest, working what she can, the socket bare at the top."
+      },
+      {
+        "content_id": "A-ENC-I3-2-pip",
+        "slot_type": "dialogue",
+        "speaker_id": "ilsa",
+        "text": "Quick steps at the door — it's Pip, in from the square, breathless. He pulls up short at the sight of the crown, then remembers himself. \"Ilsa! The square's a wonder today — there's a flower nobody's seen before, and the band's playing all the old tunes.\" Then, quieter: \"Bram sent word he can't make the raising this year.\" He looks at her, at the near-done crown. \"Everything all right? Can I help with anything?\""
+      },
+      {
+        "content_id": "A-ENC-I3-3-response",
+        "slot_type": "dialogue",
+        "speaker_id": "ilsa",
+        "text": "\"Pip.\" She doesn't stop her hands. \"The square's good, is it. Go on back — you'll miss something if you don't.\" She sets him off with a tilt of her head, and turns to the work she can still do."
+      },
+      {
+        "content_id": "A-ENC-I3-4-shortfall",
+        "slot_type": "dialogue",
+        "speaker_id": "ilsa",
+        "text": "She works on the same as before, no change in her — the settled hands, the even pace, as if nothing in the day had shifted. Only the socket stays bare. \"It needs the true stone. I cannot forge it, and I cannot fake it.\" She sets a thumb to the empty socket. \"That piece is the one thing here that isn't mine to put in place. The crown can't be finished without it.\"",
+        "choice_id": "CH-ENC-I3-1"
+      },
+      {
+        "content_id": "L-CH-ENC-I3-1-a-p",
+        "slot_type": "player_line",
+        "speaker_id": "player",
+        "text": "\"What is that stone?\"",
+        "choice_id": "CH-ENC-I3-1",
+        "option_id": "CH-ENC-I3-1-a"
+      },
+      {
+        "content_id": "L-CH-ENC-I3-1-a-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "ilsa",
+        "text": "\"The stone drinks the firelight and holds it — takes it in and keeps it. Come the festival, when the lanterns go up, it takes all that light at once and throws it back in pieces, scattered.\" She turns it to the lamp. \"The rest of the crown stays dark. This one carries the shine. In a good year, it's a sight that stays with you.\"",
+        "choice_id": "CH-ENC-I3-1",
+        "option_id": "CH-ENC-I3-1-a"
+      },
+      {
+        "content_id": "L-CH-ENC-I3-1-b-r1",
+        "slot_type": "action",
+        "speaker_id": "ilsa",
+        "text": "She's already back at the fit, the socket bare at the top, and makes room for your hands without a word.",
+        "choice_id": "CH-ENC-I3-1",
+        "option_id": "CH-ENC-I3-1-b"
+      },
+      {
+        "content_id": "L-CH-ENC-I3-2-a-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "ilsa",
+        "text": "\"Ah.\" She stops, the tongs still in her hand. \"You found this. Here.\" A beat, the certainty gone out of her. \"I didn't think that stone was in this ground to find.\" Then it comes back to her. She takes it, sets it to the socket, a strike or two, and it seats — the crown standing whole, the stone catching the forge-light as no plain stone would. \"Every year the Arch wears a new crown, forged fresh. My grandmother's hands on it before mine, and hers before that. This year's mine to raise.\"",
+        "choice_id": "CH-ENC-I3-2",
+        "option_id": "CH-ENC-I3-2-a"
+      },
+      {
+        "content_id": "CL-ENC-I3-2-a",
+        "slot_type": "dialogue",
+        "speaker_id": "ilsa",
+        "text": "She stands the finished crown up on the bench and just looks at it — the stone burning steady in the lamplight, the whole of it true. For once, she doesn't reach straight for the next task. Then she looks to you and nods, once. \"My grandmother would've stood a while over this one. It'll go up on the Arch come the raising — every part of it true.\" She sets a hand flat to the crown. \"Come and see it lit.\"",
+        "choice_id": "CH-ENC-I3-2",
+        "option_id": "CH-ENC-I3-2-a"
+      },
+      {
+        "content_id": "L-CH-ENC-I3-2-b-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "ilsa",
+        "text": "She takes it in without a word, and sets the tongs down. \"It waits on the stone, then. Nothing to be done for that but wait.\" No reproach, no asking.",
+        "choice_id": "CH-ENC-I3-2",
+        "option_id": "CH-ENC-I3-2-b"
+      },
+      {
+        "content_id": "CL-ENC-I3-2-b",
+        "slot_type": "object",
+        "speaker_id": "ilsa",
+        "text": "She turns the crown so the bare socket faces the wall, and goes back to the pieces she can still set right. It stands unfinished on the bench, and she lets you go without a word.",
+        "choice_id": "CH-ENC-I3-2",
+        "option_id": "CH-ENC-I3-2-b"
+      }
+    ],
+    "choice_nodes": [
+      {
+        "choice_id": "CH-ENC-I3-1",
+        "scene_id": "ENC-ilsa-3",
+        "availability_conditions": [],
+        "equal_weight_note": "Not an equal-weight choice: the options are graded — a full fix, a partial hand-fix, and a no-help ending do not weigh the same.",
+        "no_accrual_note": "No counter keys off any option; the grade records once for this encounter, not cumulatively.",
+        "options": [
+          {
+            "option_id": "CH-ENC-I3-1-a",
+            "player_line": "L-CH-ENC-I3-1-a-p",
+            "response_slots": [
+              "L-CH-ENC-I3-1-a-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "bond_event",
+                "arg": "Recognition"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-ENC-I3-1-b",
+            "surface_action": "Take up the work at the bench beside her",
+            "response_slots": [
+              "L-CH-ENC-I3-1-b-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "bond_event",
+                "arg": "Intimacy"
+              }
+            ],
+            "rejoin": "gather"
+          }
+        ]
+      },
+      {
+        "choice_id": "CH-ENC-I3-2",
+        "scene_id": "ENC-ilsa-3",
+        "availability_conditions": [],
+        "equal_weight_note": "Not an equal-weight choice: the options are graded — a full fix, a partial hand-fix, and a no-help ending do not weigh the same.",
+        "no_accrual_note": "No counter keys off any option; the grade records once for this encounter, not cumulatively.",
+        "options": [
+          {
+            "option_id": "CH-ENC-I3-2-a",
+            "surface_action": "Hold out the raw ore you found in the cave",
+            "response_slots": [
+              "L-CH-ENC-I3-2-a-r1",
+              "CL-ENC-I3-2-a"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "ilsa_enc3_helped"
+              },
+              {
+                "type": "knowledge_flag",
+                "arg": "centerpiece_true_ore"
+              },
+              {
+                "type": "bond_event",
+                "arg": "Trust"
+              },
+              {
+                "type": "thread_move",
+                "arg": "ilsa-forge-short"
+              },
+              {
+                "type": "score",
+                "arg": "1.0"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-ENC-I3-2-b",
+            "surface_action": "Come back later",
+            "response_slots": [
+              "L-CH-ENC-I3-2-b-r1",
+              "CL-ENC-I3-2-b"
+            ],
+            "state_actions": [
+              {
+                "type": "score",
+                "arg": "0"
+              }
+            ],
+            "rejoin": "gather"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scene_id": "ENC-mara-1",
+    "soul": "mara",
+    "screen_id": "F1",
+    "entry_gate": [],
+    "lines": [
+      {
+        "content_id": "O-ENC-M1-1",
+        "slot_type": "object",
+        "speaker_id": "mara",
+        "text": "You approach Mara in the {time_of_day} and find her at her counter, working baskets that sit mostly empty, her hands quick over the few herbs she has left."
+      },
+      {
+        "content_id": "A-ENC-M1-1-greet",
+        "slot_type": "dialogue",
+        "speaker_id": "mara",
+        "text": "\"Ah, there you are — just in time for the last of it.\" She doesn't look up from the pestle, grinding the season's herbs into the brew. \"Frost's coming early this year. Too early. Half the baskets still empty, and the berries out in the forest, yet not enough hands to bring them in.\""
+      },
+      {
+        "content_id": "A-ENC-M1-1-situation",
+        "slot_type": "dialogue",
+        "speaker_id": "mara",
+        "text": "She lifts her head, a small warm smile. \"Good to see you before the cold sets in.\" She works a handful of salt into the brew and casts — a brief flash runs through it as the spell takes, the cut herbs stilled at fresh. \"Preserve it while I still can. It's the festival tonic I'm after — everyone takes a cup on the night, a wish of good health for the year to come, brewed from the last of the season's herbs.\""
+      },
+      {
+        "content_id": "A-ENC-M1-1-shortfall",
+        "slot_type": "dialogue",
+        "speaker_id": "mara",
+        "text": "She nods at the near-empty baskets. \"Won't be much of a wish with half of them still out on the branch. I'd be splitting my time between the grove and the forest to bring it all in before the frost.\" A hum under her breath, then: \"You wouldn't happen to know the best time to pick mountain berries?\"",
+        "choice_id": "CH-ENC-M1-1"
+      },
+      {
+        "content_id": "L-CH-ENC-M1-1-a-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "mara",
+        "text": "\"Good. These are clean — you had the right hand for it.\" She sorts stems from berries, quick and practiced, not stopping as she speaks. \"The frost won't get these. That's the thing.\" She lifts one, turns it between her fingers. \"This'll hold the festival. This is what keeps it.\" Then, softer, half to the berry: \"This is what kept it.\" She scatters salt across the harvest. \"Preserve.\" A brief flash runs over the berries and leaves, holding them fast at fresh. She sets them among the others and moves on.",
+        "choice_id": "CH-ENC-M1-1",
+        "option_id": "CH-ENC-M1-1-a"
+      },
+      {
+        "content_id": "L-CH-ENC-M1-1-b-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "mara",
+        "text": "The berries darken the water almost at once, rich as blood under snow. She watches it turn, dips a finger to check, nods. \"There you go — that'll do for now.\" She sets the vessel with the others waiting for the fresh. \"Still time for the rest, but not long now.\"",
+        "choice_id": "CH-ENC-M1-1",
+        "option_id": "CH-ENC-M1-1-b"
+      },
+      {
+        "content_id": "L-CH-ENC-M1-1-c-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "mara",
+        "text": "\"Frost's coming early,\" she says, tying a bundle of sage with slow fingers. \"Should've gone yesterday — but the light was wrong, the stems still damp. Now it's all in one run before the ground ices over.\" She turns an empty basket over in her hands, sets it down with a small sigh. \"Still time. I'll have to move fast, is all.\" She grinds the last of the rosemary fine, glances once toward the window, then bends back to the work.",
+        "choice_id": "CH-ENC-M1-1",
+        "option_id": "CH-ENC-M1-1-c"
+      },
+      {
+        "content_id": "AS-ENC-M1-1",
+        "slot_type": "dialogue",
+        "speaker_id": "mara",
+        "text": "She turns the basket in her hands, running her fingers over the stems. \"These are good. You've chosen well.\" She rolls up her sleeves, reaching for the mortar and pestle. \"You'll be back for the tonic when it's ready\" — not a question, a certainty. \"Bring a cup of your own this time.\" Then, softer, almost to herself: \"It's better when we drink it together.\""
+      }
+    ],
+    "choice_nodes": [
+      {
+        "choice_id": "CH-ENC-M1-1",
+        "scene_id": "ENC-mara-1",
+        "availability_conditions": [],
+        "equal_weight_note": "Not an equal-weight choice: the options are graded — a full fix, a partial hand-fix, and a no-help ending do not weigh the same.",
+        "no_accrual_note": "No counter keys off any option; the grade records once for this encounter, not cumulatively.",
+        "options": [
+          {
+            "option_id": "CH-ENC-M1-1-a",
+            "surface_action": "Give Mara the berries and the last herbs from the forest",
+            "response_slots": [
+              "L-CH-ENC-M1-1-a-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "mara_enc1_helped"
+              },
+              {
+                "type": "bond_event",
+                "arg": "Trust"
+              },
+              {
+                "type": "thread_move",
+                "arg": "mara-tonic-frost"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-ENC-M1-1-b",
+            "surface_action": "Cast steep over a vessel of water — a berry + spring water",
+            "response_slots": [
+              "L-CH-ENC-M1-1-b-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "mara_enc1_helped"
+              },
+              {
+                "type": "bond_event",
+                "arg": "Trust"
+              },
+              {
+                "type": "thread_move",
+                "arg": "mara-tonic-frost"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-ENC-M1-1-c",
+            "surface_action": "Leave her to her work",
+            "response_slots": [
+              "L-CH-ENC-M1-1-c-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "bond_event",
+                "arg": "Recognition"
+              },
+              {
+                "type": "score",
+                "arg": "0"
+              }
+            ],
+            "rejoin": "gather"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scene_id": "ENC-mara-2",
+    "soul": "mara",
+    "screen_id": "F1",
+    "entry_gate": [],
+    "lines": [
+      {
+        "content_id": "O-ENC-M2-1",
+        "slot_type": "object",
+        "speaker_id": "mara",
+        "text": "You catch Mara at her stall in the {time_of_day}, a row of filled jars on the shelf behind her, a block of beeswax in her hands as she works a rim."
+      },
+      {
+        "content_id": "A-ENC-M2-1-greet",
+        "slot_type": "dialogue",
+        "speaker_id": "mara",
+        "text": "\"Ah! You again.\" She looks up from the wax, a warm smile settling in. \"The tonic's filling up nicely — but the cold's got to these seals.\" She presses the wax along a rim, moves to the next. \"I've gone through twice the wax I thought I would. Keeps for now, so long as I'm fast.\""
+      },
+      {
+        "content_id": "A-ENC-M2-1-situation",
+        "slot_type": "dialogue",
+        "speaker_id": "mara",
+        "text": "She works the wax to the glass. \"The frost's coming in earnest now — you can hear it through the walls.\" She straightens a jar that wasn't crooked. \"Festival's set for the first real frost, and the tonic'll be ready by then.\" A glance up, genuine: \"And you — how've you been holding up? The cold's got a way of sticking to things.\"",
+        "choice_id": "CH-ENC-M2-1"
+      },
+      {
+        "content_id": "L-CH-ENC-M2-1-give-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "mara",
+        "text": "She takes the beeswax, rolls it soft between her fingers, presses it onto the first failing seal and tests the edge with a thumb. \"That'll hold, near enough. Good for a week if the cold's kind.\" She moves down the row. \"Not as clean as a proper seal, but it'll do. Thanks for the wax — keeps me from burning through my own stash.\" A glance at the last leaves out the window. \"Used to last longer.\" She waxes the next. \"But the herbs still hold their colour. That's something.\"",
+        "choice_id": "CH-ENC-M2-1",
+        "option_id": "CH-ENC-M2-1-give"
+      },
+      {
+        "content_id": "L-CH-ENC-M2-1-cast-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "mara",
+        "text": "The air above each lid glints and tightens, drawing inward as your seal sets — a smooth, seamless skin over every mouth, like a sheet of glass, no smudged wax, no uneven rim. A brief flash as it takes. Mara taps the nearest jar with a knuckle — solid, not a breath slipping past. \"This is a proper seal,\" she murmurs, and something in her shoulders eases. \"You've got the knack of that.\"",
+        "choice_id": "CH-ENC-M2-1",
+        "option_id": "CH-ENC-M2-1-cast"
+      },
+      {
+        "content_id": "L-CH-ENC-M2-1-end-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "mara",
+        "text": "She works the wax into another lid, not looking up. \"Frost's early this year. But the jars are nearly done — the tonic'll keep the town warm even if the fire won't.\" She lifts a jar, checks the seal with a critical eye, sets it aside. She doesn't need help, and doesn't mind the company. \"You'll see the festival lights before long. The tonic'll be ready for you by then.\" Already back to her work.",
+        "choice_id": "CH-ENC-M2-1",
+        "option_id": "CH-ENC-M2-1-end"
+      },
+      {
+        "content_id": "AS-ENC-M2-1",
+        "slot_type": "dialogue",
+        "speaker_id": "mara",
+        "text": "The last jar clicks into place beside its kin, the wax catching the light like dark honey. \"That's the lot — all tight, all good. Thank you for your hands.\" She sets it just so, fingers resting a moment on the glass. \"You'll be back, I expect\" — not a question. A small smile as she tucks the wax cloth away. \"Bring your cup next time — the first taste of the tonic's yours. The door'll be open.\""
+      }
+    ],
+    "choice_nodes": [
+      {
+        "choice_id": "CH-ENC-M2-1",
+        "scene_id": "ENC-mara-2",
+        "availability_conditions": [],
+        "equal_weight_note": "Not an equal-weight choice: the options are graded — a full fix, a partial hand-fix, and a no-help ending do not weigh the same.",
+        "no_accrual_note": "No counter keys off any option; the grade records once for this encounter, not cumulatively.",
+        "options": [
+          {
+            "option_id": "CH-ENC-M2-1-give",
+            "surface_action": "Give Mara beeswax (item_beeswax) for the seals",
+            "response_slots": [
+              "L-CH-ENC-M2-1-give-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "mara_enc2_helped"
+              },
+              {
+                "type": "bond_event",
+                "arg": "Trust"
+              },
+              {
+                "type": "thread_move",
+                "arg": "mara-tonic-frost"
+              },
+              {
+                "type": "score",
+                "arg": "0.5"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-ENC-M2-1-cast",
+            "surface_action": "Cast seal on the jars — item_beeswax",
+            "response_slots": [
+              "L-CH-ENC-M2-1-cast-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "mara_enc2_helped"
+              },
+              {
+                "type": "bond_event",
+                "arg": "Trust"
+              },
+              {
+                "type": "thread_move",
+                "arg": "mara-tonic-frost"
+              },
+              {
+                "type": "score",
+                "arg": "1.0"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-ENC-M2-1-end",
+            "surface_action": "Leave her to the seals",
+            "response_slots": [
+              "L-CH-ENC-M2-1-end-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "bond_event",
+                "arg": "Recognition"
+              },
+              {
+                "type": "score",
+                "arg": "0"
+              }
+            ],
+            "rejoin": "gather"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scene_id": "ENC-mara-3",
+    "soul": "mara",
+    "screen_id": "F1",
+    "entry_gate": [],
+    "lines": [
+      {
+        "content_id": "O-ENC-M3-1",
+        "slot_type": "object",
+        "speaker_id": "mara",
+        "text": "You come back to Mara's counter in the {time_of_day} to find her over the big crock, the last of the tonic steeping inside it, most of the jars already filled and sealed on the shelf behind her."
+      },
+      {
+        "content_id": "A-ENC-M3-1-greet",
+        "slot_type": "dialogue",
+        "speaker_id": "mara",
+        "text": "\"The tonic's almost done — just needs a bit more time to steep,\" she says, not looking up. \"Mind the step, and mind the cold in here; it's got teeth tonight.\""
+      },
+      {
+        "content_id": "A-ENC-M3-1-break",
+        "slot_type": "object",
+        "speaker_id": "mara",
+        "text": "The crock shivers in the cold, its ceramic creaking. Fine fractures spread like veins along its side — and then it splits, and the tonic, the whole last batch, comes pouring out across the counter and down between the boards. Mara lunges for it, catching what she can in the first cup to hand. \"Curse it — not tonight, not all of it.\" She's scrambling now, both hands, losing more than she saves. \"Get what's left into something — anything — before it's gone.\" You're already moving. Whatever you do, it has to be now.",
+        "choice_id": "CH-ENC-M3-1"
+      },
+      {
+        "content_id": "L-CH-ENC-M3-1-bind-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "mara",
+        "text": "The crack seals shut along its length, a brief flash, and the pouring stops — the crock holds, the whole batch with it. For a second Mara just stares. Then it breaks over her, a short, disbelieving laugh. \"You saved the whole lot. The whole lot!\" She catches your arm, grinning, the reserve gone clean off her. \"I'd half given it up for lost.\" She pours two cups, presses one into your hands. \"First sip's yours — you earned it. Then we carry the rest to the square, and I'll tell the whole town whose hands did it.\"",
+        "choice_id": "CH-ENC-M3-1",
+        "option_id": "CH-ENC-M3-1-bind"
+      },
+      {
+        "content_id": "L-CH-ENC-M3-1-portion-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "mara",
+        "text": "You can't stop the leak, but the tonic parts itself into even measures — you grab the first jar and pour, Mara working fast beside you, corking each before the next can overflow. \"Half. Enough,\" she says as the last drips away. She sets the final jar down, turns to you, eyes crinkling. \"Could've lost it all, but we got most. Town'll drink well tonight.\" The saved jars stand in a row, gold in the lantern light. \"A good save. Let's get them in before the cold settles on 'em.\"",
+        "choice_id": "CH-ENC-M3-1",
+        "option_id": "CH-ENC-M3-1-portion"
+      },
+      {
+        "content_id": "L-CH-ENC-M3-1-end-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "mara",
+        "text": "The crock empties before anything can be done, the tonic sinking dark between the boards. Mara catches the last few drops, doesn't flinch, doesn't curse — just sets her jaw and turns to you with a small nod. \"That's the way of things, sometimes.\" Then, softer: \"Thank you for trying.\" She bends to wipe the floor, methodical. \"It was a fine batch.\" She stands, folds the rag. As you go, she presses a small handful of dried herbs into your hand. \"Take these. For your own making, when you need it.\"",
+        "choice_id": "CH-ENC-M3-1",
+        "option_id": "CH-ENC-M3-1-end"
+      }
+    ],
+    "choice_nodes": [
+      {
+        "choice_id": "CH-ENC-M3-1",
+        "scene_id": "ENC-mara-3",
+        "availability_conditions": [],
+        "equal_weight_note": "Not an equal-weight choice: the options are graded — a full fix, a partial hand-fix, and a no-help ending do not weigh the same.",
+        "no_accrual_note": "No counter keys off any option; the grade records once for this encounter, not cumulatively.",
+        "options": [
+          {
+            "option_id": "CH-ENC-M3-1-bind",
+            "surface_action": "Cast bind on the cracked crock — item_tree_sap + item_wool",
+            "response_slots": [
+              "L-CH-ENC-M3-1-bind-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "mara_enc3_helped"
+              },
+              {
+                "type": "bond_event",
+                "arg": "Trust"
+              },
+              {
+                "type": "thread_move",
+                "arg": "mara-tonic-frost"
+              },
+              {
+                "type": "score",
+                "arg": "1.0"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-ENC-M3-1-portion",
+            "surface_action": "Cast portion on the draining crock — item_river_stone",
+            "response_slots": [
+              "L-CH-ENC-M3-1-portion-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "mara_enc3_helped"
+              },
+              {
+                "type": "bond_event",
+                "arg": "Trust"
+              },
+              {
+                "type": "thread_move",
+                "arg": "mara-tonic-frost"
+              },
+              {
+                "type": "score",
+                "arg": "0.5"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-ENC-M3-1-end",
+            "surface_action": "Leave the spill to her",
+            "response_slots": [
+              "L-CH-ENC-M3-1-end-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "bond_event",
+                "arg": "Recognition"
+              },
+              {
+                "type": "score",
+                "arg": "0"
+              }
+            ],
+            "rejoin": "gather"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scene_id": "ENC-toby-1",
+    "soul": "toby",
+    "screen_id": "T2",
+    "entry_gate": [],
+    "lines": [
+      {
+        "content_id": "O-ENC-T1-1",
+        "slot_type": "object",
+        "speaker_id": "toby",
+        "text": "You come into the kitchen to a wall of oven-heat, the air thick with flour and yeast. Toby is at the far counter — sleeves shoved past the elbows, dough clinging to his fingers, hands fast, shaping and stacking trays before they cool. Flour has drifted up his forearms to the wrist. On the side board a flat tray sits among the risen loaves, its dough dull and slack."
+      },
+      {
+        "content_id": "A-ENC-T1-greet",
+        "slot_type": "dialogue",
+        "speaker_id": "toby",
+        "text": "\"Mind that side, it's hot.\""
+      },
+      {
+        "content_id": "A-ENC-T1-greet-act",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "He shifts a tray of cooling loaves without slowing, eyes flicking to you a heartbeat, then back to the work."
+      },
+      {
+        "content_id": "A-ENC-T1-short",
+        "slot_type": "dialogue",
+        "speaker_id": "toby",
+        "text": "\"Dough went flat overnight. A hundred short if the whole square turns out, and the night's fixed. Starter's weak on top of it — wants another round to come right.\""
+      },
+      {
+        "content_id": "A-ENC-T1-shelf",
+        "slot_type": "object",
+        "speaker_id": "toby",
+        "text": "Through the haze of flour your eye catches the shelf behind the counter — a row of small jars, a wrapped cloth, a wooden spoon, a knife laid alongside. None of them opened."
+      },
+      {
+        "content_id": "A-ENC-T1-cast",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "Toby reaches for a river stone, says \"portion,\" and a flash runs the length of the flat batch — it parts itself into even measures down the boards. Split even, it comes out thin. Dividing what little there is makes no more of it."
+      },
+      {
+        "content_id": "A-ENC-T1-cast-line",
+        "slot_type": "dialogue",
+        "speaker_id": "toby",
+        "text": "\"Parted it as far as it'll go. Still short of the square.\"",
+        "choice_id": "CH-ENC-T1-1"
+      },
+      {
+        "content_id": "L-CH-ENC-T1-1-a-r1",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "You speak \"portion\" over the same thin batch, and it parts further and cleaner than his did — measure after measure, right down the boards, enough to set a place for the whole square after all.",
+        "choice_id": "CH-ENC-T1-1",
+        "option_id": "CH-ENC-T1-1-a"
+      },
+      {
+        "content_id": "L-CH-ENC-T1-1-a-r2",
+        "slot_type": "dialogue",
+        "speaker_id": "toby",
+        "text": "\"Square's fed, then. Full tables, every one — enough over for the ones who come in late.\"",
+        "choice_id": "CH-ENC-T1-1",
+        "option_id": "CH-ENC-T1-1-a"
+      },
+      {
+        "content_id": "L-CH-ENC-T1-1-a-r3",
+        "slot_type": "dialogue",
+        "speaker_id": "toby",
+        "text": "\"Have a roll — you haven't eaten.\"",
+        "choice_id": "CH-ENC-T1-1",
+        "option_id": "CH-ENC-T1-1-a"
+      },
+      {
+        "content_id": "L-CH-ENC-T1-1-a-r4",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "He cuts one free, sets it by your hand, and is back at the next tray before you can answer.",
+        "choice_id": "CH-ENC-T1-1",
+        "option_id": "CH-ENC-T1-1-a"
+      },
+      {
+        "content_id": "L-CH-ENC-T1-1-b-r1",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "You work in beside him — you knead, he cuts and trays — and the loaves come faster with four hands. It won't close the hundred, but it holds, near enough.",
+        "choice_id": "CH-ENC-T1-1",
+        "option_id": "CH-ENC-T1-1-b"
+      },
+      {
+        "content_id": "L-CH-ENC-T1-1-b-r2",
+        "slot_type": "dialogue",
+        "speaker_id": "toby",
+        "text": "\"Rolls on top so they don't press.\"",
+        "choice_id": "CH-ENC-T1-1",
+        "option_id": "CH-ENC-T1-1-b"
+      },
+      {
+        "content_id": "L-CH-ENC-T1-1-b-r3",
+        "slot_type": "dialogue",
+        "speaker_id": "toby",
+        "text": "\"You haven't eaten. Have a roll.\"",
+        "choice_id": "CH-ENC-T1-1",
+        "option_id": "CH-ENC-T1-1-b"
+      },
+      {
+        "content_id": "L-CH-ENC-T1-1-b-r4",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "He cuts one free and holds it out, already reaching for the next tray. \"We'll make do.\"",
+        "choice_id": "CH-ENC-T1-1",
+        "option_id": "CH-ENC-T1-1-b"
+      },
+      {
+        "content_id": "L-CH-ENC-T1-1-c-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "toby",
+        "text": "\"It'll come right, or it'll come close. The square eats either way.\"",
+        "choice_id": "CH-ENC-T1-1",
+        "option_id": "CH-ENC-T1-1-c"
+      },
+      {
+        "content_id": "L-CH-ENC-T1-1-c-r2",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "He's already turning back to the dough, counting the next batch under his breath as you go.",
+        "choice_id": "CH-ENC-T1-1",
+        "option_id": "CH-ENC-T1-1-c"
+      }
+    ],
+    "choice_nodes": [
+      {
+        "choice_id": "CH-ENC-T1-1",
+        "scene_id": "ENC-toby-1",
+        "availability_conditions": [],
+        "equal_weight_note": "Not an equal-weight choice: the options are graded — a full fix, a partial hand-fix, and a no-help ending do not weigh the same.",
+        "no_accrual_note": "No counter keys off any option; the grade records once for this encounter, not cumulatively.",
+        "options": [
+          {
+            "option_id": "CH-ENC-T1-1-a",
+            "surface_action": "Cast portion over the flat batch",
+            "response_slots": [
+              "L-CH-ENC-T1-1-a-r1",
+              "L-CH-ENC-T1-1-a-r2",
+              "L-CH-ENC-T1-1-a-r3",
+              "L-CH-ENC-T1-1-a-r4"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "toby_enc1_helped"
+              },
+              {
+                "type": "bond_event",
+                "arg": "Trust"
+              },
+              {
+                "type": "thread_move",
+                "arg": "toby-feast-short"
+              },
+              {
+                "type": "thread_move",
+                "arg": "toby-the-shelf"
+              },
+              {
+                "type": "score",
+                "arg": "1.0"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-ENC-T1-1-b",
+            "surface_action": "Work in at the bench beside him",
+            "response_slots": [
+              "L-CH-ENC-T1-1-b-r1",
+              "L-CH-ENC-T1-1-b-r2",
+              "L-CH-ENC-T1-1-b-r3",
+              "L-CH-ENC-T1-1-b-r4"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "toby_enc1_helped"
+              },
+              {
+                "type": "bond_event",
+                "arg": "Trust"
+              },
+              {
+                "type": "thread_move",
+                "arg": "toby-feast-short"
+              },
+              {
+                "type": "thread_move",
+                "arg": "toby-the-shelf"
+              },
+              {
+                "type": "score",
+                "arg": "0.5"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-ENC-T1-1-c",
+            "surface_action": "Leave him to the dough",
+            "response_slots": [
+              "L-CH-ENC-T1-1-c-r1",
+              "L-CH-ENC-T1-1-c-r2"
+            ],
+            "state_actions": [
+              {
+                "type": "bond_event",
+                "arg": "Recognition"
+              },
+              {
+                "type": "score",
+                "arg": "0"
+              }
+            ],
+            "rejoin": "gather"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scene_id": "ENC-toby-2",
+    "soul": "toby",
+    "screen_id": "T2",
+    "entry_gate": [],
+    "lines": [
+      {
+        "content_id": "O-ENC-T2-1",
+        "slot_type": "object",
+        "speaker_id": "toby",
+        "text": "You step in and the bakery's chill bites at your skin — colder than a kitchen should ever be. The oven's fire is guttering, its heat spent. Toby crouches before it, black hands working the bellows, feeding the banked embers handful by handful, coals shifting and spitting orange light across his face. The loaves stand proofed and shaped, waiting in silent rows on their racks in the cold air."
+      },
+      {
+        "content_id": "A-ENC-T2-short",
+        "slot_type": "dialogue",
+        "speaker_id": "toby",
+        "text": "\"There's no heat left — the coals are banked down, and the fire's still in it, just not enough for the whole square. I ran the oven through last night for the hundred, and now it's spent. The loaves are shaped and waiting, but there's no time for another burn before nightfall.\""
+      },
+      {
+        "content_id": "A-ENC-T2-shelf",
+        "slot_type": "object",
+        "speaker_id": "toby",
+        "text": "The shelf behind the counter catches your eye again — and a new jar sits among the others now, its wax seal still whole, set in with the rest. None of them opened."
+      },
+      {
+        "content_id": "A-ENC-T2-hand",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "He kneels at the oven mouth, stoking with his blackened hands — feeding the banked coals handfuls of dry wood, but they flare and fade before the heat can catch. The bellows hisses, a brief flash of orange licks up the oven walls, too small and too short. The coals pulse like a dying thing, brightening just enough to tease before they dim again."
+      },
+      {
+        "content_id": "A-ENC-T2-hand-line",
+        "slot_type": "dialogue",
+        "speaker_id": "toby",
+        "text": "\"It comes up when I work it, but it won't hold the heat on its own.\"",
+        "choice_id": "CH-ENC-T2-1"
+      },
+      {
+        "content_id": "L-CH-ENC-T2-1-a-r1",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "You speak \"breath,\" and a broad, steady draft pours down the oven's belly — the embers flare wide and even, and the fire catches into a full, holding heat that spreads up the walls.",
+        "choice_id": "CH-ENC-T2-1",
+        "option_id": "CH-ENC-T2-1-a"
+      },
+      {
+        "content_id": "L-CH-ENC-T2-1-a-r2",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "The tightness goes out of his shoulders, and a quick grin breaks through the soot on his face.",
+        "choice_id": "CH-ENC-T2-1",
+        "option_id": "CH-ENC-T2-1-a"
+      },
+      {
+        "content_id": "L-CH-ENC-T2-1-a-r3",
+        "slot_type": "dialogue",
+        "speaker_id": "toby",
+        "text": "\"Loaves are good, heat's right now.\"",
+        "choice_id": "CH-ENC-T2-1",
+        "option_id": "CH-ENC-T2-1-a"
+      },
+      {
+        "content_id": "L-CH-ENC-T2-1-a-r4",
+        "slot_type": "dialogue",
+        "speaker_id": "toby",
+        "text": "\"You're cold — I can see it in your hands. Stand where the heat gathers a minute, so your fingers don't stiffen while we work.\"",
+        "choice_id": "CH-ENC-T2-1",
+        "option_id": "CH-ENC-T2-1-a"
+      },
+      {
+        "content_id": "L-CH-ENC-T2-1-b-r1",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "You work the coals with him, feeding the heat together — the kindling spits and flares, the oven groans as it swells, and the chill eases just enough that your skin stops stinging. It won't hold the full count, but the first trays can go in.",
+        "choice_id": "CH-ENC-T2-1",
+        "option_id": "CH-ENC-T2-1-b"
+      },
+      {
+        "content_id": "L-CH-ENC-T2-1-b-r2",
+        "slot_type": "dialogue",
+        "speaker_id": "toby",
+        "text": "\"There. Better — not enough for the whole square, but we can bake the first trays now.\"",
+        "choice_id": "CH-ENC-T2-1",
+        "option_id": "CH-ENC-T2-1-b"
+      },
+      {
+        "content_id": "L-CH-ENC-T2-1-b-r3",
+        "slot_type": "dialogue",
+        "speaker_id": "toby",
+        "text": "\"Get those near the mouth before we load. You've gone stiff.\"",
+        "choice_id": "CH-ENC-T2-1",
+        "option_id": "CH-ENC-T2-1-b"
+      },
+      {
+        "content_id": "L-CH-ENC-T2-1-c-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "toby",
+        "text": "\"I'll rest the coals and get the first trays in before dark — the rest keep till they can.\"",
+        "choice_id": "CH-ENC-T2-1",
+        "option_id": "CH-ENC-T2-1-c"
+      },
+      {
+        "content_id": "L-CH-ENC-T2-1-c-r2",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "He straightens as you turn to go, and waves you toward the heat. \"Warm yourself before you go — it's cold out.\"",
+        "choice_id": "CH-ENC-T2-1",
+        "option_id": "CH-ENC-T2-1-c"
+      }
+    ],
+    "choice_nodes": [
+      {
+        "choice_id": "CH-ENC-T2-1",
+        "scene_id": "ENC-toby-2",
+        "availability_conditions": [],
+        "equal_weight_note": "Not an equal-weight choice: the options are graded — a full fix, a partial hand-fix, and a no-help ending do not weigh the same.",
+        "no_accrual_note": "No counter keys off any option; the grade records once for this encounter, not cumulatively.",
+        "options": [
+          {
+            "option_id": "CH-ENC-T2-1-a",
+            "surface_action": "Cast breath over the banked coals — component item_grass + item_dirt",
+            "response_slots": [
+              "L-CH-ENC-T2-1-a-r1",
+              "L-CH-ENC-T2-1-a-r2",
+              "L-CH-ENC-T2-1-a-r3",
+              "L-CH-ENC-T2-1-a-r4"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "toby_enc2_helped"
+              },
+              {
+                "type": "bond_event",
+                "arg": "Trust"
+              },
+              {
+                "type": "thread_move",
+                "arg": "toby-feast-short"
+              },
+              {
+                "type": "thread_move",
+                "arg": "toby-the-shelf"
+              },
+              {
+                "type": "score",
+                "arg": "1.0"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-ENC-T2-1-b",
+            "surface_action": "Feed the fire by hand — dry kindling, item_sticks",
+            "response_slots": [
+              "L-CH-ENC-T2-1-b-r1",
+              "L-CH-ENC-T2-1-b-r2",
+              "L-CH-ENC-T2-1-b-r3"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "toby_enc2_helped"
+              },
+              {
+                "type": "bond_event",
+                "arg": "Trust"
+              },
+              {
+                "type": "thread_move",
+                "arg": "toby-feast-short"
+              },
+              {
+                "type": "thread_move",
+                "arg": "toby-the-shelf"
+              },
+              {
+                "type": "score",
+                "arg": "0.5"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-ENC-T2-1-c",
+            "surface_action": "Leave the fire to him",
+            "response_slots": [
+              "L-CH-ENC-T2-1-c-r1",
+              "L-CH-ENC-T2-1-c-r2"
+            ],
+            "state_actions": [
+              {
+                "type": "bond_event",
+                "arg": "Recognition"
+              },
+              {
+                "type": "score",
+                "arg": "0"
+              }
+            ],
+            "rejoin": "gather"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scene_id": "ENC-toby-3",
+    "soul": "toby",
+    "screen_id": "T2",
+    "entry_gate": [],
+    "lines": [
+      {
+        "content_id": "O-ENC-T3-1",
+        "slot_type": "object",
+        "speaker_id": "toby",
+        "text": "You catch Toby in the doorway, half in and half out, moving trays from the oven to the waiting baskets. The bread is all done — loaves stacked high and cool on the sideboards, the last trays heavy in his hands. Through the open door the square hums, tables being set and lights strung for the feast, the smell of fresh bread and woodsmoke hanging in the air."
+      },
+      {
+        "content_id": "A-ENC-T3-bind",
+        "slot_type": "dialogue",
+        "speaker_id": "toby",
+        "text": "\"It's all baked, every loaf of it, but I can't carry the whole lot to the square and mind the last trays coming off the oven at the same time.\""
+      },
+      {
+        "content_id": "A-ENC-T3-shelf",
+        "slot_type": "object",
+        "speaker_id": "toby",
+        "text": "Your eye passes the shelf behind the counter one more time — the same row of jars and small gifts, none of them opened."
+      },
+      {
+        "content_id": "A-ENC-T3-cast",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "Toby palms a river stone and speaks — \"weigh\" — and the loaded basket lifts a hand's breadth and hangs there, the weight plain in how it holds. Then the hold gives out and it settles back to the counter with a soft clunk."
+      },
+      {
+        "content_id": "A-ENC-T3-cast-line",
+        "slot_type": "dialogue",
+        "speaker_id": "toby",
+        "text": "\"Twenty-four in that one. The heaviest yet.\"",
+        "choice_id": "CH-ENC-T3-1"
+      },
+      {
+        "content_id": "L-CH-ENC-T3-1-a-r1",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "You get an idea. You find the river stone and speak it — \"weigh.\" The whole stacked load rises a hand's breadth and hangs, and you keep it there by holding the cast steady — suspended so long as you hold it. Toby's eyes go wide for a heartbeat, and something like approval crosses his face.",
+        "choice_id": "CH-ENC-T3-1",
+        "option_id": "CH-ENC-T3-1-a"
+      },
+      {
+        "content_id": "L-CH-ENC-T3-1-a-r2",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "Toby moves for the counter the way he always does, a hand going to pack you something back — and stops. There are no ready loaves to parcel, no order to slip a thing into. His hand settles on the wood.",
+        "choice_id": "CH-ENC-T3-1",
+        "option_id": "CH-ENC-T3-1-a"
+      },
+      {
+        "content_id": "L-CH-ENC-T3-1-a-r2-line",
+        "slot_type": "dialogue",
+        "speaker_id": "toby",
+        "text": "\"There's no loaf for the road this time. You'd have gone home with more than this.\"",
+        "choice_id": "CH-ENC-T3-1",
+        "option_id": "CH-ENC-T3-1-a"
+      },
+      {
+        "content_id": "L-CH-ENC-T3-1-a-r3",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "The load still floats on your held cast. Toby falls in beside you instead of turning back to the trays, and together you guide it out the door and down toward the square — the whole feast arriving at once, the two of you walking it in side by side.",
+        "choice_id": "CH-ENC-T3-1",
+        "option_id": "CH-ENC-T3-1-a"
+      },
+      {
+        "content_id": "L-CH-ENC-T3-1-a-r3-line",
+        "slot_type": "dialogue",
+        "speaker_id": "toby",
+        "text": "\"Keep it steady — we'll walk it in together.\"",
+        "choice_id": "CH-ENC-T3-1",
+        "option_id": "CH-ENC-T3-1-a"
+      },
+      {
+        "content_id": "L-CH-ENC-T3-1-b-r1",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "You take the loads out with him, basket by basket, back and forth to the square — more trips than one man could make, slower, but all of it gets there in the end.",
+        "choice_id": "CH-ENC-T3-1",
+        "option_id": "CH-ENC-T3-1-b"
+      },
+      {
+        "content_id": "L-CH-ENC-T3-1-b-r2",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "He shifts a heavy basket into your arms and steadies it before he lets go.",
+        "choice_id": "CH-ENC-T3-1",
+        "option_id": "CH-ENC-T3-1-b"
+      },
+      {
+        "content_id": "L-CH-ENC-T3-1-b-r3",
+        "slot_type": "dialogue",
+        "speaker_id": "toby",
+        "text": "\"Balance it on the hip — it'll ride easier that way.\"",
+        "choice_id": "CH-ENC-T3-1",
+        "option_id": "CH-ENC-T3-1-b"
+      },
+      {
+        "content_id": "L-CH-ENC-T3-1-b-r4",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "The last of it goes down among the tables, the square filling around you. Toby straightens, flour-dusted, and looks at you.",
+        "choice_id": "CH-ENC-T3-1",
+        "option_id": "CH-ENC-T3-1-b"
+      },
+      {
+        "content_id": "L-CH-ENC-T3-1-b-r4-line",
+        "slot_type": "dialogue",
+        "speaker_id": "toby",
+        "text": "\"That's all of it down. Go find yourself a seat — it's about to start.\"",
+        "choice_id": "CH-ENC-T3-1",
+        "option_id": "CH-ENC-T3-1-b"
+      },
+      {
+        "content_id": "L-CH-ENC-T3-1-c-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "toby",
+        "text": "\"The square's set. Four loads, no more, if I don't waste time — first one's for the long table.\"",
+        "choice_id": "CH-ENC-T3-1",
+        "option_id": "CH-ENC-T3-1-c"
+      },
+      {
+        "content_id": "L-CH-ENC-T3-1-c-r2",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "He gives you a warm glance on his way past, out the door with the tray balanced. \"Bread's done. It just needs moving.\"",
+        "choice_id": "CH-ENC-T3-1",
+        "option_id": "CH-ENC-T3-1-c"
+      }
+    ],
+    "choice_nodes": [
+      {
+        "choice_id": "CH-ENC-T3-1",
+        "scene_id": "ENC-toby-3",
+        "availability_conditions": [],
+        "equal_weight_note": "Not an equal-weight choice: the options are graded — a full fix, a partial hand-fix, and a no-help ending do not weigh the same.",
+        "no_accrual_note": "No counter keys off any option; the grade records once for this encounter, not cumulatively.",
+        "options": [
+          {
+            "option_id": "CH-ENC-T3-1-a",
+            "surface_action": "Cast weigh over the whole load — component item_river_stone — and hold the concentration to sustain it",
+            "response_slots": [
+              "L-CH-ENC-T3-1-a-r1",
+              "L-CH-ENC-T3-1-a-r2",
+              "L-CH-ENC-T3-1-a-r2-line",
+              "L-CH-ENC-T3-1-a-r3",
+              "L-CH-ENC-T3-1-a-r3-line"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "toby_enc3_helped"
+              },
+              {
+                "type": "bond_event",
+                "arg": "Trust"
+              },
+              {
+                "type": "thread_move",
+                "arg": "toby-feast-short"
+              },
+              {
+                "type": "thread_move",
+                "arg": "toby-the-shelf"
+              },
+              {
+                "type": "score",
+                "arg": "1.0"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-ENC-T3-1-b",
+            "surface_action": "Carry the load to the square by hand",
+            "response_slots": [
+              "L-CH-ENC-T3-1-b-r1",
+              "L-CH-ENC-T3-1-b-r2",
+              "L-CH-ENC-T3-1-b-r3",
+              "L-CH-ENC-T3-1-b-r4",
+              "L-CH-ENC-T3-1-b-r4-line"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "toby_enc3_helped"
+              },
+              {
+                "type": "bond_event",
+                "arg": "Trust"
+              },
+              {
+                "type": "thread_move",
+                "arg": "toby-feast-short"
+              },
+              {
+                "type": "thread_move",
+                "arg": "toby-the-shelf"
+              },
+              {
+                "type": "score",
+                "arg": "0.5"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-ENC-T3-1-c",
+            "surface_action": "Leave the load to him",
+            "response_slots": [
+              "L-CH-ENC-T3-1-c-r1",
+              "L-CH-ENC-T3-1-c-r2"
+            ],
+            "state_actions": [
+              {
+                "type": "bond_event",
+                "arg": "Recognition"
+              },
+              {
+                "type": "score",
+                "arg": "0"
+              }
+            ],
+            "rejoin": "gather"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scene_id": "NGT-ilsa",
+    "soul": "ilsa",
+    "screen_id": "T7",
+    "entry_gate": [],
+    "lines": [
+      {
+        "content_id": "O-NGT-I-1",
+        "slot_type": "object",
+        "speaker_id": "ilsa",
+        "text": "You come to the foot of the Arch as the grounds fill for the lighting to come. The centerpiece stands raised at the crown, the whole Arch holding a faint glow — the metal warming, not yet lit. Ilsa stands a little apart, near its base, and beside her a place is kept clear — a spot at her side, no one in it."
+      },
+      {
+        "content_id": "A-NGT-I-2-pip",
+        "slot_type": "dialogue",
+        "speaker_id": "ilsa",
+        "text": "Pip finds her through the crowd, breathless. \"Ilsa! I watched the whole road — no sign of your brother. Bram sends his regrets.\" He pauses. \"Not the first time, is it.\" He looks up at her, gentler. \"How are you holding up?\""
+      },
+      {
+        "content_id": "A-NGT-I-3-count",
+        "slot_type": "action",
+        "speaker_id": "ilsa",
+        "text": "She takes the word without stopping, her eyes going over the crowd in one sweep — the old count, arrivals against a number she keeps and never says. She doesn't find him. \"He never is,\" she says, \"by the end.\"",
+        "choice_id": "CH-NGT-I-1"
+      },
+      {
+        "content_id": "L-CH-NGT-I-1-a-r1",
+        "slot_type": "action",
+        "speaker_id": "ilsa",
+        "text": "Her eyes go to the taken place, then away. She doesn't say whose it was, and she doesn't move you from it.",
+        "choice_id": "CH-NGT-I-1",
+        "option_id": "CH-NGT-I-1-a"
+      },
+      {
+        "content_id": "L-CH-NGT-I-1-b-p",
+        "slot_type": "player_line",
+        "speaker_id": "player",
+        "text": "\"The Arch turned out fine.\"",
+        "choice_id": "CH-NGT-I-1",
+        "option_id": "CH-NGT-I-1-b"
+      },
+      {
+        "content_id": "L-CH-NGT-I-1-b-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "ilsa",
+        "text": "\"It did.\" She looks up at the glowing metal. \"Your hands on it showed. It'll hold the light, when it comes.\"",
+        "choice_id": "CH-NGT-I-1",
+        "option_id": "CH-NGT-I-1-b"
+      },
+      {
+        "content_id": "L-CH-NGT-I-1-c-p",
+        "slot_type": "player_line",
+        "speaker_id": "player",
+        "text": "\"I'll stand here with you a while.\"",
+        "choice_id": "CH-NGT-I-1",
+        "option_id": "CH-NGT-I-1-c"
+      },
+      {
+        "content_id": "L-CH-NGT-I-1-c-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "ilsa",
+        "text": "She shifts half a step, opening the space beside her. \"Family's where you stand,\" she says, \"come what may.\"",
+        "choice_id": "CH-NGT-I-1",
+        "option_id": "CH-NGT-I-1-c"
+      },
+      {
+        "content_id": "AS-NGT-I-1-1",
+        "slot_type": "dialogue",
+        "speaker_id": "ilsa",
+        "text": "She turns to you, warm in the glow of the Arch. \"Family comes first. That's the way of it, in our house — you set the place before anyone answers, and you keep it, whether they come or not.\""
+      },
+      {
+        "content_id": "AS-NGT-I-1-2",
+        "slot_type": "dialogue",
+        "speaker_id": "ilsa",
+        "text": "She starts to say the rest. \"Bram and I, we stand this raising together, every year—\""
+      },
+      {
+        "content_id": "AS-NGT-I-1-3",
+        "slot_type": "action",
+        "speaker_id": "ilsa",
+        "text": "The sentence stops. She reaches toward the kept place, stops partway, and turns back to the Arch. Nothing finishes it."
+      },
+      {
+        "content_id": "CL-NGT-I-1",
+        "slot_type": "object",
+        "speaker_id": "ilsa",
+        "text": "The Arch glows brighter above as the hour approaches, the centerpiece at the crown of it."
+      }
+    ],
+    "choice_nodes": [
+      {
+        "choice_id": "CH-NGT-I-1",
+        "scene_id": "NGT-ilsa",
+        "availability_conditions": [],
+        "equal_weight_note": "Equal-weight choice: the options carry the same weight; the soul's reaction does not favor one over another.",
+        "no_accrual_note": "Each option records its own flags once; no counter accrues across options.",
+        "options": [
+          {
+            "option_id": "CH-NGT-I-1-a",
+            "surface_action": "Quietly step into the kept place at her side",
+            "response_slots": [
+              "L-CH-NGT-I-1-a-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "bond_event",
+                "arg": "Trust"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-NGT-I-1-b",
+            "player_line": "L-CH-NGT-I-1-b-p",
+            "response_slots": [
+              "L-CH-NGT-I-1-b-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "bond_event",
+                "arg": "Recognition"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-NGT-I-1-c",
+            "player_line": "L-CH-NGT-I-1-c-p",
+            "response_slots": [
+              "L-CH-NGT-I-1-c-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "bond_event",
+                "arg": "Intimacy"
+              }
+            ],
+            "rejoin": "gather"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scene_id": "NGT-mara",
+    "soul": "mara",
+    "screen_id": "T7",
+    "entry_gate": [],
+    "lines": [
+      {
+        "content_id": "O-NGT-M-1",
+        "slot_type": "object",
+        "speaker_id": "mara",
+        "text": "You come to Mara's corner on Market Row, the town drifting past you toward the Square for the lighting still to come. A second stool stands out beside her, a full cup set across from her own, untouched. A low drawer is open at her side, and she is going through it — a hook, a spool, a folded cloth, each thing lifted, turned, set back."
+      },
+      {
+        "content_id": "A-NGT-M-1",
+        "slot_type": "action",
+        "speaker_id": "mara",
+        "text": "You step in beside her. The herbs still hang in the air — lavender, chamomile, a thread of smoke off the brazier. She doesn't stop her sorting, hands moving slow and sure: some things straightened, some folded back, some turned once in her palm before she sets them down again.",
+        "choice_id": "CH-NGT-M-1"
+      },
+      {
+        "content_id": "L-CH-NGT-M-1-a-p",
+        "slot_type": "player_line",
+        "speaker_id": "player",
+        "text": "\"That doll — whose was it?\"",
+        "choice_id": "CH-NGT-M-1",
+        "option_id": "CH-NGT-M-1-a"
+      },
+      {
+        "content_id": "L-CH-NGT-M-1-a-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "mara",
+        "text": "She lifts it gently from the drawer. \"Oh — that's Adren's. Hers when she was small; she carried it everywhere, kept it tucked in her sleeve when we weren't home.\" Her fingers move along the re-stitched arm. \"The more she carried it, the more it came apart. This mend is mine, but the wearing was all her own doing.\"",
+        "choice_id": "CH-NGT-M-1",
+        "option_id": "CH-NGT-M-1-a"
+      },
+      {
+        "content_id": "L-CH-NGT-M-1-b-p",
+        "slot_type": "player_line",
+        "speaker_id": "player",
+        "text": "\"What's all this you're sorting?\"",
+        "choice_id": "CH-NGT-M-1",
+        "option_id": "CH-NGT-M-1-b"
+      },
+      {
+        "content_id": "L-CH-NGT-M-1-b-r",
+        "slot_type": "dialogue",
+        "speaker_id": "mara",
+        "text": "She doesn't slow. \"Things folk leave behind. I keep them by — someone might come back through, wanting them.\" She lifts a folding knife, its handle mended twice, and turns it once. \"That was Ovin's, before.\" She sets it back where it was, and moves to the next thing.",
+        "choice_id": "CH-NGT-M-1",
+        "option_id": "CH-NGT-M-1-b"
+      },
+      {
+        "content_id": "L-CH-NGT-M-1-c-r",
+        "slot_type": "action",
+        "speaker_id": "mara",
+        "text": "Her hands pause over the drawer for a beat, then keep moving. She doesn't look up, and says nothing of it.",
+        "choice_id": "CH-NGT-M-1",
+        "option_id": "CH-NGT-M-1-c"
+      },
+      {
+        "content_id": "AS-NGT-M-1-1",
+        "slot_type": "action",
+        "speaker_id": "mara",
+        "text": "She eases the drawer partway shut, its edge catching in the hasp before it settles."
+      },
+      {
+        "content_id": "AS-NGT-M-1-2",
+        "slot_type": "action",
+        "speaker_id": "mara",
+        "text": "She sets a spoon straight that was already straight, squaring it to the counter's edge."
+      },
+      {
+        "content_id": "AS-NGT-M-1-3",
+        "slot_type": "action",
+        "speaker_id": "mara",
+        "text": "Her palm flattens on the wood, fingertips over the old grain, and rests there."
+      },
+      {
+        "content_id": "CL-NGT-M-1",
+        "slot_type": "object",
+        "speaker_id": "mara",
+        "text": "She reaches for the second cup — the one across from hers, untouched all night — fills it from the same pot, and sets it down in front of you. A small half-turn toward you, exact. Then she takes up her own. Two cups filled at the corner, and off toward the Square the town gathers for the lighting still to come."
+      }
+    ],
+    "choice_nodes": [
+      {
+        "choice_id": "CH-NGT-M-1",
+        "scene_id": "NGT-mara",
+        "availability_conditions": [],
+        "equal_weight_note": "Equal-weight choice: the options carry the same weight; the soul's reaction does not favor one over another.",
+        "no_accrual_note": "Each option records its own flags once; no counter accrues across options.",
+        "options": [
+          {
+            "option_id": "CH-NGT-M-1-a",
+            "player_line": "L-CH-NGT-M-1-a-p",
+            "response_slots": [
+              "L-CH-NGT-M-1-a-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "mara_names_adren"
+              },
+              {
+                "type": "bond_event",
+                "arg": "Intimacy"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-NGT-M-1-b",
+            "player_line": "L-CH-NGT-M-1-b-p",
+            "response_slots": [
+              "L-CH-NGT-M-1-b-r"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "sees_ovins_knife"
+              },
+              {
+                "type": "bond_event",
+                "arg": "Recognition"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-NGT-M-1-c",
+            "surface_action": "Sit at the second stool, beside her",
+            "response_slots": [
+              "L-CH-NGT-M-1-c-r"
+            ],
+            "state_actions": [
+              {
+                "type": "bond_event",
+                "arg": "Trust"
+              }
+            ],
+            "rejoin": "gather"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scene_id": "NGT-toby",
+    "soul": "toby",
+    "screen_id": "T7",
+    "entry_gate": [],
+    "lines": [
+      {
+        "content_id": "O-NGT-T-1",
+        "slot_type": "object",
+        "speaker_id": "toby",
+        "text": "The square sits in the gap before the feast. The long tables are laid — loaves stacked in their hundreds, the stews steaming, the wine waiting to be poured. The Lantern Arch stands dark against the sky, unlit, the rite not yet called. People drift in twos and threes, waiting. Toby is stopped for once, and his hands won't settle: he squares a stack of loaves that's already square, wipes a board that's already clean, moves the river stone a fraction along the counter and back."
+      },
+      {
+        "content_id": "A-NGT-T-long",
+        "slot_type": "dialogue",
+        "speaker_id": "toby",
+        "text": "\"The ovens are cool now, but the kneading table could use a wipe, even clean as it is. The spares are stacked and there's no dough left to proof, though that last pan of rolls wants turning before it dries. The salt bins ought to come forward too, in case someone needs a measure and has to go digging. There's nothing really left. Someone should watch the breads as they cool, all the same — they'll go gummy underneath if they sit too long. Something always wants doing.\""
+      },
+      {
+        "content_id": "A-NGT-T-shelf",
+        "slot_type": "object",
+        "speaker_id": "toby",
+        "text": "Through the open bakery door, the shelf behind the counter holds them — a row of jars, small wrapped bundles ribboned between, a carved wooden spoon, a folded cloth. More than at the week's start. None of them opened. Toby keeps his back to it.",
+        "choice_id": "CH-NGT-T-1"
+      },
+      {
+        "content_id": "L-CH-NGT-T-1-a-p",
+        "slot_type": "player_line",
+        "speaker_id": "player",
+        "text": "\"Why do you never open the jars?\"",
+        "choice_id": "CH-NGT-T-1",
+        "option_id": "CH-NGT-T-1-a"
+      },
+      {
+        "content_id": "L-CH-NGT-T-1-a-r1",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "Toby's hands stop on the tray. For a moment he doesn't move.",
+        "choice_id": "CH-NGT-T-1",
+        "option_id": "CH-NGT-T-1-a"
+      },
+      {
+        "content_id": "L-CH-NGT-T-1-a-r2",
+        "slot_type": "dialogue",
+        "speaker_id": "toby",
+        "text": "\"I pay every one of them back — rolls, a measure, whatever fits. That makes it square.\"",
+        "choice_id": "CH-NGT-T-1",
+        "option_id": "CH-NGT-T-1-a"
+      },
+      {
+        "content_id": "L-CH-NGT-T-1-a-r3",
+        "slot_type": "dialogue",
+        "speaker_id": "toby",
+        "text": "\"But if I open the jar, I've taken something. Then I owe all over again. So I leave them shut.\"",
+        "choice_id": "CH-NGT-T-1",
+        "option_id": "CH-NGT-T-1-a"
+      },
+      {
+        "content_id": "L-CH-NGT-T-1-a-r4",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "His hand finds the cloth again, slower this time.",
+        "choice_id": "CH-NGT-T-1",
+        "option_id": "CH-NGT-T-1-a"
+      },
+      {
+        "content_id": "L-CH-NGT-T-1-b-p",
+        "slot_type": "player_line",
+        "speaker_id": "player",
+        "text": "\"The far tables are short on bread.\"",
+        "choice_id": "CH-NGT-T-1",
+        "option_id": "CH-NGT-T-1-b"
+      },
+      {
+        "content_id": "L-CH-NGT-T-1-b-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "toby",
+        "text": "\"Right — should've seen that myself.\"",
+        "choice_id": "CH-NGT-T-1",
+        "option_id": "CH-NGT-T-1-b"
+      },
+      {
+        "content_id": "L-CH-NGT-T-1-b-r2",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "He's already got a basket in his arms, loaves going in three at a time, the words running ahead to the next job before this one's half done. He's back in motion.",
+        "choice_id": "CH-NGT-T-1",
+        "option_id": "CH-NGT-T-1-b"
+      },
+      {
+        "content_id": "L-CH-NGT-T-1-c-r1",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "You find a place beside him and let the quiet be. His hands wipe a counter that's already clean, fold a cloth, and pause mid-fold. He half-turns for the workbench, then stops himself.",
+        "choice_id": "CH-NGT-T-1",
+        "option_id": "CH-NGT-T-1-c"
+      },
+      {
+        "content_id": "L-CH-NGT-T-1-c-r2",
+        "slot_type": "dialogue",
+        "speaker_id": "toby",
+        "text": "\"...Nothing needs doing.\"",
+        "choice_id": "CH-NGT-T-1",
+        "option_id": "CH-NGT-T-1-c"
+      },
+      {
+        "content_id": "L-CH-NGT-T-1-c-r3",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "He doesn't reach for anything else. He stays, and lets the quiet be.",
+        "choice_id": "CH-NGT-T-1",
+        "option_id": "CH-NGT-T-1-c"
+      },
+      {
+        "content_id": "CL-NGT-T-1",
+        "slot_type": "object",
+        "speaker_id": "toby",
+        "text": "Then suddenly the horn sounds across the square. Heads turn toward the dark Arch at the far end, and the first match is struck for the rite."
+      }
+    ],
+    "choice_nodes": [
+      {
+        "choice_id": "CH-NGT-T-1",
+        "scene_id": "NGT-toby",
+        "availability_conditions": [],
+        "equal_weight_note": "Equal-weight choice: the options carry the same weight; the soul's reaction does not favor one over another.",
+        "no_accrual_note": "Each option records its own flags once; no counter accrues across options.",
+        "options": [
+          {
+            "option_id": "CH-NGT-T-1-a",
+            "player_line": "L-CH-NGT-T-1-a-p",
+            "response_slots": [
+              "L-CH-NGT-T-1-a-r1",
+              "L-CH-NGT-T-1-a-r2",
+              "L-CH-NGT-T-1-a-r3",
+              "L-CH-NGT-T-1-a-r4"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "toby_repays_every_gift"
+              },
+              {
+                "type": "bond_event",
+                "arg": "Recognition"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-NGT-T-1-b",
+            "player_line": "L-CH-NGT-T-1-b-p",
+            "response_slots": [
+              "L-CH-NGT-T-1-b-r1",
+              "L-CH-NGT-T-1-b-r2"
+            ],
+            "state_actions": [
+              {
+                "type": "bond_event",
+                "arg": "Trust"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-NGT-T-1-c",
+            "surface_action": "Find a place beside him and stay — offer no task",
+            "response_slots": [
+              "L-CH-NGT-T-1-c-r1",
+              "L-CH-NGT-T-1-c-r2",
+              "L-CH-NGT-T-1-c-r3"
+            ],
+            "state_actions": [
+              {
+                "type": "bond_event",
+                "arg": "Intimacy"
+              }
+            ],
+            "rejoin": "gather"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scene_id": "SPB-bind",
+    "soul": "ilsa",
+    "screen_id": "T4",
+    "entry_gate": [],
+    "lines": [
+      {
+        "content_id": "O-SPB-BND-1",
+        "slot_type": "object",
+        "speaker_id": "ilsa",
+        "text": "The bench, out in the Town square. Two halves of the Lantern Arch centerpiece sit clamped, a fine break running between them. A pot of tree sap and a twist of wool rest at Ilsa's hand."
+      },
+      {
+        "content_id": "A-SPB-BND-1",
+        "slot_type": "action",
+        "speaker_id": "ilsa",
+        "text": "Ilsa smears the sap along the break, binds a twist of wool over it, and presses the two halves flush. She holds them true, and speaks the word — \"bind.\" The seam pulls shut, leaving only a hairline of light along the join, cleaner than any weld.",
+        "choice_id": "CH-SPB-BND-1"
+      },
+      {
+        "content_id": "L-CH-SPB-BND-1-a-p",
+        "slot_type": "player_line",
+        "speaker_id": "player",
+        "text": "\"Does it have to line up?\"",
+        "choice_id": "CH-SPB-BND-1",
+        "option_id": "CH-SPB-BND-1-a"
+      },
+      {
+        "content_id": "L-CH-SPB-BND-1-a-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "ilsa",
+        "text": "\"Halves must fit first.\"",
+        "choice_id": "CH-SPB-BND-1",
+        "option_id": "CH-SPB-BND-1-a"
+      },
+      {
+        "content_id": "L-CH-SPB-BND-1-b-r1",
+        "slot_type": "action",
+        "speaker_id": "ilsa",
+        "text": "Ilsa sets it true and speaks the word again. The crack seals along its length, and the pane holds light again.",
+        "choice_id": "CH-SPB-BND-1",
+        "option_id": "CH-SPB-BND-1-b"
+      },
+      {
+        "content_id": "L-CH-SPB-BND-1-c-r1",
+        "slot_type": "action",
+        "speaker_id": "ilsa",
+        "text": "You hold the halves apart. The word comes, but the light does not travel between them — nothing joins.",
+        "choice_id": "CH-SPB-BND-1",
+        "option_id": "CH-SPB-BND-1-c"
+      },
+      {
+        "content_id": "L-CH-SPB-BND-1-c-r2",
+        "slot_type": "dialogue",
+        "speaker_id": "ilsa",
+        "text": "\"Held apart, it takes nothing.\"",
+        "choice_id": "CH-SPB-BND-1",
+        "option_id": "CH-SPB-BND-1-c"
+      },
+      {
+        "content_id": "AS-SPB-BND-1",
+        "slot_type": "action",
+        "speaker_id": "ilsa",
+        "text": "The seam holds smooth under Ilsa's thumb. She sets the piece into the centerpiece, the join all but invisible."
+      },
+      {
+        "content_id": "SYS-SPB-BND-1",
+        "slot_type": "object",
+        "speaker_id": "ilsa",
+        "text": "Bind has been added to your spell book."
+      }
+    ],
+    "choice_nodes": [
+      {
+        "choice_id": "CH-SPB-BND-1",
+        "scene_id": "SPB-bind",
+        "availability_conditions": [],
+        "equal_weight_note": "Equal-weight choice: the options carry the same weight; the soul's reaction does not favor one over another.",
+        "no_accrual_note": "Each option records its own flags once; no counter accrues across options.",
+        "options": [
+          {
+            "option_id": "CH-SPB-BND-1-a",
+            "player_line": "L-CH-SPB-BND-1-a-p",
+            "response_slots": [
+              "L-CH-SPB-BND-1-a-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "bind_seen"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-SPB-BND-1-b",
+            "surface_action": "Hand over a cracked lantern pane, its halves pressed together",
+            "response_slots": [
+              "L-CH-SPB-BND-1-b-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "bind_attempted"
+              },
+              {
+                "type": "bond_event",
+                "arg": "Trust"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-SPB-BND-1-c",
+            "surface_action": "Hold two halves a finger's width apart instead of fitted together",
+            "response_slots": [
+              "L-CH-SPB-BND-1-c-r1",
+              "L-CH-SPB-BND-1-c-r2"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "bind_boundary_seen"
+              }
+            ],
+            "rejoin": "gather"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scene_id": "SPB-breath",
+    "soul": "bex",
+    "screen_id": "T2",
+    "entry_gate": [],
+    "lines": [
+      {
+        "content_id": "O-SPB-BRTH-1",
+        "slot_type": "object",
+        "speaker_id": "bex",
+        "text": "The field edge, sun hanging low. A tray of threshed grain sits waiting to be cleaned before the festival stores."
+      },
+      {
+        "content_id": "A-SPB-BRTH-1",
+        "slot_type": "action",
+        "speaker_id": "bex",
+        "text": "The farmer lets out a short, directed puff of air — a single, complete gust. The chaff lifts clear in one pass; the clean grain sits undisturbed.",
+        "choice_id": "CH-SPB-BRTH-1"
+      },
+      {
+        "content_id": "L-CH-SPB-BRTH-1-a-p",
+        "slot_type": "player_line",
+        "speaker_id": "player",
+        "text": "\"Does it work on anything loose?\"",
+        "choice_id": "CH-SPB-BRTH-1",
+        "option_id": "CH-SPB-BRTH-1-a"
+      },
+      {
+        "content_id": "L-CH-SPB-BRTH-1-a-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "bex",
+        "text": "\"Loose and light, mostly. Grain, leaves.\"",
+        "choice_id": "CH-SPB-BRTH-1",
+        "option_id": "CH-SPB-BRTH-1-a"
+      },
+      {
+        "content_id": "L-CH-SPB-BRTH-1-b-r1",
+        "slot_type": "action",
+        "speaker_id": "bex",
+        "text": "They scatter off in one gust. No special fuss made.",
+        "choice_id": "CH-SPB-BRTH-1",
+        "option_id": "CH-SPB-BRTH-1-b"
+      },
+      {
+        "content_id": "L-CH-SPB-BRTH-1-c-r1",
+        "slot_type": "action",
+        "speaker_id": "bex",
+        "text": "The gust breaks around it, no effect. The farmer offers a plain, unmocking comment.",
+        "choice_id": "CH-SPB-BRTH-1",
+        "option_id": "CH-SPB-BRTH-1-c"
+      },
+      {
+        "content_id": "AS-SPB-BRTH-1",
+        "slot_type": "action",
+        "speaker_id": "bex",
+        "text": "The tray sits clean, chaff scattered aside. The farmer moves it for the next batch."
+      },
+      {
+        "content_id": "SYS-SPB-BRTH-1",
+        "slot_type": "object",
+        "speaker_id": "bex",
+        "text": "Breath has been added to your spell book."
+      }
+    ],
+    "choice_nodes": [
+      {
+        "choice_id": "CH-SPB-BRTH-1",
+        "scene_id": "SPB-breath",
+        "availability_conditions": [],
+        "equal_weight_note": "Equal-weight choice: the options carry the same weight; the soul's reaction does not favor one over another.",
+        "no_accrual_note": "Each option records its own flags once; no counter accrues across options.",
+        "options": [
+          {
+            "option_id": "CH-SPB-BRTH-1-a",
+            "player_line": "L-CH-SPB-BRTH-1-a-p",
+            "response_slots": [
+              "L-CH-SPB-BRTH-1-a-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "breath_seen"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-SPB-BRTH-1-b",
+            "surface_action": "Sweep a pile of fallen leaves into the farmer's path for the same treatment",
+            "response_slots": [
+              "L-CH-SPB-BRTH-1-b-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "breath_attempted"
+              },
+              {
+                "type": "bond_event",
+                "arg": "Trust"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-SPB-BRTH-1-c",
+            "surface_action": "Direct the gust at a standing anvil nearby instead",
+            "response_slots": [
+              "L-CH-SPB-BRTH-1-c-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "breath_boundary_seen"
+              }
+            ],
+            "rejoin": "gather"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scene_id": "SPB-dry",
+    "soul": "pip",
+    "screen_id": "T1",
+    "entry_gate": [],
+    "lines": [
+      {
+        "content_id": "O-SPB-DRY-1",
+        "slot_type": "object",
+        "speaker_id": "pip",
+        "text": "Under the eaves, rain just passed, the air thick and damp. The postman's satchel sits open, letters inside curling slightly at the edges."
+      },
+      {
+        "content_id": "A-SPB-DRY-1-s",
+        "slot_type": "action",
+        "speaker_id": "pip",
+        "text": "He works a pinch of ash over the topmost letter, turning it in his hands."
+      },
+      {
+        "content_id": "L-A-SPB-DRY-1",
+        "slot_type": "dialogue",
+        "speaker_id": "pip",
+        "text": "\"Rounds run in all weather.\""
+      },
+      {
+        "content_id": "A-SPB-DRY-1-r",
+        "slot_type": "action",
+        "speaker_id": "pip",
+        "text": "The ash leaves no residue, yet the dampness vanishes and the paper turns crisp and flat in moments.",
+        "choice_id": "CH-SPB-DRY-1"
+      },
+      {
+        "content_id": "L-CH-SPB-DRY-1-a-p",
+        "slot_type": "player_line",
+        "speaker_id": "player",
+        "text": "\"Does it work once the ink's run?\"",
+        "choice_id": "CH-SPB-DRY-1",
+        "option_id": "CH-SPB-DRY-1-a"
+      },
+      {
+        "content_id": "L-CH-SPB-DRY-1-a-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "pip",
+        "text": "\"No. Has to be caught early.\"",
+        "choice_id": "CH-SPB-DRY-1",
+        "option_id": "CH-SPB-DRY-1-a"
+      },
+      {
+        "content_id": "L-CH-SPB-DRY-1-b-r1",
+        "slot_type": "action",
+        "speaker_id": "pip",
+        "text": "It dries flat, ink intact. No fuss made over it.",
+        "choice_id": "CH-SPB-DRY-1",
+        "option_id": "CH-SPB-DRY-1-b"
+      },
+      {
+        "content_id": "L-CH-SPB-DRY-1-c-r1",
+        "slot_type": "action",
+        "speaker_id": "pip",
+        "text": "The ash settles without effect — no water to take out. The postman notes it plainly.",
+        "choice_id": "CH-SPB-DRY-1",
+        "option_id": "CH-SPB-DRY-1-c"
+      },
+      {
+        "content_id": "AS-SPB-DRY-1",
+        "slot_type": "action",
+        "speaker_id": "pip",
+        "text": "The satchel's letters sit dry and flat. The postman closes the bag, ready to move on."
+      },
+      {
+        "content_id": "SYS-SPB-DRY-1",
+        "slot_type": "object",
+        "speaker_id": "pip",
+        "text": "Dry has been added to your spell book."
+      }
+    ],
+    "choice_nodes": [
+      {
+        "choice_id": "CH-SPB-DRY-1",
+        "scene_id": "SPB-dry",
+        "availability_conditions": [],
+        "equal_weight_note": "Equal-weight choice: the options carry the same weight; the soul's reaction does not favor one over another.",
+        "no_accrual_note": "Each option records its own flags once; no counter accrues across options.",
+        "options": [
+          {
+            "option_id": "CH-SPB-DRY-1-a",
+            "player_line": "L-CH-SPB-DRY-1-a-p",
+            "response_slots": [
+              "L-CH-SPB-DRY-1-a-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "dry_seen"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-SPB-DRY-1-b",
+            "surface_action": "Hand over a second damp letter from the bag",
+            "response_slots": [
+              "L-CH-SPB-DRY-1-b-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "dry_attempted"
+              },
+              {
+                "type": "bond_event",
+                "arg": "Trust"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-SPB-DRY-1-c",
+            "surface_action": "Try the ash on a parcel that's already dry",
+            "response_slots": [
+              "L-CH-SPB-DRY-1-c-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "dry_boundary_seen"
+              }
+            ],
+            "rejoin": "gather"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scene_id": "SPB-furrow",
+    "soul": "bex",
+    "screen_id": "T2",
+    "entry_gate": [],
+    "lines": [
+      {
+        "content_id": "O-SPB-FRW-1",
+        "slot_type": "object",
+        "speaker_id": "bex",
+        "text": "The field edge, tilled soil turned soft from the morning's work. The festival week's planting is squeezed between every other job."
+      },
+      {
+        "content_id": "A-SPB-FRW-1",
+        "slot_type": "action",
+        "speaker_id": "bex",
+        "text": "The farmer sets a few sticks and a handful of dirt against the soft ground, and draws a line. A clean furrow opens instantly along the length of the cast.",
+        "choice_id": "CH-SPB-FRW-1"
+      },
+      {
+        "content_id": "L-CH-SPB-FRW-1-a-p",
+        "slot_type": "player_line",
+        "speaker_id": "player",
+        "text": "\"Does the ground matter?\"",
+        "choice_id": "CH-SPB-FRW-1",
+        "option_id": "CH-SPB-FRW-1-a"
+      },
+      {
+        "content_id": "L-CH-SPB-FRW-1-a-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "bex",
+        "text": "\"Has to be turned first. Packed ground just scuffs.\"",
+        "choice_id": "CH-SPB-FRW-1",
+        "option_id": "CH-SPB-FRW-1-a"
+      },
+      {
+        "content_id": "L-CH-SPB-FRW-1-b-r1",
+        "slot_type": "action",
+        "speaker_id": "bex",
+        "text": "A clean furrow opens. The farmer makes no special fuss over it.",
+        "choice_id": "CH-SPB-FRW-1",
+        "option_id": "CH-SPB-FRW-1-b"
+      },
+      {
+        "content_id": "L-CH-SPB-FRW-1-c-r1",
+        "slot_type": "action",
+        "speaker_id": "bex",
+        "text": "The stone doesn't part. The farmer offers a plain comment, nothing mocking.",
+        "choice_id": "CH-SPB-FRW-1",
+        "option_id": "CH-SPB-FRW-1-c"
+      },
+      {
+        "content_id": "AS-SPB-FRW-1",
+        "slot_type": "action",
+        "speaker_id": "bex",
+        "text": "A clean row runs the length of the field edge, ready for seed. The farmer moves to the next patch."
+      },
+      {
+        "content_id": "SYS-SPB-FRW-1",
+        "slot_type": "object",
+        "speaker_id": "bex",
+        "text": "Furrow has been added to your spell book."
+      }
+    ],
+    "choice_nodes": [
+      {
+        "choice_id": "CH-SPB-FRW-1",
+        "scene_id": "SPB-furrow",
+        "availability_conditions": [],
+        "equal_weight_note": "Equal-weight choice: the options carry the same weight; the soul's reaction does not favor one over another.",
+        "no_accrual_note": "Each option records its own flags once; no counter accrues across options.",
+        "options": [
+          {
+            "option_id": "CH-SPB-FRW-1-a",
+            "player_line": "L-CH-SPB-FRW-1-a-p",
+            "response_slots": [
+              "L-CH-SPB-FRW-1-a-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "furrow_seen"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-SPB-FRW-1-b",
+            "surface_action": "Turn a second patch of soil with a hoe, then offer it for the same treatment",
+            "response_slots": [
+              "L-CH-SPB-FRW-1-b-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "furrow_attempted"
+              },
+              {
+                "type": "bond_event",
+                "arg": "Trust"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-SPB-FRW-1-c",
+            "surface_action": "Try the cast on the cobbled square nearby instead",
+            "response_slots": [
+              "L-CH-SPB-FRW-1-c-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "furrow_boundary_seen"
+              }
+            ],
+            "rejoin": "gather"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scene_id": "SPB-ignite",
+    "soul": "ilsa",
+    "screen_id": "T4",
+    "entry_gate": [],
+    "lines": [
+      {
+        "content_id": "O-SPB-IGN-1",
+        "slot_type": "object",
+        "speaker_id": "ilsa",
+        "text": "The forge sits dark and still in the cool morning, the coals cold and waiting. A bundle of sticks stands ready at the mouth — Ilsa's own daily habit, not staged for anyone."
+      },
+      {
+        "content_id": "A-SPB-IGN-1",
+        "slot_type": "action",
+        "speaker_id": "ilsa",
+        "text": "Ilsa gathers the sticks into the forge mouth, settles them, and steps back a half-pace. She goes still — no tool in her hand, nothing struck or scraped. For a breath, nothing happens. Then the embers flare and catch, steady and sure.",
+        "choice_id": "CH-SPB-IGN-1"
+      },
+      {
+        "content_id": "L-CH-SPB-IGN-1-a-p",
+        "slot_type": "player_line",
+        "speaker_id": "player",
+        "text": "\"How do you get it going?\"",
+        "choice_id": "CH-SPB-IGN-1",
+        "option_id": "CH-SPB-IGN-1-a"
+      },
+      {
+        "content_id": "L-CH-SPB-IGN-1-a-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "ilsa",
+        "text": "\"You clear back first. Always.\"",
+        "choice_id": "CH-SPB-IGN-1",
+        "option_id": "CH-SPB-IGN-1-a"
+      },
+      {
+        "content_id": "L-CH-SPB-IGN-1-a-r2",
+        "slot_type": "action",
+        "speaker_id": "ilsa",
+        "text": "She turns to the bellows and begins pumping them in a steady rhythm, not looking over.",
+        "choice_id": "CH-SPB-IGN-1",
+        "option_id": "CH-SPB-IGN-1-a"
+      },
+      {
+        "content_id": "L-CH-SPB-IGN-1-b-r1",
+        "slot_type": "action",
+        "speaker_id": "ilsa",
+        "text": "It catches — small and steady. Ilsa doesn't react with approval or surprise. She glances once, then returns to her own work, as if it were expected and nothing more.",
+        "choice_id": "CH-SPB-IGN-1",
+        "option_id": "CH-SPB-IGN-1-b"
+      },
+      {
+        "content_id": "L-CH-SPB-IGN-1-c-r1",
+        "slot_type": "action",
+        "speaker_id": "ilsa",
+        "text": "Nothing catches. Ilsa glances at the grass, then back to her work — the same plain glance she'd give anything that didn't need her attention.",
+        "choice_id": "CH-SPB-IGN-1",
+        "option_id": "CH-SPB-IGN-1-c"
+      },
+      {
+        "content_id": "AS-SPB-IGN-1",
+        "slot_type": "action",
+        "speaker_id": "ilsa",
+        "text": "The forge fire settles into a working heat. Ilsa returns to the bellows without comment."
+      },
+      {
+        "content_id": "SYS-SPB-IGN-1",
+        "slot_type": "object",
+        "speaker_id": "ilsa",
+        "text": "Ignite has been added to your spell book."
+      }
+    ],
+    "choice_nodes": [
+      {
+        "choice_id": "CH-SPB-IGN-1",
+        "scene_id": "SPB-ignite",
+        "availability_conditions": [],
+        "equal_weight_note": "Equal-weight choice: the options carry the same weight; the soul's reaction does not favor one over another.",
+        "no_accrual_note": "Each option records its own flags once; no counter accrues across options.",
+        "options": [
+          {
+            "option_id": "CH-SPB-IGN-1-a",
+            "player_line": "L-CH-SPB-IGN-1-a-p",
+            "response_slots": [
+              "L-CH-SPB-IGN-1-a-r1",
+              "L-CH-SPB-IGN-1-a-r2"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "ignite_seen"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-SPB-IGN-1-b",
+            "surface_action": "Try the same clearing motion on a second stick, off to the side",
+            "response_slots": [
+              "L-CH-SPB-IGN-1-b-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "ignite_attempted"
+              },
+              {
+                "type": "bond_event",
+                "arg": "Trust"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-SPB-IGN-1-c",
+            "surface_action": "Pick up a handful of grass lying nearby and hold it near the coals",
+            "response_slots": [
+              "L-CH-SPB-IGN-1-c-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "ignite_boundary_seen"
+              }
+            ],
+            "rejoin": "gather"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scene_id": "SPB-leap",
+    "soul": "juno",
+    "screen_id": "T1",
+    "entry_gate": [],
+    "lines": [
+      {
+        "content_id": "O-SPB-LEAP-1",
+        "slot_type": "object",
+        "speaker_id": "juno",
+        "text": "The Old Shrine, quiet at the town's edge. Evening settling in. A row of small lanterns along the shrine wall, wicks dressed for the priest's round."
+      },
+      {
+        "content_id": "A-SPB-LEAP-1",
+        "slot_type": "action",
+        "speaker_id": "juno",
+        "text": "The priest dips a taper into the shrine's votive flame, drawing the heat into the wax. With a practiced motion, she sends the flame leaping to the nearest lantern — it catches and holds steady.",
+        "choice_id": "CH-SPB-LEAP-1"
+      },
+      {
+        "content_id": "L-CH-SPB-LEAP-1-a-p",
+        "slot_type": "player_line",
+        "speaker_id": "player",
+        "text": "\"Does the flame run out?\"",
+        "choice_id": "CH-SPB-LEAP-1",
+        "option_id": "CH-SPB-LEAP-1-a"
+      },
+      {
+        "content_id": "L-CH-SPB-LEAP-1-a-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "juno",
+        "text": "\"Depends how far it's asked to go. One flame, one send.\"",
+        "choice_id": "CH-SPB-LEAP-1",
+        "option_id": "CH-SPB-LEAP-1-a"
+      },
+      {
+        "content_id": "L-CH-SPB-LEAP-1-b-r1",
+        "slot_type": "action",
+        "speaker_id": "juno",
+        "text": "The wick's dressed, it catches. No special fuss made.",
+        "choice_id": "CH-SPB-LEAP-1",
+        "option_id": "CH-SPB-LEAP-1-b"
+      },
+      {
+        "content_id": "L-CH-SPB-LEAP-1-c-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "juno",
+        "text": "\"Shame to waste a good spark on a puddle.\"",
+        "choice_id": "CH-SPB-LEAP-1",
+        "option_id": "CH-SPB-LEAP-1-c"
+      },
+      {
+        "content_id": "AS-SPB-LEAP-1",
+        "slot_type": "action",
+        "speaker_id": "juno",
+        "text": "Two lanterns along the shrine wall now burn steady. The priest moves down the row toward the next dressed wick."
+      },
+      {
+        "content_id": "SYS-SPB-LEAP-1",
+        "slot_type": "object",
+        "speaker_id": "juno",
+        "text": "Leap has been added to your spell book."
+      }
+    ],
+    "choice_nodes": [
+      {
+        "choice_id": "CH-SPB-LEAP-1",
+        "scene_id": "SPB-leap",
+        "availability_conditions": [],
+        "equal_weight_note": "Equal-weight choice: the options carry the same weight; the soul's reaction does not favor one over another.",
+        "no_accrual_note": "Each option records its own flags once; no counter accrues across options.",
+        "options": [
+          {
+            "option_id": "CH-SPB-LEAP-1-a",
+            "player_line": "L-CH-SPB-LEAP-1-a-p",
+            "response_slots": [
+              "L-CH-SPB-LEAP-1-a-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "leap_seen"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-SPB-LEAP-1-b",
+            "surface_action": "Dip a second taper into the votive flame and send it to the next lantern along the row",
+            "response_slots": [
+              "L-CH-SPB-LEAP-1-b-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "leap_attempted"
+              },
+              {
+                "type": "bond_event",
+                "arg": "Trust"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-SPB-LEAP-1-c",
+            "surface_action": "Send a flame toward the rain barrel under the shrine's eave instead",
+            "response_slots": [
+              "L-CH-SPB-LEAP-1-c-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "leap_boundary_seen"
+              }
+            ],
+            "rejoin": "gather"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scene_id": "SPB-portion",
+    "soul": "toby",
+    "screen_id": "T2",
+    "entry_gate": [],
+    "lines": [
+      {
+        "content_id": "O-SPB-PRT-1",
+        "slot_type": "object",
+        "speaker_id": "toby",
+        "text": "A great mass of feast dough sits ready on Toby's counter, morning light across it. No scale in the shop is built for a batch this size."
+      },
+      {
+        "content_id": "A-SPB-PRT-1",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "Toby sets a smooth river stone against the dough's crown, without ceremony. He goes still — no rolling pin, no knife, just his gaze on the stone. Then the dough parts cleanly into equal loaf-measures, each the match of the next.",
+        "choice_id": "CH-SPB-PRT-1"
+      },
+      {
+        "content_id": "L-CH-SPB-PRT-1-a-p",
+        "slot_type": "player_line",
+        "speaker_id": "player",
+        "text": "\"How do you get it even?\"",
+        "choice_id": "CH-SPB-PRT-1",
+        "option_id": "CH-SPB-PRT-1-a"
+      },
+      {
+        "content_id": "L-CH-SPB-PRT-1-a-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "toby",
+        "text": "\"Stone does that part.\"",
+        "choice_id": "CH-SPB-PRT-1",
+        "option_id": "CH-SPB-PRT-1-a"
+      },
+      {
+        "content_id": "L-CH-SPB-PRT-1-a-r2",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "His hands move on, already shaping the first loaf.",
+        "choice_id": "CH-SPB-PRT-1",
+        "option_id": "CH-SPB-PRT-1-a"
+      },
+      {
+        "content_id": "L-CH-SPB-PRT-1-b-r1",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "He takes it without breaking stride, settles it against the next portion. The dough parts clean, same as before. He doesn't look over for approval.",
+        "choice_id": "CH-SPB-PRT-1",
+        "option_id": "CH-SPB-PRT-1-b"
+      },
+      {
+        "content_id": "L-CH-SPB-PRT-1-c-r1",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "Nothing happens — too little there to divide into anything. Toby glances at it, then reaches past it for the stone, same as before.",
+        "choice_id": "CH-SPB-PRT-1",
+        "option_id": "CH-SPB-PRT-1-c"
+      },
+      {
+        "content_id": "AS-SPB-PRT-1",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "The dough sits parted into even measures on the counter. Toby's already reaching for the next tray."
+      },
+      {
+        "content_id": "SYS-SPB-PRT-1",
+        "slot_type": "object",
+        "speaker_id": "toby",
+        "text": "Portion has been added to your spell book."
+      }
+    ],
+    "choice_nodes": [
+      {
+        "choice_id": "CH-SPB-PRT-1",
+        "scene_id": "SPB-portion",
+        "availability_conditions": [],
+        "equal_weight_note": "Equal-weight choice: the options carry the same weight; the soul's reaction does not favor one over another.",
+        "no_accrual_note": "Each option records its own flags once; no counter accrues across options.",
+        "options": [
+          {
+            "option_id": "CH-SPB-PRT-1-a",
+            "player_line": "L-CH-SPB-PRT-1-a-p",
+            "response_slots": [
+              "L-CH-SPB-PRT-1-a-r1",
+              "L-CH-SPB-PRT-1-a-r2"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "portion_seen"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-SPB-PRT-1-b",
+            "surface_action": "Hand Toby a second river stone for a smaller batch",
+            "response_slots": [
+              "L-CH-SPB-PRT-1-b-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "portion_attempted"
+              },
+              {
+                "type": "bond_event",
+                "arg": "Trust"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-SPB-PRT-1-c",
+            "surface_action": "Pick up a single berry and set it where the stone would go",
+            "response_slots": [
+              "L-CH-SPB-PRT-1-c-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "portion_boundary_seen"
+              }
+            ],
+            "rejoin": "gather"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scene_id": "SPB-preserve",
+    "soul": "mara",
+    "screen_id": "F1",
+    "entry_gate": [],
+    "lines": [
+      {
+        "content_id": "O-SPB-PRS-1",
+        "slot_type": "object",
+        "speaker_id": "mara",
+        "text": "Mara sits at her stall, a basket of just-cut flowers beside her, a bundle of herbs already gone dry."
+      },
+      {
+        "content_id": "A-SPB-PRS-1-s",
+        "slot_type": "action",
+        "speaker_id": "mara",
+        "text": "Mara takes a pinch of salt and runs it over the flower stems, working the grains in with a steady, rhythmic motion."
+      },
+      {
+        "content_id": "L-A-SPB-PRS-1",
+        "slot_type": "dialogue",
+        "speaker_id": "mara",
+        "text": "\"Cut things go quick if you let them. Salt slows it down some — doesn't stop it, just buys a while.\""
+      },
+      {
+        "content_id": "A-SPB-PRS-1-r",
+        "slot_type": "action",
+        "speaker_id": "mara",
+        "text": "The flowers stay firm and bright, no sign of wilting despite the heat.",
+        "choice_id": "CH-SPB-PRS-1"
+      },
+      {
+        "content_id": "L-CH-SPB-PRS-1-a-p",
+        "slot_type": "player_line",
+        "speaker_id": "player",
+        "text": "\"Does it work on anything dried?\"",
+        "choice_id": "CH-SPB-PRS-1",
+        "option_id": "CH-SPB-PRS-1-a"
+      },
+      {
+        "content_id": "L-CH-SPB-PRS-1-a-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "mara",
+        "text": "\"No. Has to still be fresh.\"",
+        "choice_id": "CH-SPB-PRS-1",
+        "option_id": "CH-SPB-PRS-1-a"
+      },
+      {
+        "content_id": "L-CH-SPB-PRS-1-b-r1",
+        "slot_type": "action",
+        "speaker_id": "mara",
+        "text": "Mara works the salt into the fruit until the berries hold at their ripe, bright color. No special fuss made of it.",
+        "choice_id": "CH-SPB-PRS-1",
+        "option_id": "CH-SPB-PRS-1-b"
+      },
+      {
+        "content_id": "L-CH-SPB-PRS-1-c-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "mara",
+        "text": "\"Nothing left here to hold.\"",
+        "choice_id": "CH-SPB-PRS-1",
+        "option_id": "CH-SPB-PRS-1-c"
+      },
+      {
+        "content_id": "AS-SPB-PRS-1",
+        "slot_type": "action",
+        "speaker_id": "mara",
+        "text": "Mara moves the flowers to the shaded end of the stall, where they sit firm-stemmed and unbrowned."
+      },
+      {
+        "content_id": "SYS-SPB-PRS-1",
+        "slot_type": "object",
+        "speaker_id": "mara",
+        "text": "Preserve has been added to your spell book."
+      }
+    ],
+    "choice_nodes": [
+      {
+        "choice_id": "CH-SPB-PRS-1",
+        "scene_id": "SPB-preserve",
+        "availability_conditions": [],
+        "equal_weight_note": "Equal-weight choice: the options carry the same weight; the soul's reaction does not favor one over another.",
+        "no_accrual_note": "Each option records its own flags once; no counter accrues across options.",
+        "options": [
+          {
+            "option_id": "CH-SPB-PRS-1-a",
+            "player_line": "L-CH-SPB-PRS-1-a-p",
+            "response_slots": [
+              "L-CH-SPB-PRS-1-a-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "preserve_seen"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-SPB-PRS-1-b",
+            "surface_action": "Hand over a fresh-picked berry basket for the same treatment",
+            "response_slots": [
+              "L-CH-SPB-PRS-1-b-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "preserve_attempted"
+              },
+              {
+                "type": "bond_event",
+                "arg": "Trust"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-SPB-PRS-1-c",
+            "surface_action": "Set salt on the dried herb bundle instead",
+            "response_slots": [
+              "L-CH-SPB-PRS-1-c-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "preserve_boundary_seen"
+              }
+            ],
+            "rejoin": "gather"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scene_id": "SPB-scratch",
+    "soul": "pip",
+    "screen_id": "T1",
+    "entry_gate": [],
+    "lines": [
+      {
+        "content_id": "O-SPB-SCR-1",
+        "slot_type": "object",
+        "speaker_id": "pip",
+        "text": "A fencepost along the route, festival mailbag heavy at the postman's shoulder."
+      },
+      {
+        "content_id": "A-SPB-SCR-1",
+        "slot_type": "action",
+        "speaker_id": "pip",
+        "text": "He leans into the post, working his shoulder blade against the grain, trying to catch a spot just out of reach. After a moment of futile rubbing, he gives up and just stands there, letting the bag rest.",
+        "choice_id": "CH-SPB-SCR-1"
+      },
+      {
+        "content_id": "L-CH-SPB-SCR-1-a-p",
+        "slot_type": "player_line",
+        "speaker_id": "player",
+        "text": "\"Can't reach it?\"",
+        "choice_id": "CH-SPB-SCR-1",
+        "option_id": "CH-SPB-SCR-1-a"
+      },
+      {
+        "content_id": "L-CH-SPB-SCR-1-a-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "pip",
+        "text": "\"Right between the blades. Never can.\"",
+        "choice_id": "CH-SPB-SCR-1",
+        "option_id": "CH-SPB-SCR-1-a"
+      },
+      {
+        "content_id": "L-CH-SPB-SCR-1-b-r1",
+        "slot_type": "action",
+        "speaker_id": "pip",
+        "text": "He settles it against the itch and it fades. His shoulders drop and roll once.",
+        "choice_id": "CH-SPB-SCR-1",
+        "option_id": "CH-SPB-SCR-1-b"
+      },
+      {
+        "content_id": "L-CH-SPB-SCR-1-c-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "pip",
+        "text": "\"Not a patch for it, I suppose.\"",
+        "choice_id": "CH-SPB-SCR-1",
+        "option_id": "CH-SPB-SCR-1-c"
+      },
+      {
+        "content_id": "AS-SPB-SCR-1",
+        "slot_type": "action",
+        "speaker_id": "pip",
+        "text": "The postman shrugs the mailbag back into place and carries on down the lane."
+      },
+      {
+        "content_id": "SYS-SPB-SCR-1",
+        "slot_type": "object",
+        "speaker_id": "pip",
+        "text": "Scratch has been added to your spell book."
+      }
+    ],
+    "choice_nodes": [
+      {
+        "choice_id": "CH-SPB-SCR-1",
+        "scene_id": "SPB-scratch",
+        "availability_conditions": [],
+        "equal_weight_note": "Equal-weight choice: the options carry the same weight; the soul's reaction does not favor one over another.",
+        "no_accrual_note": "Each option records its own flags once; no counter accrues across options.",
+        "options": [
+          {
+            "option_id": "CH-SPB-SCR-1-a",
+            "player_line": "L-CH-SPB-SCR-1-a-p",
+            "response_slots": [
+              "L-CH-SPB-SCR-1-a-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "scratch_seen"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-SPB-SCR-1-b",
+            "surface_action": "Hand over a scrap of wool for him to work with",
+            "response_slots": [
+              "L-CH-SPB-SCR-1-b-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "scratch_attempted"
+              },
+              {
+                "type": "bond_event",
+                "arg": "Trust"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-SPB-SCR-1-c",
+            "surface_action": "Try the wool on the wooden route post instead",
+            "response_slots": [
+              "L-CH-SPB-SCR-1-c-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "scratch_boundary_seen"
+              }
+            ],
+            "rejoin": "gather"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scene_id": "SPB-seal",
+    "soul": "pip",
+    "screen_id": "T1",
+    "entry_gate": [],
+    "lines": [
+      {
+        "content_id": "O-SPB-SEAL-1",
+        "slot_type": "object",
+        "speaker_id": "pip",
+        "text": "The Square, a stack of folded letters resting on a crate. The postman holds a lump of beeswax in his palm, warming it."
+      },
+      {
+        "content_id": "A-SPB-SEAL-1-s",
+        "slot_type": "action",
+        "speaker_id": "pip",
+        "text": "With a practiced motion, he pulls the wax along the fold of a letter and presses it flat. It adheres instantly — a smooth, weather-tight seal needing no cooling or care."
+      },
+      {
+        "content_id": "L-A-SPB-SEAL-1",
+        "slot_type": "dialogue",
+        "speaker_id": "pip",
+        "text": "\"A letter that opens in the rain is a letter lost.\"",
+        "choice_id": "CH-SPB-SEAL-1"
+      },
+      {
+        "content_id": "L-CH-SPB-SEAL-1-a-p",
+        "slot_type": "player_line",
+        "speaker_id": "player",
+        "text": "\"Does every letter need it?\"",
+        "choice_id": "CH-SPB-SEAL-1",
+        "option_id": "CH-SPB-SEAL-1-a"
+      },
+      {
+        "content_id": "L-CH-SPB-SEAL-1-a-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "pip",
+        "text": "\"Just the ones going out today. Rain's coming.\"",
+        "choice_id": "CH-SPB-SEAL-1",
+        "option_id": "CH-SPB-SEAL-1-a"
+      },
+      {
+        "content_id": "L-CH-SPB-SEAL-1-b-r1",
+        "slot_type": "action",
+        "speaker_id": "pip",
+        "text": "It seals shut along the fold. No special fuss made, returned to the stack.",
+        "choice_id": "CH-SPB-SEAL-1",
+        "option_id": "CH-SPB-SEAL-1-b"
+      },
+      {
+        "content_id": "L-CH-SPB-SEAL-1-c-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "pip",
+        "text": "\"It's already closed.\"",
+        "choice_id": "CH-SPB-SEAL-1",
+        "option_id": "CH-SPB-SEAL-1-c"
+      },
+      {
+        "content_id": "AS-SPB-SEAL-1",
+        "slot_type": "action",
+        "speaker_id": "pip",
+        "text": "The postman stacks the letters back into his bag, ready for the rounds."
+      },
+      {
+        "content_id": "SYS-SPB-SEAL-1",
+        "slot_type": "object",
+        "speaker_id": "pip",
+        "text": "Seal has been added to your spell book."
+      }
+    ],
+    "choice_nodes": [
+      {
+        "choice_id": "CH-SPB-SEAL-1",
+        "scene_id": "SPB-seal",
+        "availability_conditions": [],
+        "equal_weight_note": "Equal-weight choice: the options carry the same weight; the soul's reaction does not favor one over another.",
+        "no_accrual_note": "Each option records its own flags once; no counter accrues across options.",
+        "options": [
+          {
+            "option_id": "CH-SPB-SEAL-1-a",
+            "player_line": "L-CH-SPB-SEAL-1-a-p",
+            "response_slots": [
+              "L-CH-SPB-SEAL-1-a-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "seal_seen"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-SPB-SEAL-1-b",
+            "surface_action": "Hand over a second folded letter for the same treatment",
+            "response_slots": [
+              "L-CH-SPB-SEAL-1-b-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "seal_attempted"
+              },
+              {
+                "type": "bond_event",
+                "arg": "Trust"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-SPB-SEAL-1-c",
+            "surface_action": "Pick up an already-sealed letter and try it again",
+            "response_slots": [
+              "L-CH-SPB-SEAL-1-c-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "seal_boundary_seen"
+              }
+            ],
+            "rejoin": "gather"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scene_id": "SPB-steep",
+    "soul": "mara",
+    "screen_id": "F1",
+    "entry_gate": [],
+    "lines": [
+      {
+        "content_id": "O-SPB-STP-1",
+        "slot_type": "object",
+        "speaker_id": "mara",
+        "text": "Mara's stall. A kettle sits over a low flame, berries already dropped in."
+      },
+      {
+        "content_id": "A-SPB-STP-1-s",
+        "slot_type": "action",
+        "speaker_id": "mara",
+        "text": "Mara sets her hand near the kettle. The water takes on a deep hue almost instantly — the cast drawing the color out in a way ordinary steeping never would."
+      },
+      {
+        "content_id": "L-A-SPB-STP-1",
+        "slot_type": "dialogue",
+        "speaker_id": "mara",
+        "text": "\"It's better to let the color take the water like this than sit and wait on the fire alone. The color's the thing we want to keep — no sense making it wait longer than it needs to.\"",
+        "choice_id": "CH-SPB-STP-1"
+      },
+      {
+        "content_id": "L-CH-SPB-STP-1-a-p",
+        "slot_type": "player_line",
+        "speaker_id": "player",
+        "text": "\"Does it work on plain water?\"",
+        "choice_id": "CH-SPB-STP-1",
+        "option_id": "CH-SPB-STP-1-a"
+      },
+      {
+        "content_id": "L-CH-SPB-STP-1-a-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "mara",
+        "text": "\"Not on its own. Needs something in it first.\"",
+        "choice_id": "CH-SPB-STP-1",
+        "option_id": "CH-SPB-STP-1-a"
+      },
+      {
+        "content_id": "L-CH-SPB-STP-1-b-r1",
+        "slot_type": "action",
+        "speaker_id": "mara",
+        "text": "The color takes in moments. Mara makes no special fuss over it.",
+        "choice_id": "CH-SPB-STP-1",
+        "option_id": "CH-SPB-STP-1-b"
+      },
+      {
+        "content_id": "L-CH-SPB-STP-1-c-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "mara",
+        "text": "\"Tastes of the well and the leaves. Color's not what we're after, though.\"",
+        "choice_id": "CH-SPB-STP-1",
+        "option_id": "CH-SPB-STP-1-c"
+      },
+      {
+        "content_id": "AS-SPB-STP-1",
+        "slot_type": "action",
+        "speaker_id": "mara",
+        "text": "The kettle's water turns deep and rich. Mara lifts it off the flame, sets it to cool."
+      },
+      {
+        "content_id": "SYS-SPB-STP-1",
+        "slot_type": "object",
+        "speaker_id": "mara",
+        "text": "Steep has been added to your spell book."
+      }
+    ],
+    "choice_nodes": [
+      {
+        "choice_id": "CH-SPB-STP-1",
+        "scene_id": "SPB-steep",
+        "availability_conditions": [],
+        "equal_weight_note": "Equal-weight choice: the options carry the same weight; the soul's reaction does not favor one over another.",
+        "no_accrual_note": "Each option records its own flags once; no counter accrues across options.",
+        "options": [
+          {
+            "option_id": "CH-SPB-STP-1-a",
+            "player_line": "L-CH-SPB-STP-1-a-p",
+            "response_slots": [
+              "L-CH-SPB-STP-1-a-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "steep_seen"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-SPB-STP-1-b",
+            "surface_action": "Hand over a fresh skin of spring water and a handful of berries for a second kettle",
+            "response_slots": [
+              "L-CH-SPB-STP-1-b-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "steep_attempted"
+              },
+              {
+                "type": "bond_event",
+                "arg": "Trust"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-SPB-STP-1-c",
+            "surface_action": "Dip a cup straight into the well water instead",
+            "response_slots": [
+              "L-CH-SPB-STP-1-c-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "steep_boundary_seen"
+              }
+            ],
+            "rejoin": "gather"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scene_id": "SPB-temper",
+    "soul": "ilsa",
+    "screen_id": "T4",
+    "entry_gate": [],
+    "lines": [
+      {
+        "content_id": "O-SPB-TMP-1",
+        "slot_type": "object",
+        "speaker_id": "ilsa",
+        "text": "The forge bench, dim light. A billet glows from the coals, held steady in Ilsa's tongs. A trough of spring water sits ready beside the anvil."
+      },
+      {
+        "content_id": "A-SPB-TMP-1",
+        "slot_type": "action",
+        "speaker_id": "ilsa",
+        "text": "She turns it once more, checking its color, then swings it to the anvil. She goes still a breath, watching the metal. Then she lowers it into the water — it hardens evenly with a hiss, the heat leaving faster than any ordinary quench.",
+        "choice_id": "CH-SPB-TMP-1"
+      },
+      {
+        "content_id": "L-CH-SPB-TMP-1-a-p",
+        "slot_type": "player_line",
+        "speaker_id": "player",
+        "text": "\"Does it matter how hot?\"",
+        "choice_id": "CH-SPB-TMP-1",
+        "option_id": "CH-SPB-TMP-1-a"
+      },
+      {
+        "content_id": "L-CH-SPB-TMP-1-a-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "ilsa",
+        "text": "\"Glowing, not just warm.\"",
+        "choice_id": "CH-SPB-TMP-1",
+        "option_id": "CH-SPB-TMP-1-a"
+      },
+      {
+        "content_id": "L-CH-SPB-TMP-1-b-r1",
+        "slot_type": "action",
+        "speaker_id": "ilsa",
+        "text": "Ilsa works it the same way. It hardens evenly under her hands.",
+        "choice_id": "CH-SPB-TMP-1",
+        "option_id": "CH-SPB-TMP-1-b"
+      },
+      {
+        "content_id": "L-CH-SPB-TMP-1-c-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "ilsa",
+        "text": "\"Wood does not hold it.\"",
+        "choice_id": "CH-SPB-TMP-1",
+        "option_id": "CH-SPB-TMP-1-c"
+      },
+      {
+        "content_id": "AS-SPB-TMP-1",
+        "slot_type": "action",
+        "speaker_id": "ilsa",
+        "text": "The worked piece hisses in the water and holds its shape. Ilsa checks the edge with her thumb and sets it aside."
+      },
+      {
+        "content_id": "SYS-SPB-TMP-1",
+        "slot_type": "object",
+        "speaker_id": "ilsa",
+        "text": "Temper has been added to your spell book."
+      }
+    ],
+    "choice_nodes": [
+      {
+        "choice_id": "CH-SPB-TMP-1",
+        "scene_id": "SPB-temper",
+        "availability_conditions": [],
+        "equal_weight_note": "Equal-weight choice: the options carry the same weight; the soul's reaction does not favor one over another.",
+        "no_accrual_note": "Each option records its own flags once; no counter accrues across options.",
+        "options": [
+          {
+            "option_id": "CH-SPB-TMP-1-a",
+            "player_line": "L-CH-SPB-TMP-1-a-p",
+            "response_slots": [
+              "L-CH-SPB-TMP-1-a-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "temper_seen"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-SPB-TMP-1-b",
+            "surface_action": "Hand over a second river stone, already sitting warm near the fire",
+            "response_slots": [
+              "L-CH-SPB-TMP-1-b-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "temper_attempted"
+              },
+              {
+                "type": "bond_event",
+                "arg": "Trust"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-SPB-TMP-1-c",
+            "surface_action": "Pick up a stick lying nearby and hold it toward the quench trough instead",
+            "response_slots": [
+              "L-CH-SPB-TMP-1-c-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "temper_boundary_seen"
+              }
+            ],
+            "rejoin": "gather"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scene_id": "SPB-waft",
+    "soul": "juno",
+    "screen_id": "T1",
+    "entry_gate": [],
+    "lines": [
+      {
+        "content_id": "O-SPB-WFT-1",
+        "slot_type": "object",
+        "speaker_id": "juno",
+        "text": "The Festival Grounds, quiet. A heavy censer smokes unevenly. The priest kneels beside it, unhurried."
+      },
+      {
+        "content_id": "A-SPB-WFT-1",
+        "slot_type": "action",
+        "speaker_id": "juno",
+        "text": "She works grass and sap into the censer, cups her hands around the rising smoke. The breeze catches at the edges, but the plume steadies and climbs straight, undisturbed.",
+        "choice_id": "CH-SPB-WFT-1"
+      },
+      {
+        "content_id": "L-CH-SPB-WFT-1-a-p",
+        "slot_type": "player_line",
+        "speaker_id": "player",
+        "text": "\"Does the wind fight it?\"",
+        "choice_id": "CH-SPB-WFT-1",
+        "option_id": "CH-SPB-WFT-1-a"
+      },
+      {
+        "content_id": "L-CH-SPB-WFT-1-a-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "juno",
+        "text": "\"Not once it's called straight.\"",
+        "choice_id": "CH-SPB-WFT-1",
+        "option_id": "CH-SPB-WFT-1-a"
+      },
+      {
+        "content_id": "L-CH-SPB-WFT-1-b-r1",
+        "slot_type": "action",
+        "speaker_id": "juno",
+        "text": "The dust rises in a thin sheet and drifts out the doorway. No special fuss made.",
+        "choice_id": "CH-SPB-WFT-1",
+        "option_id": "CH-SPB-WFT-1-b"
+      },
+      {
+        "content_id": "L-CH-SPB-WFT-1-c-r1",
+        "slot_type": "action",
+        "speaker_id": "juno",
+        "text": "Nothing about it rises or drifts. The priest's expression stays plain, unmocking.",
+        "choice_id": "CH-SPB-WFT-1",
+        "option_id": "CH-SPB-WFT-1-c"
+      },
+      {
+        "content_id": "AS-SPB-WFT-1",
+        "slot_type": "action",
+        "speaker_id": "juno",
+        "text": "The censer's column rises straight and unbroken over the Grounds. The priest sits back, watching it climb."
+      },
+      {
+        "content_id": "SYS-SPB-WFT-1",
+        "slot_type": "object",
+        "speaker_id": "juno",
+        "text": "Waft has been added to your spell book."
+      }
+    ],
+    "choice_nodes": [
+      {
+        "choice_id": "CH-SPB-WFT-1",
+        "scene_id": "SPB-waft",
+        "availability_conditions": [],
+        "equal_weight_note": "Equal-weight choice: the options carry the same weight; the soul's reaction does not favor one over another.",
+        "no_accrual_note": "Each option records its own flags once; no counter accrues across options.",
+        "options": [
+          {
+            "option_id": "CH-SPB-WFT-1-a",
+            "player_line": "L-CH-SPB-WFT-1-a-p",
+            "response_slots": [
+              "L-CH-SPB-WFT-1-a-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "waft_seen"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-SPB-WFT-1-b",
+            "surface_action": "Sweep the dusty floor near the censer, offer it as a second thing to lift",
+            "response_slots": [
+              "L-CH-SPB-WFT-1-b-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "waft_attempted"
+              },
+              {
+                "type": "bond_event",
+                "arg": "Trust"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-SPB-WFT-1-c",
+            "surface_action": "Set a river stone near the censer instead",
+            "response_slots": [
+              "L-CH-SPB-WFT-1-c-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "waft_boundary_seen"
+              }
+            ],
+            "rejoin": "gather"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scene_id": "SPB-weigh",
+    "soul": "toby",
+    "screen_id": "T2",
+    "entry_gate": [],
+    "lines": [
+      {
+        "content_id": "O-SPB-WGH-1",
+        "slot_type": "object",
+        "speaker_id": "toby",
+        "text": "Toby stands at the counter with flour sacks lined up against the wall. There's no scale in town built for such feast quantities."
+      },
+      {
+        "content_id": "A-SPB-WGH-1",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "He sets a river stone against the nearest sack. He goes still a breath — no tool used, no lifting — and the sack rises a hand's breadth and hangs, heavy and low.",
+        "choice_id": "CH-SPB-WGH-1"
+      },
+      {
+        "content_id": "L-CH-SPB-WGH-1-a-p",
+        "slot_type": "player_line",
+        "speaker_id": "player",
+        "text": "\"Is that one short?\"",
+        "choice_id": "CH-SPB-WGH-1",
+        "option_id": "CH-SPB-WGH-1-a"
+      },
+      {
+        "content_id": "L-CH-SPB-WGH-1-a-r1",
+        "slot_type": "dialogue",
+        "speaker_id": "toby",
+        "text": "\"Hangs low. That's full.\"",
+        "choice_id": "CH-SPB-WGH-1",
+        "option_id": "CH-SPB-WGH-1-a"
+      },
+      {
+        "content_id": "L-CH-SPB-WGH-1-b-r1",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "The sack hangs level with the first, matched. Toby doesn't praise or comment specially.",
+        "choice_id": "CH-SPB-WGH-1",
+        "option_id": "CH-SPB-WGH-1-b"
+      },
+      {
+        "content_id": "L-CH-SPB-WGH-1-c-r1",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "Built into the floor, the oven has nothing to bear up. Toby glances at it, offers no mockery, only a brief look.",
+        "choice_id": "CH-SPB-WGH-1",
+        "option_id": "CH-SPB-WGH-1-c"
+      },
+      {
+        "content_id": "AS-SPB-WGH-1",
+        "slot_type": "action",
+        "speaker_id": "toby",
+        "text": "The sacks sit ranged against each other, matched or not. Toby's already onto the next task."
+      },
+      {
+        "content_id": "SYS-SPB-WGH-1",
+        "slot_type": "object",
+        "speaker_id": "toby",
+        "text": "Weigh has been added to your spell book."
+      }
+    ],
+    "choice_nodes": [
+      {
+        "choice_id": "CH-SPB-WGH-1",
+        "scene_id": "SPB-weigh",
+        "availability_conditions": [],
+        "equal_weight_note": "Equal-weight choice: the options carry the same weight; the soul's reaction does not favor one over another.",
+        "no_accrual_note": "Each option records its own flags once; no counter accrues across options.",
+        "options": [
+          {
+            "option_id": "CH-SPB-WGH-1-a",
+            "player_line": "L-CH-SPB-WGH-1-a-p",
+            "response_slots": [
+              "L-CH-SPB-WGH-1-a-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "weigh_seen"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-SPB-WGH-1-b",
+            "surface_action": "Set the stone against a second sack the same way",
+            "response_slots": [
+              "L-CH-SPB-WGH-1-b-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "weigh_attempted"
+              },
+              {
+                "type": "bond_event",
+                "arg": "Trust"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-SPB-WGH-1-c",
+            "surface_action": "Set the stone against the brick oven instead",
+            "response_slots": [
+              "L-CH-SPB-WGH-1-c-r1"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "weigh_boundary_seen"
+              }
+            ],
+            "rejoin": "gather"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scene_id": "VIG-grand",
+    "soul": "narrator",
+    "screen_id": "VIGG",
+    "entry_gate": [],
+    "lines": [
+      {
+        "content_id": "O-VIG-G-1",
+        "slot_type": "object",
+        "speaker_id": "narrator",
+        "text": "The night is pitched high — the fullest the square has ever known, a sea of shoulders pressed together in the dark. At the edges the feast tables groan under the weight of the season, and the festival tonic flows from hand to hand. At the center the Lantern Arch stands dark and silent, its stone circle a hollow heart in the middle of the crowd. The drum band waits, sticks poised."
+      },
+      {
+        "content_id": "A-VIG-G-1",
+        "slot_type": "action",
+        "speaker_id": "narrator",
+        "text": "The priest steps into the circle, footsteps silent on the stone. They withdraw a small worn brass chime on a leather strap and shake it once, a gentle wrist — they do not strike it. A single clear note rings out, a silver thread of sound that pulls the silence tight. The crowd stills."
+      },
+      {
+        "content_id": "A-VIG-G-1b-s",
+        "slot_type": "action",
+        "speaker_id": "narrator",
+        "text": "The priest speaks, their voice warm and plain, carrying the weight of the moment without breaking the peace."
+      },
+      {
+        "content_id": "L-A-VIG-G-1b",
+        "slot_type": "dialogue",
+        "speaker_id": "narrator",
+        "text": "\"Welcome home, all of you. Tonight the Lantern Arch lights the way, and the living and those who have passed share this square as one, no line drawn between us. It is a good night, and a full one. And to our newcomer, who spent the week lending a hand wherever one was wanted — thank you. You helped us make it ready.\""
+      },
+      {
+        "content_id": "A-VIG-G-1b-r",
+        "slot_type": "action",
+        "speaker_id": "narrator",
+        "text": "Their eyes find yours for a moment — a short nod of recognition for the work you have done, the hands you have held. You are not the subject of a speech, only the reason for the night."
+      },
+      {
+        "content_id": "A-VIG-G-2-s",
+        "slot_type": "action",
+        "speaker_id": "narrator",
+        "text": "The priest lights a single candle from a taper, the flame small and steady, and lifts it toward the crowd."
+      },
+      {
+        "content_id": "L-A-VIG-G-2-cast",
+        "slot_type": "dialogue",
+        "speaker_id": "narrator",
+        "text": "\"Waft.\""
+      },
+      {
+        "content_id": "A-VIG-G-2-r",
+        "slot_type": "action",
+        "speaker_id": "narrator",
+        "text": "A plume of incense rises, a sharp clean column of smoke that does not waver, drifting with purpose over the crowd. Then the priest turns and steps toward you, holding the candle out — the flame, and the lighting of the night, offered into your hands.",
+        "choice_id": "CH-VIG-G-1"
+      },
+      {
+        "content_id": "L-CH-VIG-G-1-a-r1",
+        "slot_type": "action",
+        "speaker_id": "narrator",
+        "text": "You take the candle, the heat against your palm, and cast leap. The flame does not wait — it springs from the wick, a golden spark that darts through the air and catches every lantern around the ring at once. A sudden bright breath of light fills the center, the Arch ablaze, the circle lit end to end in a single breath.",
+        "choice_id": "CH-VIG-G-1",
+        "option_id": "CH-VIG-G-1-a"
+      },
+      {
+        "content_id": "L-CH-VIG-G-1-b-r1",
+        "slot_type": "action",
+        "speaker_id": "narrator",
+        "text": "You take the candle and cast leap — and the flame leaps from your hand to the candle every villager holds, all of them catching in the same breath. Held light springs up all across the square, face after face lit at once, the whole crowd risen into a single glow. The town lights the night, and you led it.",
+        "choice_id": "CH-VIG-G-1",
+        "option_id": "CH-VIG-G-1-b"
+      },
+      {
+        "content_id": "A-VIG-G-3",
+        "slot_type": "object",
+        "speaker_id": "narrator",
+        "text": "Small drifting lights gather over the square, more and more of them, wandering and soft, thick above the crowd. They do not drift past. One by one they sink down into the lanterns — and each flares back out in a soundless burst of light. A flash. Then another. And another, all across the square, a silent firework blooming over the whole celebration. Where each flash fades, one of the returned now stands — warm, softly rendered, no line between them and the living. Slowly they move out through the crowd to find their loved ones and join the feast. Nobody explains it. Nobody can."
+      },
+      {
+        "content_id": "A-VIG-G-4",
+        "slot_type": "object",
+        "speaker_id": "narrator",
+        "text": "The night settles. The drums pick up a steady, joyful rhythm, the tonic passes hand to hand, the feast goes round. The returned sit among the living, laughter mixing with the music. And held on purpose amid the fullness: one place kept clear — a single chair left empty, a single lamp near the Arch unlit, for someone who did not come. A small, deliberate gap in the brightness, the brightest night of all with one place still held."
+      },
+      {
+        "content_id": "A-VIG-G-CLOSE-s1",
+        "slot_type": "action",
+        "speaker_id": "narrator",
+        "text": "You stand at the edge of the feast and watch a while — the square a golden sprawl of laughter and shared plates, the living and those returned woven together in the firelight, everyone at ease in the night."
+      },
+      {
+        "content_id": "A-VIG-G-CLOSE-s2",
+        "slot_type": "action",
+        "speaker_id": "narrator",
+        "text": "This is not the magic you came to learn. It is something deeper, something that moves beneath the words of the spells you know. The pull to stay is the strongest a night could leave — a quiet, growing certainty that there is more here than you have found, as if the village holds a thousand more stories yet to be told. You look out over the square, at the faces in the light, and feel the weight of a place worth belonging to. The thought passes, warm and unresolved, leaving you standing in the glow."
+      },
+      {
+        "content_id": "A-VIG-G-CLOSE-s3",
+        "slot_type": "action",
+        "speaker_id": "narrator",
+        "text": "A light drifts away from the crowd and breaks your contemplation. It moves with a gentle, unhurried grace, a single spark of soft amber that draws your gaze. It approaches you, growing brighter and steadier, until the warmth of it fills your vision."
+      },
+      {
+        "content_id": "L-A-VIG-G-CLOSE-name",
+        "slot_type": "dialogue",
+        "speaker_id": "narrator",
+        "text": "\"{player_name}\""
+      }
+    ],
+    "choice_nodes": [
+      {
+        "choice_id": "CH-VIG-G-1",
+        "scene_id": "VIG-grand",
+        "availability_conditions": [],
+        "equal_weight_note": "Not equal-weight flavor: both options are the player's own act and converge downstream; the difference is image and meaning, carried in the two result beats.",
+        "no_accrual_note": "Each option records its own flags once; no counter accrues across options.",
+        "options": [
+          {
+            "option_id": "CH-VIG-G-1-a",
+            "surface_action": "Cast leap on the candle",
+            "response_slots": [
+              "L-CH-VIG-G-1-a-r1"
+            ],
+            "state_actions": [],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-VIG-G-1-b",
+            "surface_action": "Cast leap on the villagers' candles",
+            "response_slots": [
+              "L-CH-VIG-G-1-b-r1"
+            ],
+            "state_actions": [],
+            "rejoin": "gather"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scene_id": "VIG-quiet",
+    "soul": "narrator",
+    "screen_id": "VIGQ",
+    "entry_gate": [],
+    "lines": [
+      {
+        "content_id": "O-VIG-Q-1",
+        "slot_type": "object",
+        "speaker_id": "narrator",
+        "text": "The Festival Grounds lie in full dark, torches and lanterns still unlit save for a few dim ones at the square's edges. The crowd is thin, gathered loosely around a raised stone circle where the unlit Lantern Arch waits."
+      },
+      {
+        "content_id": "A-VIG-Q-1",
+        "slot_type": "action",
+        "speaker_id": "narrator",
+        "text": "A figure steps into the circle — a priest, unremarkable except for the ritual distance around them. They lift a small worn brass chime on its leather strap. One clear note rings out, delicate and brief. The murmuring crowd quiets."
+      },
+      {
+        "content_id": "A-VIG-Q-2-s",
+        "slot_type": "action",
+        "speaker_id": "narrator",
+        "text": "The priest lights a single candle from a taper at hand, then lifts both palms toward the flame."
+      },
+      {
+        "content_id": "L-A-VIG-Q-2-cast",
+        "slot_type": "dialogue",
+        "speaker_id": "narrator",
+        "text": "\"Waft.\""
+      },
+      {
+        "content_id": "A-VIG-Q-2-r",
+        "slot_type": "action",
+        "speaker_id": "narrator",
+        "text": "The smoke stops drifting and gathers into one straight column, unmoved by the night air, climbing steady toward the dark. The scent that rides it is sharp and clean, a little bracing — the kind that wakes something up in the chest. It reaches the gathered crowd; a few straighten without seeming to notice why.",
+        "choice_id": "CH-VIG-Q-1"
+      },
+      {
+        "content_id": "L-CH-VIG-Q-1-a-r1",
+        "slot_type": "action",
+        "speaker_id": "narrator",
+        "text": "A second column of smoke rises alongside the first, smaller, uneven for a moment, then straightening to match. The scent doubles, sharper.",
+        "choice_id": "CH-VIG-Q-1",
+        "option_id": "CH-VIG-Q-1-a"
+      },
+      {
+        "content_id": "L-CH-VIG-Q-1-a-r2",
+        "slot_type": "action",
+        "speaker_id": "narrator",
+        "text": "The priest doesn't look over, doesn't remark on it. The two columns hold together a few seconds, then the second folds back down and the first climbs on alone.",
+        "choice_id": "CH-VIG-Q-1",
+        "option_id": "CH-VIG-Q-1-a"
+      },
+      {
+        "content_id": "L-CH-VIG-Q-1-b-r1",
+        "slot_type": "action",
+        "speaker_id": "narrator",
+        "text": "The priest's column of smoke climbs on alone, straight and unhurried, doing exactly what it was cast to do.",
+        "choice_id": "CH-VIG-Q-1",
+        "option_id": "CH-VIG-Q-1-b"
+      },
+      {
+        "content_id": "A-VIG-Q-3",
+        "slot_type": "action",
+        "speaker_id": "narrator",
+        "text": "The priest touches the candle's flame to the first lantern at the circle's edge. It catches. By hand, unhurried, they carry the flame lantern to lantern around the ring — each catching from the one before it, until the whole ring is lit."
+      },
+      {
+        "content_id": "A-VIG-Q-4",
+        "slot_type": "object",
+        "speaker_id": "narrator",
+        "text": "As the last lantern catches, the Lantern Arch lights, and above the square a thin scatter of small lights lifts into the dark and fades — there and gone, like sparks that never had to come from anywhere. Nobody explains it. Nobody seems to expect an explanation. The crowd watches it the way people watch anything that happens once a year."
+      },
+      {
+        "content_id": "A-VIG-Q-CLOSE",
+        "slot_type": "action",
+        "speaker_id": "narrator",
+        "text": "The mage stands at the ring's edge, watching the last lights fade. Whatever that was, it wasn't in any of the folk magic they came to learn — and, unbidden, they find themselves thinking there might be something else here worth staying for. Maybe another year in Hearthlight wouldn't be wasted. The thought passes, warm and unresolved. The smell of the wafting smoke goes with them, sharp and clear, all the way back into the streets."
+      }
+    ],
+    "choice_nodes": [
+      {
+        "choice_id": "CH-VIG-Q-1",
+        "scene_id": "VIG-quiet",
+        "availability_conditions": [],
+        "equal_weight_note": "Equal-weight choice: both options are participation flavor; everything downstream is identical either way.",
+        "no_accrual_note": "Each option records its own flags once; no counter accrues across options.",
+        "options": [
+          {
+            "option_id": "CH-VIG-Q-1-a",
+            "surface_action": "Step forward and cast waft on the candle",
+            "response_slots": [
+              "L-CH-VIG-Q-1-a-r1",
+              "L-CH-VIG-Q-1-a-r2"
+            ],
+            "state_actions": [
+              {
+                "type": "knowledge_flag",
+                "arg": "waft_confirmed"
+              }
+            ],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-VIG-Q-1-b",
+            "surface_action": "Hold back and watch",
+            "response_slots": [
+              "L-CH-VIG-Q-1-b-r1"
+            ],
+            "state_actions": [],
+            "rejoin": "gather"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scene_id": "VIG-warm",
+    "soul": "narrator",
+    "screen_id": "VIGW",
+    "entry_gate": [],
+    "lines": [
+      {
+        "content_id": "O-VIG-W-1",
+        "slot_type": "object",
+        "speaker_id": "narrator",
+        "text": "The square is full, the village gathered in a wide, breathing circle under the dark. Long tables line the edges, laden with bread and salted meats, and the shared tonic moves hand to hand in a slow, rhythmic tide. At the center the stone circle sits bare, its ring of lanterns unlit, the Lantern Arch a dark shape above. Near the crowd's edge a drum band sits with mallets poised, the air between them hushed."
+      },
+      {
+        "content_id": "A-VIG-W-1",
+        "slot_type": "action",
+        "speaker_id": "narrator",
+        "text": "The priest steps into the center of the ring. They do not speak. They lift a small worn brass chime on a leather strap and shake it once. A clear, sharp note rings out, cutting through the low hum of the crowd. The sound lingers, and in its wake the full town falls silent."
+      },
+      {
+        "content_id": "A-VIG-W-1b-s",
+        "slot_type": "action",
+        "speaker_id": "narrator",
+        "text": "The priest stands in the center of the ring, hands folded within wide linen sleeves, and lets the last note of the chime settle over the square."
+      },
+      {
+        "content_id": "L-A-VIG-W-1b",
+        "slot_type": "dialogue",
+        "speaker_id": "narrator",
+        "text": "\"Welcome home, travelers. Tonight the Lantern Arch lights the way, and we sit together as friends and as kin, with no line drawn between the living and those who have passed. Prepare your hearts and your seats — soon we bring the light.\""
+      },
+      {
+        "content_id": "A-VIG-W-2-s",
+        "slot_type": "action",
+        "speaker_id": "narrator",
+        "text": "The priest lights a single candle from a taper at hand, then lifts both palms toward the flame."
+      },
+      {
+        "content_id": "L-A-VIG-W-2-cast",
+        "slot_type": "dialogue",
+        "speaker_id": "narrator",
+        "text": "\"Waft.\""
+      },
+      {
+        "content_id": "A-VIG-W-2-r",
+        "slot_type": "action",
+        "speaker_id": "narrator",
+        "text": "The smoke stops drifting and gathers into one straight column, a pillar of grey that does not sway even as a light breeze crosses the square. The scent that rides it is clean and sharp, carrying far over the heads of the gathered folk.",
+        "choice_id": "CH-VIG-W-1"
+      },
+      {
+        "content_id": "L-CH-VIG-W-1-a-r1",
+        "slot_type": "action",
+        "speaker_id": "narrator",
+        "text": "The tonic is cool and herbal. You move toward the long tables and find a place among the townsfolk — a press of shoulders, the low murmur of shared talk. For a moment you are simply part of the feast.",
+        "choice_id": "CH-VIG-W-1",
+        "option_id": "CH-VIG-W-1-a"
+      },
+      {
+        "content_id": "L-CH-VIG-W-1-b-r1",
+        "slot_type": "action",
+        "speaker_id": "narrator",
+        "text": "You stay at the ring's edge, hands tucked into your sleeves, and simply watch. The crowd is a soft, rustling presence at your side, faces turned toward the priest — and you hold your place as a witness to the rite.",
+        "choice_id": "CH-VIG-W-1",
+        "option_id": "CH-VIG-W-1-b"
+      },
+      {
+        "content_id": "A-VIG-W-3",
+        "slot_type": "action",
+        "speaker_id": "narrator",
+        "text": "The priest casts leap: the flame jumps from the candle to the first lantern. Then cast by cast, one hop at a time, candle-flame to lantern and lantern by lantern around the ring, the drum band picking up as the light travels. The ring grows brighter step by step, a slow succession of orange warmth."
+      },
+      {
+        "content_id": "A-VIG-W-4",
+        "slot_type": "object",
+        "speaker_id": "narrator",
+        "text": "As the last lantern catches, the air itself changes. The lantern light seems more than it should be, a deep glow pooling over the square. Small bright sparks begin to drift above the crowd like fireflies, lifting in soft arcs until they hang in the air — a canopy of starlight suspended over the whole celebration. Shapes drift within the light, vague and shifting, and never resolve into anything certain. People stop and look up, faces upturned and soft. Nobody explains it."
+      },
+      {
+        "content_id": "A-VIG-W-5",
+        "slot_type": "object",
+        "speaker_id": "narrator",
+        "text": "Under the canopy of lights, the night settles into itself. The feast goes round, the tonic passes hand to hand, the drums keep a steady, living pulse. Those returned sit at the tables alongside the living, sharing bread and drink — their presence welcome, no line drawn between the two. Only the easy rhythm of a village at peace."
+      },
+      {
+        "content_id": "A-VIG-W-CLOSE",
+        "slot_type": "action",
+        "speaker_id": "narrator",
+        "text": "You watch the canopy hold overhead. There is a pull in the air, a sense of a place that holds a quiet, profound weight. This is not the magic of any old book, nor the spell you were sent to find. There is more to learn here — something that stays your feet. You linger in the warmth of the square, and the thought passes, warm and unresolved."
+      }
+    ],
+    "choice_nodes": [
+      {
+        "choice_id": "CH-VIG-W-1",
+        "scene_id": "VIG-warm",
+        "availability_conditions": [],
+        "equal_weight_note": "Equal-weight choice: both options are participation flavor; everything downstream is identical either way.",
+        "no_accrual_note": "Each option records its own flags once; no counter accrues across options.",
+        "options": [
+          {
+            "option_id": "CH-VIG-W-1-a",
+            "surface_action": "Take a cup of the shared tonic and step in among the townsfolk at the tables",
+            "response_slots": [
+              "L-CH-VIG-W-1-a-r1"
+            ],
+            "state_actions": [],
+            "rejoin": "gather"
+          },
+          {
+            "option_id": "CH-VIG-W-1-b",
+            "surface_action": "Hold back and watch",
+            "response_slots": [
+              "L-CH-VIG-W-1-b-r1"
+            ],
+            "state_actions": [],
+            "rejoin": "gather"
+          }
+        ]
+      }
+    ]
+  }
+]

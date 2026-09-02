@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The lanterns used to hang right there \u2014 mind your step, they'll be up again by evening, same as every year. Mara pours the last of the spring water into the final vessel, her hands steady as she seals the jar with practiced ease. \"Tonight or not at all,\" she murmurs, setting it down among the row of identical jars on the counter. She straightens up, stretching her back as she surveys the almost-complete line. Only a handful of herbs remain, waiting for the last spell to make them into tonics against the predicted frost.",
+    "wc": 95,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player brings a skin of spring water to the counter. Mara pours it into the last vessel without missing a beat. \"Good, another set of hands,\" she says, not looking up. \"Hold this a second, mind the third step, and tell me your name while you're at it.\" She hands the player a bundle of herbs to keep steady while she ties them with a string. \"Mara, right?\" she asks, already knowing the answer.",
+    "wc": 75,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player casts *steep* on the last of the uncast herbs. The color turns fast; Mara sets the finished vessel with the rest. \"The frost comes, but the spell holds,\" she says, her hands already moving on to the next task.",
+    "wc": 41,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "\"Need another set of hands?\"\nMara paused, then resumed her work. \"Not tonight,\" she said, not looking up.",
+    "wc": 18,
+    "ok": true,
+    "err": null
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The postman stops at a fencepost along the route, the festival mailbag heavy and full on his shoulder. He works his shoulder blade against the post, trying to reach a spot that itches. Giving up, he leans against the post, taking a moment's respite. \"Can't quite reach it,\" he mutters to himself, a plain frustration on his face. His eyes flicker to the player, wondering if they might have any ideas.",
+    "wc": 71,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The postman nods. \"Right between the blades. Never can.\" He shifts the mailbag, settling it more evenly. \"But it's good to be moving again, once the itch lets up.\" He starts down the lane with a springier step, the wool scrap still in hand. The player watches him go, a small smile playing at their lips. It seems the festival's magic can reach even the most unexpected places. They turn back to the path, eager to see what other surprises the day might bring.",
+    "wc": 84,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The postman settles the scrap of wool against the spot, and the itch fades. His shoulders drop, roll once. \"I'd thank you for that. Right between the blades \u2014 never can reach it myself.\" He gives a small nod, adjusts the mailbag, and continues on his way. The player's small kindness has earned some trust.",
+    "wc": 55,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player tries the wool on the wooden route post instead, out of curiosity. It doesn't help. The postman watches, then shrugs, resettling his mailbag. \"No itch there, of course. Just my skin.\" He turns back to his route, leaving the player to wonder about the strange sensations some people feel.",
+    "wc": 51,
+    "ok": true,
+    "err": null
+  }
+}

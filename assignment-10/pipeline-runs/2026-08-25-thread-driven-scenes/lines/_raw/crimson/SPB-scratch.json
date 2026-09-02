@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "The postman pauses at the fencepost, his shoulders hunching as he shifts the heavy mailbag. He works his shoulder blade against the rough wood, trying to reach an elusive itch between his shoulder blades. With a sigh, he gives up and stands still, his breath misting in the chilly air. \"Never can reach it,\" he mutters to himself, shaking his head.",
+    "wc": 61,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "\"Right between the blades. Never can.\" The postman's shoulders hunch as he leans back against the post, rubbing the spot with the side of his fist. \"Appreciate the offer, but it's no use.\" He shifts the mailbag higher and trudges on, leaving the player standing there with the scrap of wool still in hand.",
+    "wc": 54,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "The player hands the postman a scrap of wool. The postman settles it against the spot on his back, and his shoulders drop and roll once. \"Thank you, I feel human again.\"",
+    "wc": 32,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "The player tries the wool on the wooden route post instead, out of curiosity. The postman watches, unimpressed. \"Not gonna work on wood.\"",
+    "wc": 23,
+    "ok": true,
+    "err": null
+  }
+}

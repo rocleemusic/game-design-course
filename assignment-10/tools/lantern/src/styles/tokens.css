@@ -1,0 +1,211 @@
+/*
+ * Lantern design tokens — APPROVED values.
+ *
+ * Source of truth: design/tokens.html (v2, approved by Roc 2026-07-30).
+ * Palette draws from the Festival of Souls GDD pitch: cream / forest / sage /
+ * dusk / amber / gold, plus the two working darks and one muted blossom.
+ *
+ * Two layers here:
+ *   1. Approved primitives — the names the token sheet uses (--night, --gold…).
+ *      The in-app settings drawer live-edits exactly these (18 colors +
+ *      --text-body + --r-card), so every derived value routes through them.
+ *   2. Legacy names the components already consume (--surface-canvas, --ink,
+ *      --accent…) — mapped onto the primitives, names unchanged.
+ *
+ * Contrast floor: 4.5:1 body text on both surfaces (verified in
+ * test/contrast.test.ts against the shipped values below).
+ */
+
+:root {
+  /* ---- approved primitives (the drawer-tweakable 18) ---- */
+  --night: #232025;        /* graph canvas — warm charcoal, violet undertone */
+  --night-raise: #2d2930;  /* raised panels/chips on night */
+  --cream: #f3ebd7;        /* panels, play stage (pitch --cream) */
+  --paper: #f7f1e2;        /* node cards, a half-step lighter */
+  --cream-edge: #e4d5b4;   /* dividers, wells */
+  --ink: #382c1e;          /* text on cream/paper · 9.9:1 on cream */
+  --muted: #6e6149;        /* muted text on cream · 4.9:1 */
+  --milk: #ede6d6;         /* text on night · 12.6:1 */
+  --gold: #e3b26a;         /* the lantern glow, visited trace · 8.5:1 on night */
+  --amber: #ce8f45;        /* seals, warm accents (decorative on cream) */
+  --forest: #4e6b4f;       /* approved family */
+  --forest-deep: #33492f;  /* approved text/icon · 8.2:1 on cream */
+  --sage: #90a67c;         /* approved band tint */
+  --dusk: #6e8794;         /* edited family */
+  --dusk-deep: #435966;    /* edited text/icon · 6.2:1 on cream */
+  --clay: #a34a34;         /* flagged · 4.9:1 on cream */
+  --teal: #2e4e48;         /* interactive/link color on paper · 7.9:1 */
+  --blossom: #a8626d;      /* soul/NPC markers — icons only, never body text */
+  --blossom-deep: #8c5559; /* Scene kind's pending-fill head · 5.26:1 with --paper.
+                              blossom itself only clears 4.02:1 — not enough for the
+                              solid pending fill (blueprintContrast.test.ts pins this). */
+
+  /* ---- fixed companions (sheet values, not drawer-tweakable) ---- */
+  --milk-soft: #b5aca0;    /* muted on night · 6.3:1 */
+  --gold-ink: #82642d;     /* current/visited labels on paper — sheet's #8A6B33
+                              deepened a step: that one sat at 4.4:1 on paper,
+                              just under the 4.5:1 floor for the small labels */
+  --gold-med-ink: #3a2c12; /* icon on the gold medallion */
+  --dim-bg: #beb4a0;       /* UNVISITED — opaque warm dim. Never whole-card
+                              opacity over the night canvas: it greys out. */
+  --dim-ink: #6b6252;      /* text on the dim card (de-emphasized by design) */
+
+  /* ---- derived tints — color-mix so drawer edits propagate live ---- */
+  --hairline-paper: color-mix(in srgb, var(--ink) 16%, transparent);
+  --hairline-night: color-mix(in srgb, var(--milk) 16%, transparent);
+  --gold-glow: color-mix(in srgb, var(--gold) 50%, transparent);
+  --gold-thread: color-mix(in srgb, var(--gold) 55%, transparent);
+  --gold-wash: color-mix(in srgb, var(--gold) 28%, transparent);
+  --forest-line: color-mix(in srgb, var(--forest) 50%, transparent);
+  --dusk-line: color-mix(in srgb, var(--dusk) 50%, transparent);
+  --teal-tint: color-mix(in srgb, var(--teal) 8%, transparent);
+  --clay-tint: color-mix(in srgb, var(--clay) 8%, transparent);
+
+  /* ---- legacy names the components consume (values mapped in) ---- */
+  --surface-canvas: var(--night);
+  --surface-panel: var(--cream);
+  --surface-card: var(--paper);
+  --surface-card-raised: var(--cream);
+
+  --ink-muted: var(--muted);
+  --ink-on-canvas: var(--milk);
+
+  --border: var(--cream-edge);
+  --border-strong: var(--muted);
+  --edge: #857c6f;              /* graph edges/dots on night — decorative */
+  --edge-seam: var(--amber);
+
+  /* the one accent: lantern gold */
+  --accent: var(--gold);
+
+  /* state families (hue only — bands/medallions styled in app.css) */
+  --status-approved: var(--forest);
+  --status-edited: var(--dusk);
+  --status-flagged: var(--clay);
+  --status-pending: var(--hairline-paper);
+
+  /* focus */
+  --focus-ring: var(--teal);
+  --focus-ring-on-canvas: var(--gold);
+
+  /* ---- type (local @fontsource files — no network fonts) ---- */
+  --font-display: "Fraunces", Georgia, serif;
+  --font-ui: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", Consolas, monospace;
+
+  --text-body: 16px;   /* floor: >= 16px · drawer "base text size" */
+  --text-small: 13px;
+  --text-display: 20px;
+  --leading: 1.55;
+
+  /* ---- spacing + shape (sheet scale 4/8/12/16/24/32/48) ---- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+
+  --r-card: 12px;      /* card corners · drawer "card corner radius" */
+  --r-pill: 999px;     /* buttons */
+  --r-chip: 6px;       /* chips, inputs */
+  --radius: var(--r-chip);
+  --hairline: 1px;
+
+  /* interaction floor */
+  --touch-target: 44px;
+
+  /* ---- elevation (L6) — SHADOWS AND EDGES ONLY, no new colour values ----
+   *
+   * Depth in this tool is never translucency. A translucent panel over the
+   * night canvas makes the *real* background a blend, which test/contrast.ts
+   * cannot see: the test stays green while the shipped contrast falls through
+   * the floor. So every fill stays opaque and the depth comes from here —
+   * layered shadow, a lit top edge, and a sunken well.
+   *
+   * Shadow tint derives from --night rather than pure black, so a shadow on
+   * cream reads warm and belongs to the palette instead of greying it. The
+   * sheen is --paper, the surface one half-step lighter than cream: a 1px lip
+   * of it along a top edge is exactly the amount of lift chrome should have.
+   */
+  --sh-1: color-mix(in srgb, var(--night) 6%, transparent);
+  --sh-2: color-mix(in srgb, var(--night) 11%, transparent);
+  --sh-3: color-mix(in srgb, var(--night) 17%, transparent);
+  --sh-4: color-mix(in srgb, var(--night) 28%, transparent);
+  --sh-5: color-mix(in srgb, var(--night) 44%, transparent);
+
+  /* A night-tinted shadow is INVISIBLE on the night canvas — it is the canvas.
+     Chrome that overhangs the graph therefore casts with absence-of-light
+     instead, which reads on both surfaces. Not a palette colour; shadow only.
+     (app.css already shipped rgba(0,0,0,.25) on the node cards.) */
+  --sh-deep-1: rgba(0, 0, 0, 0.2);
+  --sh-deep-2: rgba(0, 0, 0, 0.36);
+  --sh-deep-3: rgba(0, 0, 0, 0.55);
+
+  --sheen: color-mix(in srgb, var(--paper) 92%, transparent);
+  --sheen-night: color-mix(in srgb, var(--milk) 11%, transparent);
+
+  /* the ladder: 1 resting chip · 2 raised chrome · 3 floating · 4 overlay */
+  --elev-1: 0 1px 1px var(--sh-2), 0 1px 3px var(--sh-1);
+  --elev-2: 0 1px 2px var(--sh-2), 0 4px 10px var(--sh-2);
+  --elev-3: 0 2px 6px var(--sh-3), 0 10px 24px var(--sh-3);
+  --elev-4: 0 6px 12px var(--sh-3), 0 22px 48px var(--sh-4);
+
+  /* a lit top edge — the single cheapest cue that a surface sits above another */
+  --edge-lip: inset 0 1px 0 var(--sheen);
+  --edge-lip-night: inset 0 1px 0 var(--sheen-night);
+
+  /* chrome casts DOWN onto the content it sits over (headers, tab strips).
+     Two layers: a warm one that shows on cream, a deep one that shows on the
+     night canvas — the same strip overhangs both. */
+  --cast-down: 0 1px 0 var(--border), 0 5px 8px -7px var(--sh-4),
+    0 7px 12px -9px var(--sh-deep-2);
+  --cast-down-strong: 0 1px 0 var(--border), 0 8px 14px -10px var(--sh-5),
+    0 10px 20px -12px var(--sh-deep-2);
+
+  /* recessed: inputs, wells, the canvas floor */
+  --well: inset 0 2px 3px var(--sh-2), inset 0 0 0 1px var(--hairline-paper);
+  --well-night: inset 0 8px 14px -8px var(--sh-deep-3),
+    inset 0 -4px 12px -8px var(--sh-deep-2);
+
+  /* ---- blueprint node cards (L5b) ----
+   *
+   * Kind colours are ALIASES onto the approved primitives. No new colour value
+   * is defined here, so the drawer's 18 still drive everything and the palette
+   * stays frozen.
+   */
+  --node-line: var(--dusk);
+  --node-choice: var(--amber);
+  --node-option: var(--teal);
+  --node-gather: var(--muted);
+  --node-scene: var(--blossom);
+  --node-screen: var(--forest);
+
+  /* Card surfaces. Both are OPAQUE (sign-off 6): every stop below is a solid
+   * colour or a mix of two solid colours — never `transparent`. A translucent
+   * card would let the night canvas show through, so the real background would
+   * be a blend the hex-parsing contrast test cannot see, and body text would
+   * quietly fall under 4.5:1 while the suite stayed green.
+   *
+   * The Blueprint read is head lighter, body a clear step DARKER. The head is
+   * kind-washed but stays anchored on paper, so it is lighter than the body
+   * for EVERY kind — including --teal and --forest, the two darkest aliases.
+   * The wash is deliberately small for that reason: at 8% even the darkest
+   * alias leaves the head ~1.14:1 lighter than the body, while amber and
+   * blossom reach ~1.20:1. The kind's real presence comes from the 3px bar and
+   * the coloured label, not from drowning the head.
+   *
+   * The body carries --ink only (9.4:1 on --cream-edge). Muted micro-labels
+   * stay in the head and foot, which sit on --paper and --cream.
+   * test/blueprintContrast.test.ts pins every one of those claims.
+   */
+  --node-head: var(--paper);
+  --node-body: var(--cream-edge);
+  --node-foot: var(--cream);
+  --node-seam: var(--cream-edge);
+  /* how much kind colour washes into the head — the FLOOR every kind must
+   * clear (test/blueprintContrast.test.ts pins this single value against
+   * every kind alias). Each kind alias in blueprint.css overrides this
+   * locally to its own higher, still-safe ceiling — see the ramp comment
+   * there (D8 #1). This token stays the conservative fallback the test can
+   * see and verify. */
+  --node-wash: 8%;
+}

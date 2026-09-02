@@ -1,0 +1,9 @@
+{
+  "slot": 1,
+  "life": 1,
+  "day": 1,
+  "picked_location": "town",
+  "threads": [{ "thread_id": "giver-receive", "soul": "toby", "status": "live" }],
+  "lead_pool": ["LEAD-01", "LEAD-02", "LEAD-03"],
+  "aliveness_band": "quiet"
+}

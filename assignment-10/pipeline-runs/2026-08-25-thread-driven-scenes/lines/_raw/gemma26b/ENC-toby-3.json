@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "text": "Toby counts the last tray twice. \"Twelve down from forty, near enough.\"",
+    "wc": 12,
+    "ok": true,
+    "err": null
+  },
+  "option_a": {
+    "text": "The player lays a length of wool over the last rising batch to keep the heat in overnight. Toby checks the cover and nods once. \"Good.\"",
+    "wc": 26,
+    "ok": true,
+    "err": null
+  },
+  "option_b": {
+    "text": "Toby reads the number, crosses the last mark himself. \"Twelve down from forty, near enough.\"",
+    "wc": 15,
+    "ok": true,
+    "err": null
+  },
+  "option_c": {
+    "text": "\"I'll check back after.\"\n\nToby nods flatly and keeps folding.",
+    "wc": 10,
+    "ok": true,
+    "err": null
+  }
+}
