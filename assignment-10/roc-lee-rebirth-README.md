@@ -27,7 +27,7 @@ A stranger opening the link needs no setup. It boots straight into the mode pick
 **Pipeline Repository Link:** https://github.com/rocleemusic/game-design-course (this folder — `assignment-10/`)
 **Pipeline Run Video Link:** *[TODO — record a short screen capture of a content-generation pass or the resolver build step, then paste the link here]*
 
-**This folder is self-contained.** Every agent contract, the resolver and Lantern review-tool source, the bundling/deploy scripts, the in-engine editor code, and the benchmark and cost-analysis reports are copied in here, not just linked to a private repo.
+**This folder is self-contained.** Every agent contract, the resolver and Lantern review-tool source, the bundling/deploy scripts, the in-engine editor code, and the benchmark and cost-analysis reports are copied in here.
 
 Three things can't be copied, because they aren't files in any repo: ComfyUI, the Blender MCP connector (real software running on separate machines, described in Stage 9 and shown in the linked video), and the live itch.io page (Deliverable 1).
 
@@ -82,12 +82,14 @@ Both line-writing paths feed the same downstream chain: the same structure forma
 
 **4. Human review surfaces — no AI, but part of how content and layout get authored**
 
-| Tool | Path (in this folder) | Does it write back into the game? |
-|---|---|---|
-| 👁️ Lantern | `tools/lantern/` (source + tests; `node_modules/` excluded) | **Yes, indirectly.** Reviewer edits round-trip through `edits.json`, and the resolver's `applyEdits` folds them back into the source before the next compile |
-| 👁️ Content Approval Editor | `phaser-tools/content-editor/` | **No.** Approve/reject + notes only, written to a `review.json` sidecar. It gates content, it doesn't touch it |
-| 👁️ In-engine hotspot editor (`EditModeSystem`, press `E` in-game) | `phaser-src/render/EditModeSystem.ts` | **No live write.** Draws region rects on the real backdrop, then exports the merged result to the clipboard in the exact `regions.json` shape. A person pastes it into the real file and rebuilds, the same "author here, build to see it" shape as everything else, just for layout instead of dialogue |
-| 👁️ Screen-Flow | `phaser-tools/screen-flow/` (scripts + mockups; the generated screenshot set and the assembled review page are excluded as reproducible output, see the note above Target Game Engine) | **No.** Captures every screen, builds a static review page with feedback boxes. Pure review artifact |
+Output from these get read by an agent to implement or address in the game.
+
+| Tool                                                               | Path (in this folder)                                                                                                                                                                  | Does it write back into the game?                                                                                                                                                                                                                                                                        |
+| ------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 👁️ Lantern                                                        | `tools/lantern/` (source + tests; `node_modules/` excluded)                                                                                                                            | **Yes, indirectly.** Reviewer edits round-trip through `edits.json`, and the resolver's `applyEdits` folds them back into the source before the next compile                                                                                                                                             |
+| 👁️ Content Approval Editor                                        | `phaser-tools/content-editor/`                                                                                                                                                         | **No.** Approve/reject + notes only, written to a `review.json` sidecar. It gates content, it doesn't touch it                                                                                                                                                                                           |
+| 👁️ In-engine hotspot editor (`EditModeSystem`, press `E` in-game) | `phaser-src/render/EditModeSystem.ts`                                                                                                                                                  | **No live write.** Draws region rects on the real backdrop, then exports the merged result to the clipboard in the exact `regions.json` shape. A person pastes it into the real file and rebuilds, the same "author here, build to see it" shape as everything else, just for layout instead of dialogue |
+| 👁️ Screen-Flow                                                    | `phaser-tools/screen-flow/` (scripts + mockups; the generated screenshot set and the assembled review page are excluded as reproducible output, see the note above Target Game Engine) | **No.** Captures every screen, builds a static review page with feedback boxes. Pure review artifact                                                                                                                                                                                                     |
 
 **5. Bundling and deploy**
 
@@ -106,12 +108,12 @@ Both line-writing paths feed the same downstream chain: the same structure forma
 
 **7. Process, not code: the rituals that keep the above honest**
 
-| What | Path (in this folder) | What it does |
-|---|---|---|
-| `/gdd-sync` | `commands/gdd-sync.md` | Reconciles a session's rulings back into the GDD, flags superseded doc sections. Proposes, never writes without approval |
-| Systems Documentarian | `agents/systems-documentarian.md` | Regenerates `phaser/ARCHITECTURE.md` (the seam diagram and module table) from what's actually on disk, at build-phase boundaries |
-| `/pm` | `skills/pm/SKILL.md` | Reads the task board, reports what's late, blocked, or unreviewed — the first move of any session |
-| Session handoffs | `plans/_handoffs/` (one representative example included) | A narrative "what happened, what's next" note, deliberately left to go stale. Durable rulings get promoted into the GDD or `CONTEXT.md`, not left here |
+| What                  | Path (in this folder)                                    | What it does                                                                                                                                                                                                        |
+| --------------------- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/gdd-sync`           | `commands/gdd-sync.md`                                   | Reconciles a session's rulings back into the GDD, flags superseded doc sections. Proposes, never writes without approval                                                                                            |
+| Systems Documentarian | `agents/systems-documentarian.md`                        | Regenerates `phaser/ARCHITECTURE.md` (the seam diagram and module table) from what's actually on disk, at build-phase boundaries                                                                                    |
+| `/pm`                 | `skills/pm/SKILL.md`                                     | Reads the task board, reports what's late, blocked, or unreviewed — the first move of any session                                                                                                                   |
+| Session handoffs      | `plans/_handoffs/` (one representative example included) | A narrative "what happened, what's next" note. Durable rulings get promoted into the GDD or `CONTEXT.md`, not left here. Implemented because was having computer issues with Docker staying up with the Paca board. |
 
 **8. Audio pipeline: a separate loop, for sound, that writes straight into the engine**
 
@@ -123,7 +125,7 @@ Both line-writing paths feed the same downstream chain: the same structure forma
 
 **This is the one agent-driven loop that writes directly into both the engine's asset folder and its source code** — no clipboard step, no separate rebuild-and-paste. Stage 3 edits `phaser/src` and moves the real asset file itself.
 
-The tradeoff for that directness: a human still has to make the actual sound, since nothing in the loop generates audio. Stage 1 and Stage 3 are proposal and wiring, not sound synthesis. Ledger state (`proposed` → `staged` → `implemented`/`rejected`) lives entirely in `asset-list.json`, the same one-source-of-truth discipline the other pipelines use for their own state.
+Stage 1 and Stage 3 are proposal and wiring, not sound synthesis. Ledger state (`proposed` → `staged` → `implemented`/`rejected`) lives entirely in `asset-list.json`, the same one-source-of-truth discipline the other pipelines use for their own state.
 
 **9. Art pipeline: 3D reference + local diffusion, for backdrops, portraits, and item icons**
 
@@ -181,6 +183,8 @@ That last one is the clearest case in this pipeline of a manual step that exists
 **Current decision I'd change:** I ran narrative content and engine/tooling work as parallel tracks without first writing down who owns which shared fact. The clearest cost of that: two separate systems ended up independently tracking which gates were cleared. `Gates.ts`'s graph parse keeps one cleared-set, `GateEngine` keeps another, and they're allowed to disagree about the same door. The adversarial QA agent ([Assignment 9](../assignment-09/)) hit that exact split 133 times in one run, and the code's own comment already admitted the gap before the agent found it.
 
 **Specific alternative:** before splitting into parallel tracks, write a short ownership contract for every shared piece of state (gates, presence, inventory): one line answering "which system is allowed to write this fact." Then prototype that seam with a throwaway script before building it inside whichever feature needs it first. In practice that means running the Systems Documentarian's architecture-record pattern *before* the first parallel build starts, not after the split already happened. I'd also prototype more up front generally — several of this session's reworks (VFX kind changes, the notebook layout rebuild) were things a fifteen-minute static mockup would have caught before code was written around the wrong shape.
+
+**What I'd do differently starting a new project:** build a quick, throwaway prototype in Phaser first, before committing to real architecture. Then build incrementally: prove one mechanic works end to end before starting the next one, instead of speccing several systems at once and discovering their conflicts later. I'd also set architecture guidelines up front, the ownership-contract idea above generalized into a habit, not a lesson learned partway through. And I'd write tests as I go, not after. Regressions hit hardest in the final stretch of this project, exactly the point where I had the least time to hunt down what broke and why. Tests written alongside each feature would have caught those the moment they happened, not weeks later during a content-freeze scramble.
 
 ### Cost analysis
 
