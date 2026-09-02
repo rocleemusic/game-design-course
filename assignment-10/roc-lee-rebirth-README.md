@@ -138,8 +138,6 @@ The only place a human types content directly into a game file is the pre-compil
 
 **10. Project-level agents — Roc talks to these directly; not part of any one content or engine run**
 
-&nbsp;
-
 | Seat | Path | What it does |
 |---|---|---|
 | 🤖 Production/PM | `agents/production-pm.md` | Reads the Paca task board and milestone calendar, reports delivery risk, review-queue backlog, and parallelism breaches. Never decides scope — writes and updates task state and a readiness doc, nothing else |
