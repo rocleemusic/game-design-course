@@ -101,6 +101,7 @@ Both line-writing paths feed the same downstream chain — the same structure fo
 | ⚙️ `playtest.mjs`, `walk.mjs`, `gate-audit.mjs`, `presence-audit.mjs` | `phaser-tools/` | Scripted health checks — full-week walk, gate logic, NPC presence, orphaned content |
 
 **7. Process, not code — the rituals that keep the above honest**
+
 | What | Path (in this folder) | What it does |
 |---|---|---|
 | `/gdd-sync` | `commands/gdd-sync.md` | Reconciles a session's rulings back into the GDD, flags superseded doc sections. Proposes, never writes without approval |
