@@ -77,6 +77,7 @@ Both line-writing paths feed the same downstream chain — the same structure fo
 | ⚙️ `content-check.mjs` + lint scripts | `tools/*.mjs` | Blocks the build if any id, index, or slot cap is wrong |
 
 **4. Human review surfaces — no AI, but part of how content and layout get authored**
+
 | Tool | Path (in this folder) | Does it write back into the game? |
 |---|---|---|
 | 👁️ Lantern | `tools/lantern/` (source + tests; `node_modules/` excluded) | **Yes, indirectly.** Reviewer edits round-trip through `edits.json`, and the resolver's `applyEdits` folds them back into the source before the next compile |
