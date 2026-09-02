@@ -46,6 +46,7 @@ Every step after the human content gate is a script, not a person. Nobody hand-e
 **Legend:** 🤖 AI agent seat · ⚙️ deterministic script, no LLM · 👁️ human review surface (no AI)
 
 **1. Steering**
+
 | Seat | Path (in this folder) | What it does |
 |---|---|---|
 | 🤖 Narrative Director | `narrative-pipeline/agents/narrative-director.md` | Reads the story corpus, proposes the arc doc that steers every soul's writing |
