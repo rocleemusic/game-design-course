@@ -53,6 +53,7 @@ Every step after the human content gate is a script, not a person. Nobody hand-e
 | Orchestrator | `narrative-pipeline/agents/orchestrator.md` | Sequences the stages below, routes flags, never writes content itself |
 
 **2. Content generation** — each agent is called one slot at a time, reports back, never calls another agent directly
+
 | Seat | Path (in this folder) | What it does |
 |---|---|---|
 | 🤖 Narrative Architect | `narrative-pipeline/agents/narrative-architect.md` | Persona cards, trait axes, seed→payoff design per soul — and the scene structure every line-writer below builds from |
