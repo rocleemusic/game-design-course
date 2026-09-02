@@ -123,8 +123,6 @@ Both line-writing paths feed the same downstream chain — the same structure fo
 
 Unlike the narrative and audio loops, this one has no persistent agent seat file — it runs as tool calls inside a session, plus real image-generation software on separate local machines, not through Claude at any generation step. **Blender and ComfyUI themselves cannot be copied into this folder** — they're running software on other machines, not repository files — so this stage is documented and demonstrated in the video rather than included as source.
 
-&nbsp;
-
 | Tool | Path / where it runs | What it does |
 |---|---|---|
 | Blender MCP (reference pull) | in-session, via the `blender` MCP connector — external | Searches Sketchfab/PolyHaven for a real-world 3D model matching an item, renders it clean on a transparent background — the source image the restyle pass repaints |
