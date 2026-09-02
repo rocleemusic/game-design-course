@@ -129,6 +129,19 @@ Unlike the narrative and audio loops, this one has no persistent agent seat file
 
 The only place a human types content directly into a game file is the pre-compile approval gate — everything downstream of "approved" is scripted, except the audio loop above (a human supplies the sound itself) and the art pipeline above (a human reviews and promotes every staged image by hand; nothing auto-ships past ComfyUI).
 
+**10. Project-level agents — Roc talks to these directly; not part of any one content or engine run**
+
+| Seat | Path | What it does |
+|---|---|---|
+| 🤖 Production/PM | `agents/production-pm.md` | Reads the Paca task board and milestone calendar, reports delivery risk, review-queue backlog, and parallelism breaches. Never decides scope — writes and updates task state and a readiness doc, nothing else |
+| 🤖 Assignment Scout | `agents/assignment-scout.md` | Surfaces candidate work toward a future course assignment — the "before" half of a before/after capture. Documentation only; never touches game or content files |
+| 🤖 Gate Recorder | `agents/gate-recorder.md` | After Roc rules on a content batch, writes that ruling's status/roll-up/index entries. Data records only |
+| 🤖 Ruling Promoter | `agents/ruling-promoter.md` | Writes a ruling into the agent contracts themselves, so the next run doesn't repeat a correction Roc already made once. Edits agent contract files, never game content |
+| 🤖 Stale Rule Auditor | `agents/stale-rule-auditor.md` | Flags sentences in a contract that a new ruling just made false. Review-only, flags only |
+| 🤖 Contract Audit | `agents/contract-audit.md` | A 10-criterion rubric run manually against every seat's contract file — keeps the crew's own paperwork honest. Review-only, no enforcement |
+
+These six don't generate game content or touch the engine — they're the crew's self-maintenance layer: keeping the task board honest, keeping each seat's own contract file accurate as rulings pile up, and surfacing what to work on next. Ruling Promoter and Stale Rule Auditor in particular are why the contracts copied into this folder stay close to what the crew actually runs, instead of drifting the way a hand-maintained spec would.
+
 ---
 
 ## Deliverable 3: Pipeline Audit & Cost Analysis
