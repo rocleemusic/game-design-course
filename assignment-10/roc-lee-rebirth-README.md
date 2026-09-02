@@ -165,7 +165,7 @@ These six don't generate game content or touch the engine. They're the crew's se
 
 **Manual steps still in the loop:**
 1. **The content approval gate itself.** Every generated line is read by a human before it's canon. This is deliberate, not friction. The register the game writes in (short, weight-preloaded, anti-ornamental) is exactly the kind of thing a model drifts off without a human catching it.
-2. **Lantern and the in-engine hotspot editor both stop at export, not write.** Lantern's edits round-trip automatically; the hotspot editor's rects go to the clipboard, and a person pastes them into `regions.json` and rebuilds.
+2. **Lantern and the in-engine hotspot editor both stop at export, not write.** Lantern's edits round-trip automatically. The hotspot editor's rects go to the clipboard instead, and a person pastes them into `regions.json` and rebuilds.
 3. **Deploy is a manual command.** `npm run deploy:itch` has to be run by hand.
 4. **Concept art for anything with no 3D reference goes through Grok by hand.** A prompt gets pasted into Grok's chat interface, the resulting image gets downloaded, and that file becomes the img2img source ComfyUI restyles — three separate hand steps (write the prompt, paste it in, retrieve the file) with no script connecting them. This one is deliberate, not an oversight: it's there specifically to avoid paying for a metered image-generation API when Grok's chat interface does the same job for free.
 
